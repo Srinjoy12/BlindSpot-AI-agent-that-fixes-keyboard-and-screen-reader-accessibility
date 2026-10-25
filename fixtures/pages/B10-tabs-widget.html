@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture B10 — Broken Tabs Widget (arrow keys and focus management broken)</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 24px; background: #f5f5f5; }
+  main { max-width: 700px; margin: 0 auto; }
+  h1 { color: #0f172a; }
+  
+  /* ── SEEDED BUG: Tabs widget using Tab key instead of arrow keys ── */
+  .tabs-wrapper { background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); overflow: hidden; margin-bottom: 24px; }
+  
+  .tab-list {
+    display: flex;
+    border-bottom: 2px solid #e5e7eb;
+    background: #f9fafb;
+    padding: 0 4px;
+  }
+  
+  /* BUG: Each tab is a separate tabstop — Tab navigates between tabs instead of arrow keys */
+  /* ARIA pattern requires role="tab", tablist, arrow key navigation within the tablist */
+  .tab-btn {
+    padding: 14px 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: .95rem;
+    color: #6b7280;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    font-family: inherit;
+    /* BUG: These should have tabindex="-1" with only the selected tab being tabindex="0" */
+    /* Instead each is independently tabbable */
+  }
+  .tab-btn[aria-selected="true"] {
+    color: #2563eb;
+    border-bottom-color: #2563eb;
+    font-weight: 600;
+  }
+  .tab-btn:focus { outline: 2px solid #2563eb; outline-offset: -2px; }
+  
+  .tab-panel {
+    padding: 24px;
+    display: none;
+  }
+  .tab-panel.active { display: block; }
+  .tab-panel h2 { margin-top: 0; color: #0f172a; font-size: 1.1rem; }
+  .tab-panel p { color: #374151; line-height: 1.6; }
+  
+  /* BUG: No role="tabpanel", no aria-labelledby on panels */
+  
+  dl { margin: 0; }
+  dt { font-weight: 600; color: #0f172a; margin-top: 16px; }
+  dd { margin: 4px 0 0 16px; color: #374151; }
+  
+  a { color: #2563eb; }
+  a:focus { outline: 2px solid #2563eb; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Product documentation</h1>
+
+  <!-- SEEDED BUG: Tabs widget with broken keyboard navigation -->
+  <!-- BUG 1: No arrow key navigation within the tablist — Tab moves to next tab instead -->
+  <!-- BUG 2: Panels have no role="tabpanel" or aria-labelledby -->
+  <!-- BUG 3: All tabs are separately tabbable — should be roving tabindex -->
+  <div class="tabs-wrapper">
+    <div role="tablist" aria-label="Documentation sections" class="tab-list">
+      <button role="tab" class="tab-btn" id="tab-overview" aria-selected="true" aria-controls="panel-overview" onclick="switchTab('overview')">
+        Overview
+      </button>
+      <button role="tab" class="tab-btn" id="tab-install" aria-selected="false" aria-controls="panel-install" onclick="switchTab('install')">
+        Installation
+      </button>
+      <button role="tab" class="tab-btn" id="tab-config" aria-selected="false" aria-controls="panel-config" onclick="switchTab('config')">
+        Configuration
+      </button>
+      <button role="tab" class="tab-btn" id="tab-api" aria-selected="false" aria-controls="panel-api" onclick="switchTab('api')">
+        API Reference
+      </button>
+    </div>
+    
+    <!-- BUG: panels have no role="tabpanel" -->
+    <div id="panel-overview" class="tab-panel active">
+      <h2>Overview</h2>
+      <p>BlindSpot automatically finds and fixes keyboard accessibility barriers on your web pages. It drives a real browser with the keyboard and runs deterministic detectors to find issues.</p>
+      <dl>
+        <dt>Keyboard crawl</dt>
+        <dd>Tabs through every focusable element, recording position and focus state</dd>
+        <dt>Detectors</dt>
+        <dd>Eight deterministic checks for traps, invisible focus, and missing names</dd>
+        <dt>AI analysis</dt>
+        <dd>Nemotron models explain findings and propose fixes</dd>
+      </dl>
+    </div>
+    
+    <div id="panel-install" class="tab-panel">
+      <h2>Installation</h2>
+      <p>Install BlindSpot using npm:</p>
+      <pre style="background:#f3f4f6;padding:16px;border-radius:4px;overflow-x:auto;"><code>npm install @blindspot/cli</code></pre>
+      <p>Then run your first audit:</p>
+      <pre style="background:#f3f4f6;padding:16px;border-radius:4px;overflow-x:auto;"><code>npx blindspot audit https://yoursite.com</code></pre>
+    </div>
+    
+    <div id="panel-config" class="tab-panel">
+      <h2>Configuration</h2>
+      <p>Create a <code>blindspot.config.js</code> in your project root:</p>
+      <dl>
+        <dt>maxStops</dt>
+        <dd>Maximum number of Tab stops to crawl (default: 150)</dd>
+        <dt>severity</dt>
+        <dd>Minimum severity to report: blocker, major, or minor</dd>
+      </dl>
+    </div>
+    
+    <div id="panel-api" class="tab-panel">
+      <h2>API Reference</h2>
+      <p>Use the BlindSpot JavaScript API for programmatic access. See the <a href="#">full API docs</a>.</p>
+    </div>
+  </div>
+</main>
+
+<script>
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      const isSelected = btn.id === `tab-${name}`;
+      btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(panel => {
+      panel.classList.toggle('active', panel.id === `panel-${name}`);
+    });
+  }
+  
+  // BUG: No arrow key navigation implemented
+  // The correct pattern: left/right arrow moves focus within the tablist
+  // BUG: No roving tabindex — all tabs are independently focusable
+</script>
+</body>
+</html>

@@ -10,8 +10,9 @@ build/
 .env.local
 .env.*.local
 
-# Data (audits, screenshots, replays)
-data/
+# Data (audits, screenshots, but preserve pre-computed replays)
+data/*
+!data/replays/
 *.db
 *.db-wal
 *.db-shm

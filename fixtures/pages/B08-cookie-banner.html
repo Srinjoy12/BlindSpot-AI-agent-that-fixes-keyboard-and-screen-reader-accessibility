@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture B08 — Cookie Banner (focus not managed, lost after dismiss)</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 0; }
+  main { max-width: 800px; margin: 40px auto; padding: 0 24px; }
+  h1 { color: #0f172a; }
+  p { line-height: 1.7; color: #374151; }
+  a { color: #2563eb; }
+  a:focus { outline: 2px solid #2563eb; }
+  button:focus { outline: 2px solid #2563eb; outline-offset: 2px; }
+  
+  /* ── SEEDED BUG: Cookie banner ── */
+  /* BUG 1: Banner is rendered at the end of the DOM — keyboard users reach page content before the banner */
+  /* BUG 2: After dismissal, focus is not returned anywhere — lost to body */
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1e293b;
+    color: #f1f5f9;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    z-index: 999;
+    box-shadow: 0 -2px 12px rgba(0,0,0,.2);
+  }
+  .cookie-banner p { margin: 0; color: #e2e8f0; font-size: .95rem; flex: 1; }
+  .cookie-banner a { color: #93c5fd; }
+  .cookie-actions { display: flex; gap: 12px; flex-shrink: 0; }
+  .btn-accept { background: #2563eb; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: .95rem; }
+  .btn-reject { background: transparent; border: 1px solid #94a3b8; color: #e2e8f0; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: .95rem; }
+  /* BUG: no :focus styles on cookie buttons (they do have browser default, but outline may be hidden in some setups) */
+  
+  .nav-bar { background: #0f172a; display: flex; gap: 0; }
+  .nav-bar a { color: #fff; text-decoration: none; padding: 16px 18px; display: block; }
+  .nav-bar a:focus { outline: 2px solid #60a5fa; }
+</style>
+</head>
+<body>
+
+<nav class="nav-bar" aria-label="Main navigation">
+  <a href="#">Home</a>
+  <a href="#">Products</a>
+  <a href="#">About</a>
+  <a href="#">Contact</a>
+</nav>
+
+<main>
+  <h1>Privacy-first analytics</h1>
+  <p>We believe your data belongs to you. Our platform collects only the minimum data needed to deliver our service, and we never sell your data to third parties.</p>
+  <p>Read our <a href="#">privacy policy</a> and <a href="#">cookie policy</a> to learn more about how we handle your information.</p>
+  <p>Our commitment to privacy is backed by GDPR compliance and independent audits. <a href="#">See our compliance certificates</a>.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</main>
+
+<!-- SEEDED BUG: Cookie banner is at the end of the DOM — Tab reaches page content before reaching this -->
+<!-- BUG 1: Focus is NOT moved to the banner when it appears (violates best practice) -->
+<!-- BUG 2: Focus is lost to document.body after dismissal (violates D8 / D11 pattern) -->
+<div class="cookie-banner" id="cookie-banner" role="alertdialog" aria-labelledby="cookie-title">
+  <p id="cookie-title">
+    We use cookies to improve your experience. By continuing, you agree to our <a href="#">cookie policy</a>.
+  </p>
+  <div class="cookie-actions">
+    <button class="btn-reject" id="btn-reject" onclick="dismissBanner()">Reject all</button>
+    <button class="btn-accept" id="btn-accept" onclick="dismissBanner()">Accept all</button>
+  </div>
+</div>
+
+<script>
+  function dismissBanner() {
+    const banner = document.getElementById('cookie-banner');
+    banner.remove();
+    // BUG: focus is not returned anywhere after removal
+    // A correct implementation would do: document.getElementById('some-logical-element').focus()
+    // This causes focus loss — D11 (focus lost after interaction)
+  }
+  
+  // BUG: Focus is NOT moved to the banner on page load
+  // A correct implementation would call: document.getElementById('btn-reject').focus()
+  // or use a proper alertdialog pattern
+</script>
+</body>
+</html>

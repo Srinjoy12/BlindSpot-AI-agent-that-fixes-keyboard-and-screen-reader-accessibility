@@ -1,0 +1,1878 @@
+{
+  "auditId": "replay_b12",
+  "pageId": "B12",
+  "report": {
+    "auditId": "replay_b12",
+    "targetUrl": "/fixtures/B12-mixed.html",
+    "timestamp": "2026-10-25T18:30:18.032Z",
+    "durationMs": 209848,
+    "keyboardScore": 0,
+    "summary": {
+      "totalStops": 14,
+      "barriersFound": 27,
+      "blockers": 15,
+      "majors": 12,
+      "minors": 0,
+      "fixesVerified": 18
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "header > nav > a:nth-of-type(1)",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "header > nav > a:nth-of-type(1)",
+          "body": "header > nav > a:nth-of-type(1):focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_2",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "header > nav > a:nth-of-type(2)",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "header > nav > a:nth-of-type(2)",
+          "body": "header > nav > a:nth-of-type(2):focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_3",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "header > nav > a:nth-of-type(3)",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "header > nav > a:nth-of-type(3)",
+          "body": "header > nav > a:nth-of-type(3):focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_4",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#share-twitter",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#share-twitter",
+          "body": "#share-twitter:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_5",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#share-linkedin",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#share-linkedin",
+          "body": "#share-linkedin:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_6",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#share-email",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#share-email",
+          "body": "#share-email:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_7",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#share-link",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#share-link",
+          "body": "#share-link:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_8",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#open-comment",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#open-comment",
+          "body": "#open-comment:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_9",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#comment-text",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=textarea, role=textarea.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=textarea, role=textarea.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#comment-text",
+          "body": "#comment-text:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_10",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#btn-post-comment",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#btn-post-comment",
+          "body": "#btn-post-comment:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_11",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#btn-cancel-comment",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#btn-cancel-comment",
+          "body": "#btn-cancel-comment:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_12",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "header > nav > a:nth-of-type(1)",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "header > nav > a:nth-of-type(1)",
+          "body": "header > nav > a:nth-of-type(1):focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_13",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "header > nav > a:nth-of-type(2)",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "header > nav > a:nth-of-type(2)",
+          "body": "header > nav > a:nth-of-type(2):focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_14",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "header > nav > a:nth-of-type(3)",
+        "wcagId": "2.4.7",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.7",
+        "impact": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "header > nav > a:nth-of-type(3)",
+          "body": "header > nav > a:nth-of-type(3):focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_15",
+        "detectorId": "D5",
+        "severity": "major",
+        "selector": "header > nav > a:nth-of-type(1)",
+        "wcagId": "2.4.11",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.11",
+        "impact": "The center of the focused element (a[role=\"a\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "evidence": "The center of the focused element (a[role=\"a\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "header > nav > a:nth-of-type(1)",
+          "body": "header > nav > a:nth-of-type(1) { scroll-margin-top: 100px !important; }",
+          "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
+        },
+        "verified": false
+      },
+      {
+        "id": "barrier_16",
+        "detectorId": "D5",
+        "severity": "major",
+        "selector": "header > nav > a:nth-of-type(2)",
+        "wcagId": "2.4.11",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.11",
+        "impact": "The center of the focused element (a[role=\"a\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "evidence": "The center of the focused element (a[role=\"a\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "header > nav > a:nth-of-type(2)",
+          "body": "header > nav > a:nth-of-type(2) { scroll-margin-top: 100px !important; }",
+          "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
+        },
+        "verified": false
+      },
+      {
+        "id": "barrier_17",
+        "detectorId": "D5",
+        "severity": "major",
+        "selector": "header > nav > a:nth-of-type(3)",
+        "wcagId": "2.4.11",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.11",
+        "impact": "The center of the focused element (a[role=\"a\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "evidence": "The center of the focused element (a[role=\"a\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "header > nav > a:nth-of-type(3)",
+          "body": "header > nav > a:nth-of-type(3) { scroll-margin-top: 100px !important; }",
+          "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
+        },
+        "verified": false
+      },
+      {
+        "id": "barrier_18",
+        "detectorId": "D5",
+        "severity": "major",
+        "selector": "#share-twitter",
+        "wcagId": "2.4.11",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.11",
+        "impact": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "evidence": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#share-twitter",
+          "body": "#share-twitter { scroll-margin-top: 100px !important; }",
+          "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
+        },
+        "verified": false
+      },
+      {
+        "id": "barrier_19",
+        "detectorId": "D5",
+        "severity": "major",
+        "selector": "#share-linkedin",
+        "wcagId": "2.4.11",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.11",
+        "impact": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "evidence": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#share-linkedin",
+          "body": "#share-linkedin { scroll-margin-top: 100px !important; }",
+          "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
+        },
+        "verified": false
+      },
+      {
+        "id": "barrier_20",
+        "detectorId": "D5",
+        "severity": "major",
+        "selector": "#share-email",
+        "wcagId": "2.4.11",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.11",
+        "impact": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "evidence": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#share-email",
+          "body": "#share-email { scroll-margin-top: 100px !important; }",
+          "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
+        },
+        "verified": false
+      },
+      {
+        "id": "barrier_21",
+        "detectorId": "D5",
+        "severity": "major",
+        "selector": "#share-link",
+        "wcagId": "2.4.11",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.11",
+        "impact": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "evidence": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#share-link",
+          "body": "#share-link { scroll-margin-top: 100px !important; }",
+          "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
+        },
+        "verified": false
+      },
+      {
+        "id": "barrier_22",
+        "detectorId": "D5",
+        "severity": "major",
+        "selector": "#open-comment",
+        "wcagId": "2.4.11",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.11",
+        "impact": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "evidence": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#open-comment",
+          "body": "#open-comment { scroll-margin-top: 100px !important; }",
+          "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
+        },
+        "verified": false
+      },
+      {
+        "id": "barrier_23",
+        "detectorId": "D6",
+        "severity": "major",
+        "selector": "#share-twitter",
+        "wcagId": "4.1.2",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#4.1.2",
+        "impact": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🐦\". Screen readers will announce only the role.",
+        "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🐦\". Screen readers will announce only the role.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#share-twitter",
+          "body": "aria-label=\"Action\"",
+          "rationale": "Provides an accessible name for screen readers on interactive control."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_24",
+        "detectorId": "D6",
+        "severity": "major",
+        "selector": "#share-email",
+        "wcagId": "4.1.2",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#4.1.2",
+        "impact": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"✉\". Screen readers will announce only the role.",
+        "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"✉\". Screen readers will announce only the role.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#share-email",
+          "body": "aria-label=\"Action\"",
+          "rationale": "Provides an accessible name for screen readers on interactive control."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_25",
+        "detectorId": "D6",
+        "severity": "major",
+        "selector": "#share-link",
+        "wcagId": "4.1.2",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#4.1.2",
+        "impact": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🔗\". Screen readers will announce only the role.",
+        "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🔗\". Screen readers will announce only the role.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#share-link",
+          "body": "aria-label=\"Action\"",
+          "rationale": "Provides an accessible name for screen readers on interactive control."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_26",
+        "detectorId": "D8",
+        "severity": "blocker",
+        "selector": "#comment-text",
+        "wcagId": "2.4.3",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.3",
+        "impact": "Dialog is present on screen, but pressing Escape does not close it or restore focus.",
+        "evidence": "Dialog is present on screen, but pressing Escape does not close it or restore focus.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#comment-text",
+          "body": "#comment-text:focus-visible { outline: 2px solid #2563eb !important; }",
+          "rationale": "Standard focus indicator repair."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_27",
+        "detectorId": "D8",
+        "severity": "major",
+        "selector": "#cookie-banner",
+        "wcagId": "2.4.3",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.3",
+        "impact": "Prominent banner or modal dialog appeared, but keyboard focus was not automatically placed into it upon load; 8 background element(s) received focus first.",
+        "evidence": "Prominent banner or modal dialog appeared, but keyboard focus was not automatically placed into it upon load; 8 background element(s) received focus first.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#cookie-banner",
+          "body": "#cookie-banner:focus-visible { outline: 2px solid #2563eb !important; }",
+          "rationale": "Standard focus indicator repair."
+        },
+        "verified": false
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 3749,
+      "totalTokensOut": 1200,
+      "totalLatencyMs": 14535,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 27,
+          "tokens": 10800
+        },
+        "ultra": {
+          "calls": 18,
+          "tokens": 10800
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.4.7"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "header > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 1026.015625,
+        "y": 15,
+        "width": 59.140625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "header > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Articles",
+      "box": {
+        "x": 1105.34375,
+        "y": 15,
+        "width": 70.8125,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "header > nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 1196.34375,
+        "y": 15,
+        "width": 59.65625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "#share-twitter",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🐦",
+      "box": {
+        "x": 261,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "#share-linkedin",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "in",
+      "box": {
+        "x": 309,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "#share-email",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "✉",
+      "box": {
+        "x": 357,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "#share-link",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🔗",
+      "box": {
+        "x": 405,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "forward",
+      "selector": "#open-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Leave a comment",
+      "box": {
+        "x": 240,
+        "y": 487.828125,
+        "width": 175.1875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "forward",
+      "selector": "#comment-text",
+      "tagName": "textarea",
+      "role": "textarea",
+      "accessibleName": "Your comment",
+      "box": {
+        "x": 430,
+        "y": 360.453125,
+        "width": 420,
+        "height": 94
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "forward",
+      "selector": "#btn-post-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Post comment",
+      "box": {
+        "x": 430,
+        "y": 473.453125,
+        "width": 203,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "forward",
+      "selector": "#btn-cancel-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Cancel",
+      "box": {
+        "x": 645,
+        "y": 473.453125,
+        "width": 205,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "forward",
+      "selector": "header > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 1026.015625,
+        "y": 15,
+        "width": 59.140625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "forward",
+      "selector": "header > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Articles",
+      "box": {
+        "x": 1105.34375,
+        "y": 15,
+        "width": 70.8125,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "forward",
+      "selector": "header > nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 1196.34375,
+        "y": 15,
+        "width": 59.65625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Articles",
+      "box": {
+        "x": 1105.34375,
+        "y": 15,
+        "width": 70.8125,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 1026.015625,
+        "y": 15,
+        "width": 59.140625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "#btn-cancel-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Cancel",
+      "box": {
+        "x": 645,
+        "y": 473.453125,
+        "width": 205,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "#btn-post-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Post comment",
+      "box": {
+        "x": 430,
+        "y": 473.453125,
+        "width": 203,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#comment-text",
+      "tagName": "textarea",
+      "role": "textarea",
+      "accessibleName": "Your comment",
+      "box": {
+        "x": 430,
+        "y": 360.453125,
+        "width": 420,
+        "height": 94
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "backward",
+      "selector": "#open-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Leave a comment",
+      "box": {
+        "x": 240,
+        "y": 487.828125,
+        "width": 175.1875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "#share-link",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🔗",
+      "box": {
+        "x": 405,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "#share-email",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "✉",
+      "box": {
+        "x": 357,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "#share-linkedin",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "in",
+      "box": {
+        "x": 309,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "backward",
+      "selector": "#share-twitter",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🐦",
+      "box": {
+        "x": 261,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 1196.34375,
+        "y": 15,
+        "width": 59.65625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Articles",
+      "box": {
+        "x": 1105.34375,
+        "y": 15,
+        "width": 70.8125,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 1026.015625,
+        "y": 15,
+        "width": 59.140625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "#btn-cancel-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Cancel",
+      "box": {
+        "x": 645,
+        "y": 473.453125,
+        "width": 205,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "backward",
+      "selector": "#btn-post-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Post comment",
+      "box": {
+        "x": 430,
+        "y": 473.453125,
+        "width": 203,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 17,
+      "direction": "backward",
+      "selector": "#comment-text",
+      "tagName": "textarea",
+      "role": "textarea",
+      "accessibleName": "Your comment",
+      "box": {
+        "x": 430,
+        "y": 360.453125,
+        "width": 420,
+        "height": 94
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 18,
+      "direction": "backward",
+      "selector": "#open-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Leave a comment",
+      "box": {
+        "x": 240,
+        "y": 487.828125,
+        "width": 175.1875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "#share-link",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🔗",
+      "box": {
+        "x": 405,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "#share-email",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "✉",
+      "box": {
+        "x": 357,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "#share-linkedin",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "in",
+      "box": {
+        "x": 309,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 22,
+      "direction": "backward",
+      "selector": "#share-twitter",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🐦",
+      "box": {
+        "x": 261,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 1196.34375,
+        "y": 15,
+        "width": 59.65625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Articles",
+      "box": {
+        "x": 1105.34375,
+        "y": 15,
+        "width": 70.8125,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 1026.015625,
+        "y": 15,
+        "width": 59.140625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 27,
+      "direction": "backward",
+      "selector": "#btn-cancel-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Cancel",
+      "box": {
+        "x": 645,
+        "y": 473.453125,
+        "width": 205,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "#btn-post-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Post comment",
+      "box": {
+        "x": 430,
+        "y": 473.453125,
+        "width": 203,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "#comment-text",
+      "tagName": "textarea",
+      "role": "textarea",
+      "accessibleName": "Your comment",
+      "box": {
+        "x": 430,
+        "y": 360.453125,
+        "width": 420,
+        "height": 94
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 30,
+      "direction": "backward",
+      "selector": "#open-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Leave a comment",
+      "box": {
+        "x": 240,
+        "y": 487.828125,
+        "width": 175.1875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "#share-link",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🔗",
+      "box": {
+        "x": 405,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 32,
+      "direction": "backward",
+      "selector": "#share-email",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "✉",
+      "box": {
+        "x": 357,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "#share-linkedin",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "in",
+      "box": {
+        "x": 309,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 34,
+      "direction": "backward",
+      "selector": "#share-twitter",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🐦",
+      "box": {
+        "x": 261,
+        "y": 207.703125,
+        "width": 40,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 1196.34375,
+        "y": 15,
+        "width": 59.65625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Articles",
+      "box": {
+        "x": 1105.34375,
+        "y": 15,
+        "width": 70.8125,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 1026.015625,
+        "y": 15,
+        "width": 59.140625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": "#comment-dialog > div",
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "#btn-cancel-comment",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Cancel",
+      "box": {
+        "x": 645,
+        "y": 473.453125,
+        "width": 205,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    }
+  ],
+  "ledger": [
+    {
+      "id": "7b5439a4-6d23-423a-81b1-5966c41388d0",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 7199,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:27:03.709Z",
+      "tier": "nano"
+    },
+    {
+      "id": "087aa348-aa57-47c5-ba61-63f1f4938633",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 3749,
+      "tokensOut": 1200,
+      "latencyMs": 7336,
+      "cacheHit": false,
+      "outcome": "success",
+      "timestamp": "2026-10-25T18:27:11.060Z",
+      "tier": "super"
+    }
+  ]
+}

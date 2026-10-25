@@ -1,0 +1,1756 @@
+{
+  "auditId": "replay_b04",
+  "pageId": "B04",
+  "report": {
+    "auditId": "replay_b04",
+    "targetUrl": "/fixtures/B04-outline-reset.html",
+    "timestamp": "2026-10-25T18:22:26.840Z",
+    "durationMs": 104405,
+    "keyboardScore": 0,
+    "summary": {
+      "totalStops": 16,
+      "barriersFound": 16,
+      "blockers": 16,
+      "majors": 0,
+      "minors": 0,
+      "fixesVerified": 16
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "nav > ul > li:nth-of-type(1) > a",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with nav > ul > li:nth-of-type(1) > a: No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "nav > ul > li:nth-of-type(1) > a",
+          "body": "nav > ul > li:nth-of-type(1) > a:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_2",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "nav > ul > li:nth-of-type(2) > a",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with nav > ul > li:nth-of-type(2) > a: No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "nav > ul > li:nth-of-type(2) > a",
+          "body": "nav > ul > li:nth-of-type(2) > a:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_3",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "nav > ul > li:nth-of-type(3) > a",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with nav > ul > li:nth-of-type(3) > a: No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "nav > ul > li:nth-of-type(3) > a",
+          "body": "nav > ul > li:nth-of-type(3) > a:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_4",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "nav > ul > li:nth-of-type(4) > a",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with nav > ul > li:nth-of-type(4) > a: No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "nav > ul > li:nth-of-type(4) > a",
+          "body": "nav > ul > li:nth-of-type(4) > a:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_5",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "nav > ul > li:nth-of-type(5) > a",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with nav > ul > li:nth-of-type(5) > a: No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "nav > ul > li:nth-of-type(5) > a",
+          "body": "nav > ul > li:nth-of-type(5) > a:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_6",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#full-name",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #full-name: No outline, box-shadow, border or background change detected when element is focused. tag=input, role=input.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=input, role=input.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#full-name",
+          "body": "#full-name:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_7",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#email",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #email: No outline, box-shadow, border or background change detected when element is focused. tag=input, role=input.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=input, role=input.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#email",
+          "body": "#email:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_8",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#role-select",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #role-select: No outline, box-shadow, border or background change detected when element is focused. tag=select, role=select.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=select, role=select.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#role-select",
+          "body": "#role-select:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_9",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#bio",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #bio: No outline, box-shadow, border or background change detected when element is focused. tag=textarea, role=textarea.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=textarea, role=textarea.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#bio",
+          "body": "#bio:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_10",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#save-btn",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #save-btn: No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#save-btn",
+          "body": "#save-btn:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_11",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#cancel-btn",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #cancel-btn: No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#cancel-btn",
+          "body": "#cancel-btn:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_12",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "main > div:nth-of-type(2) > p > a",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with main > div:nth-of-type(2) > p > a: No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "main > div:nth-of-type(2) > p > a",
+          "body": "main > div:nth-of-type(2) > p > a:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_13",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "#connect-github",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #connect-github: No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#connect-github",
+          "body": "#connect-github:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_14",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "nav > ul > li:nth-of-type(1) > a",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with nav > ul > li:nth-of-type(1) > a: No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "nav > ul > li:nth-of-type(1) > a",
+          "body": "nav > ul > li:nth-of-type(1) > a:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_15",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "nav > ul > li:nth-of-type(2) > a",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with nav > ul > li:nth-of-type(2) > a: No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "nav > ul > li:nth-of-type(2) > a",
+          "body": "nav > ul > li:nth-of-type(2) > a:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_16",
+        "detectorId": "D3",
+        "severity": "blocker",
+        "selector": "nav > ul > li:nth-of-type(3) > a",
+        "wcagId": "2.4.7",
+        "wcagName": "Focus Visible",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with nav > ul > li:nth-of-type(3) > a: No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "nav > ul > li:nth-of-type(3) > a",
+          "body": "nav > ul > li:nth-of-type(3) > a:focus-visible { outline: 3px solid #2563eb !important; outline-offset: 2px !important; }",
+          "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 0,
+      "totalTokensOut": 0,
+      "totalLatencyMs": 15819,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 16,
+          "tokens": 6400
+        },
+        "ultra": {
+          "calls": 16,
+          "tokens": 9600
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.4.7"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "nav > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Dashboard",
+      "box": {
+        "x": 24,
+        "y": 0,
+        "width": 117.03125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "nav > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Projects",
+      "box": {
+        "x": 141.03125,
+        "y": 0,
+        "width": 96.890625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "nav > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Team",
+      "box": {
+        "x": 237.921875,
+        "y": 0,
+        "width": 76.078125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "nav > ul > li:nth-of-type(4) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Settings",
+      "box": {
+        "x": 314,
+        "y": 0,
+        "width": 97.671875,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "nav > ul > li:nth-of-type(5) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Help",
+      "box": {
+        "x": 411.671875,
+        "y": 0,
+        "width": 70.375,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "#full-name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Full name",
+      "box": {
+        "x": 264,
+        "y": 233.03125,
+        "width": 752,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "#email",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Email address",
+      "box": {
+        "x": 264,
+        "y": 313.03125,
+        "width": 752,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "forward",
+      "selector": "#role-select",
+      "tagName": "select",
+      "role": "select",
+      "accessibleName": "Role",
+      "box": {
+        "x": 264,
+        "y": 393.03125,
+        "width": 752,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "forward",
+      "selector": "#bio",
+      "tagName": "textarea",
+      "role": "textarea",
+      "accessibleName": "Bio",
+      "box": {
+        "x": 264,
+        "y": 475.03125,
+        "width": 752,
+        "height": 76
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "forward",
+      "selector": "#save-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Save changes",
+      "box": {
+        "x": 264,
+        "y": 571.03125,
+        "width": 140.765625,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "forward",
+      "selector": "#cancel-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Cancel",
+      "box": {
+        "x": 420.953125,
+        "y": 570.03125,
+        "width": 91.890625,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "forward",
+      "selector": "main > div:nth-of-type(2) > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more",
+      "box": {
+        "x": 643.359375,
+        "y": 715.03125,
+        "width": 82,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "forward",
+      "selector": "#connect-github",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Connect GitHub",
+      "box": {
+        "x": 264,
+        "y": 749.03125,
+        "width": 158.515625,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "forward",
+      "selector": "nav > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Dashboard",
+      "box": {
+        "x": 24,
+        "y": 0,
+        "width": 117.03125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "forward",
+      "selector": "nav > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Projects",
+      "box": {
+        "x": 141.03125,
+        "y": 0,
+        "width": 96.890625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "forward",
+      "selector": "nav > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Team",
+      "box": {
+        "x": 237.921875,
+        "y": 0,
+        "width": 76.078125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Projects",
+      "box": {
+        "x": 141.03125,
+        "y": 0,
+        "width": 96.890625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Dashboard",
+      "box": {
+        "x": 24,
+        "y": 0,
+        "width": 117.03125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "#connect-github",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Connect GitHub",
+      "box": {
+        "x": 264,
+        "y": 749.03125,
+        "width": 158.515625,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "main > div:nth-of-type(2) > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more",
+      "box": {
+        "x": 643.359375,
+        "y": 715.03125,
+        "width": 82,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#cancel-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Cancel",
+      "box": {
+        "x": 420.953125,
+        "y": 570.03125,
+        "width": 91.890625,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "backward",
+      "selector": "#save-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Save changes",
+      "box": {
+        "x": 264,
+        "y": 571.03125,
+        "width": 140.765625,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "#bio",
+      "tagName": "textarea",
+      "role": "textarea",
+      "accessibleName": "Bio",
+      "box": {
+        "x": 264,
+        "y": 475.03125,
+        "width": 752,
+        "height": 76
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "#role-select",
+      "tagName": "select",
+      "role": "select",
+      "accessibleName": "Role",
+      "box": {
+        "x": 264,
+        "y": 393.03125,
+        "width": 752,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "#email",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Email address",
+      "box": {
+        "x": 264,
+        "y": 313.03125,
+        "width": 752,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "backward",
+      "selector": "#full-name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Full name",
+      "box": {
+        "x": 264,
+        "y": 233.03125,
+        "width": 752,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(5) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Help",
+      "box": {
+        "x": 411.671875,
+        "y": 0,
+        "width": 70.375,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(4) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Settings",
+      "box": {
+        "x": 314,
+        "y": 0,
+        "width": 97.671875,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Team",
+      "box": {
+        "x": 237.921875,
+        "y": 0,
+        "width": 76.078125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Projects",
+      "box": {
+        "x": 141.03125,
+        "y": 0,
+        "width": 96.890625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Dashboard",
+      "box": {
+        "x": 24,
+        "y": 0,
+        "width": 117.03125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 17,
+      "direction": "backward",
+      "selector": "#connect-github",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Connect GitHub",
+      "box": {
+        "x": 264,
+        "y": 749.03125,
+        "width": 158.515625,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 18,
+      "direction": "backward",
+      "selector": "main > div:nth-of-type(2) > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more",
+      "box": {
+        "x": 643.359375,
+        "y": 715.03125,
+        "width": 82,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "#cancel-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Cancel",
+      "box": {
+        "x": 420.953125,
+        "y": 570.03125,
+        "width": 91.890625,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "#save-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Save changes",
+      "box": {
+        "x": 264,
+        "y": 571.03125,
+        "width": 140.765625,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "#bio",
+      "tagName": "textarea",
+      "role": "textarea",
+      "accessibleName": "Bio",
+      "box": {
+        "x": 264,
+        "y": 475.03125,
+        "width": 752,
+        "height": 76
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 22,
+      "direction": "backward",
+      "selector": "#role-select",
+      "tagName": "select",
+      "role": "select",
+      "accessibleName": "Role",
+      "box": {
+        "x": 264,
+        "y": 393.03125,
+        "width": 752,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "#email",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Email address",
+      "box": {
+        "x": 264,
+        "y": 313.03125,
+        "width": 752,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "#full-name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Full name",
+      "box": {
+        "x": 264,
+        "y": 233.03125,
+        "width": 752,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(5) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Help",
+      "box": {
+        "x": 411.671875,
+        "y": 0,
+        "width": 70.375,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 26,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(4) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Settings",
+      "box": {
+        "x": 314,
+        "y": 0,
+        "width": 97.671875,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 27,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Team",
+      "box": {
+        "x": 237.921875,
+        "y": 0,
+        "width": 76.078125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Projects",
+      "box": {
+        "x": 141.03125,
+        "y": 0,
+        "width": 96.890625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Dashboard",
+      "box": {
+        "x": 24,
+        "y": 0,
+        "width": 117.03125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "#connect-github",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Connect GitHub",
+      "box": {
+        "x": 264,
+        "y": 749.03125,
+        "width": 158.515625,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 32,
+      "direction": "backward",
+      "selector": "main > div:nth-of-type(2) > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more",
+      "box": {
+        "x": 643.359375,
+        "y": 715.03125,
+        "width": 82,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "#cancel-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Cancel",
+      "box": {
+        "x": 420.953125,
+        "y": 570.03125,
+        "width": 91.890625,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 34,
+      "direction": "backward",
+      "selector": "#save-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Save changes",
+      "box": {
+        "x": 264,
+        "y": 571.03125,
+        "width": 140.765625,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "#bio",
+      "tagName": "textarea",
+      "role": "textarea",
+      "accessibleName": "Bio",
+      "box": {
+        "x": 264,
+        "y": 475.03125,
+        "width": 752,
+        "height": 76
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "#role-select",
+      "tagName": "select",
+      "role": "select",
+      "accessibleName": "Role",
+      "box": {
+        "x": 264,
+        "y": 393.03125,
+        "width": 752,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "#email",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Email address",
+      "box": {
+        "x": 264,
+        "y": 313.03125,
+        "width": 752,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 38,
+      "direction": "backward",
+      "selector": "#full-name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Full name",
+      "box": {
+        "x": 264,
+        "y": 233.03125,
+        "width": 752,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(0, 0, 0)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "nav > ul > li:nth-of-type(5) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Help",
+      "box": {
+        "x": 411.671875,
+        "y": 0,
+        "width": 70.375,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": false,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "ledger": [
+    {
+      "id": "476ecf5b-564d-4af4-8974-673213023d9f",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 2596,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:20:50.832Z",
+      "tier": "nano"
+    },
+    {
+      "id": "d6631a90-a26b-4651-bea1-a5e1ce140949",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 13223,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:21:04.057Z",
+      "tier": "super"
+    }
+  ]
+}

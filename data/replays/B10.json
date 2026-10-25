@@ -1,0 +1,1106 @@
+{
+  "auditId": "replay_b10",
+  "pageId": "B10",
+  "report": {
+    "auditId": "replay_b10",
+    "targetUrl": "/fixtures/B10-tabs-widget.html",
+    "timestamp": "2026-10-25T18:26:27.545Z",
+    "durationMs": 25627,
+    "keyboardScore": 90,
+    "summary": {
+      "totalStops": 7,
+      "barriersFound": 1,
+      "blockers": 0,
+      "majors": 1,
+      "minors": 0,
+      "fixesVerified": 0
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D8",
+        "severity": "major",
+        "selector": "[role='tablist']",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with [role='tablist']: Multiple tabs (7) are in the sequential Tab navigation sequence. The ARIA tabs pattern requires roving tabindex (only active tab has tabindex=0; inact",
+        "evidence": "Multiple tabs (7) are in the sequential Tab navigation sequence. The ARIA tabs pattern requires roving tabindex (only active tab has tabindex=0; inactive tabs have tabindex=-1 with arrow key navigation).",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "[role='tablist']",
+          "body": "[role='tablist']:focus-visible { outline: 2px solid #2563eb !important; }",
+          "rationale": "Standard focus indicator repair."
+        },
+        "verified": false
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 0,
+      "totalTokensOut": 0,
+      "totalLatencyMs": 8506,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 1,
+          "tokens": 400
+        },
+        "ultra": {
+          "calls": 0,
+          "tokens": 0
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.4.3"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "#tab-overview",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Overview",
+      "box": {
+        "x": 294,
+        "y": 104.875,
+        "width": 107.875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "#tab-install",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Installation",
+      "box": {
+        "x": 401.875,
+        "y": 104.875,
+        "width": 114.9375,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "#tab-config",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Configuration",
+      "box": {
+        "x": 516.8125,
+        "y": 104.875,
+        "width": 134.1875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "#tab-api",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "API Reference",
+      "box": {
+        "x": 651,
+        "y": 104.875,
+        "width": 137.5625,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "#tab-overview",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Overview",
+      "box": {
+        "x": 294,
+        "y": 104.875,
+        "width": 107.875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "#tab-install",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Installation",
+      "box": {
+        "x": 401.875,
+        "y": 104.875,
+        "width": 114.9375,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "forward",
+      "selector": "#tab-config",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Configuration",
+      "box": {
+        "x": 516.8125,
+        "y": 104.875,
+        "width": 134.1875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "#tab-install",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Installation",
+      "box": {
+        "x": 401.875,
+        "y": 104.875,
+        "width": 114.9375,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "#tab-overview",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Overview",
+      "box": {
+        "x": 294,
+        "y": 104.875,
+        "width": 107.875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "#tab-api",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "API Reference",
+      "box": {
+        "x": 651,
+        "y": 104.875,
+        "width": 137.5625,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "#tab-config",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Configuration",
+      "box": {
+        "x": 516.8125,
+        "y": 104.875,
+        "width": 134.1875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#tab-install",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Installation",
+      "box": {
+        "x": 401.875,
+        "y": 104.875,
+        "width": 114.9375,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "backward",
+      "selector": "#tab-overview",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Overview",
+      "box": {
+        "x": 294,
+        "y": 104.875,
+        "width": 107.875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "#tab-api",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "API Reference",
+      "box": {
+        "x": 651,
+        "y": 104.875,
+        "width": 137.5625,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "#tab-config",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Configuration",
+      "box": {
+        "x": 516.8125,
+        "y": 104.875,
+        "width": 134.1875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "backward",
+      "selector": "#tab-install",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Installation",
+      "box": {
+        "x": 401.875,
+        "y": 104.875,
+        "width": 114.9375,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "#tab-overview",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Overview",
+      "box": {
+        "x": 294,
+        "y": 104.875,
+        "width": 107.875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "#tab-api",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "API Reference",
+      "box": {
+        "x": 651,
+        "y": 104.875,
+        "width": 137.5625,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "backward",
+      "selector": "#tab-config",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Configuration",
+      "box": {
+        "x": 516.8125,
+        "y": 104.875,
+        "width": 134.1875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "#tab-install",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Installation",
+      "box": {
+        "x": 401.875,
+        "y": 104.875,
+        "width": 114.9375,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "backward",
+      "selector": "#tab-overview",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Overview",
+      "box": {
+        "x": 294,
+        "y": 104.875,
+        "width": 107.875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 18,
+      "direction": "backward",
+      "selector": "#tab-api",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "API Reference",
+      "box": {
+        "x": 651,
+        "y": 104.875,
+        "width": 137.5625,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "#tab-config",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Configuration",
+      "box": {
+        "x": 516.8125,
+        "y": 104.875,
+        "width": 134.1875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "#tab-install",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Installation",
+      "box": {
+        "x": 401.875,
+        "y": 104.875,
+        "width": 114.9375,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "#tab-overview",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Overview",
+      "box": {
+        "x": 294,
+        "y": 104.875,
+        "width": 107.875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "#tab-api",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "API Reference",
+      "box": {
+        "x": 651,
+        "y": 104.875,
+        "width": 137.5625,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "#tab-config",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Configuration",
+      "box": {
+        "x": 516.8125,
+        "y": 104.875,
+        "width": 134.1875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "#tab-install",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Installation",
+      "box": {
+        "x": 401.875,
+        "y": 104.875,
+        "width": 114.9375,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 26,
+      "direction": "backward",
+      "selector": "#tab-overview",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Overview",
+      "box": {
+        "x": 294,
+        "y": 104.875,
+        "width": 107.875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "#tab-api",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "API Reference",
+      "box": {
+        "x": 651,
+        "y": 104.875,
+        "width": 137.5625,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "#tab-config",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Configuration",
+      "box": {
+        "x": 516.8125,
+        "y": 104.875,
+        "width": 134.1875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 30,
+      "direction": "backward",
+      "selector": "#tab-install",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Installation",
+      "box": {
+        "x": 401.875,
+        "y": 104.875,
+        "width": 114.9375,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "#tab-overview",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Overview",
+      "box": {
+        "x": 294,
+        "y": 104.875,
+        "width": 107.875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "#tab-api",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "API Reference",
+      "box": {
+        "x": 651,
+        "y": 104.875,
+        "width": 137.5625,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 34,
+      "direction": "backward",
+      "selector": "#tab-config",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Configuration",
+      "box": {
+        "x": 516.8125,
+        "y": 104.875,
+        "width": 134.1875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "#tab-install",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Installation",
+      "box": {
+        "x": 401.875,
+        "y": 104.875,
+        "width": 114.9375,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "#tab-overview",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Overview",
+      "box": {
+        "x": 294,
+        "y": 104.875,
+        "width": 107.875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 38,
+      "direction": "backward",
+      "selector": "#tab-api",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "API Reference",
+      "box": {
+        "x": 651,
+        "y": 104.875,
+        "width": 137.5625,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "#tab-config",
+      "tagName": "button",
+      "role": "tab",
+      "accessibleName": "Configuration",
+      "box": {
+        "x": 516.8125,
+        "y": 104.875,
+        "width": 134.1875,
+        "height": 48
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "ledger": [
+    {
+      "id": "57234668-8b15-4f47-931a-fb936a398a27",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 2746,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:26:10.740Z",
+      "tier": "nano"
+    },
+    {
+      "id": "f27f3d85-9036-49e9-abc5-8bbac16dabb9",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 5760,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:26:16.501Z",
+      "tier": "super"
+    }
+  ]
+}

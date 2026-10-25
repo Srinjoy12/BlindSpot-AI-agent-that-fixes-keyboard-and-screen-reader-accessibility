@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture B04 — Outline Reset (no visible focus indicator)</title>
+<style>
+  /* ── SEEDED BUG: global outline reset — focus completely invisible ── */
+  * {
+    outline: none !important;
+    /* BUG: This removes all focus indicators from every interactive element on the page */
+  }
+  
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 0; background: #f9fafb; }
+  
+  nav { background: #1e3a5f; padding: 0 24px; }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 0; }
+  nav li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 18px;
+    font-weight: 500;
+  }
+  nav li a:hover { background: rgba(255,255,255,.1); }
+  /* BUG: no :focus style defined to replace the removed outline */
+  
+  main { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+  h1 { color: #1e3a5f; }
+  
+  .card { background: #fff; border-radius: 8px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .card h2 { margin-top: 0; color: #1e3a5f; font-size: 1.1rem; }
+  
+  .form-group { margin-bottom: 16px; }
+  label { display: block; font-weight: 600; margin-bottom: 6px; color: #333; }
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: inherit;
+    /* BUG: outline:none removes focus ring — these have no focus style */
+  }
+  
+  .btn { display: inline-block; padding: 10px 20px; border-radius: 4px; font-size: 1rem; cursor: pointer; font-family: inherit; }
+  .btn-primary { background: #1e3a5f; color: #fff; border: none; }
+  .btn-secondary { background: transparent; border: 1px solid #1e3a5f; color: #1e3a5f; }
+  /* BUG: no :focus styles on buttons — they lose the default outline */
+  
+  a { color: #1e3a5f; }
+  /* BUG: links also have no focus style */
+</style>
+</head>
+<body>
+
+<nav aria-label="Main navigation">
+  <ul>
+    <li><a href="#">Dashboard</a></li>
+    <li><a href="#">Projects</a></li>
+    <li><a href="#">Team</a></li>
+    <li><a href="#">Settings</a></li>
+    <li><a href="#">Help</a></li>
+  </ul>
+</nav>
+
+<main>
+  <h1>Account Settings</h1>
+
+  <div class="card">
+    <h2>Profile information</h2>
+    <div class="form-group">
+      <label for="full-name">Full name</label>
+      <input type="text" id="full-name" value="Jane Smith" />
+    </div>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" id="email" value="jane@example.com" />
+    </div>
+    <div class="form-group">
+      <label for="role-select">Role</label>
+      <select id="role-select">
+        <option>Developer</option>
+        <option>Designer</option>
+        <option>Product Manager</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="bio">Bio</label>
+      <textarea id="bio" rows="3">Accessibility advocate and web developer.</textarea>
+    </div>
+    <button class="btn btn-primary" id="save-btn">Save changes</button>
+    <button class="btn btn-secondary" id="cancel-btn" style="margin-left:12px;">Cancel</button>
+  </div>
+
+  <div class="card">
+    <h2>Linked accounts</h2>
+    <p>Connect your accounts to streamline your workflow. <a href="#">Learn more</a></p>
+    <button class="btn btn-secondary" id="connect-github">Connect GitHub</button>
+  </div>
+</main>
+
+</body>
+</html>

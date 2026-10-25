@@ -1,0 +1,30 @@
+{
+  "name": "@blindspot/bench",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "blindspot-bench": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "bench": "node ./dist/cli.js"
+  },
+  "dependencies": {
+    "@blindspot/ai": "*",
+    "@blindspot/detectors": "*",
+    "@blindspot/engine": "*",
+    "@blindspot/fixer": "*",
+    "@blindspot/report": "*",
+    "playwright": "^1.48.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  }
+}

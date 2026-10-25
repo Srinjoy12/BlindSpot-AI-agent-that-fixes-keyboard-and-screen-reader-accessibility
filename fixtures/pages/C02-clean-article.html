@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture C02 — Clean Article (no accessibility issues)</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 0; line-height: 1.6; color: #1f2937; }
+  
+  .skip-link {
+    position: absolute; top: -40px; left: 0;
+    background: #2563eb; color: #fff; padding: 8px 16px;
+    text-decoration: none; z-index: 9999; border-radius: 0 0 4px 0;
+  }
+  .skip-link:focus { top: 0; }
+  
+  header { background: #0f172a; padding: 0 24px; }
+  header .header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; height: 56px; justify-content: space-between; }
+  header h1 { margin: 0; color: #fff; font-size: 1.1rem; }
+  header nav a { color: #e2e8f0; text-decoration: none; margin-left: 16px; padding: 6px 10px; border-radius: 4px; }
+  header nav a:hover { background: rgba(255,255,255,.1); }
+  header nav a:focus { outline: 2px solid #60a5fa; outline-offset: 2px; }
+  
+  .breadcrumbs { padding: 12px 24px; background: #f9fafb; border-bottom: 1px solid #e5e7eb; }
+  .breadcrumbs ol { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; font-size: .875rem; max-width: 900px; margin: 0 auto; }
+  .breadcrumbs li + li::before { content: '/'; color: #9ca3af; margin-right: 8px; }
+  .breadcrumbs a { color: #2563eb; text-decoration: none; }
+  .breadcrumbs a:hover { text-decoration: underline; }
+  .breadcrumbs a:focus { outline: 2px solid #2563eb; outline-offset: 2px; }
+  .breadcrumbs [aria-current] { color: #6b7280; }
+  
+  main { max-width: 720px; margin: 40px auto; padding: 0 24px; }
+  
+  article header { background: none; padding: 0; margin-bottom: 32px; }
+  article header .header-inner { display: block; height: auto; }
+  
+  .article-title { font-size: 2rem; font-weight: 700; color: #0f172a; margin: 0 0 16px; line-height: 1.2; }
+  .article-meta { display: flex; gap: 16px; color: #6b7280; font-size: .875rem; flex-wrap: wrap; }
+  .article-meta time { font-weight: 500; }
+  
+  h2 { font-size: 1.4rem; color: #0f172a; margin: 40px 0 16px; }
+  h3 { font-size: 1.1rem; color: #0f172a; margin: 28px 0 12px; }
+  
+  p { margin: 0 0 16px; }
+  
+  ul, ol { padding-left: 24px; margin: 0 0 16px; }
+  li { margin-bottom: 8px; }
+  
+  a { color: #2563eb; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus { outline: 2px solid #2563eb; outline-offset: 2px; border-radius: 2px; }
+  
+  blockquote { border-left: 4px solid #2563eb; margin: 24px 0; padding: 12px 20px; background: #eff6ff; border-radius: 0 4px 4px 0; }
+  blockquote p { margin: 0; color: #1e40af; font-style: italic; }
+  
+  figure { margin: 32px 0; }
+  figure img { width: 100%; border-radius: 8px; display: block; }
+  figcaption { margin-top: 8px; font-size: .875rem; color: #6b7280; text-align: center; }
+  
+  .tag { display: inline-block; background: #dbeafe; color: #1e40af; padding: 2px 10px; border-radius: 999px; font-size: .8rem; text-decoration: none; }
+  .tag:hover { background: #bfdbfe; }
+  .tag:focus { outline: 2px solid #2563eb; outline-offset: 2px; }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 32px; }
+  
+  .author-card { display: flex; align-items: center; gap: 16px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; margin-top: 40px; }
+  .author-avatar { width: 56px; height: 56px; border-radius: 50%; background: #2563eb; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
+  .author-name { font-weight: 600; color: #0f172a; }
+  .author-bio { font-size: .9rem; color: #6b7280; margin-top: 4px; }
+  
+  footer { background: #0f172a; color: #94a3b8; padding: 32px 24px; margin-top: 60px; text-align: center; font-size: .875rem; }
+  footer a { color: #60a5fa; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer a:focus { outline: 2px solid #60a5fa; }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header>
+  <div class="header-inner">
+    <h1>TechBlog</h1>
+    <nav aria-label="Main navigation">
+      <a href="#">Home</a>
+      <a href="#">Articles</a>
+      <a href="#">About</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Accessibility</a></li>
+    <li><span aria-current="page">WCAG 2.2 explained</span></li>
+  </ol>
+</nav>
+
+<main id="main-content">
+  <article>
+    <header>
+      <div class="header-inner">
+        <h2 class="article-title">WCAG 2.2 explained: what changed and why it matters</h2>
+        <div class="article-meta">
+          <time datetime="2026-09-15">15 September 2026</time>
+          <span>by <a href="#">Jane Smith</a></span>
+          <span>8 min read</span>
+        </div>
+      </div>
+    </header>
+
+    <p>Web Content Accessibility Guidelines 2.2 became a W3C Recommendation in October 2023, introducing nine new success criteria and removing one. If your team has not yet updated its accessibility checklist, here is what you need to know.</p>
+
+    <h2>What is new in WCAG 2.2?</h2>
+    <p>WCAG 2.2 adds criteria focused on mobile usability, cognitive accessibility, and refinements to focus management. The most impactful additions for keyboard users are the two focus-related criteria.</p>
+
+    <h3>Focus Not Obscured (Minimum) — SC 2.4.11</h3>
+    <p>When a user interface component receives keyboard focus, the component must not be entirely hidden due to author-created content. This addresses the common problem of sticky headers covering focused elements.</p>
+
+    <blockquote>
+      <p>"Sticky headers are the most common source of SC 2.4.11 failures we see in audits."</p>
+    </blockquote>
+
+    <h3>Dragging Movements — SC 2.5.7</h3>
+    <p>All functionality that uses a dragging movement for operation must be achievable with a single pointer without dragging. This matters for sliders, sortable lists, and map interfaces.</p>
+
+    <h2>What changed from WCAG 2.1?</h2>
+    <ul>
+      <li><a href="#">SC 4.1.1 (Parsing)</a> was removed — modern browsers handle malformed markup well enough that this check no longer provides value.</li>
+      <li>SC 2.4.7 (Focus Visible) was upgraded from a WCAG 2.1 AA criterion to a revised criterion in 2.2.</li>
+      <li>Several criteria were clarified with better normative language.</li>
+    </ul>
+
+    <h2>How to audit for WCAG 2.2 compliance</h2>
+    <ol>
+      <li>Start with an automated scanner to catch the easy wins — missing alt text, colour contrast, heading structure.</li>
+      <li>Manually test with a keyboard. Tab through every interactive control and verify that focus is always visible and that you can complete every task.</li>
+      <li>Test with a screen reader — NVDA on Windows, VoiceOver on macOS and iOS, TalkBack on Android.</li>
+      <li>Use BlindSpot to catch the runtime barriers that static scanners miss.</li>
+    </ol>
+
+    <div class="tags" aria-label="Article tags">
+      <a href="#" class="tag">WCAG 2.2</a>
+      <a href="#" class="tag">Accessibility</a>
+      <a href="#" class="tag">Keyboard navigation</a>
+      <a href="#" class="tag">Screen readers</a>
+    </div>
+
+    <div class="author-card" aria-label="Author information">
+      <div class="author-avatar" aria-hidden="true">JS</div>
+      <div>
+        <div class="author-name">Jane Smith</div>
+        <div class="author-bio">Accessibility engineer and WCAG 2.2 trainer. Formerly at Deque Systems.</div>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <p>© 2026 TechBlog · <a href="#">Privacy</a> · <a href="#">Accessibility statement</a></p>
+</footer>
+</body>
+</html>

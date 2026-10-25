@@ -43,6 +43,7 @@ export const FocusStopSchema = z.object({
   focusIndicator: FocusIndicatorSchema,
   insideOpenDialog: z.boolean(),
   scrollY: z.number(),
+  tabIndex: z.number().optional(),
   // For cycle detection
   elementHandle: z.string().optional(), // internal, not serialized
 });

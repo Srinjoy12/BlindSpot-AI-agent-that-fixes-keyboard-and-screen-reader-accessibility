@@ -1,0 +1,1464 @@
+{
+  "auditId": "replay_b03",
+  "pageId": "B03",
+  "report": {
+    "auditId": "replay_b03",
+    "targetUrl": "/fixtures/B03-icon-toolbar.html",
+    "timestamp": "2026-10-25T18:20:42.392Z",
+    "durationMs": 28312,
+    "keyboardScore": 80,
+    "summary": {
+      "totalStops": 15,
+      "barriersFound": 2,
+      "blockers": 0,
+      "majors": 2,
+      "minors": 0,
+      "fixesVerified": 2
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D6",
+        "severity": "major",
+        "selector": "#btn-link",
+        "wcagId": "4.1.2",
+        "wcagName": "Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #btn-link: Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🔗\". Screen readers will announce only the role.",
+        "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🔗\". Screen readers will announce only the role.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#btn-link",
+          "body": "aria-label=\"Action\"",
+          "rationale": "Provides an accessible name for screen readers on interactive control."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_2",
+        "detectorId": "D6",
+        "severity": "major",
+        "selector": "#btn-image",
+        "wcagId": "4.1.2",
+        "wcagName": "Name, Role, Value",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #btn-image: Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"📷\". Screen readers will announce only the role.",
+        "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"📷\". Screen readers will announce only the role.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#btn-image",
+          "body": "aria-label=\"Action\"",
+          "rationale": "Provides an accessible name for screen readers on interactive control."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 0,
+      "totalTokensOut": 0,
+      "totalLatencyMs": 8843,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 2,
+          "tokens": 800
+        },
+        "ultra": {
+          "calls": 2,
+          "tokens": 1200
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 4.1.2"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "#btn-bold",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "B",
+      "box": {
+        "x": 20,
+        "y": 64,
+        "width": 31.875,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "#btn-italic",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "I",
+      "box": {
+        "x": 55.875,
+        "y": 64,
+        "width": 23.34375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "#btn-underline",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "U",
+      "box": {
+        "x": 83.21875,
+        "y": 64,
+        "width": 31.875,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "#btn-align-left",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇤",
+      "box": {
+        "x": 132.09375,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "#btn-align-center",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇌",
+      "box": {
+        "x": 173.296875,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "#btn-align-right",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇥",
+      "box": {
+        "x": 214.5,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "#btn-link",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🔗",
+      "box": {
+        "x": 268.703125,
+        "y": 64,
+        "width": 40,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "forward",
+      "selector": "#btn-image",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "📷",
+      "box": {
+        "x": 312.703125,
+        "y": 64,
+        "width": 40,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "forward",
+      "selector": "#btn-table",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☷",
+      "box": {
+        "x": 356.703125,
+        "y": 64,
+        "width": 35.625,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "forward",
+      "selector": "#btn-undo",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "↶",
+      "box": {
+        "x": 409.328125,
+        "y": 64,
+        "width": 34.609375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "forward",
+      "selector": "#btn-redo",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "↷",
+      "box": {
+        "x": 447.9375,
+        "y": 64,
+        "width": 34.609375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "forward",
+      "selector": "main > div",
+      "tagName": "div",
+      "role": "textbox",
+      "accessibleName": "Document content",
+      "box": {
+        "x": 240,
+        "y": 134.203125,
+        "width": 800,
+        "height": 334
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "forward",
+      "selector": "#btn-bold",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "B",
+      "box": {
+        "x": 20,
+        "y": 64,
+        "width": 31.875,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "forward",
+      "selector": "#btn-italic",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "I",
+      "box": {
+        "x": 55.875,
+        "y": 64,
+        "width": 23.34375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "forward",
+      "selector": "#btn-underline",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "U",
+      "box": {
+        "x": 83.21875,
+        "y": 64,
+        "width": 31.875,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "#btn-italic",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "I",
+      "box": {
+        "x": 55.875,
+        "y": 64,
+        "width": 23.34375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "#btn-bold",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "B",
+      "box": {
+        "x": 20,
+        "y": 64,
+        "width": 31.875,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "main > div",
+      "tagName": "div",
+      "role": "textbox",
+      "accessibleName": "Document content",
+      "box": {
+        "x": 240,
+        "y": 134.203125,
+        "width": 800,
+        "height": 334
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "#btn-redo",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "↷",
+      "box": {
+        "x": 447.9375,
+        "y": 64,
+        "width": 34.609375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#btn-undo",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "↶",
+      "box": {
+        "x": 409.328125,
+        "y": 64,
+        "width": 34.609375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "backward",
+      "selector": "#btn-table",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☷",
+      "box": {
+        "x": 356.703125,
+        "y": 64,
+        "width": 35.625,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "#btn-image",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "📷",
+      "box": {
+        "x": 312.703125,
+        "y": 64,
+        "width": 40,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "#btn-link",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🔗",
+      "box": {
+        "x": 268.703125,
+        "y": 64,
+        "width": 40,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "#btn-align-right",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇥",
+      "box": {
+        "x": 214.5,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "backward",
+      "selector": "#btn-align-center",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇌",
+      "box": {
+        "x": 173.296875,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "#btn-align-left",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇤",
+      "box": {
+        "x": 132.09375,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "backward",
+      "selector": "#btn-underline",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "U",
+      "box": {
+        "x": 83.21875,
+        "y": 64,
+        "width": 31.875,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "#btn-italic",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "I",
+      "box": {
+        "x": 55.875,
+        "y": 64,
+        "width": 23.34375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "backward",
+      "selector": "#btn-bold",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "B",
+      "box": {
+        "x": 20,
+        "y": 64,
+        "width": 31.875,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "backward",
+      "selector": "main > div",
+      "tagName": "div",
+      "role": "textbox",
+      "accessibleName": "Document content",
+      "box": {
+        "x": 240,
+        "y": 134.203125,
+        "width": 800,
+        "height": 334
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 17,
+      "direction": "backward",
+      "selector": "#btn-redo",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "↷",
+      "box": {
+        "x": 447.9375,
+        "y": 64,
+        "width": 34.609375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 18,
+      "direction": "backward",
+      "selector": "#btn-undo",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "↶",
+      "box": {
+        "x": 409.328125,
+        "y": 64,
+        "width": 34.609375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "#btn-table",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☷",
+      "box": {
+        "x": 356.703125,
+        "y": 64,
+        "width": 35.625,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "#btn-image",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "📷",
+      "box": {
+        "x": 312.703125,
+        "y": 64,
+        "width": 40,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "#btn-link",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🔗",
+      "box": {
+        "x": 268.703125,
+        "y": 64,
+        "width": 40,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 22,
+      "direction": "backward",
+      "selector": "#btn-align-right",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇥",
+      "box": {
+        "x": 214.5,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "#btn-align-center",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇌",
+      "box": {
+        "x": 173.296875,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "#btn-align-left",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇤",
+      "box": {
+        "x": 132.09375,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "#btn-underline",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "U",
+      "box": {
+        "x": 83.21875,
+        "y": 64,
+        "width": 31.875,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 26,
+      "direction": "backward",
+      "selector": "#btn-italic",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "I",
+      "box": {
+        "x": 55.875,
+        "y": 64,
+        "width": 23.34375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 27,
+      "direction": "backward",
+      "selector": "#btn-bold",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "B",
+      "box": {
+        "x": 20,
+        "y": 64,
+        "width": 31.875,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "main > div",
+      "tagName": "div",
+      "role": "textbox",
+      "accessibleName": "Document content",
+      "box": {
+        "x": 240,
+        "y": 134.203125,
+        "width": 800,
+        "height": 334
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 30,
+      "direction": "backward",
+      "selector": "#btn-redo",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "↷",
+      "box": {
+        "x": 447.9375,
+        "y": 64,
+        "width": 34.609375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "#btn-undo",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "↶",
+      "box": {
+        "x": 409.328125,
+        "y": 64,
+        "width": 34.609375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 32,
+      "direction": "backward",
+      "selector": "#btn-table",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☷",
+      "box": {
+        "x": 356.703125,
+        "y": 64,
+        "width": 35.625,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "#btn-image",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "📷",
+      "box": {
+        "x": 312.703125,
+        "y": 64,
+        "width": 40,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 34,
+      "direction": "backward",
+      "selector": "#btn-link",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "🔗",
+      "box": {
+        "x": 268.703125,
+        "y": 64,
+        "width": 40,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "#btn-align-right",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇥",
+      "box": {
+        "x": 214.5,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "#btn-align-center",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇌",
+      "box": {
+        "x": 173.296875,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "#btn-align-left",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "⇤",
+      "box": {
+        "x": 132.09375,
+        "y": 64,
+        "width": 37.203125,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 38,
+      "direction": "backward",
+      "selector": "#btn-underline",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "U",
+      "box": {
+        "x": 83.21875,
+        "y": 64,
+        "width": 31.875,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "#btn-italic",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "I",
+      "box": {
+        "x": 55.875,
+        "y": 64,
+        "width": 23.34375,
+        "height": 37.203125
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "ledger": [
+    {
+      "id": "852af4b9-fb03-4644-b0ef-78e82f598926",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 2671,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:20:27.096Z",
+      "tier": "nano"
+    },
+    {
+      "id": "3f451808-03b1-4a43-a652-11622446800b",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 6172,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:20:33.270Z",
+      "tier": "super"
+    }
+  ]
+}

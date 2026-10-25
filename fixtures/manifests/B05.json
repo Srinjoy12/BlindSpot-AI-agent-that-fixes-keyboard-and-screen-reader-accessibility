@@ -1,0 +1,13 @@
+{
+  "pageId": "B05",
+  "title": "Sticky header — focused links hidden under fixed header",
+  "barriers": [
+    {
+      "selector": ".article-link",
+      "detectorId": "D5",
+      "wcagId": "2.4.11",
+      "severity": "major",
+      "note": "Links in the article body receive focus but are obscured by the 64px sticky header because scroll-margin-top is not set."
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture B09 — Auto-rotating Carousel (controls out of tab order)</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+  main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+  h1 { color: #0f172a; }
+  
+  /* ── SEEDED BUG: Carousel controls are out of tab order ── */
+  .carousel-wrapper { position: relative; background: #0f172a; border-radius: 12px; overflow: hidden; margin-bottom: 40px; }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform .4s ease;
+  }
+  
+  .carousel-slide {
+    min-width: 100%;
+    padding: 60px 48px;
+    box-sizing: border-box;
+    color: #fff;
+  }
+  .carousel-slide:nth-child(1) { background: linear-gradient(135deg, #1e3a5f, #2563eb); }
+  .carousel-slide:nth-child(2) { background: linear-gradient(135deg, #1e3a5f, #7c3aed); }
+  .carousel-slide:nth-child(3) { background: linear-gradient(135deg, #1e3a5f, #059669); }
+  
+  .carousel-slide h2 { margin: 0 0 12px; font-size: 1.8rem; }
+  .carousel-slide p { margin: 0 0 24px; opacity: .9; line-height: 1.6; max-width: 480px; }
+  .slide-btn { background: #fff; color: #0f172a; border: none; padding: 12px 24px; border-radius: 6px; font-size: 1rem; cursor: pointer; font-weight: 600; }
+  .slide-btn:focus { outline: 2px solid #fff; outline-offset: 2px; }
+  
+  /* BUG: prev/next controls use negative tabindex — invisible to keyboard users */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,.2);
+    border: none;
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    tabindex: -1; /* BUG: this attribute doesn't work in HTML but JS below does */
+  }
+  .carousel-prev { left: 16px; }
+  .carousel-next { right: 16px; }
+  
+  /* Dot indicators — also not keyboard operable */
+  .carousel-dots { text-align: center; padding: 16px; }
+  .dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    margin: 0 4px;
+    /* BUG: dots are not keyboard operable — they are divs with onclick only */
+    cursor: pointer;
+  }
+  .dot.active { background: #2563eb; }
+  
+  section { background: #fff; border-radius: 8px; padding: 24px; margin-bottom: 20px; }
+  section h2 { margin-top: 0; color: #0f172a; }
+  a { color: #2563eb; }
+  a:focus { outline: 2px solid #2563eb; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Featured products</h1>
+  
+  <div class="carousel-wrapper" aria-label="Featured products carousel">
+    <div class="carousel-track" id="carousel-track">
+      <div class="carousel-slide">
+        <h2>BlindSpot Analyzer</h2>
+        <p>Find keyboard and screen reader barriers before your users do. Automated, fast, and accurate.</p>
+        <button class="slide-btn">Get started free</button>
+      </div>
+      <div class="carousel-slide">
+        <h2>Accessibility Reports</h2>
+        <p>Generate detailed WCAG-compliant reports with remediation guidance in under two minutes.</p>
+        <button class="slide-btn">See a sample report</button>
+      </div>
+      <div class="carousel-slide">
+        <h2>CI/CD Integration</h2>
+        <p>Block inaccessible code before it ships. Integrate with GitHub Actions in one step.</p>
+        <button class="slide-btn">View integration docs</button>
+      </div>
+    </div>
+    
+    <!-- BUG: tabindex="-1" set via JS below — prev/next not keyboard reachable -->
+    <button class="carousel-btn carousel-prev" id="carousel-prev" aria-label="Previous slide">&#8592;</button>
+    <button class="carousel-btn carousel-next" id="carousel-next" aria-label="Next slide">&#8594;</button>
+  </div>
+  
+  <!-- BUG: dots are divs, not buttons, no keyboard interaction -->
+  <div class="carousel-dots" role="group" aria-label="Slide indicators">
+    <div class="dot active" onclick="goToSlide(0)"></div>
+    <div class="dot" onclick="goToSlide(1)"></div>
+    <div class="dot" onclick="goToSlide(2)"></div>
+  </div>
+  
+  <section>
+    <h2>Why accessibility matters</h2>
+    <p>Over 1 billion people worldwide live with some form of disability. Accessible products reach more users and avoid legal risk. <a href="#">Learn more about WCAG 2.2</a>.</p>
+  </section>
+</main>
+
+<script>
+  let current = 0;
+  const slides = 3;
+  
+  // BUG: Set tabindex=-1 on carousel controls — they won't receive keyboard focus
+  document.getElementById('carousel-prev').setAttribute('tabindex', '-1');
+  document.getElementById('carousel-next').setAttribute('tabindex', '-1');
+  
+  function goToSlide(n) {
+    current = n;
+    document.getElementById('carousel-track').style.transform = `translateX(-${n * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === n));
+  }
+  
+  document.getElementById('carousel-next').onclick = () => goToSlide((current + 1) % slides);
+  document.getElementById('carousel-prev').onclick = () => goToSlide((current - 1 + slides) % slides);
+  
+  // BUG: Auto-rotation with no pause-on-focus mechanism
+  setInterval(() => goToSlide((current + 1) % slides), 4000);
+</script>
+</body>
+</html>

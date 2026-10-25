@@ -51,12 +51,14 @@ export async function startSession(opts: SessionOptions): Promise<Session> {
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 BlindSpot/1.0",
   });
 
-  // Block downloads and popups
-  context.on("page", (newPage) => {
-    void newPage.close();
-  });
-
   const page = await context.newPage();
+
+  // Block popups and new tabs opened by the page
+  context.on("page", (newPage) => {
+    if (newPage !== page) {
+      void newPage.close().catch(() => {});
+    }
+  });
 
   const navTimeout = opts.navigationTimeoutMs ?? 20_000;
   page.setDefaultNavigationTimeout(navTimeout);
@@ -86,20 +88,20 @@ export async function startSession(opts: SessionOptions): Promise<Session> {
 
 /** Polls document.body.innerHTML every 100ms until it stops changing for `stableMs`. */
 async function waitForDomStability(page: Page, stableMs: number): Promise<void> {
-  let lastHtml = "";
+  let lastLen = -1;
   let stableFor = 0;
   const interval = 100;
   const maxWait = 5_000;
   const deadline = Date.now() + maxWait;
 
   while (Date.now() < deadline) {
-    const html = await page.evaluate(() => document.body?.innerHTML?.length ?? 0);
-    if (html === lastHtml) {
+    const len = await page.evaluate(() => document.body?.innerHTML?.length ?? 0);
+    if (len === lastLen) {
       stableFor += interval;
       if (stableFor >= stableMs) return;
     } else {
       stableFor = 0;
-      lastHtml = String(html);
+      lastLen = len;
     }
     await sleep(interval);
   }

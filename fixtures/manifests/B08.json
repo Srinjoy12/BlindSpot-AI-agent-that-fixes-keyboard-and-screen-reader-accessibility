@@ -1,0 +1,20 @@
+{
+  "pageId": "B08",
+  "title": "Cookie banner — focus not managed, lost after dismiss",
+  "barriers": [
+    {
+      "selector": "#cookie-banner",
+      "detectorId": "D8",
+      "wcagId": "2.4.3",
+      "severity": "major",
+      "note": "Focus is not moved to the cookie banner when it appears. A keyboard user reaches page links before the banner."
+    },
+    {
+      "selector": "#btn-reject",
+      "detectorId": "D8",
+      "wcagId": "2.4.3",
+      "severity": "major",
+      "note": "After dismissing the banner, focus is lost — document.activeElement becomes body with no logical next element."
+    }
+  ]
+}

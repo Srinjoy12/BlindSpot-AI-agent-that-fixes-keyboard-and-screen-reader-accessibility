@@ -67,15 +67,30 @@ export async function runInteractionPass(
       const domAfterEnter = await page.evaluate(() => document.body.innerHTML.length);
       let dominated = domAfterEnter !== domBefore;
 
+      let domAfterSpace: number | undefined;
       // If Enter did nothing, try Space
       if (!dominated) {
         await page.keyboard.press("Space");
         await sleep(300);
-        const domAfterSpace = await page.evaluate(() => document.body.innerHTML.length);
+        domAfterSpace = await page.evaluate(() => document.body.innerHTML.length);
         dominated = domAfterSpace !== domBefore;
       }
 
-      if (!dominated) continue; // Trigger didn't open anything
+      if (!dominated) continue; // Trigger didn't open or dismiss anything
+
+      // If DOM shrank, the interaction dismissed or closed a surface
+      if (domAfterEnter < domBefore || (domAfterSpace !== undefined && domAfterSpace < domBefore)) {
+        const focusLost = await page.evaluate(() => document.activeElement === document.body || !document.activeElement);
+        interactions.push({
+          triggerSelector: selector,
+          triggerKey: "Enter",
+          escapeClosed: false,
+          focusReturnedToTrigger: false,
+          focusMovedIntoSurface: false,
+          focusLostAfterClose: focusLost,
+        });
+        continue;
+      }
 
       // Record new state
       const stateLabel = `S${stateCounter.count++}`;
@@ -95,7 +110,7 @@ export async function runInteractionPass(
       await sleep(300);
 
       const domAfterEscape = await page.evaluate(() => document.body.innerHTML.length);
-      const escapeClosed = Math.abs(domAfterEscape - domBefore) < 100;
+      const escapeClosed = Math.abs(domAfterEscape - domBefore) < 100 && Math.abs(domAfterEscape - domAfterEnter) > 20;
 
       // Check focus returned to trigger
       const focusAfterClose = await page.evaluate((sel: string) => {

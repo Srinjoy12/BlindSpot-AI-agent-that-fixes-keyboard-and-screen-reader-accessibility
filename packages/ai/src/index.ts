@@ -18,3 +18,12 @@ export {
   PatchTypeSchema,
 } from "./schemas.js";
 export type { StateDigest, FindingAnalysis, FixProposal, Severity, PatchType } from "./schemas.js";
+
+export { searchWcag } from "./tavily.js";
+export type { TavilyResult } from "./tavily.js";
+export { generateStateDigest } from "./digest.js";
+export type { DigestInput } from "./digest.js";
+export { analyzeFindings } from "./analysis.js";
+export type { AnalysisInput } from "./analysis.js";
+export { generateFix, lintPatch } from "./fix.js";
+export type { FixRequest } from "./fix.js";

@@ -1,0 +1,1263 @@
+{
+  "results": [
+    {
+      "pageId": "B01",
+      "title": "Newsletter popup — keyboard trap",
+      "totalGroundTruth": 2,
+      "detectedCount": 7,
+      "truePositives": 2,
+      "falsePositives": 5,
+      "falseNegatives": 0,
+      "precision": 0.2857142857142857,
+      "recall": 1,
+      "f1": 0.4444444444444445,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D1",
+          "selector": "#subscribe-btn",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "evidence": "Focus cycles among 3 elements across 6 stops. Trapped inside an open dialog. Escape did not free focus.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.1.2"
+        },
+        {
+          "detectorId": "D2",
+          "selector": "nav > a:nth-of-type(1)",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element never received focus during the Tab crawl of 6 stops.",
+          "confidence": 0.85,
+          "severity": "blocker",
+          "wcagId": "2.1.1"
+        },
+        {
+          "detectorId": "D2",
+          "selector": "nav > a:nth-of-type(2)",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element never received focus during the Tab crawl of 6 stops.",
+          "confidence": 0.85,
+          "severity": "blocker",
+          "wcagId": "2.1.1"
+        },
+        {
+          "detectorId": "D2",
+          "selector": "nav > a:nth-of-type(3)",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element never received focus during the Tab crawl of 6 stops.",
+          "confidence": 0.85,
+          "severity": "blocker",
+          "wcagId": "2.1.1"
+        },
+        {
+          "detectorId": "D2",
+          "selector": "nav > a:nth-of-type(4)",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element never received focus during the Tab crawl of 6 stops.",
+          "confidence": 0.85,
+          "severity": "blocker",
+          "wcagId": "2.1.1"
+        },
+        {
+          "detectorId": "D2",
+          "selector": "#open-btn",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element never received focus during the Tab crawl of 6 stops.",
+          "confidence": 0.85,
+          "severity": "blocker",
+          "wcagId": "2.1.1"
+        },
+        {
+          "detectorId": "D8",
+          "selector": "#newsletter-dialog",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "evidence": "Dialog is present on screen, but pressing Escape does not close it or restore focus.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.3"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "B02",
+      "title": "Custom dropdown — no keyboard support",
+      "totalGroundTruth": 2,
+      "detectedCount": 2,
+      "truePositives": 1,
+      "falsePositives": 1,
+      "falseNegatives": 1,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D1",
+          "selector": "#name",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            0,
+            1,
+            2,
+            4,
+            5,
+            6
+          ],
+          "evidence": "Focus cycles among 3 elements across 6 stops.  Escape did not free focus.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.1.2"
+        },
+        {
+          "detectorId": "D2",
+          "selector": "#dept-trigger",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element never received focus during the Tab crawl of 6 stops.",
+          "confidence": 0.85,
+          "severity": "blocker",
+          "wcagId": "2.1.1"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "B03",
+      "title": "Icon toolbar — buttons with no accessible names",
+      "totalGroundTruth": 5,
+      "detectedCount": 2,
+      "truePositives": 2,
+      "falsePositives": 0,
+      "falseNegatives": 3,
+      "precision": 1,
+      "recall": 0.4,
+      "f1": 0.5714285714285715,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D6",
+          "selector": "#btn-link",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            6
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🔗\". Screen readers will announce only the role.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#btn-image",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            7
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"📷\". Screen readers will announce only the role.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "B04",
+      "title": "Outline reset — no visible focus indicator",
+      "totalGroundTruth": 1,
+      "detectedCount": 16,
+      "truePositives": 1,
+      "falsePositives": 15,
+      "falseNegatives": 0,
+      "precision": 0.0625,
+      "recall": 1,
+      "f1": 0.11764705882352941,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D3",
+          "selector": "nav > ul > li:nth-of-type(1) > a",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            0
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "nav > ul > li:nth-of-type(2) > a",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            1
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "nav > ul > li:nth-of-type(3) > a",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            2
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "nav > ul > li:nth-of-type(4) > a",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            3
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "nav > ul > li:nth-of-type(5) > a",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            4
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#full-name",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            5
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=input, role=input.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#email",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            6
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=input, role=input.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#role-select",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            7
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=select, role=select.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#bio",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            8
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=textarea, role=textarea.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#save-btn",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            9
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#cancel-btn",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            10
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "main > div:nth-of-type(2) > p > a",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            11
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#connect-github",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            12
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "nav > ul > li:nth-of-type(1) > a",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            14
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "nav > ul > li:nth-of-type(2) > a",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            15
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "nav > ul > li:nth-of-type(3) > a",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            16
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "B05",
+      "title": "Sticky header — focused links hidden under fixed header",
+      "totalGroundTruth": 1,
+      "detectedCount": 1,
+      "truePositives": 1,
+      "falsePositives": 0,
+      "falseNegatives": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D5",
+          "selector": "#btn-under-header",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            2
+          ],
+          "evidence": "The center of the focused element (button[role=\"button\"]) is covered by 'header'. This is likely a sticky header or fixed banner obscuring the focused control.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.11"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "B06",
+      "title": "Positive tabindex — scrambled focus order",
+      "totalGroundTruth": 2,
+      "detectedCount": 13,
+      "truePositives": 1,
+      "falsePositives": 12,
+      "falseNegatives": 1,
+      "precision": 0.07692307692307693,
+      "recall": 0.5,
+      "f1": 0.13333333333333336,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D7",
+          "selector": "#email",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            0
+          ],
+          "evidence": "Element '#email' has an explicit positive tabindex=\"1\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "#card",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            1
+          ],
+          "evidence": "Element '#card' has an explicit positive tabindex=\"2\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "#first-name",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            2
+          ],
+          "evidence": "Element '#first-name' has an explicit positive tabindex=\"3\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "#last-name",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            3
+          ],
+          "evidence": "Element '#last-name' has an explicit positive tabindex=\"4\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "#phone",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            4
+          ],
+          "evidence": "Element '#phone' has an explicit positive tabindex=\"5\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "#expiry",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            5
+          ],
+          "evidence": "Element '#expiry' has an explicit positive tabindex=\"6\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "#cvv",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            6
+          ],
+          "evidence": "Element '#cvv' has an explicit positive tabindex=\"7\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "#address",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            7
+          ],
+          "evidence": "Element '#address' has an explicit positive tabindex=\"8\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "#city",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            8
+          ],
+          "evidence": "Element '#city' has an explicit positive tabindex=\"9\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "#zip",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            9
+          ],
+          "evidence": "Element '#zip' has an explicit positive tabindex=\"10\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "#back-btn",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            10
+          ],
+          "evidence": "Element '#back-btn' has an explicit positive tabindex=\"11\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "#submit-btn",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            11
+          ],
+          "evidence": "Element '#submit-btn' has an explicit positive tabindex=\"12\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D7",
+          "selector": "main > a",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            12
+          ],
+          "evidence": "Element 'main > a' has an explicit positive tabindex=\"13\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "B07",
+      "title": "Mega menu — hover-only, not keyboard accessible",
+      "totalGroundTruth": 2,
+      "detectedCount": 2,
+      "truePositives": 2,
+      "falsePositives": 0,
+      "falseNegatives": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D2",
+          "selector": "#products-link",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Menu trigger '#products-link' has a submenu that is only accessible on mouse hover (mouseenter). Keyboard users cannot open or reach submenu controls.",
+          "confidence": 0.95,
+          "severity": "blocker",
+          "wcagId": "2.1.1"
+        },
+        {
+          "detectorId": "D2",
+          "selector": "#solutions-link",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Menu trigger '#solutions-link' has a submenu that is only accessible on mouse hover (mouseenter). Keyboard users cannot open or reach submenu controls.",
+          "confidence": 0.95,
+          "severity": "blocker",
+          "wcagId": "2.1.1"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "B08",
+      "title": "Cookie banner — focus not managed, lost after dismiss",
+      "totalGroundTruth": 2,
+      "detectedCount": 3,
+      "truePositives": 2,
+      "falsePositives": 1,
+      "falseNegatives": 0,
+      "precision": 0.6666666666666666,
+      "recall": 1,
+      "f1": 0.8,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D8",
+          "selector": "#btn-reject",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "After interacting with '#btn-reject' (e.g., closing or dismissing a modal/banner), focus was lost to document.body instead of returning to a logical element or trigger.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D8",
+          "selector": "#cookie-title > a",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            7,
+            8,
+            9
+          ],
+          "evidence": "Dialog is present on screen, but pressing Escape does not close it or restore focus.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D8",
+          "selector": "#cookie-banner",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            7
+          ],
+          "evidence": "Prominent banner or modal dialog appeared, but keyboard focus was not automatically placed into it upon load; 7 background element(s) received focus first.",
+          "confidence": 0.95,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "B09",
+      "title": "Carousel — controls out of tab order",
+      "totalGroundTruth": 2,
+      "detectedCount": 2,
+      "truePositives": 2,
+      "falsePositives": 0,
+      "falseNegatives": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D2",
+          "selector": "#carousel-prev",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element never received focus during the Tab crawl of 7 stops.",
+          "confidence": 0.85,
+          "severity": "blocker",
+          "wcagId": "2.1.1"
+        },
+        {
+          "detectorId": "D2",
+          "selector": "#carousel-next",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element never received focus during the Tab crawl of 7 stops.",
+          "confidence": 0.85,
+          "severity": "blocker",
+          "wcagId": "2.1.1"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "B10",
+      "title": "Tabs widget — broken keyboard navigation",
+      "totalGroundTruth": 2,
+      "detectedCount": 1,
+      "truePositives": 1,
+      "falsePositives": 0,
+      "falseNegatives": 1,
+      "precision": 1,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D8",
+          "selector": "[role='tablist']",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            0,
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "evidence": "Multiple tabs (7) are in the sequential Tab navigation sequence. The ARIA tabs pattern requires roving tabindex (only active tab has tabindex=0; inactive tabs have tabindex=-1 with arrow key navigation).",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "B11",
+      "title": "Long nav — 60 links, no skip link",
+      "totalGroundTruth": 1,
+      "detectedCount": 1,
+      "truePositives": 1,
+      "falsePositives": 0,
+      "falseNegatives": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D9",
+          "selector": "nav",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            63
+          ],
+          "evidence": "Page contains 63 repetitive navigation links before main content with no skip link detected in initial focus sequence. A keyboard user must press Tab 63 times on every page load to reach primary content.",
+          "confidence": 0.95,
+          "severity": "minor",
+          "wcagId": "2.4.1"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "B12",
+      "title": "Mixed page — trap + unnamed buttons + invisible focus",
+      "totalGroundTruth": 3,
+      "detectedCount": 27,
+      "truePositives": 2,
+      "falsePositives": 25,
+      "falseNegatives": 1,
+      "precision": 0.07407407407407407,
+      "recall": 0.6666666666666666,
+      "f1": 0.13333333333333333,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D3",
+          "selector": "header > nav > a:nth-of-type(1)",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            0
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "header > nav > a:nth-of-type(2)",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            1
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "header > nav > a:nth-of-type(3)",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            2
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#share-twitter",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            3
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#share-linkedin",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            4
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#share-email",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            5
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#share-link",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            6
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#open-comment",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            7
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#comment-text",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            8
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=textarea, role=textarea.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#btn-post-comment",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            9
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "#btn-cancel-comment",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            10
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=button, role=button.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "header > nav > a:nth-of-type(1)",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            12
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "header > nav > a:nth-of-type(2)",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            13
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D3",
+          "selector": "header > nav > a:nth-of-type(3)",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            14
+          ],
+          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.7"
+        },
+        {
+          "detectorId": "D5",
+          "selector": "header > nav > a:nth-of-type(1)",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            0
+          ],
+          "evidence": "The center of the focused element (a[role=\"a\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.11"
+        },
+        {
+          "detectorId": "D5",
+          "selector": "header > nav > a:nth-of-type(2)",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            1
+          ],
+          "evidence": "The center of the focused element (a[role=\"a\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.11"
+        },
+        {
+          "detectorId": "D5",
+          "selector": "header > nav > a:nth-of-type(3)",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            2
+          ],
+          "evidence": "The center of the focused element (a[role=\"a\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.11"
+        },
+        {
+          "detectorId": "D5",
+          "selector": "#share-twitter",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            3
+          ],
+          "evidence": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.11"
+        },
+        {
+          "detectorId": "D5",
+          "selector": "#share-linkedin",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            4
+          ],
+          "evidence": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.11"
+        },
+        {
+          "detectorId": "D5",
+          "selector": "#share-email",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            5
+          ],
+          "evidence": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.11"
+        },
+        {
+          "detectorId": "D5",
+          "selector": "#share-link",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            6
+          ],
+          "evidence": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.11"
+        },
+        {
+          "detectorId": "D5",
+          "selector": "#open-comment",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            7
+          ],
+          "evidence": "The center of the focused element (button[role=\"button\"]) is covered by '#comment-dialog > div'. This is likely a sticky header or fixed banner obscuring the focused control.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "2.4.11"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#share-twitter",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            3
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🐦\". Screen readers will announce only the role.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#share-email",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            5
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"✉\". Screen readers will announce only the role.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#share-link",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            6
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🔗\". Screen readers will announce only the role.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D8",
+          "selector": "#comment-text",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            8,
+            9,
+            10
+          ],
+          "evidence": "Dialog is present on screen, but pressing Escape does not close it or restore focus.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D8",
+          "selector": "#cookie-banner",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            8
+          ],
+          "evidence": "Prominent banner or modal dialog appeared, but keyboard focus was not automatically placed into it upon load; 8 background element(s) received focus first.",
+          "confidence": 0.95,
+          "severity": "major",
+          "wcagId": "2.4.3"
+        }
+      ],
+      "fixes": []
+    },
+    {
+      "pageId": "C01",
+      "title": "Clean form — no accessibility issues",
+      "totalGroundTruth": 0,
+      "detectedCount": 0,
+      "truePositives": 0,
+      "falsePositives": 0,
+      "falseNegatives": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1,
+      "fixSuccessCount": 0,
+      "hits": [],
+      "fixes": []
+    },
+    {
+      "pageId": "C02",
+      "title": "Clean article — no accessibility issues",
+      "totalGroundTruth": 0,
+      "detectedCount": 0,
+      "truePositives": 0,
+      "falsePositives": 0,
+      "falseNegatives": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1,
+      "fixSuccessCount": 0,
+      "hits": [],
+      "fixes": []
+    },
+    {
+      "pageId": "C03",
+      "title": "Clean dialog — correct modal implementation",
+      "totalGroundTruth": 0,
+      "detectedCount": 0,
+      "truePositives": 0,
+      "falsePositives": 0,
+      "falseNegatives": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1,
+      "fixSuccessCount": 0,
+      "hits": [],
+      "fixes": []
+    },
+    {
+      "pageId": "H01",
+      "title": "Prompt injection test",
+      "totalGroundTruth": 1,
+      "detectedCount": 1,
+      "truePositives": 1,
+      "falsePositives": 0,
+      "falseNegatives": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1,
+      "fixSuccessCount": 0,
+      "hits": [
+        {
+          "detectorId": "D6",
+          "selector": "#h01-unnamed-btn",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            2
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"☰\". Screen readers will announce only the role.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        }
+      ],
+      "fixes": []
+    }
+  ],
+  "summary": {
+    "overallRecall": 72,
+    "overallPrecision": 23.376623376623375,
+    "cleanFalseAlarms": 0
+  }
+}

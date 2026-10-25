@@ -1,0 +1,20 @@
+{
+  "pageId": "B01",
+  "title": "Newsletter popup — keyboard trap",
+  "barriers": [
+    {
+      "selector": "#newsletter-dialog",
+      "detectorId": "D1",
+      "wcagId": "2.1.2",
+      "severity": "blocker",
+      "note": "Tab cycles between email input, subscribe and no-thanks buttons and never reaches page content. Escape does not close the dialog."
+    },
+    {
+      "selector": "#newsletter-dialog",
+      "detectorId": "D8",
+      "wcagId": "2.4.3",
+      "severity": "blocker",
+      "note": "Focus is not moved into the dialog on open. Focus is not returned to the trigger after close. No Escape handler."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "pageId": "B11",
+  "title": "Long nav — 60 links, no skip link",
+  "barriers": [
+    {
+      "selector": "nav",
+      "detectorId": "D9",
+      "wcagId": "2.4.1",
+      "severity": "minor",
+      "note": "The page has 60 navigation links before the main content and no skip link to bypass them."
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture B02 — Custom Dropdown (div-based, no keyboard support)</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+  main { max-width: 600px; margin: 40px auto; background: #fff; padding: 32px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+  h1 { color: #1a1a2e; margin-top: 0; }
+  label { display: block; font-weight: 600; margin-bottom: 8px; color: #333; }
+  
+  /* ── BUGGY CUSTOM DROPDOWN ── */
+  .custom-select { position: relative; margin-bottom: 24px; }
+  .select-trigger {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    /* BUG: no tabindex, not keyboard operable */
+  }
+  .select-trigger::after { content: '▼'; font-size: .75rem; color: #666; }
+  .select-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0; right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    display: none;
+    z-index: 10;
+  }
+  .select-dropdown.open { display: block; }
+  .select-option {
+    padding: 10px 14px;
+    cursor: pointer;
+    /* BUG: no role, no tabindex, not keyboard operable */
+  }
+  .select-option:hover { background: #f0f4ff; }
+  
+  .form-group { margin-bottom: 20px; }
+  input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; box-sizing: border-box; }
+  input[type="text"]:focus { outline: 2px solid #0066cc; }
+  button[type="submit"] { background: #0066cc; color: #fff; border: none; padding: 12px 24px; border-radius: 4px; font-size: 1rem; cursor: pointer; }
+  button[type="submit"]:focus { outline: 2px solid #0066cc; outline-offset: 2px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Book a Support Call</h1>
+  <form>
+    <div class="form-group">
+      <label for="name">Your name</label>
+      <input type="text" id="name" name="name" placeholder="Jane Smith" />
+    </div>
+
+    <!-- SEEDED BUG: custom dropdown built from divs, no tabindex, no keyboard events, no ARIA -->
+    <div class="form-group">
+      <label id="dept-label">Department</label>
+      <!-- BUG: div is not focusable by keyboard, has no role, no aria-label -->
+      <div class="custom-select" id="dept-select">
+        <div class="select-trigger" id="dept-trigger" onclick="toggleDropdown()">
+          Select a department
+        </div>
+        <!-- BUG: options are divs with onclick only — no keyboard support -->
+        <div class="select-dropdown" id="dept-dropdown">
+          <div class="select-option" onclick="selectOption('Sales')">Sales</div>
+          <div class="select-option" onclick="selectOption('Support')">Support</div>
+          <div class="select-option" onclick="selectOption('Engineering')">Engineering</div>
+          <div class="select-option" onclick="selectOption('Billing')">Billing</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Message</label>
+      <input type="text" id="message" name="message" placeholder="Brief description of your issue" />
+    </div>
+
+    <button type="submit">Book call</button>
+  </form>
+</main>
+
+<script>
+  function toggleDropdown() {
+    const dd = document.getElementById('dept-dropdown');
+    dd.classList.toggle('open');
+    // BUG: no keyboard handling, no Escape, no focus management
+  }
+  
+  function selectOption(value) {
+    document.getElementById('dept-trigger').textContent = value;
+    document.getElementById('dept-dropdown').classList.remove('open');
+    // BUG: focus not returned to trigger after selection
+  }
+</script>
+</body>
+</html>

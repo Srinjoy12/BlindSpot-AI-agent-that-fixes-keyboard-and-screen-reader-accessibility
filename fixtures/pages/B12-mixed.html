@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture B12 — Mixed page (trap + unnamed button + invisible focus)</title>
+<style>
+  /* BUG 3: global outline suppression — invisible focus */
+  *:focus { outline: none; }
+  
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+  header { background: #1e3a5f; color: #fff; padding: 0 24px; display: flex; align-items: center; height: 56px; justify-content: space-between; }
+  header h1 { margin: 0; font-size: 1.1rem; }
+  header nav a { color: #fff; text-decoration: none; margin-left: 16px; padding: 4px 8px; }
+  
+  main { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+  .page-h1 { color: #1e3a5f; }
+  p { line-height: 1.7; color: #374151; }
+  
+  /* Floating share panel */
+  .share-panel { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; }
+  .share-panel h2 { margin-top: 0; font-size: 1rem; color: #1e3a5f; }
+  .share-buttons { display: flex; gap: 8px; }
+  
+  /* BUG 2: icon-only share buttons with no accessible name */
+  .share-btn {
+    width: 40px; height: 40px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    /* BUG: no aria-label — screen reader says "button" only */
+  }
+  
+  /* BUG 3: no focus indicator (outline: none above) */
+  
+  /* Comment dialog — BUG 1: keyboard trap */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.6);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100;
+  }
+  .dialog {
+    background: #fff; border-radius: 8px; padding: 28px; width: 420px; max-width: 90vw;
+  }
+  .dialog h2 { margin-top: 0; color: #1e3a5f; }
+  .dialog textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; box-sizing: border-box; resize: vertical; font-family: inherit; }
+  .dialog-buttons { display: flex; gap: 12px; margin-top: 16px; }
+  .dialog-buttons button { flex: 1; padding: 10px; border-radius: 4px; font-size: 1rem; cursor: pointer; }
+  .btn-post { background: #1e3a5f; color: #fff; border: none; }
+  .btn-cancel { background: transparent; border: 1px solid #999; }
+  
+  button.cta { background: #1e3a5f; color: #fff; border: none; padding: 12px 24px; border-radius: 4px; font-size: 1rem; cursor: pointer; }
+</style>
+</head>
+<body>
+<header>
+  <h1>TechBlog</h1>
+  <nav aria-label="Main navigation">
+    <a href="#">Home</a>
+    <a href="#">Articles</a>
+    <a href="#">About</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="page-h1">How AI is transforming accessibility testing</h1>
+  
+  <div class="share-panel">
+    <h2>Share this article</h2>
+    <div class="share-buttons">
+      <!-- BUG 2: No accessible names on these buttons -->
+      <button class="share-btn" id="share-twitter">🐦</button>
+      <button class="share-btn" id="share-linkedin">in</button>
+      <button class="share-btn" id="share-email">✉</button>
+      <button class="share-btn" id="share-link">🔗</button>
+    </div>
+  </div>
+  
+  <p>Accessibility testing has traditionally relied on rule-based scanners. These tools are fast and cheap, but they only check what a machine can decide from markup. They cannot tell you what happens when a real keyboard user navigates your page.</p>
+  <p>AI changes this. By combining deterministic keyboard crawls with language model analysis, we can now find barriers that only appear at runtime — keyboard traps, invisible focus indicators, and controls that are unreachable by Tab.</p>
+  
+  <button class="cta" id="open-comment" onclick="document.getElementById('comment-dialog').removeAttribute('hidden')">
+    Leave a comment
+  </button>
+</main>
+
+<!-- BUG 1: Keyboard trap in comment dialog -->
+<!-- Focus is not moved to dialog on open; Escape doesn't close; focus cycles inside -->
+<div id="comment-dialog" role="dialog" style="display:contents;" hidden>
+  <div class="overlay">
+    <div class="dialog">
+      <h2>Leave a comment</h2>
+      <label for="comment-text" style="display:block;margin-bottom:8px;font-weight:600;">Your comment</label>
+      <textarea id="comment-text" rows="4" placeholder="Write your comment here…"></textarea>
+      <div class="dialog-buttons">
+        <button class="btn-post" id="btn-post-comment">Post comment</button>
+        <button class="btn-cancel" id="btn-cancel-comment" onclick="document.getElementById('comment-dialog').setAttribute('hidden','')">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // BUG 1: No focus management on open, no Escape key handler
+  // BUG 2: Share buttons have no accessible names (caught by D6)
+  // BUG 3: outline:none in CSS with no replacement (caught by D3)
+</script>
+</body>
+</html>

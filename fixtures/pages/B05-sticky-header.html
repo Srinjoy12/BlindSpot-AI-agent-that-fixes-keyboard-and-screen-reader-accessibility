@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture B05 — Sticky Header (focused links hidden under fixed header)</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 0; }
+  
+  /* ── SEEDED BUG: sticky header with no scroll-margin-top on focusable elements ── */
+  .sticky-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 64px;
+    background: #0f172a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  }
+  .sticky-header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .sticky-header nav a:focus { outline: 2px solid #60a5fa; }
+  .logo { font-weight: 700; font-size: 1.1rem; }
+  
+  /* BUG: page content has no scroll-margin-top to account for the fixed header */
+  main {
+    margin-top: 64px; /* makes room for header visually */
+    padding: 40px 24px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  section { margin-bottom: 60px; }
+  h1, h2 { color: #0f172a; }
+  p { line-height: 1.7; color: #374151; }
+  
+  /* BUG: anchor links have no scroll-margin-top — the sticky header covers the focused element */
+  a.in-page-link { color: #2563eb; }
+  a.in-page-link:focus { outline: 2px solid #2563eb; outline-offset: 2px; }
+  
+  .article-link {
+    display: inline-block;
+    color: #2563eb;
+    text-decoration: underline;
+    padding: 2px 0;
+    /* BUG: no scroll-margin-top, so when focused, hidden under the sticky header */
+  }
+  .article-link:focus { outline: 2px solid #2563eb; outline-offset: 2px; }
+  
+  .link-list { list-style: none; padding: 0; }
+  .link-list li { margin-bottom: 12px; }
+  
+  .content-section {
+    padding-top: 24px;
+    /* BUG: no scroll-margin-top: 64px — focused heading and first link will be hidden */
+  }
+</style>
+</head>
+<body>
+
+<!-- Sticky header that overlaps focused elements below it -->
+<header class="sticky-header" role="banner">
+  <span class="logo">TechBlog</span>
+  <nav aria-label="Main navigation">
+    <a href="#intro">Intro</a>
+    <a href="#features">Features</a>
+  </nav>
+</header>
+
+<main>
+  <!-- Button obscured by sticky header (top: 15px, z-index: 1 while header is z-index: 1000) -->
+  <button class="article-link" id="btn-under-header" style="position: absolute; top: 15px; left: 200px; z-index: 1;">Search archives</button>
+
+  <section id="intro" class="content-section">
+    <h1>Building accessible web products</h1>
+    <p>Accessibility is not a feature — it is a foundation.</p>
+    <ul class="link-list">
+      <!-- BUG: This link is positioned under the 64px sticky header -->
+      <li><a class="article-link" id="first-article-link" href="#" style="position:relative; z-index:1;">Introduction to WCAG 2.2</a></li>
+      <li><a class="article-link" href="#">Focus management in single-page apps</a></li>
+    </ul>
+  </section>
+
+  <section id="features" class="content-section">
+    <h2>Key features of our platform</h2>
+    <p>Our platform was designed with keyboard users in mind. However, some older components still have gaps.</p>
+    <ul class="link-list">
+      <li><a class="article-link" href="#">Automated accessibility scanning</a></li>
+      <li><a class="article-link" href="#">Real-user keyboard testing</a></li>
+      <li><a class="article-link" href="#">One-click remediation suggestions</a></li>
+    </ul>
+  </section>
+
+  <section id="pricing" class="content-section">
+    <h2>Pricing plans</h2>
+    <p>Choose the plan that's right for your team. All plans include keyboard accessibility scanning.</p>
+    <ul class="link-list">
+      <li><a class="article-link" href="#">Starter — $0/month</a></li>
+      <li><a class="article-link" href="#">Pro — $49/month</a></li>
+      <li><a class="article-link" href="#">Enterprise — contact us</a></li>
+    </ul>
+  </section>
+
+  <section id="contact" class="content-section">
+    <h2>Contact us</h2>
+    <p>Have questions? We'd love to hear from you. <a class="in-page-link" href="#">Send us an email</a> or <a class="in-page-link" href="#">book a demo call</a>.</p>
+  </section>
+</main>
+
+</body>
+</html>

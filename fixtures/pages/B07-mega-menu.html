@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture B07 — Mega Menu (hover-only, not keyboard accessible)</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 0; }
+  
+  /* ── SEEDED BUG: mega-menu opens on mouseenter only ── */
+  nav { background: #1a1a2e; }
+  .nav-container { display: flex; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  .nav-item { position: relative; }
+  .nav-link {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 18px 16px;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .nav-link:focus { outline: 2px solid #60a5fa; outline-offset: -2px; }
+  
+  /* BUG: mega-menu only shows on :hover, not on :focus or via keyboard */
+  .mega-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 600px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+    padding: 24px;
+    z-index: 100;
+    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /* BUG: Only opens on hover — keyboard users cannot access this */
+  .nav-item:hover .mega-menu { display: grid; }
+  /* BUG: :focus-within would fix this but is intentionally omitted */
+  
+  .mega-col h3 { margin: 0 0 12px; font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; color: #666; }
+  .mega-col a { display: block; color: #1a1a2e; text-decoration: none; padding: 6px 0; font-size: .95rem; }
+  .mega-col a:hover { color: #2563eb; }
+  /* BUG: mega-menu links also have no focus styles because the menu never opens for keyboard users */
+  
+  main { padding: 40px 24px; max-width: 800px; margin: 0 auto; }
+  h1 { color: #1a1a2e; }
+  p { line-height: 1.7; color: #374151; }
+  a.body-link { color: #2563eb; }
+  a.body-link:focus { outline: 2px solid #2563eb; }
+</style>
+</head>
+<body>
+
+<nav aria-label="Main navigation">
+  <div class="nav-container">
+    <a class="nav-link" href="#">Home</a>
+    
+    <!-- SEEDED BUG: "Products" has a mega-menu but it is hover-only -->
+    <!-- BUG: no aria-haspopup, no aria-expanded, no keyboard event handler -->
+    <div class="nav-item" id="products-item">
+      <a class="nav-link" href="#" id="products-link">Products</a>
+      <!-- BUG: this mega-menu is unreachable by keyboard -->
+      <div class="mega-menu" id="products-mega" aria-hidden="true">
+        <div class="mega-col">
+          <h3>Design tools</h3>
+          <a href="#">Figma integration</a>
+          <a href="#">Design tokens</a>
+          <a href="#">Component library</a>
+        </div>
+        <div class="mega-col">
+          <h3>Development</h3>
+          <a href="#">VS Code extension</a>
+          <a href="#">CLI tools</a>
+          <a href="#">GitHub Action</a>
+        </div>
+        <div class="mega-col">
+          <h3>Testing</h3>
+          <a href="#">Automated scanner</a>
+          <a href="#">Keyboard tester</a>
+          <a href="#">Screen reader audit</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="nav-item">
+      <a class="nav-link" href="#" id="solutions-link">Solutions</a>
+      <!-- BUG: another hover-only mega-menu -->
+      <div class="mega-menu" id="solutions-mega" aria-hidden="true">
+        <div class="mega-col">
+          <h3>By team</h3>
+          <a href="#">Design teams</a>
+          <a href="#">Engineering teams</a>
+          <a href="#">QA teams</a>
+        </div>
+        <div class="mega-col">
+          <h3>By industry</h3>
+          <a href="#">Finance</a>
+          <a href="#">Healthcare</a>
+          <a href="#">Education</a>
+        </div>
+        <div class="mega-col">
+          <h3>By size</h3>
+          <a href="#">Startups</a>
+          <a href="#">Mid-market</a>
+          <a href="#">Enterprise</a>
+        </div>
+      </div>
+    </div>
+    
+    <a class="nav-link" href="#" id="pricing-link">Pricing</a>
+    <a class="nav-link" href="#" id="docs-link">Docs</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Accessibility-first product development</h1>
+  <p>Our platform makes it easy to build and ship accessible web products. Explore our <a class="body-link" href="#">product catalog</a> or <a class="body-link" href="#">contact sales</a> to get started.</p>
+  <p>Try using only your keyboard to navigate through the menu items above. Mouse users can hover over "Products" to see the full menu — keyboard users cannot.</p>
+</main>
+
+</body>
+</html>

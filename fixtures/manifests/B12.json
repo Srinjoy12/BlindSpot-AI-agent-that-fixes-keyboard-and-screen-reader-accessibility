@@ -1,0 +1,27 @@
+{
+  "pageId": "B12",
+  "title": "Mixed page — trap + unnamed buttons + invisible focus",
+  "barriers": [
+    {
+      "selector": "#comment-dialog",
+      "detectorId": "D1",
+      "wcagId": "2.1.2",
+      "severity": "blocker",
+      "note": "The comment dialog traps focus. Tab cycles between the textarea and buttons. Escape does not close it."
+    },
+    {
+      "selector": "#share-twitter",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Share button for Twitter has no accessible name. Screen reader announces 'button' only."
+    },
+    {
+      "selector": "body",
+      "detectorId": "D3",
+      "wcagId": "2.4.7",
+      "severity": "blocker",
+      "note": "Global *:focus { outline: none } removes all focus indicators with no replacement."
+    }
+  ]
+}

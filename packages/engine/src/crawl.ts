@@ -43,7 +43,7 @@ const CAPTURE_FOCUS_STATE_SCRIPT = `
   const cy = rect.y + rect.height / 2;
   let obscuredBy = null;
   const topEl = document.elementFromPoint(cx, cy);
-  if (topEl && topEl !== el && !el.contains(topEl)) {
+  if (topEl && topEl !== el && !el.contains(topEl) && !topEl.contains(el)) {
     obscuredBy = getSelector(topEl);
   }
 
@@ -51,9 +51,9 @@ const CAPTURE_FOCUS_STATE_SCRIPT = `
   let insideOpenDialog = false;
   let parent = el.parentElement;
   while (parent) {
-    if ((parent.getAttribute('role') === 'dialog' || parent.tagName === 'DIALOG') 
-        && parent.getAttribute('aria-hidden') !== 'true'
-        && (parent.open !== false || parent.getAttribute('role') === 'dialog')) {
+    const role = parent.getAttribute('role');
+    const isDialog = role === 'dialog' || role === 'alertdialog' || parent.tagName === 'DIALOG' || parent.id === 'cookie-banner' || parent.classList.contains('cookie-banner');
+    if (isDialog && parent.getAttribute('aria-hidden') !== 'true' && (parent.open !== false || role === 'dialog' || role === 'alertdialog' || parent.id === 'cookie-banner')) {
       insideOpenDialog = true;
       break;
     }
@@ -63,17 +63,23 @@ const CAPTURE_FOCUS_STATE_SCRIPT = `
   // Get scroll position
   const scrollY = window.scrollY;
 
-  // Get ARIA accessible name (simplified)
+  // Get ARIA accessible name (spec-compliant precedence: aria-labelledby > aria-label > native labels > title > placeholder)
   const accessibleName = el.getAttribute('aria-label')
-    || el.getAttribute('aria-labelledby') && document.getElementById(el.getAttribute('aria-labelledby') || '')?.textContent?.trim()
+    || (el.getAttribute('aria-labelledby') && document.getElementById(el.getAttribute('aria-labelledby') || '')?.textContent?.trim())
+    || (el.labels && el.labels[0]?.textContent?.trim())
+    || el.closest('label')?.textContent?.trim()
     || el.getAttribute('title')
-    || el.textContent?.trim().slice(0, 100)
     || el.getAttribute('placeholder')
     || el.getAttribute('alt')
+    || (el.tagName !== 'INPUT' && el.tagName !== 'TEXTAREA' && el.tagName !== 'SELECT' ? el.textContent?.trim().slice(0, 100) : '')
     || '';
 
   // Get role
   const role = el.getAttribute('role') || el.tagName.toLowerCase();
+
+  // Get tabindex
+  const tabIndexAttr = el.getAttribute('tabindex');
+  const tabIndex = tabIndexAttr !== null ? parseInt(tabIndexAttr, 10) : undefined;
 
   return {
     selector: getSelector(el),
@@ -85,6 +91,7 @@ const CAPTURE_FOCUS_STATE_SCRIPT = `
     obscuredBy,
     insideOpenDialog,
     scrollY,
+    tabIndex,
   };
 })()
 `;
@@ -165,6 +172,7 @@ async function crawlForward(page: Page, maxStops: number, pauseMs: number): Prom
       obscuredBy: string | null;
       insideOpenDialog: boolean;
       scrollY: number;
+      tabIndex?: number;
     } | null;
 
     if (!state) continue;
@@ -184,6 +192,7 @@ async function crawlForward(page: Page, maxStops: number, pauseMs: number): Prom
       focusIndicator,
       insideOpenDialog: state.insideOpenDialog,
       scrollY: state.scrollY,
+      tabIndex: state.tabIndex,
     };
 
     stops.push(stop);
@@ -222,6 +231,7 @@ async function crawlBackward(page: Page, maxStops: number, pauseMs: number): Pro
       obscuredBy: string | null;
       insideOpenDialog: boolean;
       scrollY: number;
+      tabIndex?: number;
     } | null;
 
     if (!state) continue;
@@ -241,6 +251,7 @@ async function crawlBackward(page: Page, maxStops: number, pauseMs: number): Pro
       focusIndicator,
       insideOpenDialog: state.insideOpenDialog,
       scrollY: state.scrollY,
+      tabIndex: state.tabIndex,
     });
   }
 

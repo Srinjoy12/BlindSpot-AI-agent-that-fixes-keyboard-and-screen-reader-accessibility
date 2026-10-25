@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture B11 — Long nav without skip link</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 0; }
+  
+  /* ── SEEDED BUG: 60 navigation links, no skip link ── */
+  /* A keyboard user must Tab through all 60 nav links to reach the main content */
+  
+  .site-header { background: #0f172a; color: #fff; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .site-header h1 { margin: 0; font-size: 1.2rem; }
+  
+  .mega-nav { background: #1e293b; }
+  .mega-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; }
+  
+  .nav-section { padding: 16px 20px; min-width: 150px; }
+  .nav-section h2 { color: #94a3b8; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 8px; }
+  .nav-section a {
+    display: block;
+    color: #e2e8f0;
+    text-decoration: none;
+    padding: 4px 0;
+    font-size: .9rem;
+    line-height: 1.5;
+  }
+  .nav-section a:hover { color: #fff; }
+  .nav-section a:focus { outline: 2px solid #60a5fa; outline-offset: 2px; color: #fff; }
+  
+  /* BUG: No skip link at the top of the page */
+  /* A correct implementation would have: <a href="#main" class="skip-link">Skip to main content</a> */
+  
+  main { padding: 40px 24px; max-width: 800px; margin: 0 auto; }
+  main h2 { color: #0f172a; }
+  main p { line-height: 1.7; color: #374151; }
+  a.body-link { color: #2563eb; }
+  a.body-link:focus { outline: 2px solid #2563eb; }
+  
+  /* If a skip link existed, it would look like this: */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #2563eb;
+    color: #fff;
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 9999;
+  }
+  .skip-link:focus { top: 0; }
+</style>
+</head>
+<body>
+<!-- BUG: skip link is absent -->
+<!-- <a href="#main-content" class="skip-link">Skip to main content</a> -->
+
+<header class="site-header">
+  <h1>Enterprise Cloud Platform</h1>
+</header>
+
+<!-- 60 navigation links — a keyboard user must tab through all of these -->
+<nav class="mega-nav" aria-label="Main navigation">
+  <div class="mega-nav-inner">
+    <div class="nav-section">
+      <h2>Products</h2>
+      <a href="#">Compute</a>
+      <a href="#">Storage</a>
+      <a href="#">Networking</a>
+      <a href="#">Databases</a>
+      <a href="#">Serverless</a>
+      <a href="#">Containers</a>
+      <a href="#">Kubernetes</a>
+      <a href="#">Load Balancers</a>
+      <a href="#">CDN</a>
+      <a href="#">DNS</a>
+    </div>
+    <div class="nav-section">
+      <h2>AI & ML</h2>
+      <a href="#">Model Training</a>
+      <a href="#">Inference API</a>
+      <a href="#">Vector Database</a>
+      <a href="#">Data Pipeline</a>
+      <a href="#">AutoML</a>
+      <a href="#">Model Registry</a>
+      <a href="#">Feature Store</a>
+      <a href="#">Experiment Tracking</a>
+      <a href="#">Monitoring</a>
+      <a href="#">Model Serving</a>
+    </div>
+    <div class="nav-section">
+      <h2>Security</h2>
+      <a href="#">IAM</a>
+      <a href="#">KMS</a>
+      <a href="#">WAF</a>
+      <a href="#">DDoS Protection</a>
+      <a href="#">Secret Manager</a>
+      <a href="#">Security Hub</a>
+      <a href="#">Compliance Center</a>
+      <a href="#">Audit Logs</a>
+      <a href="#">Threat Detection</a>
+      <a href="#">SIEM</a>
+    </div>
+    <div class="nav-section">
+      <h2>Developer Tools</h2>
+      <a href="#">CLI</a>
+      <a href="#">SDKs</a>
+      <a href="#">Terraform Provider</a>
+      <a href="#">GitHub Actions</a>
+      <a href="#">API Reference</a>
+      <a href="#">Code Samples</a>
+      <a href="#">Sandbox Environment</a>
+      <a href="#">Status Page</a>
+      <a href="#">Changelog</a>
+      <a href="#">Blog</a>
+    </div>
+    <div class="nav-section">
+      <h2>Support</h2>
+      <a href="#">Documentation</a>
+      <a href="#">Community Forum</a>
+      <a href="#">Support Plans</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Service Level Agreements</a>
+      <a href="#">Training</a>
+      <a href="#">Certifications</a>
+      <a href="#">Webinars</a>
+      <a href="#">Office Hours</a>
+      <a href="#">Professional Services</a>
+    </div>
+    <div class="nav-section">
+      <h2>Company</h2>
+      <a href="#">About</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">Investors</a>
+      <a href="#">Partners</a>
+      <a href="#">Legal</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Cookie Settings</a>
+      <a href="#">Accessibility</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+  <h2>Welcome to Enterprise Cloud</h2>
+  <p>A keyboard user trying to reach this content must Tab through all 60 navigation links above. A skip link would let them jump directly here.</p>
+  <p>The European Accessibility Act and WCAG 2.2 Success Criterion 2.4.1 require a mechanism to bypass blocks of repeated content. <a class="body-link" href="#">Read the criterion</a>.</p>
+  <p>Adding a single skip link to the top of the page resolves this for all keyboard users. <a class="body-link" href="#">See the fix</a>.</p>
+</main>
+
+</body>
+</html>

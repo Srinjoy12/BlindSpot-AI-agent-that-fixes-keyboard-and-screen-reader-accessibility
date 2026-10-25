@@ -1,0 +1,13 @@
+{
+  "pageId": "B04",
+  "title": "Outline reset — no visible focus indicator",
+  "barriers": [
+    {
+      "selector": "body",
+      "detectorId": "D3",
+      "wcagId": "2.4.7",
+      "severity": "blocker",
+      "note": "Global outline:none !important removes the focus indicator from every interactive element with no replacement."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "pageId": "B03",
+  "title": "Icon toolbar — buttons with no accessible names",
+  "barriers": [
+    {
+      "selector": "#btn-bold",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Bold button has no aria-label. Screen reader announces 'button' with no purpose."
+    },
+    {
+      "selector": "#btn-italic",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Italic button has no aria-label."
+    },
+    {
+      "selector": "#btn-link",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Link insert button has no aria-label — emoji is not an accessible name."
+    },
+    {
+      "selector": "#btn-image",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Image insert button has no aria-label."
+    },
+    {
+      "selector": "#btn-undo",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Undo button has no aria-label — arrow character is not an accessible name."
+    }
+  ]
+}

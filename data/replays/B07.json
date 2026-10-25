@@ -1,0 +1,1282 @@
+{
+  "auditId": "replay_b07",
+  "pageId": "B07",
+  "report": {
+    "auditId": "replay_b07",
+    "targetUrl": "/fixtures/B07-mega-menu.html",
+    "timestamp": "2026-10-25T18:24:35.862Z",
+    "durationMs": 25558,
+    "keyboardScore": 80,
+    "summary": {
+      "totalStops": 10,
+      "barriersFound": 2,
+      "blockers": 0,
+      "majors": 2,
+      "minors": 0,
+      "fixesVerified": 2
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D2",
+        "severity": "major",
+        "selector": "#products-link",
+        "wcagId": "2.1.1",
+        "wcagName": "Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #products-link: Menu item '#products-link' has a hover-only submenu with no keyboard trigger or aria-haspopup.",
+        "evidence": "Menu item '#products-link' has a hover-only submenu with no keyboard trigger or aria-haspopup.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#products-link",
+          "body": "#products-link:focus-visible { outline: 2px solid #2563eb !important; }",
+          "rationale": "Standard focus indicator repair."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_2",
+        "detectorId": "D2",
+        "severity": "major",
+        "selector": "#solutions-link",
+        "wcagId": "2.1.1",
+        "wcagName": "Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #solutions-link: Menu item '#solutions-link' has a hover-only submenu with no keyboard trigger or aria-haspopup.",
+        "evidence": "Menu item '#solutions-link' has a hover-only submenu with no keyboard trigger or aria-haspopup.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#solutions-link",
+          "body": "#solutions-link:focus-visible { outline: 2px solid #2563eb !important; }",
+          "rationale": "Standard focus indicator repair."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 0,
+      "totalTokensOut": 0,
+      "totalLatencyMs": 11212,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 2,
+          "tokens": 800
+        },
+        "ultra": {
+          "calls": 2,
+          "tokens": 1200
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.1.1"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "nav > div > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 40,
+        "y": 0,
+        "width": 76,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "#products-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 116,
+        "y": 0,
+        "width": 99.015625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "#solutions-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Solutions",
+      "box": {
+        "x": 215.015625,
+        "y": 0,
+        "width": 101.0625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "#pricing-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Pricing",
+      "box": {
+        "x": 316.078125,
+        "y": 0,
+        "width": 83.515625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "#docs-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Docs",
+      "box": {
+        "x": 399.59375,
+        "y": 0,
+        "width": 69.796875,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "product catalog",
+      "box": {
+        "x": 837.125,
+        "y": 178.875,
+        "width": 114.65625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "contact sales",
+      "box": {
+        "x": 240,
+        "y": 178.875,
+        "width": 790.203125,
+        "height": 45.1875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "forward",
+      "selector": "nav > div > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 40,
+        "y": 0,
+        "width": 76,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "forward",
+      "selector": "#products-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 116,
+        "y": 0,
+        "width": 99.015625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "forward",
+      "selector": "#solutions-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Solutions",
+      "box": {
+        "x": 215.015625,
+        "y": 0,
+        "width": 101.0625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "#products-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 116,
+        "y": 0,
+        "width": 99.015625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "nav > div > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 40,
+        "y": 0,
+        "width": 76,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "contact sales",
+      "box": {
+        "x": 240,
+        "y": 178.875,
+        "width": 790.203125,
+        "height": 45.1875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "product catalog",
+      "box": {
+        "x": 837.125,
+        "y": 178.875,
+        "width": 114.65625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#docs-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Docs",
+      "box": {
+        "x": 399.59375,
+        "y": 0,
+        "width": 69.796875,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "backward",
+      "selector": "#pricing-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Pricing",
+      "box": {
+        "x": 316.078125,
+        "y": 0,
+        "width": 83.515625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "#solutions-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Solutions",
+      "box": {
+        "x": 215.015625,
+        "y": 0,
+        "width": 101.0625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "#products-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 116,
+        "y": 0,
+        "width": 99.015625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "nav > div > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 40,
+        "y": 0,
+        "width": 76,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "contact sales",
+      "box": {
+        "x": 240,
+        "y": 178.875,
+        "width": 790.203125,
+        "height": 45.1875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "product catalog",
+      "box": {
+        "x": 837.125,
+        "y": 178.875,
+        "width": 114.65625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "#docs-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Docs",
+      "box": {
+        "x": 399.59375,
+        "y": 0,
+        "width": 69.796875,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "backward",
+      "selector": "#pricing-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Pricing",
+      "box": {
+        "x": 316.078125,
+        "y": 0,
+        "width": 83.515625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "#solutions-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Solutions",
+      "box": {
+        "x": 215.015625,
+        "y": 0,
+        "width": 101.0625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "backward",
+      "selector": "#products-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 116,
+        "y": 0,
+        "width": 99.015625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 17,
+      "direction": "backward",
+      "selector": "nav > div > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 40,
+        "y": 0,
+        "width": 76,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "contact sales",
+      "box": {
+        "x": 240,
+        "y": 178.875,
+        "width": 790.203125,
+        "height": 45.1875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "product catalog",
+      "box": {
+        "x": 837.125,
+        "y": 178.875,
+        "width": 114.65625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "#docs-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Docs",
+      "box": {
+        "x": 399.59375,
+        "y": 0,
+        "width": 69.796875,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 22,
+      "direction": "backward",
+      "selector": "#pricing-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Pricing",
+      "box": {
+        "x": 316.078125,
+        "y": 0,
+        "width": 83.515625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "#solutions-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Solutions",
+      "box": {
+        "x": 215.015625,
+        "y": 0,
+        "width": 101.0625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "#products-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 116,
+        "y": 0,
+        "width": 99.015625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "nav > div > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 40,
+        "y": 0,
+        "width": 76,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 27,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "contact sales",
+      "box": {
+        "x": 240,
+        "y": 178.875,
+        "width": 790.203125,
+        "height": 45.1875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "product catalog",
+      "box": {
+        "x": 837.125,
+        "y": 178.875,
+        "width": 114.65625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "#docs-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Docs",
+      "box": {
+        "x": 399.59375,
+        "y": 0,
+        "width": 69.796875,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 30,
+      "direction": "backward",
+      "selector": "#pricing-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Pricing",
+      "box": {
+        "x": 316.078125,
+        "y": 0,
+        "width": 83.515625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "#solutions-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Solutions",
+      "box": {
+        "x": 215.015625,
+        "y": 0,
+        "width": 101.0625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 32,
+      "direction": "backward",
+      "selector": "#products-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 116,
+        "y": 0,
+        "width": 99.015625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "nav > div > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 40,
+        "y": 0,
+        "width": 76,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "contact sales",
+      "box": {
+        "x": 240,
+        "y": 178.875,
+        "width": 790.203125,
+        "height": 45.1875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "product catalog",
+      "box": {
+        "x": 837.125,
+        "y": 178.875,
+        "width": 114.65625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "#docs-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Docs",
+      "box": {
+        "x": 399.59375,
+        "y": 0,
+        "width": 69.796875,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 38,
+      "direction": "backward",
+      "selector": "#pricing-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Pricing",
+      "box": {
+        "x": 316.078125,
+        "y": 0,
+        "width": 83.515625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "#solutions-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Solutions",
+      "box": {
+        "x": 215.015625,
+        "y": 0,
+        "width": 101.0625,
+        "height": 54
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "ledger": [
+    {
+      "id": "6fb83413-d1f6-4d7a-8ae2-2f30322cca07",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 2694,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:24:16.446Z",
+      "tier": "nano"
+    },
+    {
+      "id": "f7d0ce32-a606-49a6-8786-5235142ece2d",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 8518,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:24:24.965Z",
+      "tier": "super"
+    }
+  ]
+}

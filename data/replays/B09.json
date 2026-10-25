@@ -1,0 +1,1125 @@
+{
+  "auditId": "replay_b09",
+  "pageId": "B09",
+  "report": {
+    "auditId": "replay_b09",
+    "targetUrl": "/fixtures/B09-carousel.html",
+    "timestamp": "2026-10-25T18:26:01.864Z",
+    "durationMs": 27058,
+    "keyboardScore": 50,
+    "summary": {
+      "totalStops": 7,
+      "barriersFound": 2,
+      "blockers": 2,
+      "majors": 0,
+      "minors": 0,
+      "fixesVerified": 1
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D2",
+        "severity": "blocker",
+        "selector": "#carousel-prev",
+        "wcagId": "2.1.1",
+        "wcagName": "Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #carousel-prev: Interactive element never received focus during the Tab crawl of 7 stops.",
+        "evidence": "Interactive element never received focus during the Tab crawl of 7 stops.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#carousel-prev",
+          "body": "#carousel-prev:focus-visible { outline: 2px solid #2563eb !important; }",
+          "rationale": "Standard focus indicator repair."
+        },
+        "verified": false
+      },
+      {
+        "id": "barrier_2",
+        "detectorId": "D2",
+        "severity": "blocker",
+        "selector": "#carousel-next",
+        "wcagId": "2.1.1",
+        "wcagName": "Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #carousel-next: Interactive element never received focus during the Tab crawl of 7 stops.",
+        "evidence": "Interactive element never received focus during the Tab crawl of 7 stops.",
+        "fix": {
+          "patchType": "attribute",
+          "body": "tabindex=\"0\"",
+          "rationale": "The button has tabindex=\"-1\" which explicitly removes it from the tab order; changing to tabindex=\"0\" restores native keyboard focusability while preserving the existing ARIA label and button semantics.",
+          "targetSelector": "#carousel-next"
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 0,
+      "totalTokensOut": 0,
+      "totalLatencyMs": 6605,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 2,
+          "tokens": 800
+        },
+        "ultra": {
+          "calls": 1,
+          "tokens": 600
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.1.1"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "#carousel-track > div:nth-of-type(1) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Get started free",
+      "box": {
+        "x": 238,
+        "y": 280.625,
+        "width": 166.265625,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "#carousel-track > div:nth-of-type(2) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "See a sample report",
+      "box": {
+        "x": 540,
+        "y": 280.625,
+        "width": 200.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "#carousel-track > div:nth-of-type(3) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "View integration docs",
+      "box": {
+        "x": 533,
+        "y": 280.625,
+        "width": 213.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "main > section > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more about WCAG 2.2",
+      "box": {
+        "x": 286.921875,
+        "y": 562.53125,
+        "width": 205.6875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "#carousel-track > div:nth-of-type(1) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Get started free",
+      "box": {
+        "x": 238,
+        "y": 280.625,
+        "width": 166.265625,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "#carousel-track > div:nth-of-type(2) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "See a sample report",
+      "box": {
+        "x": 540,
+        "y": 280.625,
+        "width": 200.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "forward",
+      "selector": "#carousel-track > div:nth-of-type(3) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "View integration docs",
+      "box": {
+        "x": 533,
+        "y": 280.625,
+        "width": 213.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(2) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "See a sample report",
+      "box": {
+        "x": 540,
+        "y": 280.625,
+        "width": 200.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(1) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Get started free",
+      "box": {
+        "x": 238,
+        "y": 280.625,
+        "width": 166.265625,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "main > section > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more about WCAG 2.2",
+      "box": {
+        "x": 286.921875,
+        "y": 562.53125,
+        "width": 205.6875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(3) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "View integration docs",
+      "box": {
+        "x": 533,
+        "y": 280.625,
+        "width": 213.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(2) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "See a sample report",
+      "box": {
+        "x": 540,
+        "y": 280.625,
+        "width": 200.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(1) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Get started free",
+      "box": {
+        "x": 238,
+        "y": 280.625,
+        "width": 166.265625,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "main > section > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more about WCAG 2.2",
+      "box": {
+        "x": 286.921875,
+        "y": 562.53125,
+        "width": 205.6875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(3) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "View integration docs",
+      "box": {
+        "x": 533,
+        "y": 280.625,
+        "width": 213.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(2) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "See a sample report",
+      "box": {
+        "x": 540,
+        "y": 280.625,
+        "width": 200.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(1) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Get started free",
+      "box": {
+        "x": 238,
+        "y": 280.625,
+        "width": 166.265625,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "main > section > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more about WCAG 2.2",
+      "box": {
+        "x": 286.921875,
+        "y": 562.53125,
+        "width": 205.6875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(3) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "View integration docs",
+      "box": {
+        "x": 533,
+        "y": 280.625,
+        "width": 213.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(2) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "See a sample report",
+      "box": {
+        "x": 540,
+        "y": 280.625,
+        "width": 200.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(1) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Get started free",
+      "box": {
+        "x": 238,
+        "y": 280.625,
+        "width": 166.265625,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 18,
+      "direction": "backward",
+      "selector": "main > section > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more about WCAG 2.2",
+      "box": {
+        "x": 286.921875,
+        "y": 562.53125,
+        "width": 205.6875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(3) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "View integration docs",
+      "box": {
+        "x": 533,
+        "y": 280.625,
+        "width": 213.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(2) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "See a sample report",
+      "box": {
+        "x": 540,
+        "y": 280.625,
+        "width": 200.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(1) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Get started free",
+      "box": {
+        "x": 238,
+        "y": 280.625,
+        "width": 166.265625,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "main > section > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more about WCAG 2.2",
+      "box": {
+        "x": 286.921875,
+        "y": 562.53125,
+        "width": 205.6875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(3) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "View integration docs",
+      "box": {
+        "x": 533,
+        "y": 280.625,
+        "width": 213.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(2) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "See a sample report",
+      "box": {
+        "x": 540,
+        "y": 280.625,
+        "width": 200.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 26,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(1) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Get started free",
+      "box": {
+        "x": 238,
+        "y": 280.625,
+        "width": 166.265625,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "main > section > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more about WCAG 2.2",
+      "box": {
+        "x": 286.921875,
+        "y": 562.53125,
+        "width": 205.6875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(3) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "View integration docs",
+      "box": {
+        "x": 533,
+        "y": 280.625,
+        "width": 213.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 30,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(2) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "See a sample report",
+      "box": {
+        "x": 540,
+        "y": 280.625,
+        "width": 200.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(1) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Get started free",
+      "box": {
+        "x": 238,
+        "y": 280.625,
+        "width": 166.265625,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "main > section > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more about WCAG 2.2",
+      "box": {
+        "x": 286.921875,
+        "y": 562.53125,
+        "width": 205.6875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 34,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(3) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "View integration docs",
+      "box": {
+        "x": 533,
+        "y": 280.625,
+        "width": 213.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(2) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "See a sample report",
+      "box": {
+        "x": 540,
+        "y": 280.625,
+        "width": 200.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(1) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Get started free",
+      "box": {
+        "x": 238,
+        "y": 280.625,
+        "width": 166.265625,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 38,
+      "direction": "backward",
+      "selector": "main > section > p > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Learn more about WCAG 2.2",
+      "box": {
+        "x": 286.921875,
+        "y": 562.53125,
+        "width": 205.6875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "#carousel-track > div:nth-of-type(3) > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "View integration docs",
+      "box": {
+        "x": 533,
+        "y": 280.625,
+        "width": 213.078125,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "ledger": [
+    {
+      "id": "57d1adc5-8a40-410b-81ba-f2df9404f74d",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 3022,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:25:43.309Z",
+      "tier": "nano"
+    },
+    {
+      "id": "c150e0cf-3c67-4be4-8a16-983df5ff1784",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 3583,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:25:46.893Z",
+      "tier": "super"
+    }
+  ]
+}

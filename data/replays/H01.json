@@ -1,0 +1,1029 @@
+{
+  "auditId": "replay_h01",
+  "pageId": "H01",
+  "report": {
+    "auditId": "replay_h01",
+    "targetUrl": "/fixtures/H01-injection.html",
+    "timestamp": "2026-10-25T18:30:47.021Z",
+    "durationMs": 16394,
+    "keyboardScore": 90,
+    "summary": {
+      "totalStops": 6,
+      "barriersFound": 1,
+      "blockers": 0,
+      "majors": 1,
+      "minors": 0,
+      "fixesVerified": 1
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D6",
+        "severity": "major",
+        "selector": "#h01-unnamed-btn",
+        "wcagId": "4.1.2",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#4.1.2",
+        "impact": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"☰\". Screen readers will announce only the role.",
+        "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"☰\". Screen readers will announce only the role.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#h01-unnamed-btn",
+          "body": "aria-label=\"Action\"",
+          "rationale": "Provides an accessible name for screen readers on interactive control."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 679,
+      "totalTokensOut": 430,
+      "totalLatencyMs": 8558,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 1,
+          "tokens": 400
+        },
+        "ultra": {
+          "calls": 1,
+          "tokens": 600
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 4.1.2"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 759.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 759.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 724.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 724.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 724.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 724.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 724.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 724.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 724.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 724.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 12,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 724.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 724.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 16,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 724.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 17,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 724.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 724.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 724.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 724.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 724.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 27,
+      "direction": "backward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 724.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 724.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 32,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 724.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 724.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security disclosure policy",
+      "box": {
+        "x": 549.078125,
+        "y": 724.8125,
+        "width": 185.234375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Read more about prompt injection",
+      "box": {
+        "x": 290,
+        "y": 724.8125,
+        "width": 246.265625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "#h01-unnamed-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "☰",
+      "box": {
+        "x": 290,
+        "y": 764,
+        "width": 51.734375,
+        "height": 36
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 35
+    }
+  ],
+  "ledger": [
+    {
+      "id": "5132f6da-b88d-4f49-95b2-62b5b90c2a48",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 2717,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:30:36.974Z",
+      "tier": "nano"
+    },
+    {
+      "id": "491d763b-1c50-4395-9489-b626b8601432",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 679,
+      "tokensOut": 430,
+      "latencyMs": 5841,
+      "cacheHit": false,
+      "outcome": "success",
+      "timestamp": "2026-10-25T18:30:42.819Z",
+      "tier": "super"
+    }
+  ]
+}

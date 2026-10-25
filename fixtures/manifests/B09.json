@@ -1,0 +1,20 @@
+{
+  "pageId": "B09",
+  "title": "Carousel — controls out of tab order",
+  "barriers": [
+    {
+      "selector": "#carousel-prev",
+      "detectorId": "D2",
+      "wcagId": "2.1.1",
+      "severity": "blocker",
+      "note": "The previous slide button has tabindex=-1 set by JavaScript and cannot be reached by Tab."
+    },
+    {
+      "selector": "#carousel-next",
+      "detectorId": "D2",
+      "wcagId": "2.1.1",
+      "severity": "blocker",
+      "note": "The next slide button has tabindex=-1 set by JavaScript and cannot be reached by Tab."
+    }
+  ]
+}

@@ -1,0 +1,1470 @@
+{
+  "auditId": "replay_b05",
+  "pageId": "B05",
+  "report": {
+    "auditId": "replay_b05",
+    "targetUrl": "/fixtures/B05-sticky-header.html",
+    "timestamp": "2026-10-25T18:22:57.252Z",
+    "durationMs": 30335,
+    "keyboardScore": 90,
+    "summary": {
+      "totalStops": 16,
+      "barriersFound": 1,
+      "blockers": 0,
+      "majors": 1,
+      "minors": 0,
+      "fixesVerified": 0
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D5",
+        "severity": "major",
+        "selector": "#btn-under-header",
+        "wcagId": "2.4.11",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.11",
+        "impact": "The center of the focused element (button[role=\"button\"]) is covered by 'header'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "evidence": "The center of the focused element (button[role=\"button\"]) is covered by 'header'. This is likely a sticky header or fixed banner obscuring the focused control.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#btn-under-header",
+          "body": "#btn-under-header { scroll-margin-top: 100px !important; }",
+          "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
+        },
+        "verified": false
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 673,
+      "totalTokensOut": 428,
+      "totalLatencyMs": 13294,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 1,
+          "tokens": 400
+        },
+        "ultra": {
+          "calls": 0,
+          "tokens": 0
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.4.11"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "header > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Intro",
+      "box": {
+        "x": 1103.46875,
+        "y": 19,
+        "width": 49.1875,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "header > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Features",
+      "box": {
+        "x": 1176.84375,
+        "y": 19,
+        "width": 79.15625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "#btn-under-header",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Search archives",
+      "box": {
+        "x": 200,
+        "y": 15,
+        "width": 99.578125,
+        "height": 23
+      },
+      "inViewport": true,
+      "obscuredBy": "header",
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "#first-article-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Introduction to WCAG 2.2",
+      "box": {
+        "x": 240,
+        "y": 252.0625,
+        "width": 184.578125,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "#intro > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Focus management in single-page apps",
+      "box": {
+        "x": 240,
+        "y": 286.0625,
+        "width": 289.703125,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "#features > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Automated accessibility scanning",
+      "box": {
+        "x": 240,
+        "y": 503.0625,
+        "width": 241.859375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "#features > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Real-user keyboard testing",
+      "box": {
+        "x": 240,
+        "y": 537.0625,
+        "width": 195.359375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "forward",
+      "selector": "#features > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "One-click remediation suggestions",
+      "box": {
+        "x": 240,
+        "y": 571.0625,
+        "width": 252.453125,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "forward",
+      "selector": "#pricing > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Starter — $0/month",
+      "box": {
+        "x": 240,
+        "y": 778.0625,
+        "width": 142.34375,
+        "height": 22
+      },
+      "inViewport": false,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 10
+    },
+    {
+      "index": 9,
+      "direction": "forward",
+      "selector": "#pricing > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Pro — $49/month",
+      "box": {
+        "x": 240,
+        "y": 465.0625,
+        "width": 127.15625,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 10,
+      "direction": "forward",
+      "selector": "#pricing > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Enterprise — contact us",
+      "box": {
+        "x": 240,
+        "y": 499.0625,
+        "width": 172.59375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 11,
+      "direction": "forward",
+      "selector": "#contact > p > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Send us an email",
+      "box": {
+        "x": 566.46875,
+        "y": 676.875,
+        "width": 122.765625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 12,
+      "direction": "forward",
+      "selector": "#contact > p > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "book a demo call",
+      "box": {
+        "x": 712.53125,
+        "y": 676.875,
+        "width": 122.96875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 14,
+      "direction": "forward",
+      "selector": "header > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Intro",
+      "box": {
+        "x": 1103.46875,
+        "y": 19,
+        "width": 49.1875,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 15,
+      "direction": "forward",
+      "selector": "header > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Features",
+      "box": {
+        "x": 1176.84375,
+        "y": 19,
+        "width": 79.15625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 16,
+      "direction": "forward",
+      "selector": "#btn-under-header",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Search archives",
+      "box": {
+        "x": 200,
+        "y": 15,
+        "width": 99.578125,
+        "height": 23
+      },
+      "inViewport": true,
+      "obscuredBy": "header",
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Features",
+      "box": {
+        "x": 1176.84375,
+        "y": 19,
+        "width": 79.15625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Intro",
+      "box": {
+        "x": 1103.46875,
+        "y": 19,
+        "width": 49.1875,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "#contact > p > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "book a demo call",
+      "box": {
+        "x": 712.53125,
+        "y": 676.875,
+        "width": 122.96875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "#contact > p > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Send us an email",
+      "box": {
+        "x": 566.46875,
+        "y": 676.875,
+        "width": 122.765625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#pricing > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Enterprise — contact us",
+      "box": {
+        "x": 240,
+        "y": 499.0625,
+        "width": 172.59375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 6,
+      "direction": "backward",
+      "selector": "#pricing > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Pro — $49/month",
+      "box": {
+        "x": 240,
+        "y": 465.0625,
+        "width": 127.15625,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "#pricing > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Starter — $0/month",
+      "box": {
+        "x": 240,
+        "y": 431.0625,
+        "width": 142.34375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "#features > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "One-click remediation suggestions",
+      "box": {
+        "x": 240,
+        "y": 214.0625,
+        "width": 252.453125,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "#features > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Real-user keyboard testing",
+      "box": {
+        "x": 240,
+        "y": 180.0625,
+        "width": 195.359375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 10,
+      "direction": "backward",
+      "selector": "#features > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Automated accessibility scanning",
+      "box": {
+        "x": 240,
+        "y": 146.0625,
+        "width": 241.859375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "#intro > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Focus management in single-page apps",
+      "box": {
+        "x": 240,
+        "y": 286.0625,
+        "width": 289.703125,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "backward",
+      "selector": "#first-article-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Introduction to WCAG 2.2",
+      "box": {
+        "x": 240,
+        "y": 252.0625,
+        "width": 184.578125,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "#btn-under-header",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Search archives",
+      "box": {
+        "x": 200,
+        "y": 15,
+        "width": 99.578125,
+        "height": 23
+      },
+      "inViewport": true,
+      "obscuredBy": "header",
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Features",
+      "box": {
+        "x": 1176.84375,
+        "y": 19,
+        "width": 79.15625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Intro",
+      "box": {
+        "x": 1103.46875,
+        "y": 19,
+        "width": 49.1875,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 17,
+      "direction": "backward",
+      "selector": "#contact > p > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "book a demo call",
+      "box": {
+        "x": 712.53125,
+        "y": 676.875,
+        "width": 122.96875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 18,
+      "direction": "backward",
+      "selector": "#contact > p > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Send us an email",
+      "box": {
+        "x": 566.46875,
+        "y": 676.875,
+        "width": 122.765625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "#pricing > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Enterprise — contact us",
+      "box": {
+        "x": 240,
+        "y": 499.0625,
+        "width": 172.59375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "#pricing > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Pro — $49/month",
+      "box": {
+        "x": 240,
+        "y": 465.0625,
+        "width": 127.15625,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "#pricing > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Starter — $0/month",
+      "box": {
+        "x": 240,
+        "y": 431.0625,
+        "width": 142.34375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 22,
+      "direction": "backward",
+      "selector": "#features > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "One-click remediation suggestions",
+      "box": {
+        "x": 240,
+        "y": 214.0625,
+        "width": 252.453125,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "#features > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Real-user keyboard testing",
+      "box": {
+        "x": 240,
+        "y": 180.0625,
+        "width": 195.359375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "#features > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Automated accessibility scanning",
+      "box": {
+        "x": 240,
+        "y": 146.0625,
+        "width": 241.859375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "#intro > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Focus management in single-page apps",
+      "box": {
+        "x": 240,
+        "y": 286.0625,
+        "width": 289.703125,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 26,
+      "direction": "backward",
+      "selector": "#first-article-link",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Introduction to WCAG 2.2",
+      "box": {
+        "x": 240,
+        "y": 252.0625,
+        "width": 184.578125,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 27,
+      "direction": "backward",
+      "selector": "#btn-under-header",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Search archives",
+      "box": {
+        "x": 200,
+        "y": 15,
+        "width": 99.578125,
+        "height": 23
+      },
+      "inViewport": true,
+      "obscuredBy": "header",
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Features",
+      "box": {
+        "x": 1176.84375,
+        "y": 19,
+        "width": 79.15625,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "header > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Intro",
+      "box": {
+        "x": 1103.46875,
+        "y": 19,
+        "width": 49.1875,
+        "height": 26
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "#contact > p > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "book a demo call",
+      "box": {
+        "x": 712.53125,
+        "y": 676.875,
+        "width": 122.96875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 32,
+      "direction": "backward",
+      "selector": "#contact > p > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Send us an email",
+      "box": {
+        "x": 566.46875,
+        "y": 676.875,
+        "width": 122.765625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "#pricing > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Enterprise — contact us",
+      "box": {
+        "x": 240,
+        "y": 499.0625,
+        "width": 172.59375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 34,
+      "direction": "backward",
+      "selector": "#pricing > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Pro — $49/month",
+      "box": {
+        "x": 240,
+        "y": 465.0625,
+        "width": 127.15625,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "#pricing > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Starter — $0/month",
+      "box": {
+        "x": 240,
+        "y": 431.0625,
+        "width": 142.34375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "#features > ul > li:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "One-click remediation suggestions",
+      "box": {
+        "x": 240,
+        "y": 214.0625,
+        "width": 252.453125,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "#features > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Real-user keyboard testing",
+      "box": {
+        "x": 240,
+        "y": 180.0625,
+        "width": 195.359375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 38,
+      "direction": "backward",
+      "selector": "#features > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Automated accessibility scanning",
+      "box": {
+        "x": 240,
+        "y": 146.0625,
+        "width": 241.859375,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 357
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "#intro > ul > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Focus management in single-page apps",
+      "box": {
+        "x": 240,
+        "y": 286.0625,
+        "width": 289.703125,
+        "height": 22
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "ledger": [
+    {
+      "id": "7569ba5d-6c93-4bda-aab3-f6f2264a0c6f",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 3319,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:22:35.494Z",
+      "tier": "nano"
+    },
+    {
+      "id": "6198ea1f-91d1-438c-b548-a96cc004701a",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 673,
+      "tokensOut": 428,
+      "latencyMs": 9975,
+      "cacheHit": false,
+      "outcome": "success",
+      "timestamp": "2026-10-25T18:22:45.471Z",
+      "tier": "super"
+    }
+  ]
+}

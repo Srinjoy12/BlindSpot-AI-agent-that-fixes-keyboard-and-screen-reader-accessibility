@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture B01 — Keyboard Trap in Newsletter Dialog</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 20px; }
+  nav { background: #1a1a2e; padding: 12px 20px; display: flex; gap: 20px; margin: -20px -20px 20px; }
+  nav a { color: #fff; text-decoration: none; padding: 4px 8px; }
+  nav a:focus { outline: 2px solid #fff; }
+  main { max-width: 700px; margin: 0 auto; }
+  h1 { color: #1a1a2e; }
+  p { line-height: 1.6; color: #333; }
+  .btn-primary { background: #0066cc; color: #fff; border: none; padding: 12px 24px; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+  .btn-primary:hover { background: #0052a3; }
+  /* ── BUGGY DIALOG — intentionally traps focus ── */
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center; z-index: 100; }
+  .dialog { background: #fff; border-radius: 8px; padding: 32px; width: 380px; max-width: 90vw; }
+  .dialog h2 { margin-top: 0; color: #1a1a2e; }
+  .dialog input[type="email"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; box-sizing: border-box; margin: 12px 0; }
+  .dialog input[type="email"]:focus { outline: 2px solid #0066cc; }
+  .dialog-buttons { display: flex; gap: 12px; margin-top: 8px; }
+  .dialog-buttons button { flex: 1; padding: 10px; border-radius: 4px; font-size: 1rem; cursor: pointer; }
+  .btn-subscribe { background: #0066cc; color: #fff; border: none; }
+  .btn-subscribe:focus { outline: 2px solid #0066cc; outline-offset: 2px; }
+  .btn-no-thanks { background: transparent; border: 1px solid #999; color: #333; }
+  .btn-no-thanks:focus { outline: 2px solid #0066cc; outline-offset: 2px; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="#">Home</a>
+  <a href="#">Articles</a>
+  <a href="#">About</a>
+  <a href="#">Contact</a>
+</nav>
+
+<main>
+  <h1>Welcome to Tech Weekly</h1>
+  <p>Your source for the latest in technology, design, and accessibility. Subscribe to our newsletter and never miss an update.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <button class="btn-primary" id="open-btn" onclick="document.getElementById('newsletter-dialog').removeAttribute('hidden')">
+    Read Latest Article
+  </button>
+</main>
+
+<!-- SEEDED BUG: Dialog with keyboard trap — Escape is ignored, focus never leaves the dialog -->
+<!-- BUG: No aria-modal, no aria-labelledby, focus not moved in on open, Escape not handled -->
+<div id="newsletter-dialog" role="dialog" style="display:contents;">
+  <div class="overlay">
+    <div class="dialog">
+      <h2>Stay in the loop!</h2>
+      <p style="color:#555;margin:0 0 8px;">Subscribe to our newsletter for weekly insights.</p>
+      <label for="email-input" style="font-weight:600;display:block;">Email address</label>
+      <input type="email" id="email-input" placeholder="you@example.com" />
+      <div class="dialog-buttons">
+        <button class="btn-subscribe" id="subscribe-btn">Subscribe</button>
+        <button class="btn-no-thanks" id="no-thanks-btn">No thanks</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // SEEDED KEYBOARD TRAP (WCAG 2.1.2)
+  // Focus is trapped within email-input, subscribe-btn, and no-thanks-btn.
+  // Tab wraps around indefinitely. Escape is intentionally NOT handled.
+  setTimeout(() => {
+    document.getElementById('email-input').focus();
+  }, 50);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+      const trapElements = [
+        document.getElementById('email-input'),
+        document.getElementById('subscribe-btn'),
+        document.getElementById('no-thanks-btn')
+      ];
+      const active = document.activeElement;
+      
+      if (!e.shiftKey && active === trapElements[2]) {
+        e.preventDefault();
+        trapElements[0].focus();
+      } else if (e.shiftKey && active === trapElements[0]) {
+        e.preventDefault();
+        trapElements[2].focus();
+      }
+    }
+  });
+
+  // "No thanks" closes visually but focus is not managed correctly
+  document.getElementById('no-thanks-btn').addEventListener('click', function() {
+    // BUG: dialog hidden but focus NOT returned to trigger
+    document.getElementById('newsletter-dialog').setAttribute('hidden', '');
+  });
+  
+  document.getElementById('subscribe-btn').addEventListener('click', function() {
+    alert('Subscribed! (demo)');
+  });
+</script>
+</body>
+</html>

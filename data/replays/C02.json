@@ -1,0 +1,1452 @@
+{
+  "auditId": "replay_c02",
+  "pageId": "C02",
+  "report": {
+    "auditId": "replay_c02",
+    "targetUrl": "/fixtures/C02-clean-article.html",
+    "timestamp": "2026-10-25T18:30:25.517Z",
+    "durationMs": 3278,
+    "keyboardScore": 100,
+    "summary": {
+      "totalStops": 17,
+      "barriersFound": 0,
+      "blockers": 0,
+      "majors": 0,
+      "minors": 0,
+      "fixesVerified": 0
+    },
+    "barriers": [],
+    "aiTransparency": {
+      "totalCalls": 0,
+      "totalTokensIn": 0,
+      "totalTokensOut": 0,
+      "totalLatencyMs": 0,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 0,
+          "tokens": 0
+        },
+        "ultra": {
+          "calls": 0,
+          "tokens": 0
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.1.1"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Skip to main content",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 180.765625,
+        "height": 41.59375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "header > div > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 848.015625,
+        "y": 12.203125,
+        "width": 63.140625,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "header > div > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Articles",
+      "box": {
+        "x": 931.34375,
+        "y": 12.203125,
+        "width": 74.8125,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "header > div > nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 1026.34375,
+        "y": 12.203125,
+        "width": 63.65625,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "nav > ol > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 190,
+        "y": 70,
+        "width": 38.25,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "nav > ol > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Accessibility",
+      "box": {
+        "x": 248.375,
+        "y": 70,
+        "width": 80.46875,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "#main-content > article > header > div > div > span:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Jane Smith",
+      "box": {
+        "x": 445.859375,
+        "y": 246.171875,
+        "width": 71.75,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "forward",
+      "selector": "#main-content > article > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "SC 4.1.1 (Parsing)",
+      "box": {
+        "x": 304,
+        "y": 390.65625,
+        "width": 126.046875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 586
+    },
+    {
+      "index": 8,
+      "direction": "forward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "WCAG 2.2",
+      "box": {
+        "x": 280,
+        "y": 475.03125,
+        "width": 80.609375,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 9,
+      "direction": "forward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Accessibility",
+      "box": {
+        "x": 368.609375,
+        "y": 475.03125,
+        "width": 94.578125,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 10,
+      "direction": "forward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Keyboard navigation",
+      "box": {
+        "x": 471.1875,
+        "y": 475.03125,
+        "width": 141.65625,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 11,
+      "direction": "forward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Screen readers",
+      "box": {
+        "x": 620.84375,
+        "y": 475.03125,
+        "width": 110.5625,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 12,
+      "direction": "forward",
+      "selector": "footer > p > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Privacy",
+      "box": {
+        "x": 598.6875,
+        "y": 731.5,
+        "width": 47.109375,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 13,
+      "direction": "forward",
+      "selector": "footer > p > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Accessibility statement",
+      "box": {
+        "x": 657.390625,
+        "y": 731.5,
+        "width": 149.390625,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 15,
+      "direction": "forward",
+      "selector": "a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Skip to main content",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 180.765625,
+        "height": 41.59375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "forward",
+      "selector": "header > div > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 848.015625,
+        "y": 12.203125,
+        "width": 63.140625,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 17,
+      "direction": "forward",
+      "selector": "header > div > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Articles",
+      "box": {
+        "x": 931.34375,
+        "y": 12.203125,
+        "width": 74.8125,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "header > div > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 848.015625,
+        "y": 12.203125,
+        "width": 63.140625,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Skip to main content",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 180.765625,
+        "height": 41.59375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "footer > p > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Accessibility statement",
+      "box": {
+        "x": 657.390625,
+        "y": 731.5,
+        "width": 149.390625,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "footer > p > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Privacy",
+      "box": {
+        "x": 598.6875,
+        "y": 731.5,
+        "width": 47.109375,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Screen readers",
+      "box": {
+        "x": 620.84375,
+        "y": 475.03125,
+        "width": 110.5625,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 6,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Keyboard navigation",
+      "box": {
+        "x": 471.1875,
+        "y": 475.03125,
+        "width": 141.65625,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Accessibility",
+      "box": {
+        "x": 368.609375,
+        "y": 475.03125,
+        "width": 94.578125,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "WCAG 2.2",
+      "box": {
+        "x": 280,
+        "y": 475.03125,
+        "width": 80.609375,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "#main-content > article > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "SC 4.1.1 (Parsing)",
+      "box": {
+        "x": 304,
+        "y": 32.65625,
+        "width": 126.046875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 10,
+      "direction": "backward",
+      "selector": "#main-content > article > header > div > div > span:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Jane Smith",
+      "box": {
+        "x": 445.859375,
+        "y": 246.171875,
+        "width": 71.75,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "nav > ol > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Accessibility",
+      "box": {
+        "x": 248.375,
+        "y": 70,
+        "width": 80.46875,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "backward",
+      "selector": "nav > ol > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 190,
+        "y": 70,
+        "width": 38.25,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "header > div > nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 1026.34375,
+        "y": 12.203125,
+        "width": 63.65625,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "backward",
+      "selector": "header > div > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Articles",
+      "box": {
+        "x": 931.34375,
+        "y": 12.203125,
+        "width": 74.8125,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "header > div > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 848.015625,
+        "y": 12.203125,
+        "width": 63.140625,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "backward",
+      "selector": "a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Skip to main content",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 180.765625,
+        "height": 41.59375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 18,
+      "direction": "backward",
+      "selector": "footer > p > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Accessibility statement",
+      "box": {
+        "x": 657.390625,
+        "y": 731.5,
+        "width": 149.390625,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "footer > p > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Privacy",
+      "box": {
+        "x": 598.6875,
+        "y": 731.5,
+        "width": 47.109375,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Screen readers",
+      "box": {
+        "x": 620.84375,
+        "y": 475.03125,
+        "width": 110.5625,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Keyboard navigation",
+      "box": {
+        "x": 471.1875,
+        "y": 475.03125,
+        "width": 141.65625,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 22,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Accessibility",
+      "box": {
+        "x": 368.609375,
+        "y": 475.03125,
+        "width": 94.578125,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "WCAG 2.2",
+      "box": {
+        "x": 280,
+        "y": 475.03125,
+        "width": 80.609375,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "#main-content > article > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "SC 4.1.1 (Parsing)",
+      "box": {
+        "x": 304,
+        "y": 32.65625,
+        "width": 126.046875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "#main-content > article > header > div > div > span:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Jane Smith",
+      "box": {
+        "x": 445.859375,
+        "y": 246.171875,
+        "width": 71.75,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 26,
+      "direction": "backward",
+      "selector": "nav > ol > li:nth-of-type(2) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Accessibility",
+      "box": {
+        "x": 248.375,
+        "y": 70,
+        "width": 80.46875,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 27,
+      "direction": "backward",
+      "selector": "nav > ol > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 190,
+        "y": 70,
+        "width": 38.25,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "header > div > nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 1026.34375,
+        "y": 12.203125,
+        "width": 63.65625,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "header > div > nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Articles",
+      "box": {
+        "x": 931.34375,
+        "y": 12.203125,
+        "width": 74.8125,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 30,
+      "direction": "backward",
+      "selector": "header > div > nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 848.015625,
+        "y": 12.203125,
+        "width": 63.140625,
+        "height": 30
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Skip to main content",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 180.765625,
+        "height": 41.59375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "footer > p > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Accessibility statement",
+      "box": {
+        "x": 657.390625,
+        "y": 731.5,
+        "width": 149.390625,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 34,
+      "direction": "backward",
+      "selector": "footer > p > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Privacy",
+      "box": {
+        "x": 598.6875,
+        "y": 731.5,
+        "width": 47.109375,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Screen readers",
+      "box": {
+        "x": 620.84375,
+        "y": 475.03125,
+        "width": 110.5625,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Keyboard navigation",
+      "box": {
+        "x": 471.1875,
+        "y": 475.03125,
+        "width": 141.65625,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Accessibility",
+      "box": {
+        "x": 368.609375,
+        "y": 475.03125,
+        "width": 94.578125,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 38,
+      "direction": "backward",
+      "selector": "#main-content > article > div:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "WCAG 2.2",
+      "box": {
+        "x": 280,
+        "y": 475.03125,
+        "width": 80.609375,
+        "height": 24.46875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "#main-content > article > ul > li:nth-of-type(1) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "SC 4.1.1 (Parsing)",
+      "box": {
+        "x": 304,
+        "y": 32.65625,
+        "width": 126.046875,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 944
+    }
+  ],
+  "ledger": []
+}

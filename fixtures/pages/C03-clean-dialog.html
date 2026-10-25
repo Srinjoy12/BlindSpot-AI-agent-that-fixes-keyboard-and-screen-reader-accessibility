@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture C03 — Clean Dialog (correct modal, no false alarms)</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 24px; background: #f5f5f5; }
+  
+  main { max-width: 600px; margin: 0 auto; }
+  h1 { color: #0f172a; }
+  p { line-height: 1.7; color: #374151; }
+  
+  .btn { padding: 11px 24px; border-radius: 6px; font-size: 1rem; cursor: pointer; border: none; font-family: inherit; font-weight: 500; }
+  .btn-primary { background: #2563eb; color: #fff; }
+  .btn-primary:hover { background: #1d4ed8; }
+  .btn-primary:focus { outline: 3px solid #2563eb; outline-offset: 3px; }
+  .btn-secondary { background: #fff; border: 1px solid #d1d5db; color: #374151; }
+  .btn-secondary:hover { background: #f9fafb; }
+  .btn-secondary:focus { outline: 3px solid #2563eb; outline-offset: 3px; }
+  .btn-danger { background: #dc2626; color: #fff; }
+  .btn-danger:hover { background: #b91c1c; }
+  .btn-danger:focus { outline: 3px solid #dc2626; outline-offset: 3px; }
+  
+  a { color: #2563eb; }
+  a:focus { outline: 2px solid #2563eb; outline-offset: 2px; }
+  
+  /* ── CORRECT modal implementation — no accessibility issues ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100;
+  }
+  .modal-overlay[hidden] { display: none; }
+  
+  .modal {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px;
+    width: 480px;
+    max-width: 90vw;
+    box-shadow: 0 20px 60px rgba(0,0,0,.2);
+    position: relative;
+  }
+  .modal h2 { margin: 0 0 8px; color: #0f172a; font-size: 1.25rem; }
+  .modal p { margin: 0 0 24px; color: #6b7280; }
+  
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 32px; height: 32px;
+    border-radius: 6px; border: none;
+    background: #f3f4f6; color: #374151;
+    font-size: 1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-close:hover { background: #e5e7eb; }
+  .modal-close:focus { outline: 3px solid #2563eb; outline-offset: 2px; }
+  
+  .modal-actions { display: flex; gap: 12px; justify-content: flex-end; }
+  
+  .item-list { list-style: none; padding: 0; margin: 0 0 24px; }
+  .item-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f3f4f6; }
+  .item-list li:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Shopping cart</h1>
+  <p>This page demonstrates a correctly implemented modal dialog. Focus is moved into the dialog on open, Tab stays within the dialog, Escape closes it, and focus returns to the trigger.</p>
+  
+  <ul class="item-list" aria-label="Cart items">
+    <li>
+      <span>Accessibility audit — 1 month</span>
+      <span>$49</span>
+    </li>
+    <li>
+      <span>Report export add-on</span>
+      <span>$9</span>
+    </li>
+  </ul>
+  
+  <p>Total: <strong>$58</strong></p>
+  
+  <button class="btn btn-primary" id="checkout-btn">Proceed to checkout</button>
+  <a href="#" style="margin-left:16px;">Continue shopping</a>
+  
+  <!-- Correctly implemented confirm dialog -->
+  <!-- aria-modal traps assistive tech, aria-labelledby links the heading, focus is managed in JS -->
+  <div class="modal-overlay" id="confirm-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+    <div class="modal">
+      <button class="modal-close" id="modal-close-btn" aria-label="Close dialog">✕</button>
+      <h2 id="modal-title">Confirm your order</h2>
+      <p id="modal-desc">You are about to purchase 2 items for $58. This charge will appear on your account immediately.</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
+        <button class="btn btn-danger" id="modal-confirm-btn">Confirm purchase</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // CORRECT focus management implementation
+  
+  const modal = document.getElementById('confirm-modal');
+  const openBtn = document.getElementById('checkout-btn');
+  const closeBtn = document.getElementById('modal-close-btn');
+  const cancelBtn = document.getElementById('modal-cancel-btn');
+  const confirmBtn = document.getElementById('modal-confirm-btn');
+  
+  // All focusable elements inside the modal
+  const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+  
+  function openModal() {
+    modal.removeAttribute('hidden');
+    // CORRECT: focus moves to first focusable element inside the modal
+    closeBtn.focus();
+    // CORRECT: trap focus inside the modal
+    modal.addEventListener('keydown', trapFocus);
+  }
+  
+  function closeModal() {
+    modal.setAttribute('hidden', '');
+    modal.removeEventListener('keydown', trapFocus);
+    // CORRECT: focus returns to the element that opened the modal
+    openBtn.focus();
+  }
+  
+  function trapFocus(e) {
+    if (e.key !== 'Tab') {
+      if (e.key === 'Escape') closeModal(); // CORRECT: Escape closes the dialog
+      return;
+    }
+    
+    const focusable = Array.from(modal.querySelectorAll(FOCUSABLE)).filter(el => !el.disabled);
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus(); // CORRECT: Shift+Tab from first wraps to last
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus(); // CORRECT: Tab from last wraps to first
+      }
+    }
+  }
+  
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  confirmBtn.addEventListener('click', () => {
+    closeModal();
+    alert('Order confirmed! (demo)');
+  });
+  
+  // CORRECT: clicking the overlay (not the modal itself) also closes it
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+</script>
+</body>
+</html>

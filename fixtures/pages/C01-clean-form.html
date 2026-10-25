@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlindSpot Fixture C01 — Clean Form (no accessibility issues)</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+  
+  .skip-link {
+    position: absolute; top: -40px; left: 0;
+    background: #2563eb; color: #fff; padding: 8px 16px;
+    text-decoration: none; z-index: 9999; border-radius: 0 0 4px 0;
+  }
+  .skip-link:focus { top: 0; }
+  
+  header { background: #0f172a; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+  header h1 { margin: 0; color: #fff; font-size: 1.1rem; }
+  header nav a { color: #e2e8f0; text-decoration: none; margin-left: 16px; padding: 6px 10px; border-radius: 4px; }
+  header nav a:hover { background: rgba(255,255,255,.1); }
+  header nav a:focus { outline: 2px solid #60a5fa; outline-offset: 2px; }
+  
+  main { max-width: 600px; margin: 40px auto; padding: 0 20px; }
+  h2 { color: #0f172a; }
+  
+  .form-card { background: #fff; border-radius: 8px; padding: 32px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  
+  .form-group { margin-bottom: 20px; }
+  label { display: block; font-weight: 600; margin-bottom: 6px; color: #1f2937; }
+  .required-star { color: #dc2626; margin-left: 2px; }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid #d1d5db; border-radius: 6px;
+    font-size: 1rem; font-family: inherit;
+    box-sizing: border-box;
+    color: #111827;
+    background: #fff;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: 3px solid #2563eb;
+    outline-offset: 1px;
+    border-color: #2563eb;
+  }
+  
+  .hint { font-size: .85rem; color: #6b7280; margin-top: 4px; }
+  .error { font-size: .85rem; color: #dc2626; margin-top: 4px; }
+  
+  fieldset { border: 1px solid #d1d5db; border-radius: 6px; padding: 16px 20px; margin: 0 0 20px; }
+  legend { font-weight: 600; color: #1f2937; padding: 0 8px; }
+  .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .radio-label { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #374151; }
+  input[type="radio"] { width: 18px; height: 18px; accent-color: #2563eb; }
+  input[type="radio"]:focus { outline: 3px solid #2563eb; outline-offset: 2px; }
+  
+  .checkbox-label { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; color: #374151; }
+  input[type="checkbox"] { width: 18px; height: 18px; accent-color: #2563eb; flex-shrink: 0; margin-top: 2px; }
+  input[type="checkbox"]:focus { outline: 3px solid #2563eb; outline-offset: 2px; }
+  
+  .btn-row { display: flex; gap: 12px; margin-top: 8px; }
+  .btn { padding: 11px 24px; border-radius: 6px; font-size: 1rem; font-family: inherit; cursor: pointer; border: none; font-weight: 500; }
+  .btn-primary { background: #2563eb; color: #fff; }
+  .btn-primary:hover { background: #1d4ed8; }
+  .btn-primary:focus { outline: 3px solid #2563eb; outline-offset: 3px; }
+  .btn-secondary { background: transparent; border: 1px solid #d1d5db; color: #374151; }
+  .btn-secondary:hover { background: #f9fafb; }
+  .btn-secondary:focus { outline: 3px solid #2563eb; outline-offset: 3px; }
+  
+  [aria-required="true"]::placeholder { opacity: 0.6; }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header>
+  <h1>Accessibility Demo</h1>
+  <nav aria-label="Main navigation">
+    <a href="#">Home</a>
+    <a href="#">Products</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+
+<main id="main-content">
+  <h2>Contact us</h2>
+  <div class="form-card">
+    <form aria-label="Contact form" novalidate>
+      <div class="form-group">
+        <label for="c01-name">
+          Full name<span class="required-star" aria-hidden="true">*</span>
+        </label>
+        <input type="text" id="c01-name" name="name"
+               autocomplete="name"
+               aria-required="true"
+               placeholder="Jane Smith" />
+      </div>
+      
+      <div class="form-group">
+        <label for="c01-email">
+          Email address<span class="required-star" aria-hidden="true">*</span>
+        </label>
+        <input type="email" id="c01-email" name="email"
+               autocomplete="email"
+               aria-required="true"
+               placeholder="jane@example.com"
+               aria-describedby="c01-email-hint" />
+        <p class="hint" id="c01-email-hint">We'll only use this to respond to your message.</p>
+      </div>
+      
+      <div class="form-group">
+        <label for="c01-phone">Phone number</label>
+        <input type="tel" id="c01-phone" name="phone"
+               autocomplete="tel"
+               placeholder="+1 555 0100" />
+      </div>
+      
+      <fieldset>
+        <legend>Enquiry type<span class="required-star" aria-hidden="true">*</span></legend>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="enquiry" value="support" aria-required="true" /> Technical support
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="enquiry" value="sales" /> Sales enquiry
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="enquiry" value="partnership" /> Partnership
+          </label>
+        </div>
+      </fieldset>
+      
+      <div class="form-group">
+        <label for="c01-message">
+          Message<span class="required-star" aria-hidden="true">*</span>
+        </label>
+        <textarea id="c01-message" name="message" rows="4"
+                  aria-required="true"
+                  placeholder="How can we help?"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="checkbox-label">
+          <input type="checkbox" id="c01-newsletter" name="newsletter" />
+          <span>Send me occasional product updates and news</span>
+        </label>
+      </div>
+      
+      <div class="btn-row">
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <button type="reset" class="btn btn-secondary">Clear form</button>
+      </div>
+    </form>
+  </div>
+</main>
+</body>
+</html>

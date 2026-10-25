@@ -1,0 +1,2147 @@
+{
+  "auditId": "replay_b11",
+  "pageId": "B11",
+  "report": {
+    "auditId": "replay_b11",
+    "targetUrl": "/fixtures/B11-long-nav.html",
+    "timestamp": "2026-10-25T18:26:48.139Z",
+    "durationMs": 20532,
+    "keyboardScore": 97,
+    "summary": {
+      "totalStops": 40,
+      "barriersFound": 1,
+      "blockers": 0,
+      "majors": 0,
+      "minors": 1,
+      "fixesVerified": 1
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D9",
+        "severity": "minor",
+        "selector": "nav",
+        "wcagId": "2.4.1",
+        "wcagName": "Keyboard Accessibility Requirement",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/quickref/#2.4.1",
+        "impact": "Page contains 40 repetitive navigation links before main content with no skip link detected in initial focus sequence. A keyboard user must press Tab 40 times on every page load to reach primary content.",
+        "evidence": "Page contains 40 repetitive navigation links before main content with no skip link detected in initial focus sequence. A keyboard user must press Tab 40 times on every page load to reach primary content.",
+        "fix": {
+          "patchType": "html",
+          "targetSelector": "body",
+          "body": "<a href=\"#main-content\" class=\"skip-link\" style=\"position:absolute;top:-50px;left:0;background:#2563eb;color:#fff;padding:8px 16px;z-index:9999;\" onfocus=\"this.style.top='0'\" onblur=\"this.style.top='-50px'\">Skip to main content</a>",
+          "rationale": "Inserts a keyboard bypass mechanism at the top of the body per WCAG 2.4.1."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 764,
+      "totalTokensOut": 483,
+      "totalLatencyMs": 8603,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 1,
+          "tokens": 400
+        },
+        "ultra": {
+          "calls": 1,
+          "tokens": 600
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.4.1"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Compute",
+      "box": {
+        "x": 60,
+        "y": 94,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Storage",
+      "box": {
+        "x": 60,
+        "y": 123.609375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Networking",
+      "box": {
+        "x": 60,
+        "y": 153.21875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Databases",
+      "box": {
+        "x": 60,
+        "y": 182.828125,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(5)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Serverless",
+      "box": {
+        "x": 60,
+        "y": 212.4375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(6)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Containers",
+      "box": {
+        "x": 60,
+        "y": 242.046875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(7)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Kubernetes",
+      "box": {
+        "x": 60,
+        "y": 271.65625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(8)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Load Balancers",
+      "box": {
+        "x": 60,
+        "y": 301.265625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(9)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "CDN",
+      "box": {
+        "x": 60,
+        "y": 330.875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(10)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "DNS",
+      "box": {
+        "x": 60,
+        "y": 360.484375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Model Training",
+      "box": {
+        "x": 250,
+        "y": 94,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Inference API",
+      "box": {
+        "x": 250,
+        "y": 123.609375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Vector Database",
+      "box": {
+        "x": 250,
+        "y": 153.21875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Data Pipeline",
+      "box": {
+        "x": 250,
+        "y": 182.828125,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(5)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "AutoML",
+      "box": {
+        "x": 250,
+        "y": 212.4375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(6)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Model Registry",
+      "box": {
+        "x": 250,
+        "y": 242.046875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(7)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Feature Store",
+      "box": {
+        "x": 250,
+        "y": 271.65625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 17,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(8)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Experiment Tracking",
+      "box": {
+        "x": 250,
+        "y": 301.265625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 18,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(9)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Monitoring",
+      "box": {
+        "x": 250,
+        "y": 330.875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 19,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(10)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Model Serving",
+      "box": {
+        "x": 250,
+        "y": 360.484375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 20,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "IAM",
+      "box": {
+        "x": 440,
+        "y": 94,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 21,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "KMS",
+      "box": {
+        "x": 440,
+        "y": 123.609375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 22,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "WAF",
+      "box": {
+        "x": 440,
+        "y": 153.21875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 23,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "DDoS Protection",
+      "box": {
+        "x": 440,
+        "y": 182.828125,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 24,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(5)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Secret Manager",
+      "box": {
+        "x": 440,
+        "y": 212.4375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 25,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(6)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security Hub",
+      "box": {
+        "x": 440,
+        "y": 242.046875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 26,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(7)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Compliance Center",
+      "box": {
+        "x": 440,
+        "y": 271.65625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 27,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(8)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Audit Logs",
+      "box": {
+        "x": 440,
+        "y": 301.265625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(9)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Threat Detection",
+      "box": {
+        "x": 440,
+        "y": 330.875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(10)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "SIEM",
+      "box": {
+        "x": 440,
+        "y": 360.484375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 30,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "CLI",
+      "box": {
+        "x": 630,
+        "y": 94,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "SDKs",
+      "box": {
+        "x": 630,
+        "y": 123.609375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 32,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Terraform Provider",
+      "box": {
+        "x": 630,
+        "y": 153.21875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 33,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "GitHub Actions",
+      "box": {
+        "x": 630,
+        "y": 182.828125,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 34,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(5)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "API Reference",
+      "box": {
+        "x": 630,
+        "y": 212.4375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 35,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(6)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Code Samples",
+      "box": {
+        "x": 630,
+        "y": 242.046875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 36,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(7)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Sandbox Environment",
+      "box": {
+        "x": 630,
+        "y": 271.65625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 37,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(8)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Status Page",
+      "box": {
+        "x": 630,
+        "y": 301.265625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 38,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(9)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Changelog",
+      "box": {
+        "x": 630,
+        "y": 330.875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 39,
+      "direction": "forward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(10)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Blog",
+      "box": {
+        "x": 630,
+        "y": 360.484375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(9)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Changelog",
+      "box": {
+        "x": 630,
+        "y": 330.875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(8)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Status Page",
+      "box": {
+        "x": 630,
+        "y": 301.265625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(7)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Sandbox Environment",
+      "box": {
+        "x": 630,
+        "y": 271.65625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(6)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Code Samples",
+      "box": {
+        "x": 630,
+        "y": 242.046875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(5)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "API Reference",
+      "box": {
+        "x": 630,
+        "y": 212.4375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "GitHub Actions",
+      "box": {
+        "x": 630,
+        "y": 182.828125,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Terraform Provider",
+      "box": {
+        "x": 630,
+        "y": 153.21875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "SDKs",
+      "box": {
+        "x": 630,
+        "y": 123.609375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(4) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "CLI",
+      "box": {
+        "x": 630,
+        "y": 94,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(10)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "SIEM",
+      "box": {
+        "x": 440,
+        "y": 360.484375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(9)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Threat Detection",
+      "box": {
+        "x": 440,
+        "y": 330.875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(8)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Audit Logs",
+      "box": {
+        "x": 440,
+        "y": 301.265625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(7)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Compliance Center",
+      "box": {
+        "x": 440,
+        "y": 271.65625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(6)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Security Hub",
+      "box": {
+        "x": 440,
+        "y": 242.046875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(5)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Secret Manager",
+      "box": {
+        "x": 440,
+        "y": 212.4375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "DDoS Protection",
+      "box": {
+        "x": 440,
+        "y": 182.828125,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "WAF",
+      "box": {
+        "x": 440,
+        "y": 153.21875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 17,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "KMS",
+      "box": {
+        "x": 440,
+        "y": 123.609375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 18,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(3) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "IAM",
+      "box": {
+        "x": 440,
+        "y": 94,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(10)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Model Serving",
+      "box": {
+        "x": 250,
+        "y": 360.484375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(9)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Monitoring",
+      "box": {
+        "x": 250,
+        "y": 330.875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(8)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Experiment Tracking",
+      "box": {
+        "x": 250,
+        "y": 301.265625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 22,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(7)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Feature Store",
+      "box": {
+        "x": 250,
+        "y": 271.65625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(6)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Model Registry",
+      "box": {
+        "x": 250,
+        "y": 242.046875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(5)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "AutoML",
+      "box": {
+        "x": 250,
+        "y": 212.4375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Data Pipeline",
+      "box": {
+        "x": 250,
+        "y": 182.828125,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 26,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Vector Database",
+      "box": {
+        "x": 250,
+        "y": 153.21875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 27,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Inference API",
+      "box": {
+        "x": 250,
+        "y": 123.609375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(2) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Model Training",
+      "box": {
+        "x": 250,
+        "y": 94,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(10)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "DNS",
+      "box": {
+        "x": 60,
+        "y": 360.484375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 30,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(9)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "CDN",
+      "box": {
+        "x": 60,
+        "y": 330.875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(8)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Load Balancers",
+      "box": {
+        "x": 60,
+        "y": 301.265625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 32,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(7)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Kubernetes",
+      "box": {
+        "x": 60,
+        "y": 271.65625,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(6)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Containers",
+      "box": {
+        "x": 60,
+        "y": 242.046875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 34,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(5)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Serverless",
+      "box": {
+        "x": 60,
+        "y": 212.4375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Databases",
+      "box": {
+        "x": 60,
+        "y": 182.828125,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Networking",
+      "box": {
+        "x": 60,
+        "y": 153.21875,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Storage",
+      "box": {
+        "x": 60,
+        "y": 123.609375,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 38,
+      "direction": "backward",
+      "selector": "nav > div > div:nth-of-type(1) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Compute",
+      "box": {
+        "x": 60,
+        "y": 94,
+        "width": 150,
+        "height": 29.609375
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "ledger": [
+    {
+      "id": "7349e60d-341f-4cf6-a369-366a6384bbcd",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 3244,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:26:34.973Z",
+      "tier": "nano"
+    },
+    {
+      "id": "a3d90972-d887-43d5-a5c6-1a3becd8aee1",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 764,
+      "tokensOut": 483,
+      "latencyMs": 5359,
+      "cacheHit": false,
+      "outcome": "success",
+      "timestamp": "2026-10-25T18:26:40.335Z",
+      "tier": "super"
+    }
+  ]
+}

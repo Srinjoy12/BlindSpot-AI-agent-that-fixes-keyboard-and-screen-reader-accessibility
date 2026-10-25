@@ -1,0 +1,854 @@
+{
+  "auditId": "replay_c03",
+  "pageId": "C03",
+  "report": {
+    "auditId": "replay_c03",
+    "targetUrl": "/fixtures/C03-clean-dialog.html",
+    "timestamp": "2026-10-25T18:30:30.613Z",
+    "durationMs": 5088,
+    "keyboardScore": 100,
+    "summary": {
+      "totalStops": 5,
+      "barriersFound": 0,
+      "blockers": 0,
+      "majors": 0,
+      "minors": 0,
+      "fixesVerified": 0
+    },
+    "barriers": [],
+    "aiTransparency": {
+      "totalCalls": 0,
+      "totalTokensIn": 0,
+      "totalTokensOut": 0,
+      "totalLatencyMs": 0,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 0,
+          "tokens": 0
+        },
+        "ultra": {
+          "calls": 0,
+          "tokens": 0
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.1.1"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 17,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 22,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 26,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 32,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 34,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Continue shopping",
+      "box": {
+        "x": 561.4375,
+        "y": 365.625,
+        "width": 136.828125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 38,
+      "direction": "backward",
+      "selector": "#checkout-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Proceed to checkout",
+      "box": {
+        "x": 340,
+        "y": 354.625,
+        "width": 201.25,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 3,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "ledger": []
+}

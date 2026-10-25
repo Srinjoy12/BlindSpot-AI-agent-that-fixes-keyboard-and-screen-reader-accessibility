@@ -1,0 +1,20 @@
+{
+  "pageId": "B06",
+  "title": "Positive tabindex — scrambled focus order",
+  "barriers": [
+    {
+      "selector": "#email",
+      "detectorId": "D7",
+      "wcagId": "2.4.3",
+      "severity": "major",
+      "note": "Multiple elements have positive tabindex values (1-13) that override the visual reading order."
+    },
+    {
+      "selector": "#first-name",
+      "detectorId": "D4",
+      "wcagId": "2.4.3",
+      "severity": "major",
+      "note": "Tab order jumps from email (tabindex=1) to card (tabindex=2) before reaching first name (tabindex=3), contradicting visual reading order."
+    }
+  ]
+}

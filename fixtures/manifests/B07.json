@@ -1,0 +1,20 @@
+{
+  "pageId": "B07",
+  "title": "Mega menu — hover-only, not keyboard accessible",
+  "barriers": [
+    {
+      "selector": "#products-link",
+      "detectorId": "D2",
+      "wcagId": "2.1.1",
+      "severity": "blocker",
+      "note": "The mega-menu under 'Products' only opens on mouseenter. Keyboard focus on the link does not open the menu."
+    },
+    {
+      "selector": "#solutions-link",
+      "detectorId": "D2",
+      "wcagId": "2.1.1",
+      "severity": "blocker",
+      "note": "The mega-menu under 'Solutions' only opens on mouseenter."
+    }
+  ]
+}

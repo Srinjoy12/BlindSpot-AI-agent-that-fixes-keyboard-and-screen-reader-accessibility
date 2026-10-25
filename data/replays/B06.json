@@ -1,0 +1,1752 @@
+{
+  "auditId": "replay_b06",
+  "pageId": "B06",
+  "report": {
+    "auditId": "replay_b06",
+    "targetUrl": "/fixtures/B06-positive-tabindex.html",
+    "timestamp": "2026-10-25T18:24:10.240Z",
+    "durationMs": 72918,
+    "keyboardScore": 0,
+    "summary": {
+      "totalStops": 16,
+      "barriersFound": 13,
+      "blockers": 0,
+      "majors": 13,
+      "minors": 0,
+      "fixesVerified": 13
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#email",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #email: Element '#email' has an explicit positive tabindex=\"1\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or",
+        "evidence": "Element '#email' has an explicit positive tabindex=\"1\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#email",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_2",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#card",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #card: Element '#card' has an explicit positive tabindex=\"2\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or ",
+        "evidence": "Element '#card' has an explicit positive tabindex=\"2\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#card",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_3",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#first-name",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #first-name: Element '#first-name' has an explicit positive tabindex=\"3\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"",
+        "evidence": "Element '#first-name' has an explicit positive tabindex=\"3\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#first-name",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_4",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#last-name",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #last-name: Element '#last-name' has an explicit positive tabindex=\"4\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0",
+        "evidence": "Element '#last-name' has an explicit positive tabindex=\"4\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#last-name",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_5",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#phone",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #phone: Element '#phone' has an explicit positive tabindex=\"5\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or",
+        "evidence": "Element '#phone' has an explicit positive tabindex=\"5\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#phone",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_6",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#expiry",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #expiry: Element '#expiry' has an explicit positive tabindex=\"6\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" o",
+        "evidence": "Element '#expiry' has an explicit positive tabindex=\"6\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#expiry",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_7",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#cvv",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #cvv: Element '#cvv' has an explicit positive tabindex=\"7\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or n",
+        "evidence": "Element '#cvv' has an explicit positive tabindex=\"7\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#cvv",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_8",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#address",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #address: Element '#address' has an explicit positive tabindex=\"8\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" ",
+        "evidence": "Element '#address' has an explicit positive tabindex=\"8\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#address",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_9",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#city",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #city: Element '#city' has an explicit positive tabindex=\"9\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or ",
+        "evidence": "Element '#city' has an explicit positive tabindex=\"9\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#city",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_10",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#zip",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #zip: Element '#zip' has an explicit positive tabindex=\"10\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or ",
+        "evidence": "Element '#zip' has an explicit positive tabindex=\"10\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#zip",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_11",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#back-btn",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #back-btn: Element '#back-btn' has an explicit positive tabindex=\"11\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0",
+        "evidence": "Element '#back-btn' has an explicit positive tabindex=\"11\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#back-btn",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_12",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "#submit-btn",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #submit-btn: Element '#submit-btn' has an explicit positive tabindex=\"12\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=",
+        "evidence": "Element '#submit-btn' has an explicit positive tabindex=\"12\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "#submit-btn",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_13",
+        "detectorId": "D7",
+        "severity": "major",
+        "selector": "main > a",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with main > a: Element 'main > a' has an explicit positive tabindex=\"13\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\"",
+        "evidence": "Element 'main > a' has an explicit positive tabindex=\"13\". Positive tabindex values disrupt logical tab order and should be replaced with tabindex=\"0\" or native source ordering.",
+        "fix": {
+          "patchType": "attribute",
+          "targetSelector": "main > a",
+          "body": "tabindex=\"0\"",
+          "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 0,
+      "totalTokensOut": 0,
+      "totalLatencyMs": 13640,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 13,
+          "tokens": 5200
+        },
+        "ultra": {
+          "calls": 13,
+          "tokens": 7800
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.4.3"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "#email",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Email",
+      "box": {
+        "x": 314,
+        "y": 262.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0,
+      "tabIndex": 1
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "#card",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Card number",
+      "box": {
+        "x": 314,
+        "y": 440.40625,
+        "width": 652,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0,
+      "tabIndex": 2
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "#first-name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "First name",
+      "box": {
+        "x": 314,
+        "y": 183.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0,
+      "tabIndex": 3
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "#last-name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Last name",
+      "box": {
+        "x": 648,
+        "y": 183.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0,
+      "tabIndex": 4
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "#phone",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Phone",
+      "box": {
+        "x": 648,
+        "y": 262.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0,
+      "tabIndex": 5
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "#expiry",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Expiry",
+      "box": {
+        "x": 314,
+        "y": 519.40625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0,
+      "tabIndex": 6
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "#cvv",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "CVV",
+      "box": {
+        "x": 648,
+        "y": 519.40625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0,
+      "tabIndex": 7
+    },
+    {
+      "index": 7,
+      "direction": "forward",
+      "selector": "#address",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Street address",
+      "box": {
+        "x": 314,
+        "y": 697.671875,
+        "width": 652,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0,
+      "tabIndex": 8
+    },
+    {
+      "index": 8,
+      "direction": "forward",
+      "selector": "#city",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "City",
+      "box": {
+        "x": 314,
+        "y": 759.671875,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 17,
+      "tabIndex": 9
+    },
+    {
+      "index": 9,
+      "direction": "forward",
+      "selector": "#zip",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "ZIP code",
+      "box": {
+        "x": 648,
+        "y": 759.671875,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 17,
+      "tabIndex": 10
+    },
+    {
+      "index": 10,
+      "direction": "forward",
+      "selector": "#back-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Back",
+      "box": {
+        "x": 423.828125,
+        "y": 708.671875,
+        "width": 75.578125,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 11
+    },
+    {
+      "index": 11,
+      "direction": "forward",
+      "selector": "#submit-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Place order",
+      "box": {
+        "x": 290,
+        "y": 708.671875,
+        "width": 121.828125,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 12
+    },
+    {
+      "index": 12,
+      "direction": "forward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Need help? Contact support",
+      "box": {
+        "x": 290,
+        "y": 758.671875,
+        "width": 700,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 13
+    },
+    {
+      "index": 14,
+      "direction": "forward",
+      "selector": "#email",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Email",
+      "box": {
+        "x": 314,
+        "y": 94.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 1
+    },
+    {
+      "index": 15,
+      "direction": "forward",
+      "selector": "#card",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Card number",
+      "box": {
+        "x": 314,
+        "y": 272.40625,
+        "width": 652,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 2
+    },
+    {
+      "index": 16,
+      "direction": "forward",
+      "selector": "#first-name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "First name",
+      "box": {
+        "x": 314,
+        "y": 15.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 3
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "#card",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Card number",
+      "box": {
+        "x": 314,
+        "y": 272.40625,
+        "width": 652,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 2
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "#email",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Email",
+      "box": {
+        "x": 314,
+        "y": 94.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 1
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Need help? Contact support",
+      "box": {
+        "x": 290,
+        "y": 758.671875,
+        "width": 700,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 13
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "#submit-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Place order",
+      "box": {
+        "x": 290,
+        "y": 708.671875,
+        "width": 121.828125,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 12
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#back-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Back",
+      "box": {
+        "x": 423.828125,
+        "y": 708.671875,
+        "width": 75.578125,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 11
+    },
+    {
+      "index": 6,
+      "direction": "backward",
+      "selector": "#zip",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "ZIP code",
+      "box": {
+        "x": 648,
+        "y": 608.671875,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 10
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "#city",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "City",
+      "box": {
+        "x": 314,
+        "y": 608.671875,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 9
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "#address",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Street address",
+      "box": {
+        "x": 314,
+        "y": 529.671875,
+        "width": 652,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 8
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "#cvv",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "CVV",
+      "box": {
+        "x": 648,
+        "y": 351.40625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 7
+    },
+    {
+      "index": 10,
+      "direction": "backward",
+      "selector": "#expiry",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Expiry",
+      "box": {
+        "x": 314,
+        "y": 351.40625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 6
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "#phone",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Phone",
+      "box": {
+        "x": 648,
+        "y": 94.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 5
+    },
+    {
+      "index": 12,
+      "direction": "backward",
+      "selector": "#last-name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Last name",
+      "box": {
+        "x": 648,
+        "y": 15.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 4
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "#first-name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "First name",
+      "box": {
+        "x": 314,
+        "y": 15.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 3
+    },
+    {
+      "index": 14,
+      "direction": "backward",
+      "selector": "#card",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Card number",
+      "box": {
+        "x": 314,
+        "y": 272.40625,
+        "width": 652,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 2
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "#email",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Email",
+      "box": {
+        "x": 314,
+        "y": 94.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 1
+    },
+    {
+      "index": 17,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Need help? Contact support",
+      "box": {
+        "x": 290,
+        "y": 758.671875,
+        "width": 700,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 13
+    },
+    {
+      "index": 18,
+      "direction": "backward",
+      "selector": "#submit-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Place order",
+      "box": {
+        "x": 290,
+        "y": 708.671875,
+        "width": 121.828125,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 12
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "#back-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Back",
+      "box": {
+        "x": 423.828125,
+        "y": 708.671875,
+        "width": 75.578125,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 11
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "#zip",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "ZIP code",
+      "box": {
+        "x": 648,
+        "y": 608.671875,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 10
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "#city",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "City",
+      "box": {
+        "x": 314,
+        "y": 608.671875,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 9
+    },
+    {
+      "index": 22,
+      "direction": "backward",
+      "selector": "#address",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Street address",
+      "box": {
+        "x": 314,
+        "y": 529.671875,
+        "width": 652,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 8
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "#cvv",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "CVV",
+      "box": {
+        "x": 648,
+        "y": 351.40625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 7
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "#expiry",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Expiry",
+      "box": {
+        "x": 314,
+        "y": 351.40625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 6
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "#phone",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Phone",
+      "box": {
+        "x": 648,
+        "y": 94.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 5
+    },
+    {
+      "index": 26,
+      "direction": "backward",
+      "selector": "#last-name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Last name",
+      "box": {
+        "x": 648,
+        "y": 15.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 4
+    },
+    {
+      "index": 27,
+      "direction": "backward",
+      "selector": "#first-name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "First name",
+      "box": {
+        "x": 314,
+        "y": 15.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 3
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "#card",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Card number",
+      "box": {
+        "x": 314,
+        "y": 272.40625,
+        "width": 652,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 2
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "#email",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Email",
+      "box": {
+        "x": 314,
+        "y": 94.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 1
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "main > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Need help? Contact support",
+      "box": {
+        "x": 290,
+        "y": 758.671875,
+        "width": 700,
+        "height": 17
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 13
+    },
+    {
+      "index": 32,
+      "direction": "backward",
+      "selector": "#submit-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Place order",
+      "box": {
+        "x": 290,
+        "y": 708.671875,
+        "width": 121.828125,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 12
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "#back-btn",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Back",
+      "box": {
+        "x": 423.828125,
+        "y": 708.671875,
+        "width": 75.578125,
+        "height": 38
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 11
+    },
+    {
+      "index": 34,
+      "direction": "backward",
+      "selector": "#zip",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "ZIP code",
+      "box": {
+        "x": 648,
+        "y": 608.671875,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 10
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "#city",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "City",
+      "box": {
+        "x": 314,
+        "y": 608.671875,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 9
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "#address",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Street address",
+      "box": {
+        "x": 314,
+        "y": 529.671875,
+        "width": 652,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 8
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "#cvv",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "CVV",
+      "box": {
+        "x": 648,
+        "y": 351.40625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 7
+    },
+    {
+      "index": 38,
+      "direction": "backward",
+      "selector": "#expiry",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Expiry",
+      "box": {
+        "x": 314,
+        "y": 351.40625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 6
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "#phone",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Phone",
+      "box": {
+        "x": 648,
+        "y": 94.140625,
+        "width": 318,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(30, 58, 95)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 168,
+      "tabIndex": 5
+    }
+  ],
+  "ledger": [
+    {
+      "id": "cfa35eff-52a6-4d23-a92d-b986fe382242",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 3043,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:23:05.257Z",
+      "tier": "nano"
+    },
+    {
+      "id": "6b426021-4d1d-47a1-80e9-8e3d4e5c8a96",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 10597,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:23:15.854Z",
+      "tier": "super"
+    }
+  ]
+}

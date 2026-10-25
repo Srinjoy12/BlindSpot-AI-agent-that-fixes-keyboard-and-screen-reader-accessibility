@@ -1,0 +1,1403 @@
+{
+  "auditId": "replay_b08",
+  "pageId": "B08",
+  "report": {
+    "auditId": "replay_b08",
+    "targetUrl": "/fixtures/B08-cookie-banner.html",
+    "timestamp": "2026-10-25T18:25:34.738Z",
+    "durationMs": 58804,
+    "keyboardScore": 55,
+    "summary": {
+      "totalStops": 13,
+      "barriersFound": 3,
+      "blockers": 1,
+      "majors": 2,
+      "minors": 0,
+      "fixesVerified": 1
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D8",
+        "severity": "major",
+        "selector": "#btn-reject",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #btn-reject: After interacting with '#btn-reject' (e.g., closing or dismissing a modal/banner), focus was lost to document.body instead of returning to a logical e",
+        "evidence": "After interacting with '#btn-reject' (e.g., closing or dismissing a modal/banner), focus was lost to document.body instead of returning to a logical element or trigger.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#btn-reject",
+          "body": "#btn-reject:focus-visible { outline: 2px solid #2563eb !important; }",
+          "rationale": "Standard focus indicator repair."
+        },
+        "verified": false
+      },
+      {
+        "id": "barrier_2",
+        "detectorId": "D8",
+        "severity": "blocker",
+        "selector": "#cookie-title > a",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #cookie-title > a: Dialog is present on screen, but pressing Escape does not close it or restore focus.",
+        "evidence": "Dialog is present on screen, but pressing Escape does not close it or restore focus.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#cookie-title > a",
+          "body": "#cookie-title > a:focus-visible { outline: 2px solid #2563eb !important; }",
+          "rationale": "Standard focus indicator repair."
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      },
+      {
+        "id": "barrier_3",
+        "detectorId": "D8",
+        "severity": "major",
+        "selector": "#cookie-banner",
+        "wcagId": "2.4.3",
+        "wcagName": "Focus Order",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #cookie-banner: Prominent banner or modal dialog appeared, but keyboard focus was not automatically placed into it upon load; 7 background element(s) received focus f",
+        "evidence": "Prominent banner or modal dialog appeared, but keyboard focus was not automatically placed into it upon load; 7 background element(s) received focus first.",
+        "fix": {
+          "patchType": "css",
+          "targetSelector": "#cookie-banner",
+          "body": "#cookie-banner:focus-visible { outline: 2px solid #2563eb !important; }",
+          "rationale": "Standard focus indicator repair."
+        },
+        "verified": false
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 0,
+      "totalTokensOut": 0,
+      "totalLatencyMs": 8340,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 3,
+          "tokens": 1200
+        },
+        "ultra": {
+          "calls": 1,
+          "tokens": 600
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.4.3"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 79.140625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 79.140625,
+        "y": 0,
+        "width": 101.28125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 180.421875,
+        "y": 0,
+        "width": 79.65625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "forward",
+      "selector": "nav > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Contact",
+      "box": {
+        "x": 260.078125,
+        "y": 0,
+        "width": 93.625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "main > p:nth-of-type(2) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "privacy policy",
+      "box": {
+        "x": 309.09375,
+        "y": 223.8125,
+        "width": 99.625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "main > p:nth-of-type(2) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "cookie policy",
+      "box": {
+        "x": 444.15625,
+        "y": 223.8125,
+        "width": 94.9375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "main > p:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "See our compliance certificates",
+      "box": {
+        "x": 240,
+        "y": 267,
+        "width": 753.484375,
+        "height": 45.1875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "forward",
+      "selector": "#cookie-title > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "cookie policy",
+      "box": {
+        "x": 552.828125,
+        "y": 750.578125,
+        "width": 89.703125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "forward",
+      "selector": "#btn-reject",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Reject all",
+      "box": {
+        "x": 1033.578125,
+        "y": 741,
+        "width": 104.515625,
+        "height": 39
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "forward",
+      "selector": "#btn-accept",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Accept all",
+      "box": {
+        "x": 1150.09375,
+        "y": 741,
+        "width": 105.90625,
+        "height": 39
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "forward",
+      "selector": "nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 79.140625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "forward",
+      "selector": "nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 79.140625,
+        "y": 0,
+        "width": 101.28125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "forward",
+      "selector": "nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 180.421875,
+        "y": 0,
+        "width": 79.65625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 79.140625,
+        "y": 0,
+        "width": 101.28125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 79.140625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "#btn-accept",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Accept all",
+      "box": {
+        "x": 1150.09375,
+        "y": 741,
+        "width": 105.90625,
+        "height": 39
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "#btn-reject",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Reject all",
+      "box": {
+        "x": 1033.578125,
+        "y": 741,
+        "width": 104.515625,
+        "height": 39
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#cookie-title > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "cookie policy",
+      "box": {
+        "x": 552.828125,
+        "y": 750.578125,
+        "width": 89.703125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "See our compliance certificates",
+      "box": {
+        "x": 240,
+        "y": 267,
+        "width": 753.484375,
+        "height": 45.1875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(2) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "cookie policy",
+      "box": {
+        "x": 444.15625,
+        "y": 223.8125,
+        "width": 94.9375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(2) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "privacy policy",
+      "box": {
+        "x": 309.09375,
+        "y": 223.8125,
+        "width": 99.625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Contact",
+      "box": {
+        "x": 260.078125,
+        "y": 0,
+        "width": 93.625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 10,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 180.421875,
+        "y": 0,
+        "width": 79.65625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 79.140625,
+        "y": 0,
+        "width": 101.28125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 79.140625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 14,
+      "direction": "backward",
+      "selector": "#btn-accept",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Accept all",
+      "box": {
+        "x": 1150.09375,
+        "y": 741,
+        "width": 105.90625,
+        "height": 39
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "#btn-reject",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Reject all",
+      "box": {
+        "x": 1033.578125,
+        "y": 741,
+        "width": 104.515625,
+        "height": 39
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "backward",
+      "selector": "#cookie-title > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "cookie policy",
+      "box": {
+        "x": 552.828125,
+        "y": 750.578125,
+        "width": 89.703125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 17,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "See our compliance certificates",
+      "box": {
+        "x": 240,
+        "y": 267,
+        "width": 753.484375,
+        "height": 45.1875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 18,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(2) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "cookie policy",
+      "box": {
+        "x": 444.15625,
+        "y": 223.8125,
+        "width": 94.9375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(2) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "privacy policy",
+      "box": {
+        "x": 309.09375,
+        "y": 223.8125,
+        "width": 99.625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Contact",
+      "box": {
+        "x": 260.078125,
+        "y": 0,
+        "width": 93.625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 180.421875,
+        "y": 0,
+        "width": 79.65625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 22,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 79.140625,
+        "y": 0,
+        "width": 101.28125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 79.140625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "#btn-accept",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Accept all",
+      "box": {
+        "x": 1150.09375,
+        "y": 741,
+        "width": 105.90625,
+        "height": 39
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 26,
+      "direction": "backward",
+      "selector": "#btn-reject",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Reject all",
+      "box": {
+        "x": 1033.578125,
+        "y": 741,
+        "width": 104.515625,
+        "height": 39
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 27,
+      "direction": "backward",
+      "selector": "#cookie-title > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "cookie policy",
+      "box": {
+        "x": 552.828125,
+        "y": 750.578125,
+        "width": 89.703125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "See our compliance certificates",
+      "box": {
+        "x": 240,
+        "y": 267,
+        "width": 753.484375,
+        "height": 45.1875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(2) > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "cookie policy",
+      "box": {
+        "x": 444.15625,
+        "y": 223.8125,
+        "width": 94.9375,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 30,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(2) > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "privacy policy",
+      "box": {
+        "x": 309.09375,
+        "y": 223.8125,
+        "width": 99.625,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(4)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Contact",
+      "box": {
+        "x": 260.078125,
+        "y": 0,
+        "width": 93.625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 32,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(3)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "About",
+      "box": {
+        "x": 180.421875,
+        "y": 0,
+        "width": 79.65625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(2)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Products",
+      "box": {
+        "x": 79.140625,
+        "y": 0,
+        "width": 101.28125,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 34,
+      "direction": "backward",
+      "selector": "nav > a:nth-of-type(1)",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "Home",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "width": 79.140625,
+        "height": 50
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(96, 165, 250)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "#btn-accept",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Accept all",
+      "box": {
+        "x": 1150.09375,
+        "y": 741,
+        "width": 105.90625,
+        "height": 39
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "#btn-reject",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Reject all",
+      "box": {
+        "x": 1033.578125,
+        "y": 741,
+        "width": 104.515625,
+        "height": 39
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 38,
+      "direction": "backward",
+      "selector": "#cookie-title > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "cookie policy",
+      "box": {
+        "x": 552.828125,
+        "y": 750.578125,
+        "width": 89.703125,
+        "height": 18
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": true,
+      "scrollY": 0
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "main > p:nth-of-type(3) > a",
+      "tagName": "a",
+      "role": "a",
+      "accessibleName": "See our compliance certificates",
+      "box": {
+        "x": 240,
+        "y": 267,
+        "width": 753.484375,
+        "height": 45.1875
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "ledger": [
+    {
+      "id": "7b6754e0-f2b0-4334-9981-e4696bbc3137",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 2753,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:25:02.813Z",
+      "tier": "nano"
+    },
+    {
+      "id": "8a00c0ea-c6c8-43eb-8f45-840827ac186f",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 5587,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:25:08.400Z",
+      "tier": "super"
+    }
+  ]
+}

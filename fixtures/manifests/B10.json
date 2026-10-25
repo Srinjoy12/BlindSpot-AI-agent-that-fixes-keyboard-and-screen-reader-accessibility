@@ -1,0 +1,20 @@
+{
+  "pageId": "B10",
+  "title": "Tabs widget — broken keyboard navigation",
+  "barriers": [
+    {
+      "selector": "#tab-install",
+      "detectorId": "D2",
+      "wcagId": "2.1.1",
+      "severity": "major",
+      "note": "Tab key moves between tabs instead of arrow keys as required by the ARIA tabs pattern. No arrow key handler is present."
+    },
+    {
+      "selector": "[role='tablist']",
+      "detectorId": "D8",
+      "wcagId": "2.4.3",
+      "severity": "major",
+      "note": "All tabs are separately tabbable (no roving tabindex). ARIA pattern requires only the selected tab to be in the tab sequence."
+    }
+  ]
+}

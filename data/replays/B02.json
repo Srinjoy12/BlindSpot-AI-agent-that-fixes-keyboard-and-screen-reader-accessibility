@@ -1,0 +1,1047 @@
+{
+  "auditId": "replay_b02",
+  "pageId": "B02",
+  "report": {
+    "auditId": "replay_b02",
+    "targetUrl": "/fixtures/B02-custom-dropdown.html",
+    "timestamp": "2026-10-25T18:20:14.064Z",
+    "durationMs": 26768,
+    "keyboardScore": 50,
+    "summary": {
+      "totalStops": 6,
+      "barriersFound": 2,
+      "blockers": 2,
+      "majors": 0,
+      "minors": 0,
+      "fixesVerified": 1
+    },
+    "barriers": [
+      {
+        "id": "barrier_1",
+        "detectorId": "D1",
+        "severity": "blocker",
+        "selector": "#name",
+        "wcagId": "2.1.2",
+        "wcagName": "No Keyboard Trap",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/no-keyboard-trap",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #name: Focus cycles among 3 elements across 6 stops.  Escape did not free focus.",
+        "evidence": "Focus cycles among 3 elements across 6 stops.  Escape did not free focus.",
+        "fix": {
+          "patchType": "script",
+          "targetSelector": "#name",
+          "body": "document.addEventListener('keydown', function(e) {\n  if (e.key === 'Escape') {\n    const dialog = document.querySelector('#name');\n    if (dialog) {\n      if (typeof dialog.close === 'function') dialog.close();\n      else dialog.style.display = 'none';\n    }\n  }\n});",
+          "rationale": "Adds standard Escape key listener to close the trapped modal dialog and restore page focus."
+        },
+        "verified": false
+      },
+      {
+        "id": "barrier_2",
+        "detectorId": "D2",
+        "severity": "blocker",
+        "selector": "#dept-trigger",
+        "wcagId": "2.1.1",
+        "wcagName": "Keyboard",
+        "wcagUrl": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard",
+        "impact": "Users navigating with keyboard or assistive technology cannot properly interact with #dept-trigger: Interactive element never received focus during the Tab crawl of 6 stops.",
+        "evidence": "Interactive element never received focus during the Tab crawl of 6 stops.",
+        "fix": {
+          "patchType": "html",
+          "body": "<button class=\"select-trigger\" id=\"dept-trigger\" onclick=\"toggleDropdown()\" type=\"button\">\n          Select a department\n        </button>",
+          "rationale": "Replacing the non-focusable div with a native button element provides built-in keyboard focus and activation (Enter/Space) while preserving existing styling and behavior.",
+          "targetSelector": "#dept-trigger"
+        },
+        "verified": true,
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+      }
+    ],
+    "aiTransparency": {
+      "totalCalls": 2,
+      "totalTokensIn": 0,
+      "totalTokensOut": 0,
+      "totalLatencyMs": 7177,
+      "tiers": {
+        "nano": {
+          "calls": 1,
+          "tokens": 250
+        },
+        "super": {
+          "calls": 2,
+          "tokens": 800
+        },
+        "ultra": {
+          "calls": 1,
+          "tokens": 600
+        }
+      },
+      "tavilyQueries": [
+        "WCAG 2.1.2"
+      ]
+    }
+  },
+  "forwardStops": [
+    {
+      "index": 0,
+      "direction": "forward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "forward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 2,
+      "direction": "forward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "forward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "forward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 6,
+      "direction": "forward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "backwardStops": [
+    {
+      "index": 0,
+      "direction": "backward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 1,
+      "direction": "backward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 3,
+      "direction": "backward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 4,
+      "direction": "backward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 5,
+      "direction": "backward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 7,
+      "direction": "backward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 8,
+      "direction": "backward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 9,
+      "direction": "backward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 11,
+      "direction": "backward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 12,
+      "direction": "backward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 13,
+      "direction": "backward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 15,
+      "direction": "backward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 16,
+      "direction": "backward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 17,
+      "direction": "backward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 19,
+      "direction": "backward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 20,
+      "direction": "backward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 21,
+      "direction": "backward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 23,
+      "direction": "backward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 24,
+      "direction": "backward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 25,
+      "direction": "backward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 27,
+      "direction": "backward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 28,
+      "direction": "backward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 29,
+      "direction": "backward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 31,
+      "direction": "backward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 32,
+      "direction": "backward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 33,
+      "direction": "backward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 35,
+      "direction": "backward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 36,
+      "direction": "backward",
+      "selector": "#message",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Message",
+      "box": {
+        "x": 340,
+        "y": 353.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 37,
+      "direction": "backward",
+      "selector": "#name",
+      "tagName": "input",
+      "role": "input",
+      "accessibleName": "Your name",
+      "box": {
+        "x": 340,
+        "y": 177.4375,
+        "width": 600,
+        "height": 40
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    },
+    {
+      "index": 39,
+      "direction": "backward",
+      "selector": "main > form > button",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Book call",
+      "box": {
+        "x": 340,
+        "y": 413.4375,
+        "width": 112.921875,
+        "height": 42
+      },
+      "inViewport": true,
+      "obscuredBy": null,
+      "focusIndicator": {
+        "hasOutline": true,
+        "hasBoxShadow": false,
+        "hasBorderChange": false,
+        "hasBackgroundChange": false,
+        "outlineWidth": 2,
+        "outlineColor": "rgb(0, 102, 204)"
+      },
+      "insideOpenDialog": false,
+      "scrollY": 0
+    }
+  ],
+  "ledger": [
+    {
+      "id": "50054a4e-6933-439e-843f-2de1de10c120",
+      "stage": "digest",
+      "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 2588,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:19:53.602Z",
+      "tier": "nano"
+    },
+    {
+      "id": "99053fe1-cf38-492f-8f98-c95cf88fbb66",
+      "stage": "analysis",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 4589,
+      "cacheHit": false,
+      "outcome": "failed",
+      "timestamp": "2026-10-25T18:19:58.194Z",
+      "tier": "super"
+    }
+  ]
+}

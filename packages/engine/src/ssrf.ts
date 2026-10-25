@@ -1,10 +1,10 @@
 // SSRF guard — refuses URLs that resolve to private/internal addresses.
 // Call checkUrl() before passing any user-supplied URL to the browser.
 
-import { DNS } from "dns";
+import dns from "dns";
 import { promisify } from "util";
 
-const dnsLookup = promisify(DNS.lookup);
+const dnsLookup = promisify(dns.lookup);
 
 // Private, loopback, link-local, and cloud metadata IP ranges (IPv4 and IPv6).
 const BLOCKED_RANGES = [
