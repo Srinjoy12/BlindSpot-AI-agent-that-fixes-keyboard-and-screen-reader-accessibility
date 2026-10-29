@@ -32,7 +32,8 @@
           "body": "#btn-under-header { scroll-margin-top: 100px !important; }",
           "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": true
       }
     ],
     "aiTransparency": {
@@ -56,6 +57,26 @@
       },
       "tavilyQueries": [
         "WCAG 2.4.11"
+      ]
+    },
+    "baseline": {
+      "tool": "axe-core",
+      "version": "4.14.0",
+      "violationCount": 1,
+      "rules": [
+        {
+          "ruleId": "color-contrast",
+          "impact": "serious",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143"
+          ],
+          "nodeCount": 1,
+          "selectors": [
+            "#btn-under-header"
+          ]
+        }
       ]
     }
   },

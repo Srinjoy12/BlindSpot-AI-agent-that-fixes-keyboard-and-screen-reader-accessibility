@@ -55,31 +55,62 @@ export async function runInteractionPass(
 
     // Capture DOM state before interaction
     const domBefore = await page.evaluate(() => document.body.innerHTML.length);
+    const hiddenDialogsBefore = await page.evaluate(() => {
+      const dialogs = Array.from(document.querySelectorAll('[role="dialog"], [role="alertdialog"], dialog, .modal'));
+      return dialogs
+        .filter((d) => d.hasAttribute('hidden') || window.getComputedStyle(d).display === 'none')
+        .map((d) => (d.id ? '#' + CSS.escape(d.id) : (d.getAttribute('role') ? `[role="${d.getAttribute('role')}"]` : d.tagName.toLowerCase())));
+    });
 
     try {
-      await trigger.focus();
+      await trigger.focus({ timeout: 1000 }).catch(() => {});
       await sleep(80);
 
       // Try Enter first
       await page.keyboard.press("Enter");
       await sleep(300);
 
+      // Check if any previously hidden dialog became visible
+      let newlyOpenedDialog = await page.evaluate((hiddenList: string[]) => {
+        for (const sel of hiddenList) {
+          try {
+            const el = document.querySelector(sel);
+            if (el && !el.hasAttribute('hidden') && window.getComputedStyle(el).display !== 'none') {
+              return sel;
+            }
+          } catch {}
+        }
+        return null;
+      }, hiddenDialogsBefore);
+
       const domAfterEnter = await page.evaluate(() => document.body.innerHTML.length);
-      let dominated = domAfterEnter !== domBefore;
+      let dominated = newlyOpenedDialog !== null || domAfterEnter !== domBefore;
 
       let domAfterSpace: number | undefined;
       // If Enter did nothing, try Space
       if (!dominated) {
         await page.keyboard.press("Space");
         await sleep(300);
+        newlyOpenedDialog = await page.evaluate((hiddenList: string[]) => {
+          for (const sel of hiddenList) {
+            try {
+              const el = document.querySelector(sel);
+              if (el && !el.hasAttribute('hidden') && window.getComputedStyle(el).display !== 'none') {
+                return sel;
+              }
+            } catch {}
+          }
+          return null;
+        }, hiddenDialogsBefore);
         domAfterSpace = await page.evaluate(() => document.body.innerHTML.length);
-        dominated = domAfterSpace !== domBefore;
+        dominated = newlyOpenedDialog !== null || domAfterSpace !== domBefore;
       }
 
       if (!dominated) continue; // Trigger didn't open or dismiss anything
 
-      // If DOM shrank, the interaction dismissed or closed a surface
-      if (domAfterEnter < domBefore || (domAfterSpace !== undefined && domAfterSpace < domBefore)) {
+      // If no newly opened dialog and DOM shrank, the interaction dismissed or closed a surface
+      const isDismissal = !newlyOpenedDialog && (domAfterEnter < domBefore || (domAfterSpace !== undefined && domAfterSpace < domBefore));
+      if (isDismissal) {
         const focusLost = await page.evaluate(() => document.activeElement === document.body || !document.activeElement);
         interactions.push({
           triggerSelector: selector,
@@ -103,14 +134,27 @@ export async function runInteractionPass(
         return { moved: true, selector: el.tagName.toLowerCase() };
       });
 
-      const focusMovedIntoSurface = focusInfo.moved;
+      const focusMovedIntoSurface = focusInfo.moved && focusInfo.selector !== selector;
 
       // Try Escape to close
       await page.keyboard.press("Escape");
       await sleep(300);
 
+      // Check if newly opened dialog closed after Escape
+      const isClosedAfterEscape = newlyOpenedDialog
+        ? await page.evaluate((sel: string) => {
+            try {
+              const el = document.querySelector(sel);
+              if (!el) return true;
+              return el.hasAttribute('hidden') || window.getComputedStyle(el).display === 'none';
+            } catch {
+              return false;
+            }
+          }, newlyOpenedDialog)
+        : false;
+
       const domAfterEscape = await page.evaluate(() => document.body.innerHTML.length);
-      const escapeClosed = Math.abs(domAfterEscape - domBefore) < 100 && Math.abs(domAfterEscape - domAfterEnter) > 20;
+      const escapeClosed = newlyOpenedDialog ? isClosedAfterEscape : (Math.abs(domAfterEscape - domBefore) < 100 && Math.abs(domAfterEscape - domAfterEnter) > 20);
 
       // Check focus returned to trigger
       const focusAfterClose = await page.evaluate((sel: string) => {
@@ -129,6 +173,7 @@ export async function runInteractionPass(
         triggerSelector: selector,
         triggerKey: "Enter",
         openedState: stateLabel,
+        openedDialogSelector: newlyOpenedDialog || undefined,
         escapeClosed,
         focusReturnedToTrigger: focusAfterClose,
         focusMovedIntoSurface,

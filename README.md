@@ -1,6 +1,6 @@
 # BlindSpot 👁️‍🗨️
 
-> **The AI agent that audits, fixes, and deterministically verifies keyboard and screen-reader accessibility in a real browser.**  
+> **The AI agent that audits, fixes, and deterministically verifies keyboard navigation and accessibility tree barriers in Chromium.**  
 > *Built for the Nebius x NVIDIA Global AI Hackathon (Best Apps & Agents Track).*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -8,6 +8,8 @@
 [![Nebius Token Factory](https://img.shields.io/badge/Inference-Nebius%20Token%20Factory-00D26A)](https://nebius.com)
 [![Tavily Search](https://img.shields.io/badge/Retrieval-Tavily%20API-4F46E5)](https://tavily.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?logo=typescript)](https://www.typescriptlang.org)
+
+![BlindSpot Accessibility Audit Dashboard](docs/screenshots/after/hero-1440.png)
 
 ---
 
@@ -17,19 +19,30 @@
 
 Automated accessibility scanners (like axe-core or Lighthouse) check static HTML markup. They tell you when an `<img>` tag lacks `alt` text. **They cannot tell you that a newsletter pop-up swallows the `Tab` key so a user can never reach the checkout button.**
 
-BlindSpot bridges this gap by driving an isolated Chromium session with physical keyboard keystrokes (`Tab`, `Shift+Tab`, `Enter`, `Space`, `Escape`), detecting runtime barriers, synthesizing human impact with **NVIDIA Nemotron Super + Tavily**, proposing surgical repairs with **NVIDIA Nemotron Ultra**, and validating the repair with 0 regressions.
+BlindSpot bridges this gap by driving an isolated Chromium session with physical keyboard keystrokes (`Tab`, `Shift+Tab`, `Enter`, `Space`, `Escape`), detecting runtime barriers, synthesizing human impact with **NVIDIA Nemotron Super + Tavily**, proposing surgical repairs with **NVIDIA Nemotron Ultra**, and validating the repair with 0 regressions. BlindSpot inspects the browser's accessibility tree (CDP AXTree) and never claims to replace physical screen readers (NVDA/JAWS/VoiceOver) or certify legal compliance.
 
 ---
 
 ## 🚀 Live Demo & The 30-Second Path
 
 1. **Open the live application**: [http://localhost:3000](http://localhost:3000) (or hosted Nebius Endpoint).
-2. Click **"Try a broken page"** on the hero start screen.
-3. Select **"B01: Newsletter Popup (Keyboard Trap)"**.
-4. Watch the interactive **Keyboard Replay scrubber** show focus cycling in the trapped dialog.
-5. Inspect the **D1 (WCAG 2.1.2)** Blocker card.
-6. Click **"Fix with Nemotron Ultra"** to view the surgical patch and the green **Verified in Browser** badge.
-7. Open the **"NVIDIA Token Factory Ledger"** in the top navigation to view live model telemetry, latencies, and token usage.
+2. Click **"Try the cookie banner example"** on the start screen for an instant recorded run.
+3. Inspect the calm **results summary** and **axe-core comparison row** (axe-core found 0 issues, BlindSpot found 3).
+4. Review problem details in the **Problems** tab and inspect the 2D SVG bounding-box path in the **Keyboard path** scrubber.
+5. Review verified unified patches in the **Fixes** tab and model telemetry in the **Models and cost** tab.
+
+---
+
+## 📁 In-Browser Project Folder Scanner: "Open project folder"
+
+BlindSpot operates as an in-browser project scanner using the browser's native File System Access API without requiring local software installation or terminal setup:
+
+1. **Pick Folder**: Switch the input mode to **"Open folder"** and click **"Open project folder"**. On Chromium desktop browsers (Chrome, Edge, Brave, Opera), this invokes the native **File System Access API** (`window.showDirectoryPicker`). On Firefox and Safari, a read-only directory upload fallback is provided.
+2. **Review & Exclude**: Inspect the project structure, select the entry HTML page (default `index.html`), and see live file counts and token estimates. Sensitive files (`.env*`, `*.pem`, `*.key`, `.git/*`, `node_modules/*`) are automatically excluded.
+3. **Scan & Verify**: BlindSpot loads the files into an ephemeral, in-memory Node.js HTTP server (`127.0.0.1`), executes the Chromium keyboard crawl, detects barriers, localizes the responsible file (e.g. `styles.css`), synthesizes a patch with **NVIDIA Nemotron Ultra**, and verifies resolution in the sandbox.
+4. **Inspect & Apply**: Review the verified unified diffs with line numbers. Click **"Apply all verified fixes"** to write changes directly back to your local folder on disk.
+5. **Safety Backups & Byte-for-Byte Revert**: Before the first write, an automated safety backup is saved to `.blindspot/backup/<ISO-timestamp>/<path>`. Click **"Revert changes"** at any time to restore your original files with automated byte-for-byte verification.
+6. **Scope Honesty**: This mode is strictly designed for **static projects** (HTML, CSS, JS with an `index.html` entry point). Framework projects (Next.js, Vite, React) requiring a compilation step, bundler, or dev server are not supported. Details in [docs/privacy.md](docs/privacy.md) and [docs/limitations.md](docs/limitations.md).
 
 ---
 
@@ -42,7 +55,7 @@ flowchart TD
     subgraph Browser Session [Playwright Chromium Engine]
         A[Input URL / Fixture] --> B[Keyboard Tab & Shift+Tab Crawl]
         B --> C[Keyboard Interaction Pass: Enter/Space/Escape]
-        C --> D[Deterministic Detectors D1–D11]
+        D[Deterministic Detectors D1–D9] <-- C
     end
 
     subgraph Nebius Token Factory [NVIDIA Nemotron Inference]
@@ -62,15 +75,17 @@ flowchart TD
 
 | Pipeline Stage | Model Tier | Identifier on Token Factory | Purpose & Token Profile |
 | :--- | :--- | :--- | :--- |
-| **1. State Digest** | **Nemotron-3 Nano (30B)** | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | Fast (~1.2s), token-efficient (~250 tokens) summary of landmarks, interactive widgets, and modal candidates per state. |
-| **2. Issue Analysis** | **Nemotron-3 Super (120B)** | `nvidia/nemotron-3-super-120b-a12b` | High judgment (~2.8s). Merges duplicate detector hits, assigns severity, and explains who is affected in plain language. |
+| **1. State Digest** | **Nemotron-3 Nano (30B)** | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | Fast (~1.0–1.4s measured), token-efficient (~250 tokens) summary of landmarks, interactive widgets, and modal candidates per state. |
+| **2. Issue Analysis** | **Nemotron-3 Super (120B)** | `nvidia/nemotron-3-super-120b-a12b` | High judgment (~2.2–3.0s measured). Merges duplicate detector hits, assigns severity, and explains who is affected in plain language. |
 | **3. Grounded Retrieval** | **Tavily API** | Runtime search API | Fetches authoritative WCAG 2.2 criterion text, understanding docs, and techniques. |
-| **4. Fix Proposal** | **Nemotron-3 Ultra (550B)** | `nvidia/Nemotron-3-Ultra-550b-a55b` | Surgical code repairs (CSS `:focus-visible` rules, `aria-label` attributes, DOM bypass links, Escape key listeners). |
+| **4. Fix Proposal** | **Nemotron-3 Ultra (550B)** | `nvidia/Nemotron-3-Ultra-550b-a55b` | Surgical code repairs (CSS `:focus-visible` rules, `aria-label` attributes, DOM bypass links, Escape key listeners) (~3.2–4.8s measured). |
 | **5. Verification** | **None (Pure Code)** | Playwright Chromium | Deterministic re-crawl. A model is never allowed to grade its own homework. |
+
+> *Note on costs and latencies: Pricing estimates in the UI are based on unconfigured placeholder default rates ($0.15/$0.60 per 1M tokens for Nano, $0.60/$1.80 for Super, $1.20/$3.60 for Ultra). Set PRICE_NANO_IN etc. to configure real rates. Latencies shown reflect measured local benchmark runs.*
 
 ---
 
-## 🛠️ The 11 Deterministic Detectors
+## 🛠️ The 9 Deterministic & Heuristic Detectors (D1–D9)
 
 - **D1 — Keyboard Trap (WCAG 2.1.2 · Blocker)**: Detects cyclical Tab loops where focus cannot escape and Escape key fails.
 - **D2 — Unreachable Control (WCAG 2.1.1 · Blocker/Major)**: Discovers interactive candidate elements (links, buttons, custom click handlers) that never receive focus.
@@ -81,8 +96,6 @@ flowchart TD
 - **D7 — Positive Tabindex (WCAG 2.4.3 · Major)**: Identifies disruptive `tabindex > 0` attributes.
 - **D8 — Dialog Focus Mismanagement (WCAG 2.4.3, 2.1.2 · Blocker/Major)**: Checks initial focus placement, Escape key dismissal, and focus return to triggers.
 - **D9 — Skip Link Missing (WCAG 2.4.1 · Minor)**: Detects repetitive header navigation (10+ links) lacking an early bypass mechanism.
-- **D10 — Generic Link Text (WCAG 2.4.4 · Minor)**: Flags vague anchor labels ('click here', 'read more').
-- **D11 — Focus Lost (WCAG 2.4.3 · Major)**: Tracks interactions where focus drops to `document.body`.
 
 ---
 
@@ -92,16 +105,25 @@ We evaluated BlindSpot across 16 reproducible fixture pages (12 seeded barrier p
 
 | Metric | Target | Measured Result |
 | :--- | :--- | :--- |
-| **Seeded Barrier Recall (B01–B12)** | ≥ 70% | **72.0%** (18 / 25 seeded barriers) |
+| **Seeded Barrier Recall (B01–B12)** | ≥ 70% | **92.0%** (23 / 25 seeded barriers detected; 2 missed) |
+| **Seeded Barrier Recall (B01–B11)** | ≥ 70% | **90.9%** (20 / 22 seeded barriers detected; 2 missed) |
+| **Verified Fix Rate (B01–B12)** | ≥ 90% | **92.0%** (23 / 25 verified by deterministic re-crawl) |
+| **Regressions Introduced** | 0 | **0 regressions** (0% regression rate across all verified fixes) |
 | **Clean Control False Alarms (C01–C03)** | 0 | **0 false alarms** (3 / 3 clean controls) |
-| **Prompt Injection Defense (H01)** | 100% | **PASSED (Safe)** |
-| **B01 Keyboard Trap Recall** | 100% | **100% Recall** |
+| **Prompt Injection Defense (H01)** | 100% | **PASSED (Safe - injection in DOM text ignored)** |
+| **Axe-core Comparison (B01–B11 Pages)** | — | **0 violations on 7 of 11 pages** (63.6%) |
+| **Axe-core Comparison (B01–B12 Pages)** | — | **0 violations on 7 of 12 pages** (58.3%) |
+| **Axe-core Seeded Barriers (B01–B11)** | — | **Axe reported nothing for 10 of 11 pages on seeded barriers** (flagged only B06 tabindex; B01 flagged unrelated `aria-dialog-name`) |
+| **Axe-core Overall (All 25 Barriers)** | — | **Axe missed 22 of 23 barriers found by BlindSpot** (detected only 1 of 25) |
+| **B01 & B12 Keyboard Trap Recall** | 100% | **100% Recall** (newsletter dialog loop & comment dialog trap) |
+| **B02 & B03 Accessible Names across AXTree** | 100% | **100% Recall** (5/5 toolbar buttons and custom dropdown) |
 | **B05 Sticky Header Obscured** | 100% | **100% Recall, 100% Precision** |
 | **B07 Hover-Only Mega Menu** | 100% | **100% Recall, 100% Precision** |
+| **B08 Cookie Banner Focus Lost** | 100% | **100% Recall** |
 | **B09 Carousel Navigation** | 100% | **100% Recall, 100% Precision** |
 | **B11 Skip Link Missing** | 100% | **100% Recall, 100% Precision** |
 
-*Full breakdown available in [docs/benchmark-results.md](docs/benchmark-results.md).*
+> **Disclosure**: The fixtures were written by the same team as the detectors, and several were designed to contain problems a static checker cannot see, so recall on them is optimistic. Full 25-item per-barrier breakdown table, exact denominators, double-counting analysis, and axe-core baseline analysis are documented in [docs/benchmark-results.md](docs/benchmark-results.md).
 
 ---
 
@@ -175,6 +197,7 @@ docker run -p 3000:3000 --env-file .env blindspot:latest
 
 - [Architecture Specification](docs/architecture.md) — Comprehensive technical design and data flow.
 - [Benchmark Results](docs/benchmark-results.md) — Complete 16-page evaluation scorecard and lift over static scanners.
+- [Privacy & Project Folder Security](docs/privacy.md) — Ephemeral in-memory sandboxing, egress blocking, and backup/revert safeguards.
 - [Limitations & Ethics](docs/limitations.md) — Transparent boundaries, non-goals, and responsible use guidelines.
 - [Platform & Model Feedback](docs/feedback-notes.md) — Actionable developer feedback on Nebius Token Factory and NVIDIA Nemotron models.
 - [Video Demo Script](docs/video-transcript.md) — The 2m 45s pitch script with voice-over cues.

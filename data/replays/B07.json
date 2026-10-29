@@ -33,7 +33,8 @@
           "rationale": "Standard focus indicator repair."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_2",
@@ -52,7 +53,8 @@
           "rationale": "Standard focus indicator repair."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       }
     ],
     "aiTransparency": {
@@ -77,6 +79,12 @@
       "tavilyQueries": [
         "WCAG 2.1.1"
       ]
+    },
+    "baseline": {
+      "tool": "axe-core",
+      "version": "4.14.0",
+      "violationCount": 0,
+      "rules": []
     }
   },
   "forwardStops": [

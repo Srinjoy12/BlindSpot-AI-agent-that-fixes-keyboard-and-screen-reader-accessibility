@@ -78,6 +78,7 @@ export const InteractionRecordSchema = z.object({
   triggerSelector: z.string(),
   triggerKey: z.enum(["Enter", "Space"]),
   openedState: z.string().optional(), // state label of the opened surface
+  openedDialogSelector: z.string().optional(),
   escapeClosed: z.boolean(),
   focusReturnedToTrigger: z.boolean(),
   focusMovedIntoSurface: z.boolean(),
@@ -85,6 +86,28 @@ export const InteractionRecordSchema = z.object({
 });
 
 export type InteractionRecord = z.infer<typeof InteractionRecordSchema>;
+
+// ─── Axe-Core Baseline ───────────────────────────────────────────────────────
+
+export const AxeRuleSummarySchema = z.object({
+  ruleId: z.string(),
+  description: z.string().optional(),
+  impact: z.string().nullable(),
+  tags: z.array(z.string()),
+  nodeCount: z.number(),
+  selectors: z.array(z.string()),
+});
+
+export type AxeRuleSummary = z.infer<typeof AxeRuleSummarySchema>;
+
+export const AxeBaselineResultSchema = z.object({
+  tool: z.literal("axe-core"),
+  version: z.string(),
+  violationCount: z.number(),
+  rules: z.array(AxeRuleSummarySchema),
+});
+
+export type AxeBaselineResult = z.infer<typeof AxeBaselineResultSchema>;
 
 // ─── Audit Session ────────────────────────────────────────────────────────────
 
@@ -96,4 +119,41 @@ export interface AuditSession {
   limitsHit: string[]; // e.g. ["maxStops", "timeout"]
   startedAt: string;
   finishedAt?: string;
+  baseline?: AxeBaselineResult;
+}
+
+// ─── Source Audit Session ─────────────────────────────────────────────────────
+
+export interface SourceAuditOptions {
+  source: string;
+  kind: "html" | "snippet";
+  auditId?: string;
+  navigationTimeoutMs?: number;
+}
+
+export interface SourceSession {
+  page: import("playwright").Page;
+  context: import("playwright").BrowserContext;
+  browser: import("playwright").Browser;
+  localOrigin: string;
+  blockedRequestsCount: number;
+  close(): Promise<void>;
+}
+
+// ─── FileSet Types ────────────────────────────────────────────────────────────
+
+export type FileSet = Map<string, string>;
+
+export interface FileInputItem {
+  path: string;
+  content: string;
+}
+
+export interface FileSetAuditOptions {
+  files: FileSet | FileInputItem[];
+  entryPath?: string;
+  auditId?: string;
+  navigationTimeoutMs?: number;
+  maxStops?: number;
+  pauseMs?: number;
 }

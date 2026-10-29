@@ -6,6 +6,7 @@ import { getTokenFactoryClient, Models } from "./client.js";
 import { SUPER_ANALYSIS_PROMPT } from "./prompts.js";
 import { FindingAnalysisSchema, type FindingAnalysis, type StateDigest } from "./schemas.js";
 import { recordCall } from "./ledger.js";
+import { estimateModelCost } from "./pricing.js";
 import { searchWcag } from "./tavily.js";
 import { z } from "zod";
 
@@ -94,12 +95,15 @@ export async function analyzeFindings(input: AnalysisInput): Promise<FindingAnal
     recordCall({
       id: crypto.randomUUID(),
       stage: "analysis",
+      tier: "Super",
+      modelId: model,
       model,
       tokensIn,
       tokensOut,
       latencyMs,
+      estimatedCostUsd: estimateModelCost(model, tokensIn, tokensOut),
       cacheHit: false,
-      outcome: "success",
+      outcome: "ok",
       timestamp: new Date().toISOString(),
     });
 
@@ -111,12 +115,15 @@ export async function analyzeFindings(input: AnalysisInput): Promise<FindingAnal
     recordCall({
       id: crypto.randomUUID(),
       stage: "analysis",
+      tier: "Super",
+      modelId: model,
       model,
       tokensIn: 0,
       tokensOut: 0,
       latencyMs,
+      estimatedCostUsd: 0,
       cacheHit: false,
-      outcome: "failed",
+      outcome: "fallback",
       timestamp: new Date().toISOString(),
     });
 

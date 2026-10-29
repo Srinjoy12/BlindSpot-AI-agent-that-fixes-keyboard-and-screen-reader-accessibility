@@ -1,107 +1,116 @@
 import React from "react";
+import { Button } from "./ui/Button.js";
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  theme?: "dark" | "light";
+  onToggleTheme?: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({
+  theme = "dark",
+  onToggleTheme,
+}) => {
   return (
     <header
+      role="banner"
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 20px",
-        height: "50px",
         borderBottom: "1px solid var(--color-border-subdued)",
         backgroundColor: "var(--color-surface-1)",
         position: "sticky",
         top: 0,
         zIndex: 100,
       }}
-      role="banner"
     >
-      {/* Left: Brand & Engine Identity */}
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <span
-          style={{
-            fontSize: "15px",
-            fontWeight: 700,
-            letterSpacing: "-0.02em",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          BlindSpot
-        </span>
-        <span
-          className="header-tag"
-          style={{
-            fontSize: "10px",
-            fontWeight: 600,
-            padding: "2px 5px",
-            borderRadius: "var(--radius-xs)",
-            backgroundColor: "var(--color-surface-2)",
-            color: "var(--color-text-secondary)",
-            border: "1px solid var(--color-border-subdued)",
-            fontFamily: "var(--font-mono)",
-            letterSpacing: "0.04em",
-          }}
-        >
-          NEBIUS × NVIDIA
-        </span>
+      <div
+        className="app-container"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "var(--space-3)",
+          paddingTop: "var(--space-3)",
+          paddingBottom: "var(--space-3)",
+        }}
+      >
+        {/* Left: Product Name & Navigation */}
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-6)" }}>
+          <span
+            style={{
+              fontSize: "var(--font-size-lg)",
+              fontWeight: 600,
+              color: "var(--color-text-primary)",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            BlindSpot
+          </span>
 
-        <span className="header-desc" style={{ color: "var(--color-border-strong)", fontSize: "12px" }}>
-          /
-        </span>
+          <nav aria-label="Main navigation">
+            <ul
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "var(--space-4)",
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+              }}
+            >
+              <li>
+                <a
+                  href="#main-content"
+                  aria-current="page"
+                  style={{
+                    fontSize: "var(--font-size-sm)",
+                    fontWeight: 600,
+                    color: "var(--color-text-primary)",
+                    textDecoration: "none",
+                    borderBottom: "2px solid var(--color-accent-secondary)",
+                    paddingBottom: "4px",
+                  }}
+                >
+                  Audit
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
 
-        <span
-          className="header-desc"
-          style={{
-            fontSize: "12px",
-            color: "var(--color-text-secondary)",
-          }}
-        >
-          Accessibility Intelligence Engine
-        </span>
-      </div>
-
-      {/* Right: Technical Telemetry Status */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        {/* Right: Theme Toggle & Attribution Line */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "7px",
-            fontSize: "12px",
-            color: "var(--color-text-secondary)",
+            gap: "var(--space-4)",
+            flexWrap: "wrap",
           }}
         >
           <span
             style={{
-              width: "6px",
-              height: "6px",
-              borderRadius: "50%",
-              backgroundColor: "var(--color-accent-emerald)",
-              display: "inline-block",
+              fontSize: "var(--font-size-sm)",
+              color: "var(--color-text-muted)",
+              lineHeight: 1.5,
             }}
-            aria-hidden="true"
-          />
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px" }}>
-            Nemotron-3
+          >
+            Built with Nebius Token Factory and NVIDIA Nemotron
           </span>
-        </div>
 
-        <div
-          className="header-meta"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            padding: "2px 7px",
-            borderRadius: "var(--radius-xs)",
-            backgroundColor: "var(--color-surface-2)",
-            border: "1px solid var(--color-border-subdued)",
-            fontSize: "11px",
-            fontFamily: "var(--font-mono)",
-            color: "var(--color-text-muted)",
-          }}
-        >
-          <span>Deterministic Chromium</span>
+          {onToggleTheme && (
+            <Button
+              id="theme-toggle-button"
+              variant="secondary"
+              size="sm"
+              onClick={onToggleTheme}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+              title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+            >
+              {theme === "dark" ? "Light theme" : "Dark theme"}
+            </Button>
+          )}
         </div>
       </div>
     </header>

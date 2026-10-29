@@ -32,7 +32,8 @@
           "body": "[role='tablist']:focus-visible { outline: 2px solid #2563eb !important; }",
           "rationale": "Standard focus indicator repair."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       }
     ],
     "aiTransparency": {
@@ -57,6 +58,12 @@
       "tavilyQueries": [
         "WCAG 2.4.3"
       ]
+    },
+    "baseline": {
+      "tool": "axe-core",
+      "version": "4.14.0",
+      "violationCount": 0,
+      "rules": []
     }
   },
   "forwardStops": [

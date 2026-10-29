@@ -10,9 +10,11 @@
     "dev": "npm run dev --workspace=apps/web",
     "build": "npm run build --workspace=apps/web",
     "test": "vitest run",
+    "test:contrast": "npx tsx scripts/test-contrast.ts",
     "hello-models": "npx tsx scripts/hello-models.ts",
     "seed-replays": "npx tsx scripts/seed-replays.ts",
     "bench": "npx tsx packages/bench/src/cli.ts",
+    "bench:code": "npx tsx packages/bench/src/cli-code.ts",
     "scan-secrets": "bash scripts/scan-secrets.sh"
   },
   "devDependencies": {

@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, "..");
 dotenv.config({ path: path.resolve(REPO_ROOT, ".env") });
 
-import { startSession, crawl, runInteractionPass } from "../packages/engine/src/index.js";
+import { startSession, crawl, runInteractionPass, runAxe, isFindingReportedByAxe } from "../packages/engine/src/index.js";
 import { runDetectors } from "../packages/detectors/src/index.js";
 import { generateStateDigest, analyzeFindings, clearLedger, ledgerTotals, getLedger } from "../packages/ai/src/index.js";
 import { runFixLoop } from "../packages/fixer/src/index.js";
@@ -47,6 +47,9 @@ async function seedFixture(fixtureFile: string) {
 
   const session = await startSession({ auditId, targetUrl: fileUrl });
   try {
+    // 0. Run axe-core baseline
+    const axeBaseline = await runAxe(session.page);
+
     // 1. Keyboard Crawl
     const crawlResult = await crawl(session.page, { maxStops: 40, pauseMs: 30 });
 
@@ -219,6 +222,7 @@ async function seedFixture(fixtureFile: string) {
         verificationEvidence: isVerified
           ? "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
           : undefined,
+        alsoReportedByAxe: isFindingReportedByAxe(hit.selector, axeBaseline),
       });
     }
 
@@ -240,6 +244,7 @@ async function seedFixture(fixtureFile: string) {
       timestamp: new Date().toISOString(),
       durationMs: Date.now() - startTime,
       keyboardScore,
+      baseline: axeBaseline,
       summary: {
         totalStops: crawlResult.forwardStops.length,
         barriersFound: hits.length,

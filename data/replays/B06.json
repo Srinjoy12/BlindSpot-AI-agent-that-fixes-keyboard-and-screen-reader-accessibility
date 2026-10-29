@@ -33,7 +33,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": true
       },
       {
         "id": "barrier_2",
@@ -52,7 +53,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": true
       },
       {
         "id": "barrier_3",
@@ -71,7 +73,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": true
       },
       {
         "id": "barrier_4",
@@ -90,7 +93,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": true
       },
       {
         "id": "barrier_5",
@@ -109,7 +113,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": true
       },
       {
         "id": "barrier_6",
@@ -128,7 +133,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_7",
@@ -147,7 +153,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_8",
@@ -166,7 +173,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_9",
@@ -185,7 +193,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_10",
@@ -204,7 +213,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_11",
@@ -223,7 +233,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_12",
@@ -242,7 +253,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_13",
@@ -261,7 +273,8 @@
           "rationale": "Replaces disruptive positive tabindex with standard tabindex=0 to restore logical reading order."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       }
     ],
     "aiTransparency": {
@@ -285,6 +298,28 @@
       },
       "tavilyQueries": [
         "WCAG 2.4.3"
+      ]
+    },
+    "baseline": {
+      "tool": "axe-core",
+      "version": "4.14.0",
+      "violationCount": 1,
+      "rules": [
+        {
+          "ruleId": "tabindex",
+          "impact": "serious",
+          "tags": [
+            "cat.keyboard"
+          ],
+          "nodeCount": 13,
+          "selectors": [
+            "#first-name",
+            "#last-name",
+            "#email",
+            "#phone",
+            "#card"
+          ]
+        }
       ]
     }
   },

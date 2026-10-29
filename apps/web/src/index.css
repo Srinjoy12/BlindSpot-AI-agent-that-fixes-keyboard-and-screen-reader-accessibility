@@ -1,44 +1,143 @@
-/* BlindSpot — Precision Developer Workbench Design System */
+/* BlindSpot — Minimal Readable Design System
+   Brand References:
+   - NVIDIA Green #76B900. Source: https://www.nvidia.com/en-us/about-nvidia/legal-info/brand-guidelines/
+   - Nebius secondary accent sampled on 2026-10-27. Source: https://nebius.com/_next/static/css/c44eba56dc823930.css and https://nebius.com/_next/static/css/d09a98cf4da412f0.css
+*/
+
 :root {
-  --color-bg-canvas: #0B0E14;
-  --color-surface-1: #111620;
-  --color-surface-2: #171D2A;
-  --color-surface-3: #1E2536;
-  --color-border-subdued: #232B3B;
-  --color-border-strong: #333F54;
-  --color-border-focus: #3B82F6;
+  /* Color Tokens - Dark Theme (Default) */
+  --color-bg-canvas: #0C0E12;
+  --color-surface-1: #151820;
+  --color-surface-2: #1E222D;
+  --color-surface-3: #282E3D;
 
-  --color-text-primary: #F3F4F6;
-  --color-text-secondary: #9CA3AF;
-  --color-text-muted: #6B7280;
+  --color-border-subdued: #363E50;
+  --color-border-ui: #707A8F;
+  --color-border-strong: #8E98AB;
+  --color-focus-ring: #76B900;
 
-  --color-accent-emerald: #10B981;
-  --color-accent-emerald-subtle: rgba(16, 185, 129, 0.1);
-  --color-accent-emerald-border: rgba(16, 185, 129, 0.35);
+  --color-text-primary: #F9FAFB;
+  --color-text-secondary: #D1D5DB;
+  --color-text-muted: #A6ADB9;
 
-  --color-severity-blocker: #EF4444;
-  --color-severity-blocker-bg: rgba(239, 68, 68, 0.1);
-  --color-severity-blocker-border: rgba(239, 68, 68, 0.35);
+  /* Primary accent: NVIDIA green #76B900 (confirmed against NVIDIA public brand guidelines) */
+  --color-accent-primary: #76B900;
+  --color-accent-primary-text: #000000;
 
-  --color-severity-major: #F59E0B;
-  --color-severity-major-bg: rgba(245, 158, 11, 0.1);
-  --color-severity-major-border: rgba(245, 158, 11, 0.35);
+  /* Secondary accent: sampled from public nebius.com on 2026-10-27.
+     Source: https://nebius.com/_next/static/css/d09a98cf4da412f0.css (#B186DB).
+     Used strictly for links, selected-tab indicators, and 'Found by BlindSpot only' highlight. */
+  --color-accent-secondary: #B186DB;
 
+  /* Semantic status colors (strictly separate from brand colors) */
+  --color-severity-blocker: #FF7A7A;
+  --color-severity-major: #FBBF24;
   --color-severity-minor: #60A5FA;
-  --color-severity-minor-bg: rgba(96, 165, 250, 0.1);
-  --color-severity-minor-border: rgba(96, 165, 250, 0.35);
+  --color-status-success: #34D399;
+  --color-status-warning: #FBBF24;
+  --color-status-error: #FF7A7A;
 
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace;
+  /* Spacing Scale (4px base: 8/12/16/24/32/48) */
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
 
-  --radius-xs: 2px;
-  --radius-sm: 3px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
+  /* Radius (6 and 10 only) */
+  --radius-sm: 6px;
+  --radius-md: 10px;
 
-  --shadow-modal: 0 16px 40px -4px rgba(0, 0, 0, 0.75);
+  /* Shadows (none or subtle) */
+  --shadow-none: none;
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+  /* Motion (150ms) */
+  --transition-duration: 150ms;
+  --transition-timing: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --line-height-base: 1.5;
 }
 
+/* Light Theme Variables */
+[data-theme="light"] {
+  --color-bg-canvas: #FFFFFF;
+  --color-surface-1: #F8F9FA;
+  --color-surface-2: #EEF0F4;
+  --color-surface-3: #E2E5EB;
+
+  --color-border-subdued: #D0D5DD;
+  --color-border-ui: #667085;
+  --color-border-strong: #344054;
+  --color-focus-ring: #2E6B00;
+
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted: #526075;
+
+  --color-accent-primary: #76B900;
+  --color-accent-primary-text: #000000;
+
+  /* Secondary accent light: sampled from public nebius.com on 2026-10-27.
+     Source: https://nebius.com/_next/static/css/c44eba56dc823930.css (#614efa / #5136E2). */
+  --color-accent-secondary: #5136E2;
+
+  --color-severity-blocker: #B91C1C;
+  --color-severity-major: #92400E;
+  --color-severity-minor: #1D4ED8;
+  --color-status-success: #065F46;
+  --color-status-warning: #92400E;
+  --color-status-error: #B91C1C;
+
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --color-bg-canvas: #FFFFFF;
+    --color-surface-1: #F8F9FA;
+    --color-surface-2: #EEF0F4;
+    --color-surface-3: #E2E5EB;
+
+    --color-border-subdued: #D0D5DD;
+    --color-border-ui: #667085;
+    --color-border-strong: #344054;
+    --color-focus-ring: #2E6B00;
+
+    --color-text-primary: #0F172A;
+    --color-text-secondary: #334155;
+    --color-text-muted: #526075;
+
+    --color-accent-primary: #76B900;
+    --color-accent-primary-text: #000000;
+    --color-accent-secondary: #5136E2;
+
+    --color-severity-blocker: #B91C1C;
+    --color-severity-major: #92400E;
+    --color-severity-minor: #1D4ED8;
+    --color-status-success: #065F46;
+    --color-status-warning: #92400E;
+    --color-status-error: #B91C1C;
+
+    --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Base Styles */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -46,150 +145,147 @@
 }
 
 html {
-  color-scheme: dark;
+  font-size: 16px;
+  background-color: var(--color-bg-canvas);
+  color: var(--color-text-primary);
 }
 
 body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  font-weight: var(--font-weight-regular);
   background-color: var(--color-bg-canvas);
   color: var(--color-text-primary);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  line-height: 1.5;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  min-height: 100vh;
-  overflow-x: hidden;
 }
 
-/* Explicit high-visibility focus indicator (WCAG 2.4.7 compliant) */
+/* Skip to Content Landmark Link */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-surface-3);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-focus-ring);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  z-index: 9999;
+  text-decoration: none;
+  transition: top var(--transition-duration) var(--transition-timing);
+}
+
+.skip-link:focus {
+  top: var(--space-3);
+}
+
+/* Accessible Focus Rings */
 *:focus-visible {
-  outline: 2px solid var(--color-border-focus) !important;
+  outline: 2px solid var(--color-focus-ring) !important;
   outline-offset: 2px !important;
+}
+
+/* Typography defaults: Two weights only (400 and 600), Sentence case */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+h1 {
+  font-size: var(--font-size-3xl);
+}
+
+h2 {
+  font-size: var(--font-size-xl);
+}
+
+h3 {
+  font-size: var(--font-size-base);
+}
+
+p, span, label, input, button, select, textarea {
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 code, pre, .font-mono {
   font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
 }
 
-button {
-  cursor: pointer;
-  font-family: inherit;
-  border: none;
-  background: transparent;
-  color: inherit;
-  user-select: none;
-  transition: transform 120ms ease-out, background-color 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out;
-}
-
-button:active:not(:disabled) {
-  transform: scale(0.98);
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.55;
-}
-
-input, select, textarea {
-  font-family: inherit;
-  color: inherit;
-}
-
-input[type="text"] {
-  outline: none;
-  transition: border-color 150ms ease-out, background-color 150ms ease-out;
-}
-
-input[type="text"]:focus {
-  border-color: var(--color-border-focus);
-}
-
+/* Secondary Accent for links */
 a {
-  color: var(--color-border-focus);
-  text-decoration: none;
-  transition: color 120ms ease-out;
+  color: var(--color-accent-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity var(--transition-duration) var(--transition-timing);
 }
 
 a:hover {
-  text-decoration: underline;
+  opacity: 0.85;
 }
 
-/* Minimalist technical scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* Buttons */
+button {
+  font-family: var(--font-sans);
+  border: none;
+  background: transparent;
+  color: inherit;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-bg-canvas);
+/* Inputs & Form Elements */
+input, textarea, select {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border-ui);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--color-border-subdued);
-  border-radius: var(--radius-xs);
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-focus-ring);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-border-strong);
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.animate-spin {
-  animation: spin 800ms linear infinite;
-}
-
-/* Responsive Grid and Viewport Adaptations */
-@media (max-width: 992px) {
-  .score-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-  .score-hero {
-    grid-column: span 3 !important;
-    border-bottom: 1px solid var(--color-border-subdued) !important;
-    border-right: none !important;
-  }
-  .stepper-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-  .header-meta {
-    display: none !important;
-  }
-  .inspector-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .inspector-coords {
-    border-left: none !important;
-    padding-left: 0 !important;
-    border-top: 1px solid var(--color-border-subdued) !important;
-    padding-top: 12px !important;
-  }
+/* Content Container Max Width 1120px */
+.app-container {
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-6);
 }
 
 @media (max-width: 640px) {
-  .score-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  .score-hero {
-    grid-column: span 2 !important;
-  }
-  .stepper-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  .audit-input-row {
-    flex-direction: column !important;
-  }
-  .header-desc {
-    display: none !important;
+  .app-container {
+    padding: var(--space-4);
   }
 }
 
+/* Visually Hidden Utility for Screen Readers */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *, ::before, ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

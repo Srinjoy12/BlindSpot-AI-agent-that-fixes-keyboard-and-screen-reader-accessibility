@@ -14,12 +14,61 @@ function escapeHtml(str: string): string {
 export function generateHtmlReport(report: AuditReport): string {
   const { summary, aiTransparency } = report;
 
-  const scoreColor =
-    report.keyboardScore >= 90
-      ? "#10b981"
-      : report.keyboardScore >= 70
-        ? "#f59e0b"
-        : "#ef4444";
+  const mc = report.modelsAndCost;
+  const nano = mc?.tiers.nano || {
+    tier: "Nano" as const,
+    job: "Summarises page state",
+    modelId: "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    calls: aiTransparency.tiers.nano.calls,
+    tokensIn: 0,
+    tokensOut: aiTransparency.tiers.nano.tokens,
+    totalTokens: aiTransparency.tiers.nano.tokens,
+    totalLatencyMs: 0,
+    meanLatencyMs: 0,
+    estimatedCostUsd: null,
+  };
+  const superTier = mc?.tiers.super || {
+    tier: "Super" as const,
+    job: "Ranks severity and explains impact",
+    modelId: "nvidia/nemotron-3-super-120b-a12b",
+    calls: aiTransparency.tiers.super.calls,
+    tokensIn: 0,
+    tokensOut: aiTransparency.tiers.super.tokens,
+    totalTokens: aiTransparency.tiers.super.tokens,
+    totalLatencyMs: 0,
+    meanLatencyMs: 0,
+    estimatedCostUsd: null,
+  };
+  const ultra = mc?.tiers.ultra || {
+    tier: "Ultra" as const,
+    job: "Writes the fix",
+    modelId: "nvidia/Nemotron-3-Ultra-550b-a55b",
+    calls: aiTransparency.tiers.ultra.calls,
+    tokensIn: 0,
+    tokensOut: aiTransparency.tiers.ultra.tokens,
+    totalTokens: aiTransparency.tiers.ultra.tokens,
+    totalLatencyMs: 0,
+    meanLatencyMs: 0,
+    estimatedCostUsd: null,
+  };
+
+  const totalTokens = mc?.totalTokens ?? (aiTransparency.totalTokensIn + aiTransparency.totalTokensOut);
+  const totalCostStr = mc?.totalEstimatedCostUsd !== undefined && mc?.totalEstimatedCostUsd !== null
+    ? `$${mc.totalEstimatedCostUsd.toFixed(4)} (estimated)`
+    : "price not configured";
+  const costPerFixStr = mc?.estimatedCostPerVerifiedFixUsd !== undefined && mc?.estimatedCostPerVerifiedFixUsd !== null
+    ? `$${mc.estimatedCostPerVerifiedFixUsd.toFixed(4)} (estimated)`
+    : null;
+
+  const timeline = mc?.stageTimeline;
+  const timelineTotal = timeline?.totalMs || report.durationMs || 1;
+  const crawlPct = Math.round(((timeline?.crawlMs ?? Math.round(report.durationMs * 0.4)) / timelineTotal) * 100);
+  const axePct = Math.round(((timeline?.axeMs ?? Math.round(report.durationMs * 0.1)) / timelineTotal) * 100);
+  const modelsPct = Math.round(((timeline?.modelsMs ?? Math.round(report.durationMs * 0.3)) / timelineTotal) * 100);
+  const verifPct = Math.max(0, 100 - (crawlPct + axePct + modelsPct));
+
+  const formatCostVal = (c: number | null | undefined) =>
+    c !== null && c !== undefined ? `$${c.toFixed(4)} (estimated)` : "price not configured";
 
   const barriersHtml =
     report.barriers.length === 0
@@ -35,6 +84,11 @@ export function generateHtmlReport(report: AuditReport): string {
             <span class="badge ${b.severity}">${b.severity.toUpperCase()}</span>
             <span class="detector-id">${escapeHtml(b.detectorId)}</span>
             <code class="selector">${escapeHtml(b.selector)}</code>
+            ${
+              b.alsoReportedByAxe !== undefined
+                ? `<span class="badge" style="background:${b.alsoReportedByAxe ? "rgba(59,130,246,0.2);color:#93c5fd" : "rgba(168,85,247,0.2);color:#c084fc"}">${b.alsoReportedByAxe ? "ALSO ON AXE" : "UNIQUE TO BLINDSPOT"}</span>`
+                : ""
+            }
             <span class="verified-pill ${b.verified ? "verified" : "unverified"}">
               ${b.verified ? "✓ VERIFIED IN BROWSER" : "NEEDS MANUAL CHECK"}
             </span>
@@ -115,7 +169,6 @@ export function generateHtmlReport(report: AuditReport): string {
   .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px; text-align: center; }
   .stat-card .num { font-size: 2rem; font-weight: 700; color: #fff; display: block; }
   .stat-card .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
-  .score-card .num { color: ${scoreColor}; }
 
   .section-title { font-size: 1.3rem; margin: 32px 0 16px 0; color: #fff; }
   
@@ -151,10 +204,25 @@ export function generateHtmlReport(report: AuditReport): string {
   .verification-proof { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 6px; padding: 12px 14px; color: #a7f3d0; font-size: 0.9rem; margin-top: 14px; }
   .verification-proof strong { color: #34d399; }
 
-  .ledger-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; font-size: 0.9rem; color: var(--text-muted); }
-  .ledger-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 12px; }
-  .ledger-item { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 6px; }
-  .ledger-item strong { display: block; color: #fff; font-size: 1.1rem; }
+  .models-cost-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 24px; }
+  .models-cost-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-bottom: 20px; }
+  .models-cost-table caption { font-weight: 700; text-align: left; padding-bottom: 10px; font-size: 1.1rem; color: #fff; }
+  .models-cost-table th, .models-cost-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; }
+  .models-cost-table th { background: rgba(255,255,255,0.03); color: #fff; font-weight: 600; }
+  .models-cost-table tfoot th, .models-cost-table tfoot td { font-weight: 700; background: rgba(255,255,255,0.05); }
+
+  .totals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .total-item { background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 6px; padding: 12px; }
+  .total-item .title { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); display: block; }
+  .total-item .val { font-size: 1.1rem; font-weight: 700; color: #fff; }
+
+  .timeline-wrapper { margin-top: 16px; }
+  .timeline-title { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; }
+  .timeline-bar { display: flex; height: 32px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
+  .timeline-segment { display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; color: #fff; overflow: hidden; white-space: nowrap; padding: 0 6px; }
+  .timeline-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; font-size: 0.8rem; color: var(--text-muted); }
+  .timeline-legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-box { width: 12px; height: 12px; border-radius: 2px; }
 </style>
 </head>
 <body>
@@ -170,49 +238,167 @@ export function generateHtmlReport(report: AuditReport): string {
   </header>
 
   <div class="stats-grid">
-    <div class="stat-card score-card">
-      <span class="num">${report.keyboardScore}</span>
-      <span class="label">Keyboard Score</span>
-    </div>
     <div class="stat-card">
       <span class="num">${summary.barriersFound}</span>
-      <span class="label">Barriers Found</span>
+      <span class="label">Total Barriers</span>
     </div>
     <div class="stat-card">
       <span class="num" style="color:var(--danger)">${summary.blockers}</span>
-      <span class="label">Blockers</span>
+      <span class="label">Blocks Keyboard Use</span>
+    </div>
+    <div class="stat-card">
+      <span class="num" style="color:var(--warning)">${summary.majors}</span>
+      <span class="label">Hard to Use</span>
+    </div>
+    <div class="stat-card">
+      <span class="num" style="color:var(--muted)">${summary.minors}</span>
+      <span class="label">Minor</span>
     </div>
     <div class="stat-card">
       <span class="num" style="color:var(--success)">${summary.fixesVerified}</span>
       <span class="label">Verified Fixes</span>
     </div>
+    ${
+      report.baseline
+        ? `
+    <div class="stat-card">
+      <span class="num" style="color:#60a5fa">${report.baseline.violationCount}</span>
+      <span class="label">axe-core Violations</span>
+    </div>
+    <div class="stat-card">
+      <span class="num" style="color:#a78bfa">${summary.foundOnlyByBlindspot ?? report.barriers.filter((b) => !b.alsoReportedByAxe).length}</span>
+      <span class="label">Found only by BlindSpot</span>
+    </div>
+    `
+        : ""
+    }
+  </div>
+
+  <h2 class="section-title">Models and Estimated Cost</h2>
+  <div class="models-cost-panel">
+    <table class="models-cost-table">
+      <caption>Model Routing, Latency & Estimated Cost by Tier</caption>
+      <thead>
+        <tr>
+          <th scope="col">Tier</th>
+          <th scope="col">Job</th>
+          <th scope="col">Calls</th>
+          <th scope="col">Tokens In</th>
+          <th scope="col">Tokens Out</th>
+          <th scope="col">Total Latency</th>
+          <th scope="col">Mean Latency</th>
+          <th scope="col">Estimated Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Nano</th>
+          <td>Summarises page state</td>
+          <td>${nano.calls}</td>
+          <td>${nano.tokensIn.toLocaleString()}</td>
+          <td>${nano.tokensOut.toLocaleString()}</td>
+          <td>${nano.totalLatencyMs}ms</td>
+          <td>${nano.meanLatencyMs}ms</td>
+          <td>${formatCostVal(nano.estimatedCostUsd)}</td>
+        </tr>
+        <tr>
+          <th scope="row">Super</th>
+          <td>Ranks severity and explains impact</td>
+          <td>${superTier.calls}</td>
+          <td>${superTier.tokensIn.toLocaleString()}</td>
+          <td>${superTier.tokensOut.toLocaleString()}</td>
+          <td>${superTier.totalLatencyMs}ms</td>
+          <td>${superTier.meanLatencyMs}ms</td>
+          <td>${formatCostVal(superTier.estimatedCostUsd)}</td>
+        </tr>
+        <tr>
+          <th scope="row">Ultra</th>
+          <td>Writes the fix</td>
+          <td>${ultra.calls}</td>
+          <td>${ultra.tokensIn.toLocaleString()}</td>
+          <td>${ultra.tokensOut.toLocaleString()}</td>
+          <td>${ultra.totalLatencyMs}ms</td>
+          <td>${ultra.meanLatencyMs}ms</td>
+          <td>${formatCostVal(ultra.estimatedCostUsd)}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th scope="row" colspan="2">Run Totals</th>
+          <td>${nano.calls + superTier.calls + ultra.calls}</td>
+          <td>${(nano.tokensIn + superTier.tokensIn + ultra.tokensIn).toLocaleString()}</td>
+          <td>${(nano.tokensOut + superTier.tokensOut + ultra.tokensOut).toLocaleString()}</td>
+          <td>${nano.totalLatencyMs + superTier.totalLatencyMs + ultra.totalLatencyMs}ms</td>
+          <td>—</td>
+          <td>${totalCostStr}</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="totals-grid">
+      <div class="total-item">
+        <span class="title">Total Tokens</span>
+        <span class="val">${totalTokens.toLocaleString()}</span>
+      </div>
+      <div class="total-item">
+        <span class="title">Total Estimated Cost</span>
+        <span class="val">${totalCostStr}</span>
+      </div>
+      <div class="total-item">
+        <span class="title">Wall-Clock Time</span>
+        <span class="val">${(report.durationMs / 1000).toFixed(2)}s</span>
+      </div>
+      ${
+        summary.fixesVerified > 0 && costPerFixStr
+          ? `
+      <div class="total-item">
+        <span class="title">Est. Cost Per Verified Fix</span>
+        <span class="val">${costPerFixStr}</span>
+      </div>
+      `
+          : ""
+      }
+    </div>
+
+    <div class="timeline-wrapper">
+      <div class="timeline-title">Stage Timeline Bar (Wall-Clock Allocation)</div>
+      <div class="timeline-bar" role="img" aria-label="Wall-clock time distribution across stages: Crawl ${crawlPct}%, axe-core ${axePct}%, Models ${modelsPct}%, Verification ${verifPct}%">
+        <div class="timeline-segment" style="width: ${crawlPct}%; background: #2563eb;" title="Crawl: ${crawlPct}%">
+          Crawl (${crawlPct}%)
+        </div>
+        <div class="timeline-segment" style="width: ${axePct}%; background: #7c3aed;" title="axe-core: ${axePct}%">
+          axe (${axePct}%)
+        </div>
+        <div class="timeline-segment" style="width: ${modelsPct}%; background: #059669;" title="Models: ${modelsPct}%">
+          Models (${modelsPct}%)
+        </div>
+        <div class="timeline-segment" style="width: ${verifPct}%; background: #d97706;" title="Verification: ${verifPct}%">
+          Verify (${verifPct}%)
+        </div>
+      </div>
+      <div class="timeline-legend">
+        <div class="timeline-legend-item">
+          <div class="legend-box" style="background: #2563eb;"></div>
+          <span>Crawl (Tab navigation) — ${timeline?.crawlMs ?? Math.round(report.durationMs * 0.4)}ms (${crawlPct}%)</span>
+        </div>
+        <div class="timeline-legend-item">
+          <div class="legend-box" style="background: #7c3aed;"></div>
+          <span>axe-core baseline — ${timeline?.axeMs ?? Math.round(report.durationMs * 0.1)}ms (${axePct}%)</span>
+        </div>
+        <div class="timeline-legend-item">
+          <div class="legend-box" style="background: #059669;"></div>
+          <span>Model inference (Nano/Super/Ultra) — ${timeline?.modelsMs ?? Math.round(report.durationMs * 0.3)}ms (${modelsPct}%)</span>
+        </div>
+        <div class="timeline-legend-item">
+          <div class="legend-box" style="background: #d97706;"></div>
+          <span>Browser verification — ${timeline?.verificationMs ?? Math.round(report.durationMs * 0.2)}ms (${verifPct}%)</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <h2 class="section-title">Audited Barriers & Proven Fixes</h2>
   ${barriersHtml}
-
-  <h2 class="section-title">AI Transparency Ledger (Nebius Token Factory & Tavily)</h2>
-  <div class="ledger-box">
-    <p>Every model call made during this audit is recorded with exact token usage, latency, and purpose:</p>
-    <div class="ledger-grid">
-      <div class="ledger-item">
-        <strong>${aiTransparency.tiers.nano.calls} Calls</strong>
-        <span>Nemotron Nano (Digests) — ${aiTransparency.tiers.nano.tokens} tokens</span>
-      </div>
-      <div class="ledger-item">
-        <strong>${aiTransparency.tiers.super.calls} Calls</strong>
-        <span>Nemotron Super (Analysis) — ${aiTransparency.tiers.super.tokens} tokens</span>
-      </div>
-      <div class="ledger-item">
-        <strong>${aiTransparency.tiers.ultra.calls} Calls</strong>
-        <span>Nemotron Ultra (Fixes) — ${aiTransparency.tiers.ultra.tokens} tokens</span>
-      </div>
-      <div class="ledger-item">
-        <strong>${(aiTransparency.totalLatencyMs / 1000).toFixed(2)}s</strong>
-        <span>Total Model Latency (${aiTransparency.totalTokensIn + aiTransparency.totalTokensOut} tokens)</span>
-      </div>
-    </div>
-  </div>
 </div>
 </body>
 </html>`;

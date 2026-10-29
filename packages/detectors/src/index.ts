@@ -11,8 +11,10 @@ import { detectD6 } from "./D6-name.js";
 import { detectD7 } from "./D7-tabindex.js";
 import { detectD8 } from "./D8-dialog.js";
 import { detectD9 } from "./D9-skiplink.js";
+import { deduplicateHits } from "./dedup.js";
 
 export * from "./types.js";
+export { deduplicateHits } from "./dedup.js";
 export { detectD1 } from "./D1-trap.js";
 export { detectD2 } from "./D2-unreachable.js";
 export { detectD3 } from "./D3-invisible.js";
@@ -37,5 +39,5 @@ export function runDetectors(input: DetectorInput): DetectorHit[] {
     ...detectD9(input),
   ];
 
-  return hits;
+  return deduplicateHits(hits);
 }

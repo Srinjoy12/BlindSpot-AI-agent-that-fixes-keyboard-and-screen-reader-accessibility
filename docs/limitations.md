@@ -8,7 +8,7 @@ BlindSpot is an autonomous developer agent designed to catch, repair, and verify
 ### What BlindSpot Does:
 - Drives a real Chromium browser using keyboard emulation (`Tab`, `Shift+Tab`, `Enter`, `Space`, `Escape`).
 - Records physical focus stops, bounding boxes, visual focus indicator changes, and element obscuration.
-- Evaluates 11 deterministic detectors (D1–D11) against WCAG 2.2 Level A and AA criteria.
+- Evaluates 9 deterministic and heuristic detectors (D1–D9) against WCAG 2.2 Level A and AA criteria.
 - Employs three tiered NVIDIA Nemotron models (Nano, Super, Ultra) hosted on Nebius Token Factory to digest page states, analyze human impact, and generate surgical patches.
 - Re-runs the keyboard test in a fresh browser session to mathematically prove that the barrier is gone and no regressions were introduced.
 
@@ -18,15 +18,22 @@ BlindSpot is an autonomous developer agent designed to catch, repair, and verify
 3. **No Multi-Page Authenticated Crawling in MVP**: The current engine is scoped to single URL audits. Authenticated flows behind OAuth/passwords, multi-step checkout funnels, and enterprise intranet pages are not crawled.
 4. **No Native Mobile Apps or PDFs**: BlindSpot only audits HTML/SVG web interfaces rendered in Chromium. Mobile native apps (iOS/Android) and static PDF documents are out of scope.
 5. **No Automated Git Commits to Strangers' Repos**: BlindSpot delivers verified unified diffs and CSS/DOM runtime snippets. It never modifies user codebases without explicit developer action.
+6. **Framework Projects Are Not Supported**: The web app's "Open project folder" mode supports static projects (plain HTML/CSS/JS with an `index.html` entry point). Framework projects (Next.js, Vite, React, Vue, Svelte) that require a compilation step, bundler, or active dev server are not supported.
 
 ---
 
 ## 2. Known Failure Cases & Edge Cases
 
 Documenting boundaries and failure modes is a core engineering principle:
+- **Airgapped External CDN Blocking**: In Project Folder mode, the ephemeral sandbox aborts all outgoing network requests to preserve privacy and safety. Projects that rely on remote CDN scripts (e.g. jQuery CDN), remote font stylesheets (e.g. Google Fonts), or remote CSS frameworks will render without them unless those assets are hosted locally in the folder.
 - **Canvas and WebGL Elements**: Custom controls rendered purely inside HTML5 `<canvas>` or WebGL shaders without fallback ARIA DOM subtrees are invisible to the focus crawler.
 - **Custom Faux-Focus Widgets**: Single-page apps that capture keyboard events and manually paint CSS classes onto container divs without updating `document.activeElement` may report unreachable controls.
 - **Lazy-Loaded Content Beyond Scroll Depth**: Elements that only mount into the DOM after infinite scrolling beyond viewport limits may not be captured in the initial 150-stop crawl.
+- **Benchmark Team Recall Bias**: Fixtures and detectors were written by the same team, so recall on them is optimistic.
+- **Code Mode Verified-Diff Rate (52.9%) & Complex Component Rewrites**:
+  In our automated code mode benchmark across 16 fixtures (`npm run bench:code`), 18 of 34 attempted fixes were fully verified in airgapped Chromium. Fixes failed verification in fixtures B01, B02, B06, B07, B08, B09, B10, and B11 for two primary engineering reasons:
+  1. *Diff Linter Threshold Rejections*: BlindSpot's diff linter strictly rejects patches that exceed size or blast-radius limits (`fix too large, not applied`). Complex widgets like B01 (modal trap script rewrite), B07 (mega menu keyboard handler), and B10 (tablist roving tabindex) tempt LLMs to rewrite entire blocks rather than surgical single-line patches.
+  2. *Secondary Regression Detection*: Under our strict Rule 6 verification harness, a fix is marked `unverified` if the primary barrier was resolved but ANY new Blocker or Major regression was introduced. For example, in B08 (cookie banner) and B09 (carousel), the model eliminated the hover/focus barrier but inadvertently introduced tab order or focus-restoration defects on adjacent buttons. We intentionally refuse to count "partial" or buggy fixes as verified.
 
 ---
 
@@ -34,14 +41,49 @@ Documenting boundaries and failure modes is a core engineering principle:
 
 As required by our engineering manifesto: *an accessibility tool with an inaccessible interface loses all credibility*.
 
-Before freezing the build, BlindSpot ran its own audit engine against its own dashboard UI (`http://localhost:3000`):
-- **Blockers**: 0
-- **Majors**: 0
-- **Minors**: 0
-- **Keyboard Reach**: 100% of interactive controls reached via Tab sequence.
-- **Focus Indicators**: High-contrast focus rings (3:1 contrast against dark background) present on every stop.
-- **Semantics**: Native HTML buttons, links, inputs, and polite ARIA live regions for streaming status.
-- **Reduced Motion**: Full support for `prefers-reduced-motion: reduce`.
+Before freezing the build, BlindSpot ran its own audit engine and verification suite against its own running UI (`http://localhost:3000`), testing both the initial empty state and the tabbed results dashboard:
+
+### Automated Crawler & Detector Findings:
+- **axe-core Baseline Audit**: 0 violations reported (version 4.10.0).
+- **Physical Keyboard Stops**: 14 forward focus stops captured across interactive controls; 36 backward stops.
+- **Detector D2 (Unreachable Control) Finding on WAI-ARIA Tabs**:
+  When BlindSpot's sequential forward `Tab`-only crawler audits the tabbed dashboard, detector D2 flags unselected tab buttons (`#blindspot-results-tab-*`) as unreachable. This is an honest and known limitation of sequential Tab crawling:
+  - Following the official W3C WAI-ARIA Tabs Design Pattern, tabs use a **roving tabindex**: the currently active tab has `tabIndex={0}`, while all inactive tabs have `tabIndex={-1}`.
+  - A keyboard user presses `Tab` to enter the active tab, and uses `ArrowLeft` / `ArrowRight` (or `Home` / `End`) to navigate between tabs.
+  - Because BlindSpot's initial forward pass presses `Tab` rather than arrow keys within tablists, it correctly observes that inactive tabs cannot be reached via `Tab` alone.
+  - This finding demonstrates why detector D2 is sensitive to custom navigation patterns, and serves as an important engineering reminder that roving tabindex widgets require arrow key emulation to evaluate reachability accurately.
+
+### Interactive Accessibility Verification (WCAG 2.2 AA):
+1. **Keyboard Operability**:
+   - 100% of controls (URL input, code textarea, format radios, mode segments, example dropdown, theme toggle, step toggles, and results tabs) are fully operable via keyboard without a mouse.
+   - SegmentedControl and Results Tabs support arrow key navigation (`ArrowLeft`, `ArrowRight`, `Home`, `End`) with automatic focus transfer.
+   - Code diff containers and data tables have `tabIndex={0}`, `role="region"`, and accessible names so keyboard users can scroll wide content using arrow keys.
+2. **Focus Indicators (WCAG 2.4.7 & 2.4.11)**:
+   - High-visibility focus ring: `2px solid var(--color-focus-ring)` with `2px` offset on all interactive elements.
+   - Contrast: Dark theme focus ring (#76B900) achieves 8.71:1 contrast; Light theme focus ring (#2E6B00) achieves 7.14:1 contrast (exceeding the 3:1 WCAG requirement).
+   - No focus indicators are obscured by headers or modals.
+3. **Semantic Hierarchy & Landmarks**:
+   - Exactly one `<h1>` per view ("Accessibility audit").
+   - Strict heading hierarchy (`h1` → `h2` → `h3`) with zero skipped levels.
+   - Semantic landmarks: `<header role="banner">`, `<main id="main-content">`, `<footer role="contentinfo">`, `<nav aria-label="Main navigation">`.
+   - Skip to main content link (`.skip-link`) positioned at top of DOM.
+4. **Form Controls & Labelling**:
+   - Every input, select, and textarea has a visible `<label>` or explicit `aria-label`.
+   - Live character counter and airgap warning linked via `aria-describedby`.
+5. **Live Progress Announcements**:
+   - Progress stepper contains an `aria-live="polite"` region announcing each step sequentially: `"Step X of 6: [Step Name]"` and `"Audit complete: Finished in X.X s"`.
+6. **No Keyboard Traps**:
+   - Verified zero keyboard traps across all states. Focus flows forward and backward without obstruction.
+   - Modals trap focus intentionally while open, close on `Escape`, and return focus to the trigger button.
+7. **Prefers-Reduced-Motion**:
+   - Full support for `@media (prefers-reduced-motion: reduce)` in `index.css`: all animations and transitions are clamped to 0.01ms.
+8. **Zoom to 200% & Responsive Reflow**:
+   - Tested at 1440, 1024, 768, and 390 px viewports, as well as 200% zoom (simulated at 640px).
+   - Zero horizontal page scroll (`document.documentElement.scrollWidth <= document.documentElement.clientWidth`).
+   - Tables scroll inside their container with visible focus rings.
+   - Tab bar scrolls horizontally with touch momentum on small screens.
+9. **Contrast Validation**:
+   - Automated contrast test (`npm run test:contrast`): 114/114 assertions passed across both dark and light palettes. Primary text achieves 19.5:1 contrast ratio.
 
 ---
 

@@ -2,3 +2,5 @@
 
 export { runFixtureBenchmark } from "./runner.js";
 export type { FixtureBenchmarkResult, FixtureManifest, BarrierGroundTruth } from "./runner.js";
+export { runFixtureCodeBenchmark } from "./runner-code.js";
+export type { FixtureCodeBenchmarkResult, FixtureCodeFixSummary } from "./runner-code.js";

@@ -32,7 +32,8 @@
           "body": "#carousel-prev:focus-visible { outline: 2px solid #2563eb !important; }",
           "rationale": "Standard focus indicator repair."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_2",
@@ -51,7 +52,8 @@
           "targetSelector": "#carousel-next"
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       }
     ],
     "aiTransparency": {
@@ -76,6 +78,12 @@
       "tavilyQueries": [
         "WCAG 2.1.1"
       ]
+    },
+    "baseline": {
+      "tool": "axe-core",
+      "version": "4.14.0",
+      "violationCount": 0,
+      "rules": []
     }
   },
   "forwardStops": [

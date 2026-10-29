@@ -1,71 +1,57 @@
-# User Research Notes & Field Interviews
-*BlindSpot Project · Conducted Oct 22–23, 2026*
+# BlindSpot — User Research & Accessibility Validation Notes
 
-Goal: Validate the core problem statement, friction in existing accessibility auditing workflows, developer trust requirements for automated code fixes, and the real-world impact on keyboard and screen-reader users before locking technical scope.
-
----
-
-## 1. Structured Questions Asked
-
-1. **Last keyboard problem**: When did you last find a keyboard navigation or screen-reader barrier on your site, and how did you find it?
-2. **Current tooling gaps**: What tools or automated linters do you use today (e.g. axe-core, Lighthouse, eslint-plugin-jsx-a11y), and what do they consistently miss?
-3. **Trust in automated fixes**: Would you trust an AI agent to write accessibility fixes, and what proof would you need to see before merging or applying them?
-4. **Delivery format**: Which would you rather receive — an interactive visual report with verified diffs or an automated pull request?
+No user interviews were completed before submission.
 
 ---
 
-## 2. Interview Logs
+## Real User Interview Notes (Template for Human Input)
 
-### Conversation 1 — Lead Frontend Developer (E-commerce / SaaS)
-* **Date**: Oct 22, 2026
-* **Role**: Senior React / Next.js Engineer at a consumer checkout platform (team of 8 developers).
-* **Q1 (Last problem)**: "Last sprint, a customer reported they couldn't complete our checkout using Tab. A third-party cookie consent banner had rendered at the bottom of the DOM, but visually sat on top of the 'Place Order' button. Because focus was obscured by the sticky banner, keyboard users couldn't see what they were pressing. We only found it through customer support."
-* **Q2 (Current tools & gaps)**: "We run Lighthouse in CI and have `axe-core` integrated into our unit tests. It caught missing `alt` attributes and low text contrast on buttons, but it gave a 100 score to the page with the obscured checkout button. Scanners only inspect static DOM nodes, not whether a physical Tab keystroke lands under an overlay."
-* **Q3 (Trust in automated fixes)**: "I would never merge an AI-suggested fix blind. AI code reviewers frequently hallucinate ARIA attributes or add `tabindex='1'` which actually breaks tab order. To trust it, I need to see the fix re-run in a real browser with proof that the target barrier disappeared and no regressions occurred."
-* **Q4 (Report vs. PR)**: "An interactive report with a unified diff and browser proof is much better. Automated PRs from bots often fail our internal lint rules or conflict with component architectures. Give me the verified patch and let me paste it."
+<!--
+INSTRUCTIONS FOR HUMAN REVIEWER / SUBMITTER:
+Fill in this section with real notes from user interviews, usability testing sessions, or testing with disabled/assistive-technology users.
+Do NOT invent, draft, or synthesize personas or feedback.
+-->
 
----
-
-### Conversation 2 — Full-Stack Developer (Web Agency)
-* **Date**: Oct 23, 2026
-* **Role**: Agency developer shipping 2–3 client sites per quarter (Wordpress, Webflow, and custom React).
-* **Q1 (Last problem)**: "We built a custom slide-out navigation menu with interactive div tags for a luxury apparel client. On mouse hover, it looked great. During a client demo, their compliance officer tried pressing Tab: the menu never expanded, and when it finally did via click, pressing Escape did nothing, trapping focus inside an invisible mobile drawer."
-* **Q2 (Current tools & gaps)**: "Lighthouse only checks markup syntax. It has no idea that our dropdown menu is completely inoperable via keyboard because it's built from styled `<div>` elements with `onClick` handlers rather than native `<button>` tags."
-* **Q3 (Trust in automated fixes)**: "If it can write standard CSS (like `:focus-visible` restoration) or insert a missing `aria-label` or keyboard listener, that saves me hours. But I want to see the before-and-after sequence."
-* **Q4 (Report vs. PR)**: "A clean report with one-click code copy and explanation of which WCAG criterion failed."
-
----
-
-### Conversation 3 — QA Lead / Accessibility Specialist
-* **Date**: Oct 23, 2026
-* **Role**: Lead QA Engineer specializing in Section 508 and WCAG 2.2 Level AA compliance audits.
-* **Q1 (Last problem)**: "Yesterday on a banking portal audit: a promotional credit card modal appeared on page load. When the modal was dismissed via Escape, focus reset to `document.body`, forcing keyboard and screen-reader users to Tab through 45 header links all over again."
-* **Q2 (Current tools & gaps)**: "Automated scanners only detect 25% to 30% of total WCAG defects. They completely miss focus management, modal focus traps, and logical tab sequences. Manual testing by our team takes 3 to 5 business days per release."
-* **Q3 (Trust in automated fixes)**: "Automated fixes are great only if validated deterministically. If the tool verifies that focus returns to the triggering button upon modal close, that provides mathematical proof of compliance."
-* **Q4 (Report vs. PR)**: "A structured export (HTML, Markdown, JSON) linking each barrier to its WCAG criterion with proof of re-testing."
+### Interview / Session 1
+- **Date:** [YYYY-MM-DD]
+- **Participant:** [Anonymous / Role / Identity]
+- **Assistive Technology / Modality:** [Screen reader (NVDA, JAWS, VoiceOver) / Keyboard-only / Switch access / Screen magnifier / Other]
+- **Test Context / Tasks Attempted:**
+  - [Task description]
+- **Observed Barriers & Navigation Issues:**
+  - [Observation 1]
+  - [Observation 2]
+- **Direct Quotes:**
+  - "[Quote from participant]"
+- **Actionable Takeaways:**
+  - [Takeaway 1]
+  - [Takeaway 2]
 
 ---
 
-### Conversation 4 — Assistive Technology Daily User (Keyboard-Only)
-* **Date**: Oct 23, 2026
-* **Role**: Software engineer and daily keyboard-only user (uses standard keyboard with switch device assistance due to motor control impairment).
-* **Q1 (Last problem)**: "Almost daily. The most infuriating barrier is a newsletter signup pop-up that traps the Tab key. Once focus enters the modal, pressing Tab just bounces between the email field and the submit button, and Escape doesn't dismiss it. Because I don't use a mouse, my only option is to close the browser tab and abandon the website."
-* **Q2 (Current tools & gaps)**: "Teams tell me their site passes automated accessibility tools. But passing a scanner doesn't mean the site is usable. When focus is invisible or trapped, you are locked out."
-* **Q3 (Trust in automated fixes)**: "If automated tools can actually test whether focus can leave a dialog, that would fix 80% of the showstopping barriers I encounter every week."
-* **Q4 (Delivery)**: "Whatever gets the developer to ship the fix faster."
+## Technical Context & Industry Benchmark Data
+
+While direct primary user interviews have not yet been conducted, BlindSpot's problem statement is grounded in published empirical research on automated accessibility scanning limitations:
+
+### 1. WebAIM Million Annual Study (2024)
+- **95.9% of home pages** had detectable WCAG 2 failures.
+- Across 1 million home pages, automated tools detected an average of **56.8 errors per page**.
+- **The Blind Spot**: WebAIM relies on automated DOM-tree rule checking (WAVE / axe-core engines). These engines excel at static token inspection (e.g., missing `alt` attributes, insufficient text contrast ratios, missing form labels). However, they cannot evaluate dynamic user interactions—such as whether pressing `Tab` traps the user inside a modal, whether a sticky banner obscures active focus, or whether dismissing an overlay returns focus to the triggering button.
+
+### 2. UK Government Digital Service (GDS) Audit
+The UK Government Digital Service conducted a formal audit comparing leading automated accessibility testing tools against known, manually verified accessibility barriers:
+- Automated accessibility testing tools detected **only ~30% to 40%** of total WCAG barriers.
+- Over **60% of barrier classes** went undetected by every static scanner tested.
+- The highest concentrations of undetected barriers were in:
+  1. **Keyboard operability (WCAG 2.1.1 & 2.1.2)**: Cyclic focus traps and controls unreachable via sequential keyboard navigation.
+  2. **Focus order and management (WCAG 2.4.3)**: Focus dropped to `document.body` after dialog dismissal, or reading order scrambled by positive tabindexes.
+  3. **Focus visibility and obscuration (WCAG 2.4.7 & 2.4.11)**: Global CSS `outline: none` overrides and focused elements hidden behind fixed/sticky viewports.
 
 ---
 
-## 3. Key Synthesis & Validated Themes
+## Scope Transparency & Limitations
 
-1. **The 'False Sense of Security' Crisis**: Rule-based scanners (axe-core, Lighthouse) miss the most debilitating accessibility barriers—keyboard traps, focus obscured by fixed headers, and focus drops after modal dismissals. Teams assume a score of 100 means their site is accessible.
-2. **Developers Demand Proof, Not Promises**: Developers reject unverified AI suggestions. Trust requires mathematical, browser-driven verification proving the barrier was eliminated without introducing regressions.
-3. **Surgical Runtime & Source Patches**: Developers prefer copying verified surgical patches (CSS rules, ARIA attributes, small focus management scripts) into their own codebase over intrusive automated PR bots.
-4. **Legal & Compliance Urgency**: With the European Accessibility Act (EAA) taking effect and ADA Title III web litigation rising, teams need exportable, auditable records mapping findings to exact WCAG 2.2 criteria.
-
----
-
-## 4. Primary Quote for Hackathon Submission
-
-> *"Automated scanners gave our release a clean bill of health, but our keyboard users were getting completely trapped inside newsletter modals. If an AI agent can physically Tab through the page, flag the trap, write the fix, and prove the fix in a real browser, that changes release confidence forever."*  
-> — **Senior Frontend Engineer, SaaS Checkout Platform (Interviewed Oct 22, 2026)**
+- **Chromium AXTree vs. Physical Screen Readers**:
+  BlindSpot queries the Chrome DevTools Protocol `Accessibility.getFullAXTree` endpoint to evaluate semantic accessibility tree structure. It does not run physical audio screen readers (such as NVDA, JAWS, or Apple VoiceOver) and cannot evaluate synthesized pronunciation, speech rate, or rotor navigation.
+- **Auditing Tool, Not Legal Certification**:
+  BlindSpot is an engineering auditing and developer feedback tool. Passing an automated keyboard audit does not constitute legal certification of WCAG compliance.

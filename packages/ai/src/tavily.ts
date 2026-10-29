@@ -1,6 +1,8 @@
 // tavily.ts — Tavily API integration for WCAG 2.2 research and accessibility guidelines.
 // Used to ground Super (analysis) and Ultra (fixer) in authoritative W3C WCAG documentation.
 
+import { recordTavilyCall } from "./ledger.js";
+
 export interface TavilyResult {
   query: string;
   url: string;
@@ -32,6 +34,13 @@ export async function searchWcag(wcagId: string, barrierName: string): Promise<T
     });
 
     const latencyMs = Date.now() - start;
+    recordTavilyCall({
+      id: `tavily-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      query,
+      latencyMs,
+      timestamp: new Date().toISOString(),
+    });
+
     if (!response.ok) return null;
 
     const data = (await response.json()) as {
@@ -49,6 +58,13 @@ export async function searchWcag(wcagId: string, barrierName: string): Promise<T
       latencyMs,
     };
   } catch {
+    const latencyMs = Date.now() - start;
+    recordTavilyCall({
+      id: `tavily-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      query,
+      latencyMs,
+      timestamp: new Date().toISOString(),
+    });
     return null;
   }
 }

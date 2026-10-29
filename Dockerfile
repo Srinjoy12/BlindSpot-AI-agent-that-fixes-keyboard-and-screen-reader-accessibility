@@ -2,7 +2,7 @@
 # Based on the official pinned Microsoft Playwright image
 # Runs as non-root user (pwuser) for secure execution on Nebius AI Cloud / Serverless Endpoints
 
-FROM mcr.microsoft.com/playwright:v1.48.2-noble
+FROM mcr.microsoft.com/playwright:v1.64.1-noble
 
 # Set working directory
 WORKDIR /app

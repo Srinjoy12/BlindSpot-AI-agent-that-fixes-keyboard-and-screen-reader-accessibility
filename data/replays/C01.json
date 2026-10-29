@@ -38,6 +38,12 @@
       "tavilyQueries": [
         "WCAG 2.1.1"
       ]
+    },
+    "baseline": {
+      "tool": "axe-core",
+      "version": "4.14.0",
+      "violationCount": 0,
+      "rules": []
     }
   },
   "forwardStops": [

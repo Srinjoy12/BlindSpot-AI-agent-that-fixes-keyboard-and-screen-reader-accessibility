@@ -14,7 +14,7 @@ export const ExportBar: React.FC<ExportBarProps> = ({ auditId, report }) => {
   const safeId = (report?.auditId || auditId).replace(/[^a-zA-Z0-9_-]/g, "_");
 
   const triggerClientDownload = (format: "html" | "markdown" | "json", e: React.MouseEvent) => {
-    if (!report) return; // Allow natural fallback to server href
+    if (!report) return;
 
     try {
       setDownloadingFormat(format);
@@ -60,33 +60,30 @@ export const ExportBar: React.FC<ExportBarProps> = ({ auditId, report }) => {
         justifyContent: "space-between",
         alignItems: "center",
         flexWrap: "wrap",
-        gap: "12px",
+        gap: "var(--space-3)",
         backgroundColor: "var(--color-surface-1)",
         border: "1px solid var(--color-border-subdued)",
-        borderRadius: "var(--radius-lg)",
-        padding: "16px 20px",
-        marginBottom: "20px",
+        borderRadius: "var(--radius-md)",
+        padding: "var(--space-4)",
+        marginBottom: "var(--space-6)",
       }}
     >
       <div>
-        <div
+        <h2
           style={{
-            fontSize: "11px",
+            fontSize: "var(--font-size-base)",
             fontWeight: 600,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            color: "var(--color-text-muted)",
-            fontFamily: "var(--font-mono)",
+            color: "var(--color-text-primary)",
           }}
         >
-          Audit Deliverables
-        </div>
-        <div style={{ fontSize: "12px", color: "var(--color-text-secondary)", marginTop: "2px" }}>
-          Export deterministic test results, WCAG citations, and verified patches for CI review
+          Audit deliverables
+        </h2>
+        <div style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", marginTop: "2px" }}>
+          Export deterministic test results, WCAG citations, and verified patches
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
         {/* HTML Report */}
         <a
           href={`/api/reports/${auditId}/html`}
@@ -95,20 +92,20 @@ export const ExportBar: React.FC<ExportBarProps> = ({ auditId, report }) => {
           style={{
             display: "inline-flex",
             alignItems: "center",
-            padding: "6px 12px",
-            borderRadius: "var(--radius-xs)",
-            backgroundColor: "var(--color-accent-emerald-subtle)",
-            border: "1px solid var(--color-accent-emerald-border)",
-            color: "var(--color-accent-emerald)",
-            fontSize: "12px",
-            fontFamily: "var(--font-mono)",
+            padding: "var(--space-2) var(--space-3)",
+            borderRadius: "var(--radius-sm)",
+            backgroundColor: "var(--color-surface-2)",
+            border: "1px solid var(--color-border-ui)",
+            color: "var(--color-text-primary)",
+            fontSize: "var(--font-size-sm)",
             fontWeight: 600,
             textDecoration: "none",
+            minHeight: "36px",
             cursor: "pointer",
           }}
           title="Download standalone, accessible HTML report (.html)"
         >
-          {downloadingFormat === "html" ? "Generating..." : "HTML Report (.html) ↓"}
+          {downloadingFormat === "html" ? "Generating..." : "HTML report (.html) ↓"}
         </a>
 
         {/* Markdown */}
@@ -119,20 +116,20 @@ export const ExportBar: React.FC<ExportBarProps> = ({ auditId, report }) => {
           style={{
             display: "inline-flex",
             alignItems: "center",
-            padding: "6px 12px",
-            borderRadius: "var(--radius-xs)",
+            padding: "var(--space-2) var(--space-3)",
+            borderRadius: "var(--radius-sm)",
             backgroundColor: "var(--color-surface-2)",
             border: "1px solid var(--color-border-subdued)",
-            color: "var(--color-text-primary)",
-            fontSize: "12px",
-            fontFamily: "var(--font-mono)",
-            fontWeight: 500,
+            color: "var(--color-text-secondary)",
+            fontSize: "var(--font-size-sm)",
+            fontWeight: 400,
             textDecoration: "none",
+            minHeight: "36px",
             cursor: "pointer",
           }}
           title="Download Markdown summary document (.md)"
         >
-          {downloadingFormat === "markdown" ? "Generating..." : "Markdown (.md) ↓"}
+          {downloadingFormat === "markdown" ? "Generating..." : "Markdown summary (.md) ↓"}
         </a>
 
         {/* JSON */}
@@ -143,20 +140,20 @@ export const ExportBar: React.FC<ExportBarProps> = ({ auditId, report }) => {
           style={{
             display: "inline-flex",
             alignItems: "center",
-            padding: "6px 12px",
-            borderRadius: "var(--radius-xs)",
+            padding: "var(--space-2) var(--space-3)",
+            borderRadius: "var(--radius-sm)",
             backgroundColor: "var(--color-surface-2)",
             border: "1px solid var(--color-border-subdued)",
-            color: "var(--color-text-secondary)",
-            fontSize: "12px",
-            fontFamily: "var(--font-mono)",
-            fontWeight: 500,
+            color: "var(--color-text-muted)",
+            fontSize: "var(--font-size-sm)",
+            fontWeight: 400,
             textDecoration: "none",
+            minHeight: "36px",
             cursor: "pointer",
           }}
           title="Download JSON data schema (.json)"
         >
-          {downloadingFormat === "json" ? "Generating..." : "JSON Data (.json) ↓"}
+          {downloadingFormat === "json" ? "Generating..." : "JSON schema (.json) ↓"}
         </a>
       </div>
     </div>

@@ -62,7 +62,7 @@
 
 <!-- SEEDED BUG: Cookie banner is at the end of the DOM — Tab reaches page content before reaching this -->
 <!-- BUG 1: Focus is NOT moved to the banner when it appears (violates best practice) -->
-<!-- BUG 2: Focus is lost to document.body after dismissal (violates D8 / D11 pattern) -->
+<!-- BUG 2: Focus is lost to document.body after dismissal (violates D8 dialog/banner focus management) -->
 <div class="cookie-banner" id="cookie-banner" role="alertdialog" aria-labelledby="cookie-title">
   <p id="cookie-title">
     We use cookies to improve your experience. By continuing, you agree to our <a href="#">cookie policy</a>.
@@ -79,7 +79,7 @@
     banner.remove();
     // BUG: focus is not returned anywhere after removal
     // A correct implementation would do: document.getElementById('some-logical-element').focus()
-    // This causes focus loss — D11 (focus lost after interaction)
+    // This causes focus loss — D8 (dialog/banner focus management)
   }
   
   // BUG: Focus is NOT moved to the banner on page load

@@ -3,12 +3,15 @@
 
 import { chromium, type Browser, type BrowserContext, type Page } from "playwright";
 
+import { attachSsrfGuard, checkUrl } from "./ssrf.js";
+
 export interface SessionOptions {
   auditId: string;
   targetUrl: string;
   navigationTimeoutMs?: number; // default: 20_000
   viewportWidth?: number; // default: 1280
   viewportHeight?: number; // default: 800
+  appPort?: number;
 }
 
 export interface Session {
@@ -36,6 +39,9 @@ async function getSharedBrowser(): Promise<Browser> {
 
 /** Starts a fresh isolated browser context for one audit. */
 export async function startSession(opts: SessionOptions): Promise<Session> {
+  // Validate target URL before opening context
+  await checkUrl(opts.targetUrl, { allowFixtures: true, appPort: opts.appPort });
+
   const browser = await getSharedBrowser();
 
   const context = await browser.newContext({
@@ -49,6 +55,12 @@ export async function startSession(opts: SessionOptions): Promise<Session> {
     // Emulate a standard desktop user agent
     userAgent:
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 BlindSpot/1.0",
+  });
+
+  // Attach SSRF guard to every request in this context (main frame, redirects, fetches, subresources)
+  await attachSsrfGuard(context, {
+    allowFixtures: true,
+    appPort: opts.appPort,
   });
 
   const page = await context.newPage();

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Stat } from "./ui/Stat.js";
 
 export interface LedgerCall {
   tier: "nano" | "super" | "ultra";
@@ -29,8 +30,8 @@ export const LedgerDrawer: React.FC<LedgerDrawerProps> = ({ ledger }) => {
       style={{
         backgroundColor: "var(--color-surface-1)",
         border: "1px solid var(--color-border-subdued)",
-        borderRadius: "var(--radius-lg)",
-        marginBottom: "20px",
+        borderRadius: "var(--radius-md)",
+        marginBottom: "var(--space-6)",
         overflow: "hidden",
       }}
     >
@@ -38,7 +39,7 @@ export const LedgerDrawer: React.FC<LedgerDrawerProps> = ({ ledger }) => {
         onClick={() => setIsOpen(!isOpen)}
         style={{
           width: "100%",
-          padding: "14px 20px",
+          padding: "var(--space-4)",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -46,43 +47,41 @@ export const LedgerDrawer: React.FC<LedgerDrawerProps> = ({ ledger }) => {
           border: "none",
           color: "inherit",
           textAlign: "left",
+          cursor: "pointer",
         }}
         aria-expanded={isOpen}
       >
         <div>
           <div
             style={{
-              fontSize: "11px",
+              fontSize: "var(--font-size-base)",
               fontWeight: 600,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              color: "var(--color-text-muted)",
-              fontFamily: "var(--font-mono)",
+              color: "var(--color-text-primary)",
             }}
           >
-            NVIDIA Token Factory & Telemetry Ledger
+            Token factory telemetry ledger
           </div>
-          <div style={{ fontSize: "12px", color: "var(--color-text-secondary)", marginTop: "2px" }}>
+          <div style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", marginTop: "2px" }}>
             {ledger.length} model invocations · {(totalLatencyMs / 1000).toFixed(2)}s total compute time
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div style={{ display: "flex", gap: "6px", fontSize: "11px", fontFamily: "var(--font-mono)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
+          <div style={{ display: "flex", gap: "var(--space-2)", fontSize: "var(--font-size-sm)", fontFamily: "var(--font-mono)" }}>
             <span
               style={{
-                padding: "2px 5px",
-                borderRadius: "var(--radius-xs)",
+                padding: "2px 8px",
+                borderRadius: "var(--radius-sm)",
                 border: "1px solid var(--color-border-subdued)",
-                color: "var(--color-border-focus)",
+                color: "var(--color-text-secondary)",
               }}
             >
               Nano: {nanoCalls.length}
             </span>
             <span
               style={{
-                padding: "2px 5px",
-                borderRadius: "var(--radius-xs)",
+                padding: "2px 8px",
+                borderRadius: "var(--radius-sm)",
                 border: "1px solid var(--color-border-subdued)",
                 color: "var(--color-severity-major)",
               }}
@@ -91,10 +90,10 @@ export const LedgerDrawer: React.FC<LedgerDrawerProps> = ({ ledger }) => {
             </span>
             <span
               style={{
-                padding: "2px 5px",
-                borderRadius: "var(--radius-xs)",
+                padding: "2px 8px",
+                borderRadius: "var(--radius-sm)",
                 border: "1px solid var(--color-border-subdued)",
-                color: "var(--color-accent-emerald)",
+                color: "var(--color-status-success)",
               }}
             >
               Ultra: {ultraCalls.length}
@@ -103,12 +102,11 @@ export const LedgerDrawer: React.FC<LedgerDrawerProps> = ({ ledger }) => {
 
           <span
             style={{
-              fontSize: "11px",
-              fontFamily: "var(--font-mono)",
-              color: "var(--color-text-muted)",
-              padding: "2px 6px",
+              fontSize: "var(--font-size-sm)",
+              color: "var(--color-text-secondary)",
+              padding: "4px 10px",
               backgroundColor: "var(--color-surface-2)",
-              borderRadius: "var(--radius-xs)",
+              borderRadius: "var(--radius-sm)",
               border: "1px solid var(--color-border-subdued)",
             }}
           >
@@ -120,7 +118,7 @@ export const LedgerDrawer: React.FC<LedgerDrawerProps> = ({ ledger }) => {
       {isOpen && (
         <div
           style={{
-            padding: "0 20px 20px",
+            padding: "0 var(--space-4) var(--space-4)",
             borderTop: "1px solid var(--color-border-subdued)",
           }}
         >
@@ -128,81 +126,42 @@ export const LedgerDrawer: React.FC<LedgerDrawerProps> = ({ ledger }) => {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "8px",
-              margin: "14px 0",
+              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+              gap: "var(--space-3)",
+              margin: "var(--space-4) 0",
             }}
           >
             <div
               style={{
-                padding: "10px 14px",
-                borderRadius: "var(--radius-xs)",
+                padding: "var(--space-3)",
+                borderRadius: "var(--radius-sm)",
                 backgroundColor: "var(--color-surface-2)",
                 border: "1px solid var(--color-border-subdued)",
               }}
             >
-              <div style={{ fontSize: "10px", color: "var(--color-text-muted)", fontFamily: "var(--font-mono)" }}>
-                TOKENS IN
-              </div>
-              <div
-                style={{
-                  fontSize: "16px",
-                  fontWeight: 700,
-                  fontFamily: "var(--font-mono)",
-                  color: "var(--color-text-primary)",
-                  marginTop: "2px",
-                }}
-              >
-                {totalTokensIn.toLocaleString()}
-              </div>
+              <Stat label="Tokens in" value={totalTokensIn.toLocaleString()} />
             </div>
 
             <div
               style={{
-                padding: "10px 14px",
-                borderRadius: "var(--radius-xs)",
+                padding: "var(--space-3)",
+                borderRadius: "var(--radius-sm)",
                 backgroundColor: "var(--color-surface-2)",
                 border: "1px solid var(--color-border-subdued)",
               }}
             >
-              <div style={{ fontSize: "10px", color: "var(--color-text-muted)", fontFamily: "var(--font-mono)" }}>
-                TOKENS OUT
-              </div>
-              <div
-                style={{
-                  fontSize: "16px",
-                  fontWeight: 700,
-                  fontFamily: "var(--font-mono)",
-                  color: "var(--color-accent-emerald)",
-                  marginTop: "2px",
-                }}
-              >
-                {totalTokensOut.toLocaleString()}
-              </div>
+              <Stat label="Tokens out" value={totalTokensOut.toLocaleString()} valueColor="var(--color-status-success)" />
             </div>
 
             <div
               style={{
-                padding: "10px 14px",
-                borderRadius: "var(--radius-xs)",
+                padding: "var(--space-3)",
+                borderRadius: "var(--radius-sm)",
                 backgroundColor: "var(--color-surface-2)",
                 border: "1px solid var(--color-border-subdued)",
               }}
             >
-              <div style={{ fontSize: "10px", color: "var(--color-text-muted)", fontFamily: "var(--font-mono)" }}>
-                TOTAL AI LATENCY
-              </div>
-              <div
-                style={{
-                  fontSize: "16px",
-                  fontWeight: 700,
-                  fontFamily: "var(--font-mono)",
-                  color: "var(--color-border-focus)",
-                  marginTop: "2px",
-                }}
-              >
-                {(totalLatencyMs / 1000).toFixed(2)}s
-              </div>
+              <Stat label="Total model latency" value={`${(totalLatencyMs / 1000).toFixed(2)}s`} />
             </div>
           </div>
 
@@ -212,7 +171,7 @@ export const LedgerDrawer: React.FC<LedgerDrawerProps> = ({ ledger }) => {
               style={{
                 width: "100%",
                 borderCollapse: "collapse",
-                fontSize: "11px",
+                fontSize: "var(--font-size-sm)",
                 fontFamily: "var(--font-mono)",
                 textAlign: "left",
               }}
@@ -221,14 +180,15 @@ export const LedgerDrawer: React.FC<LedgerDrawerProps> = ({ ledger }) => {
                 <tr
                   style={{
                     borderBottom: "1px solid var(--color-border-subdued)",
-                    color: "var(--color-text-muted)",
+                    color: "var(--color-text-secondary)",
+                    backgroundColor: "var(--color-surface-2)",
                   }}
                 >
-                  <th style={{ padding: "6px 10px" }}>Tier</th>
-                  <th style={{ padding: "6px 10px" }}>Model</th>
-                  <th style={{ padding: "6px 10px" }}>Prompt Tokens</th>
-                  <th style={{ padding: "6px 10px" }}>Completion Tokens</th>
-                  <th style={{ padding: "6px 10px" }}>Latency</th>
+                  <th scope="col" style={{ padding: "8px 12px", fontWeight: 600 }}>Tier</th>
+                  <th scope="col" style={{ padding: "8px 12px", fontWeight: 600 }}>Model</th>
+                  <th scope="col" style={{ padding: "8px 12px", fontWeight: 600 }}>Prompt tokens</th>
+                  <th scope="col" style={{ padding: "8px 12px", fontWeight: 600 }}>Completion tokens</th>
+                  <th scope="col" style={{ padding: "8px 12px", fontWeight: 600 }}>Latency</th>
                 </tr>
               </thead>
               <tbody>
@@ -236,38 +196,28 @@ export const LedgerDrawer: React.FC<LedgerDrawerProps> = ({ ledger }) => {
                   <tr
                     key={i}
                     style={{
-                      borderBottom: "1px solid rgba(255, 255, 255, 0.03)",
+                      borderBottom: "1px solid var(--color-border-subdued)",
                     }}
                   >
-                    <td style={{ padding: "6px 10px" }}>
-                      <span
-                        style={{
-                          textTransform: "uppercase",
-                          fontWeight: 700,
-                          fontSize: "9px",
-                          padding: "1px 4px",
-                          borderRadius: "var(--radius-xs)",
-                          backgroundColor:
-                            c.tier === "ultra"
-                              ? "var(--color-accent-emerald-subtle)"
-                              : c.tier === "super"
-                              ? "var(--color-severity-major-bg)"
-                              : "rgba(59, 130, 246, 0.1)",
-                          color:
-                            c.tier === "ultra"
-                              ? "var(--color-accent-emerald)"
-                              : c.tier === "super"
-                              ? "var(--color-severity-major)"
-                              : "var(--color-border-focus)",
-                        }}
-                      >
-                        {c.tier}
-                      </span>
-                    </td>
-                    <td style={{ padding: "6px 10px", color: "var(--color-text-primary)" }}>{c.model}</td>
-                    <td style={{ padding: "6px 10px", color: "var(--color-text-muted)" }}>{c.tokensIn}</td>
-                    <td style={{ padding: "6px 10px", color: "var(--color-accent-emerald)" }}>{c.tokensOut}</td>
-                    <td style={{ padding: "6px 10px", color: "var(--color-text-secondary)" }}>{c.latencyMs}ms</td>
+                    <th
+                      scope="row"
+                      style={{
+                        padding: "8px 12px",
+                        fontWeight: 600,
+                        color:
+                          c.tier === "ultra"
+                            ? "var(--color-status-success)"
+                            : c.tier === "super"
+                            ? "var(--color-severity-major)"
+                            : "var(--color-text-primary)",
+                      }}
+                    >
+                      {c.tier}
+                    </th>
+                    <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>{c.model}</td>
+                    <td style={{ padding: "8px 12px", color: "var(--color-text-secondary)" }}>{c.tokensIn}</td>
+                    <td style={{ padding: "8px 12px", color: "var(--color-status-success)" }}>{c.tokensOut}</td>
+                    <td style={{ padding: "8px 12px", color: "var(--color-text-muted)" }}>{c.latencyMs}ms</td>
                   </tr>
                 ))}
               </tbody>

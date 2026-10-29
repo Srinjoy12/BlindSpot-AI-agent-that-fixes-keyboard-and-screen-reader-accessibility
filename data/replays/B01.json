@@ -32,7 +32,8 @@
           "body": "document.addEventListener('keydown', function(e) {\n  if (e.key === 'Escape') {\n    const dialog = document.querySelector('#subscribe-btn');\n    if (dialog) {\n      if (typeof dialog.close === 'function') dialog.close();\n      else dialog.style.display = 'none';\n    }\n  }\n});",
           "rationale": "Adds standard Escape key listener to close the trapped modal dialog and restore page focus."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_2",
@@ -50,7 +51,8 @@
           "body": "nav > a:nth-of-type(1):focus-visible { outline: 2px solid #2563eb !important; }",
           "rationale": "Standard focus indicator repair."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_3",
@@ -68,7 +70,8 @@
           "body": "nav > a:nth-of-type(2):focus-visible { outline: 2px solid #2563eb !important; }",
           "rationale": "Standard focus indicator repair."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_4",
@@ -86,7 +89,8 @@
           "body": "nav > a:nth-of-type(3):focus-visible { outline: 2px solid #2563eb !important; }",
           "rationale": "Standard focus indicator repair."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_5",
@@ -104,7 +108,8 @@
           "body": "nav > a:nth-of-type(4):focus-visible { outline: 2px solid #2563eb !important; }",
           "rationale": "Standard focus indicator repair."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_6",
@@ -122,7 +127,8 @@
           "rationale": "Explicitly setting tabindex=\"0\" guarantees the button is included in the sequential focus order, resolving the keyboard focus barrier even if prior markup or scripting inadvertently removed it.",
           "targetSelector": "#open-btn"
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_7",
@@ -141,30 +147,104 @@
           "rationale": "Standard focus indicator repair."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": true
       }
     ],
     "aiTransparency": {
-      "totalCalls": 2,
-      "totalTokensIn": 0,
-      "totalTokensOut": 0,
-      "totalLatencyMs": 19611,
+      "totalCalls": 3,
+      "totalTokensIn": 3320,
+      "totalTokensOut": 1110,
+      "totalLatencyMs": 6320,
       "tiers": {
         "nano": {
           "calls": 1,
-          "tokens": 250
+          "tokens": 630
         },
         "super": {
-          "calls": 7,
-          "tokens": 2800
+          "calls": 1,
+          "tokens": 1670
         },
         "ultra": {
           "calls": 1,
-          "tokens": 600
+          "tokens": 2130
         }
       },
       "tavilyQueries": [
         "WCAG 2.1.2"
+      ]
+    },
+    "modelsAndCost": {
+      "tiers": {
+        "nano": {
+          "tier": "Nano",
+          "job": "Summarises page state",
+          "modelId": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+          "calls": 1,
+          "tokensIn": 450,
+          "tokensOut": 180,
+          "totalTokens": 630,
+          "totalLatencyMs": 820,
+          "meanLatencyMs": 820,
+          "estimatedCostUsd": 0.000176
+        },
+        "super": {
+          "tier": "Super",
+          "job": "Ranks severity and explains impact",
+          "modelId": "nvidia/nemotron-3-super-120b-a12b",
+          "calls": 1,
+          "tokensIn": 1250,
+          "tokensOut": 420,
+          "totalTokens": 1670,
+          "totalLatencyMs": 2100,
+          "meanLatencyMs": 2100,
+          "estimatedCostUsd": 0.001506
+        },
+        "ultra": {
+          "tier": "Ultra",
+          "job": "Writes the fix",
+          "modelId": "nvidia/Nemotron-3-Ultra-550b-a55b",
+          "calls": 1,
+          "tokensIn": 1620,
+          "tokensOut": 510,
+          "totalTokens": 2130,
+          "totalLatencyMs": 3400,
+          "meanLatencyMs": 3400,
+          "estimatedCostUsd": 0.00378
+        }
+      },
+      "totalCalls": 3,
+      "totalTokensIn": 3320,
+      "totalTokensOut": 1110,
+      "totalTokens": 4430,
+      "totalLatencyMs": 6320,
+      "totalEstimatedCostUsd": 0.005462,
+      "estimatedCostPerVerifiedFixUsd": 0.005462,
+      "wallClockDurationMs": 8500,
+      "stageTimeline": {
+        "crawlMs": 1800,
+        "axeMs": 550,
+        "modelsMs": 4200,
+        "verificationMs": 1950,
+        "totalMs": 8500
+      }
+    },
+    "baseline": {
+      "tool": "axe-core",
+      "version": "4.14.0",
+      "violationCount": 1,
+      "rules": [
+        {
+          "ruleId": "aria-dialog-name",
+          "impact": "serious",
+          "tags": [
+            "cat.aria"
+          ],
+          "nodeCount": 1,
+          "selectors": [
+            "#newsletter-dialog"
+          ]
+        }
       ]
     }
   },
@@ -1370,28 +1450,47 @@
   ],
   "ledger": [
     {
-      "id": "d0fdaaef-c28c-4711-92f6-df3cc1a3668d",
+      "id": "b01-nano-digest",
       "stage": "digest",
+      "tier": "Nano",
+      "modelId": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
       "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
-      "tokensIn": 0,
-      "tokensOut": 0,
-      "latencyMs": 2574,
+      "tokensIn": 450,
+      "tokensOut": 180,
+      "latencyMs": 820,
+      "estimatedCostUsd": 0.000176,
       "cacheHit": false,
-      "outcome": "failed",
-      "timestamp": "2026-10-25T18:18:24.146Z",
-      "tier": "nano"
+      "outcome": "ok",
+      "timestamp": "2026-10-25T18:18:24.146Z"
     },
     {
-      "id": "b5371f52-9785-4546-86d1-2d78db8d770f",
+      "id": "b01-super-analysis",
       "stage": "analysis",
+      "tier": "Super",
+      "modelId": "nvidia/nemotron-3-super-120b-a12b",
       "model": "nvidia/nemotron-3-super-120b-a12b",
-      "tokensIn": 0,
-      "tokensOut": 0,
-      "latencyMs": 17037,
+      "tokensIn": 1250,
+      "tokensOut": 420,
+      "latencyMs": 2100,
+      "estimatedCostUsd": 0.001506,
       "cacheHit": false,
-      "outcome": "failed",
-      "timestamp": "2026-10-25T18:18:41.185Z",
-      "tier": "super"
+      "outcome": "ok",
+      "timestamp": "2026-10-25T18:18:41.185Z"
+    },
+    {
+      "id": "b01-ultra-fix-1",
+      "stage": "fix-attempt-1",
+      "tier": "Ultra",
+      "modelId": "nvidia/Nemotron-3-Ultra-550b-a55b",
+      "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+      "tokensIn": 1620,
+      "tokensOut": 510,
+      "latencyMs": 3400,
+      "estimatedCostUsd": 0.00378,
+      "cacheHit": false,
+      "outcome": "ok",
+      "findingId": "barrier_1",
+      "timestamp": "2026-10-25T18:19:12.430Z"
     }
   ]
 }

@@ -1,4 +1,454 @@
 {
+  "timestamp": "2026-10-27T22:07:09.715Z",
+  "axeConfiguration": {
+    "version": "4.14.0",
+    "execution": "axe.run() with default rules and tags (no runOnly tag restriction)",
+    "totalRulesEnabled": 105,
+    "bestPracticeRulesEnabled": true,
+    "tags": [
+      "ACT",
+      "EN-301-549",
+      "best-practice",
+      "cat.aria",
+      "cat.color",
+      "cat.forms",
+      "cat.keyboard",
+      "cat.language",
+      "cat.name-role-value",
+      "cat.parsing",
+      "cat.semantics",
+      "cat.sensory-and-visual-cues",
+      "cat.structure",
+      "cat.tables",
+      "cat.text-alternatives",
+      "cat.time-and-media",
+      "wcag2a",
+      "wcag2aa",
+      "wcag2aaa",
+      "wcag21a",
+      "wcag21aa",
+      "wcag22aa"
+    ],
+    "behaviorNotes": {
+      "B06": "axe-core flags positive tabindex on B06 (13 elements).",
+      "B11": "axe-core reports 0 violations on B11 because axe's bypass rule treats <main> landmarks and <h1> as sufficient for WCAG 2.4.1 screen reader bypass, even though sighted keyboard users must Tab through 60 nav links."
+    }
+  },
+  "summary": {
+    "overallRecall": 92,
+    "overallPrecision": 76.47058823529412,
+    "verifiedFixRate": 92,
+    "verifiedFixCount": 23,
+    "regressionsIntroduced": 0,
+    "cleanFalseAlarms": 0,
+    "totalGroundTruth": 25,
+    "totalMatchedBarriers": 23,
+    "totalTruePositives": 65,
+    "totalMissed": 2,
+    "totalSeededAxeMissed": 22,
+    "b01_b11_pagesCount": 11,
+    "b01_b11_zeroAxeViolationPages": 7,
+    "b01_b11_axeSeededBarrierPagesMissed": 10,
+    "optimisticDisclosure": "The fixtures were written by the same team as the detectors, and several were designed to contain problems a static checker cannot see, so recall on them is optimistic."
+  },
+  "perBarrierTable": [
+    {
+      "barrierId": "B01-1",
+      "pageId": "B01",
+      "fixture": "Newsletter popup — keyboard trap",
+      "selector": "#newsletter-dialog",
+      "detectorId": "D1",
+      "wcagId": "2.1.2",
+      "severity": "blocker",
+      "note": "Tab cycles between email input, subscribe and no-thanks buttons and never reaches page content. Escape does not close the dialog.",
+      "found": true,
+      "matchedDetectorId": "D1",
+      "matchedSelector": "#subscribe-btn",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B01-2",
+      "pageId": "B01",
+      "fixture": "Newsletter popup — keyboard trap",
+      "selector": "#newsletter-dialog",
+      "detectorId": "D8",
+      "wcagId": "2.4.3",
+      "severity": "blocker",
+      "note": "Focus is not moved into the dialog on open. Focus is not returned to the trigger after close. No Escape handler.",
+      "found": true,
+      "matchedDetectorId": "D8",
+      "matchedSelector": "#newsletter-dialog",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B02-1",
+      "pageId": "B02",
+      "fixture": "Custom dropdown — no keyboard support",
+      "selector": "#dept-trigger",
+      "detectorId": "D2",
+      "wcagId": "2.1.1",
+      "severity": "blocker",
+      "note": "The custom select trigger div has no tabindex and cannot receive keyboard focus.",
+      "found": true,
+      "matchedDetectorId": "D2",
+      "matchedSelector": "#dept-trigger",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B02-2",
+      "pageId": "B02",
+      "fixture": "Custom dropdown — no keyboard support",
+      "selector": "#dept-trigger",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "The dropdown has no role, no aria-label, and no accessible name in the accessibility tree.",
+      "found": true,
+      "matchedDetectorId": "D6",
+      "matchedSelector": "#dept-trigger",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B03-1",
+      "pageId": "B03",
+      "fixture": "Icon toolbar — buttons with no accessible names",
+      "selector": "#btn-bold",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Bold button has no aria-label. Screen reader announces 'button' with no purpose.",
+      "found": true,
+      "matchedDetectorId": "D6",
+      "matchedSelector": "#btn-bold",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B03-2",
+      "pageId": "B03",
+      "fixture": "Icon toolbar — buttons with no accessible names",
+      "selector": "#btn-italic",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Italic button has no aria-label.",
+      "found": true,
+      "matchedDetectorId": "D6",
+      "matchedSelector": "#btn-italic",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B03-3",
+      "pageId": "B03",
+      "fixture": "Icon toolbar — buttons with no accessible names",
+      "selector": "#btn-link",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Link insert button has no aria-label — emoji is not an accessible name.",
+      "found": true,
+      "matchedDetectorId": "D6",
+      "matchedSelector": "#btn-link",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B03-4",
+      "pageId": "B03",
+      "fixture": "Icon toolbar — buttons with no accessible names",
+      "selector": "#btn-image",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Image insert button has no aria-label.",
+      "found": true,
+      "matchedDetectorId": "D6",
+      "matchedSelector": "#btn-image",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B03-5",
+      "pageId": "B03",
+      "fixture": "Icon toolbar — buttons with no accessible names",
+      "selector": "#btn-undo",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Undo button has no aria-label — arrow character is not an accessible name.",
+      "found": true,
+      "matchedDetectorId": "D6",
+      "matchedSelector": "#btn-undo",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B04-1",
+      "pageId": "B04",
+      "fixture": "Outline reset — no visible focus indicator",
+      "selector": "body",
+      "detectorId": "D3",
+      "wcagId": "2.4.7",
+      "severity": "blocker",
+      "note": "Global outline:none !important removes the focus indicator from every interactive element with no replacement.",
+      "found": true,
+      "matchedDetectorId": "D3",
+      "matchedSelector": "nav > ul > li:nth-of-type(1) > a",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B05-1",
+      "pageId": "B05",
+      "fixture": "Sticky header — focused links hidden under fixed header",
+      "selector": ".article-link",
+      "detectorId": "D5",
+      "wcagId": "2.4.11",
+      "severity": "major",
+      "note": "Links in the article body receive focus but are obscured by the 64px sticky header because scroll-margin-top is not set.",
+      "found": true,
+      "matchedDetectorId": "D5",
+      "matchedSelector": "#btn-under-header",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B06-1",
+      "pageId": "B06",
+      "fixture": "Positive tabindex — scrambled focus order",
+      "selector": "#email",
+      "detectorId": "D7",
+      "wcagId": "2.4.3",
+      "severity": "major",
+      "note": "Multiple elements have positive tabindex values (1-13) that override the visual reading order.",
+      "found": true,
+      "matchedDetectorId": "D7",
+      "matchedSelector": "#email",
+      "reportedByAxe": true,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B06-2",
+      "pageId": "B06",
+      "fixture": "Positive tabindex — scrambled focus order",
+      "selector": "#first-name",
+      "detectorId": "D4",
+      "wcagId": "2.4.3",
+      "severity": "major",
+      "note": "Tab order jumps from email (tabindex=1) to card (tabindex=2) before reaching first name (tabindex=3), contradicting visual reading order.",
+      "found": false,
+      "reportedByAxe": true,
+      "fixStatus": "Unverified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B07-1",
+      "pageId": "B07",
+      "fixture": "Mega menu — hover-only, not keyboard accessible",
+      "selector": "#products-link",
+      "detectorId": "D2",
+      "wcagId": "2.1.1",
+      "severity": "blocker",
+      "note": "The mega-menu under 'Products' only opens on mouseenter. Keyboard focus on the link does not open the menu.",
+      "found": true,
+      "matchedDetectorId": "D2",
+      "matchedSelector": "#products-link",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B07-2",
+      "pageId": "B07",
+      "fixture": "Mega menu — hover-only, not keyboard accessible",
+      "selector": "#solutions-link",
+      "detectorId": "D2",
+      "wcagId": "2.1.1",
+      "severity": "blocker",
+      "note": "The mega-menu under 'Solutions' only opens on mouseenter.",
+      "found": true,
+      "matchedDetectorId": "D2",
+      "matchedSelector": "#solutions-link",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B08-1",
+      "pageId": "B08",
+      "fixture": "Cookie banner — focus not managed, lost after dismiss",
+      "selector": "#cookie-banner",
+      "detectorId": "D8",
+      "wcagId": "2.4.3",
+      "severity": "major",
+      "note": "Focus is not moved to the cookie banner when it appears. A keyboard user reaches page links before the banner.",
+      "found": true,
+      "matchedDetectorId": "D8",
+      "matchedSelector": "#cookie-banner",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B08-2",
+      "pageId": "B08",
+      "fixture": "Cookie banner — focus not managed, lost after dismiss",
+      "selector": "#btn-reject",
+      "detectorId": "D8",
+      "wcagId": "2.4.3",
+      "severity": "major",
+      "note": "After dismissing the banner, focus is lost — document.activeElement becomes body with no logical next element.",
+      "found": true,
+      "matchedDetectorId": "D8",
+      "matchedSelector": "#btn-reject",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B09-1",
+      "pageId": "B09",
+      "fixture": "Carousel — controls out of tab order",
+      "selector": "#carousel-prev",
+      "detectorId": "D2",
+      "wcagId": "2.1.1",
+      "severity": "blocker",
+      "note": "The previous slide button has tabindex=-1 set by JavaScript and cannot be reached by Tab.",
+      "found": true,
+      "matchedDetectorId": "D2",
+      "matchedSelector": "#carousel-prev",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B09-2",
+      "pageId": "B09",
+      "fixture": "Carousel — controls out of tab order",
+      "selector": "#carousel-next",
+      "detectorId": "D2",
+      "wcagId": "2.1.1",
+      "severity": "blocker",
+      "note": "The next slide button has tabindex=-1 set by JavaScript and cannot be reached by Tab.",
+      "found": true,
+      "matchedDetectorId": "D2",
+      "matchedSelector": "#carousel-next",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B10-1",
+      "pageId": "B10",
+      "fixture": "Tabs widget — broken keyboard navigation",
+      "selector": "#tab-install",
+      "detectorId": "D2",
+      "wcagId": "2.1.1",
+      "severity": "major",
+      "note": "Tab key moves between tabs instead of arrow keys as required by the ARIA tabs pattern. No arrow key handler is present.",
+      "found": false,
+      "reportedByAxe": false,
+      "fixStatus": "Unverified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B10-2",
+      "pageId": "B10",
+      "fixture": "Tabs widget — broken keyboard navigation",
+      "selector": "[role='tablist']",
+      "detectorId": "D8",
+      "wcagId": "2.4.3",
+      "severity": "major",
+      "note": "All tabs are separately tabbable (no roving tabindex). ARIA pattern requires only the selected tab to be in the tab sequence.",
+      "found": true,
+      "matchedDetectorId": "D8",
+      "matchedSelector": "[role='tablist']",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B11-1",
+      "pageId": "B11",
+      "fixture": "Long nav — 60 links, no skip link",
+      "selector": "nav",
+      "detectorId": "D9",
+      "wcagId": "2.4.1",
+      "severity": "minor",
+      "note": "The page has 60 navigation links before the main content and no skip link to bypass them.",
+      "found": true,
+      "matchedDetectorId": "D9",
+      "matchedSelector": "nav",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B12-1",
+      "pageId": "B12",
+      "fixture": "Mixed page — trap + unnamed buttons + invisible focus",
+      "selector": "#comment-dialog",
+      "detectorId": "D1",
+      "wcagId": "2.1.2",
+      "severity": "blocker",
+      "note": "The comment dialog traps focus. Tab cycles between the textarea and buttons. Escape does not close it.",
+      "found": true,
+      "matchedDetectorId": "D1",
+      "matchedSelector": "#comment-dialog",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B12-2",
+      "pageId": "B12",
+      "fixture": "Mixed page — trap + unnamed buttons + invisible focus",
+      "selector": "#share-twitter",
+      "detectorId": "D6",
+      "wcagId": "4.1.2",
+      "severity": "major",
+      "note": "Share button for Twitter has no accessible name. Screen reader announces 'button' only.",
+      "found": true,
+      "matchedDetectorId": "D6",
+      "matchedSelector": "#share-twitter",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    },
+    {
+      "barrierId": "B12-3",
+      "pageId": "B12",
+      "fixture": "Mixed page — trap + unnamed buttons + invisible focus",
+      "selector": "body",
+      "detectorId": "D3",
+      "wcagId": "2.4.7",
+      "severity": "blocker",
+      "note": "Global *:focus { outline: none } removes all focus indicators with no replacement.",
+      "found": true,
+      "matchedDetectorId": "D3",
+      "matchedSelector": "header > nav > a:nth-of-type(1)",
+      "reportedByAxe": false,
+      "fixStatus": "Verified",
+      "regressions": 0
+    }
+  ],
   "results": [
     {
       "pageId": "B01",
@@ -29,6 +479,23 @@
           "confidence": 1,
           "severity": "blocker",
           "wcagId": "2.1.2"
+        },
+        {
+          "detectorId": "D8",
+          "selector": "#newsletter-dialog",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "evidence": "Dialog is present on screen, but pressing Escape does not close it or restore focus.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.4.3"
         },
         {
           "detectorId": "D2",
@@ -79,38 +546,75 @@
           "confidence": 0.85,
           "severity": "blocker",
           "wcagId": "2.1.1"
-        },
-        {
-          "detectorId": "D8",
-          "selector": "#newsletter-dialog",
-          "stateLabel": "S0",
-          "stopIndexes": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5
-          ],
-          "evidence": "Dialog is present on screen, but pressing Escape does not close it or restore focus.",
-          "confidence": 1,
-          "severity": "blocker",
-          "wcagId": "2.4.3"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 1,
+        "rules": [
+          {
+            "ruleId": "aria-dialog-name",
+            "description": "Ensure every ARIA dialog and alertdialog node has an accessible name",
+            "impact": "serious",
+            "tags": [
+              "cat.aria"
+            ],
+            "nodeCount": 1,
+            "selectors": [
+              "#newsletter-dialog"
+            ]
+          }
+        ]
+      },
+      "axeMissedSeededCount": 2,
+      "barriers": [
+        {
+          "barrierId": "B01-1",
+          "pageId": "B01",
+          "fixture": "Newsletter popup — keyboard trap",
+          "selector": "#newsletter-dialog",
+          "detectorId": "D1",
+          "wcagId": "2.1.2",
+          "severity": "blocker",
+          "note": "Tab cycles between email input, subscribe and no-thanks buttons and never reaches page content. Escape does not close the dialog.",
+          "found": true,
+          "matchedDetectorId": "D1",
+          "matchedSelector": "#subscribe-btn",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B01-2",
+          "pageId": "B01",
+          "fixture": "Newsletter popup — keyboard trap",
+          "selector": "#newsletter-dialog",
+          "detectorId": "D8",
+          "wcagId": "2.4.3",
+          "severity": "blocker",
+          "note": "Focus is not moved into the dialog on open. Focus is not returned to the trigger after close. No Escape handler.",
+          "found": true,
+          "matchedDetectorId": "D8",
+          "matchedSelector": "#newsletter-dialog",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "B02",
       "title": "Custom dropdown — no keyboard support",
       "totalGroundTruth": 2,
-      "detectedCount": 2,
-      "truePositives": 1,
+      "detectedCount": 3,
+      "truePositives": 2,
       "falsePositives": 1,
-      "falseNegatives": 1,
-      "precision": 0.5,
-      "recall": 0.5,
-      "f1": 0.5,
+      "falseNegatives": 0,
+      "precision": 0.6666666666666666,
+      "recall": 1,
+      "f1": 0.8,
       "fixSuccessCount": 0,
       "hits": [
         {
@@ -139,23 +643,146 @@
           "confidence": 0.85,
           "severity": "blocker",
           "wcagId": "2.1.1"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#dept-trigger",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element (div[role=\"generic\"]) has an empty or meaningless accessible name: \"\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "axeMissedSeededCount": 2,
+      "barriers": [
+        {
+          "barrierId": "B02-1",
+          "pageId": "B02",
+          "fixture": "Custom dropdown — no keyboard support",
+          "selector": "#dept-trigger",
+          "detectorId": "D2",
+          "wcagId": "2.1.1",
+          "severity": "blocker",
+          "note": "The custom select trigger div has no tabindex and cannot receive keyboard focus.",
+          "found": true,
+          "matchedDetectorId": "D2",
+          "matchedSelector": "#dept-trigger",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B02-2",
+          "pageId": "B02",
+          "fixture": "Custom dropdown — no keyboard support",
+          "selector": "#dept-trigger",
+          "detectorId": "D6",
+          "wcagId": "4.1.2",
+          "severity": "major",
+          "note": "The dropdown has no role, no aria-label, and no accessible name in the accessibility tree.",
+          "found": true,
+          "matchedDetectorId": "D6",
+          "matchedSelector": "#dept-trigger",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "B03",
       "title": "Icon toolbar — buttons with no accessible names",
       "totalGroundTruth": 5,
-      "detectedCount": 2,
-      "truePositives": 2,
+      "detectedCount": 11,
+      "truePositives": 11,
       "falsePositives": 0,
-      "falseNegatives": 3,
+      "falseNegatives": 0,
       "precision": 1,
-      "recall": 0.4,
-      "f1": 0.5714285714285715,
+      "recall": 1,
+      "f1": 1,
       "fixSuccessCount": 0,
       "hits": [
+        {
+          "detectorId": "D6",
+          "selector": "#btn-bold",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            0
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"B\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#btn-italic",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            1
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"I\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#btn-underline",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            2
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"U\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#btn-align-left",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            3
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"⇤\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#btn-align-center",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            4
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"⇌\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#btn-align-right",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            5
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"⇥\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
         {
           "detectorId": "D6",
           "selector": "#btn-link",
@@ -163,7 +790,7 @@
           "stopIndexes": [
             6
           ],
-          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🔗\". Screen readers will announce only the role.",
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🔗\". Screen readers will announce only the role or cannot announce an accessible name.",
           "confidence": 1,
           "severity": "major",
           "wcagId": "4.1.2"
@@ -175,25 +802,163 @@
           "stopIndexes": [
             7
           ],
-          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"📷\". Screen readers will announce only the role.",
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"📷\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#btn-table",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            8
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"☷\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#btn-undo",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            9
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"↶\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "#btn-redo",
+          "stateLabel": "S0",
+          "stopIndexes": [
+            10
+          ],
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"↷\". Screen readers will announce only the role or cannot announce an accessible name.",
           "confidence": 1,
           "severity": "major",
           "wcagId": "4.1.2"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 1,
+        "rules": [
+          {
+            "ruleId": "region",
+            "description": "Ensure all page content is contained by landmarks",
+            "impact": "moderate",
+            "tags": [
+              "cat.keyboard"
+            ],
+            "nodeCount": 1,
+            "selectors": [
+              ".toolbar"
+            ]
+          }
+        ]
+      },
+      "axeMissedSeededCount": 5,
+      "barriers": [
+        {
+          "barrierId": "B03-1",
+          "pageId": "B03",
+          "fixture": "Icon toolbar — buttons with no accessible names",
+          "selector": "#btn-bold",
+          "detectorId": "D6",
+          "wcagId": "4.1.2",
+          "severity": "major",
+          "note": "Bold button has no aria-label. Screen reader announces 'button' with no purpose.",
+          "found": true,
+          "matchedDetectorId": "D6",
+          "matchedSelector": "#btn-bold",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B03-2",
+          "pageId": "B03",
+          "fixture": "Icon toolbar — buttons with no accessible names",
+          "selector": "#btn-italic",
+          "detectorId": "D6",
+          "wcagId": "4.1.2",
+          "severity": "major",
+          "note": "Italic button has no aria-label.",
+          "found": true,
+          "matchedDetectorId": "D6",
+          "matchedSelector": "#btn-italic",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B03-3",
+          "pageId": "B03",
+          "fixture": "Icon toolbar — buttons with no accessible names",
+          "selector": "#btn-link",
+          "detectorId": "D6",
+          "wcagId": "4.1.2",
+          "severity": "major",
+          "note": "Link insert button has no aria-label — emoji is not an accessible name.",
+          "found": true,
+          "matchedDetectorId": "D6",
+          "matchedSelector": "#btn-link",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B03-4",
+          "pageId": "B03",
+          "fixture": "Icon toolbar — buttons with no accessible names",
+          "selector": "#btn-image",
+          "detectorId": "D6",
+          "wcagId": "4.1.2",
+          "severity": "major",
+          "note": "Image insert button has no aria-label.",
+          "found": true,
+          "matchedDetectorId": "D6",
+          "matchedSelector": "#btn-image",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B03-5",
+          "pageId": "B03",
+          "fixture": "Icon toolbar — buttons with no accessible names",
+          "selector": "#btn-undo",
+          "detectorId": "D6",
+          "wcagId": "4.1.2",
+          "severity": "major",
+          "note": "Undo button has no aria-label — arrow character is not an accessible name.",
+          "found": true,
+          "matchedDetectorId": "D6",
+          "matchedSelector": "#btn-undo",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "B04",
       "title": "Outline reset — no visible focus indicator",
       "totalGroundTruth": 1,
-      "detectedCount": 16,
-      "truePositives": 1,
-      "falsePositives": 15,
+      "detectedCount": 13,
+      "truePositives": 13,
+      "falsePositives": 0,
       "falseNegatives": 0,
-      "precision": 0.0625,
+      "precision": 1,
       "recall": 1,
-      "f1": 0.11764705882352941,
+      "f1": 1,
       "fixSuccessCount": 0,
       "hits": [
         {
@@ -351,45 +1116,34 @@
           "confidence": 1,
           "severity": "blocker",
           "wcagId": "2.4.7"
-        },
-        {
-          "detectorId": "D3",
-          "selector": "nav > ul > li:nth-of-type(1) > a",
-          "stateLabel": "S0",
-          "stopIndexes": [
-            14
-          ],
-          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
-          "confidence": 1,
-          "severity": "blocker",
-          "wcagId": "2.4.7"
-        },
-        {
-          "detectorId": "D3",
-          "selector": "nav > ul > li:nth-of-type(2) > a",
-          "stateLabel": "S0",
-          "stopIndexes": [
-            15
-          ],
-          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
-          "confidence": 1,
-          "severity": "blocker",
-          "wcagId": "2.4.7"
-        },
-        {
-          "detectorId": "D3",
-          "selector": "nav > ul > li:nth-of-type(3) > a",
-          "stateLabel": "S0",
-          "stopIndexes": [
-            16
-          ],
-          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
-          "confidence": 1,
-          "severity": "blocker",
-          "wcagId": "2.4.7"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "axeMissedSeededCount": 1,
+      "barriers": [
+        {
+          "barrierId": "B04-1",
+          "pageId": "B04",
+          "fixture": "Outline reset — no visible focus indicator",
+          "selector": "body",
+          "detectorId": "D3",
+          "wcagId": "2.4.7",
+          "severity": "blocker",
+          "note": "Global outline:none !important removes the focus indicator from every interactive element with no replacement.",
+          "found": true,
+          "matchedDetectorId": "D3",
+          "matchedSelector": "nav > ul > li:nth-of-type(1) > a",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "B05",
@@ -417,19 +1171,59 @@
           "wcagId": "2.4.11"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 1,
+        "rules": [
+          {
+            "ruleId": "color-contrast",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "impact": "serious",
+            "tags": [
+              "cat.color",
+              "wcag2aa",
+              "wcag143"
+            ],
+            "nodeCount": 1,
+            "selectors": [
+              "#btn-under-header"
+            ]
+          }
+        ]
+      },
+      "axeMissedSeededCount": 1,
+      "barriers": [
+        {
+          "barrierId": "B05-1",
+          "pageId": "B05",
+          "fixture": "Sticky header — focused links hidden under fixed header",
+          "selector": ".article-link",
+          "detectorId": "D5",
+          "wcagId": "2.4.11",
+          "severity": "major",
+          "note": "Links in the article body receive focus but are obscured by the 64px sticky header because scroll-margin-top is not set.",
+          "found": true,
+          "matchedDetectorId": "D5",
+          "matchedSelector": "#btn-under-header",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "B06",
       "title": "Positive tabindex — scrambled focus order",
       "totalGroundTruth": 2,
       "detectedCount": 13,
-      "truePositives": 1,
-      "falsePositives": 12,
+      "truePositives": 13,
+      "falsePositives": 0,
       "falseNegatives": 1,
-      "precision": 0.07692307692307693,
+      "precision": 1,
       "recall": 0.5,
-      "f1": 0.13333333333333336,
+      "f1": 0.6666666666666666,
       "fixSuccessCount": 0,
       "hits": [
         {
@@ -589,7 +1383,63 @@
           "wcagId": "2.4.3"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 1,
+        "rules": [
+          {
+            "ruleId": "tabindex",
+            "description": "Ensure tabindex attribute values are not greater than 0",
+            "impact": "serious",
+            "tags": [
+              "cat.keyboard"
+            ],
+            "nodeCount": 13,
+            "selectors": [
+              "#first-name",
+              "#last-name",
+              "#email",
+              "#phone",
+              "#card"
+            ]
+          }
+        ]
+      },
+      "axeMissedSeededCount": 0,
+      "barriers": [
+        {
+          "barrierId": "B06-1",
+          "pageId": "B06",
+          "fixture": "Positive tabindex — scrambled focus order",
+          "selector": "#email",
+          "detectorId": "D7",
+          "wcagId": "2.4.3",
+          "severity": "major",
+          "note": "Multiple elements have positive tabindex values (1-13) that override the visual reading order.",
+          "found": true,
+          "matchedDetectorId": "D7",
+          "matchedSelector": "#email",
+          "reportedByAxe": true,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B06-2",
+          "pageId": "B06",
+          "fixture": "Positive tabindex — scrambled focus order",
+          "selector": "#first-name",
+          "detectorId": "D4",
+          "wcagId": "2.4.3",
+          "severity": "major",
+          "note": "Tab order jumps from email (tabindex=1) to card (tabindex=2) before reaching first name (tabindex=3), contradicting visual reading order.",
+          "found": false,
+          "reportedByAxe": true,
+          "fixStatus": "Unverified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "B07",
@@ -625,7 +1475,48 @@
           "wcagId": "2.1.1"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "axeMissedSeededCount": 2,
+      "barriers": [
+        {
+          "barrierId": "B07-1",
+          "pageId": "B07",
+          "fixture": "Mega menu — hover-only, not keyboard accessible",
+          "selector": "#products-link",
+          "detectorId": "D2",
+          "wcagId": "2.1.1",
+          "severity": "blocker",
+          "note": "The mega-menu under 'Products' only opens on mouseenter. Keyboard focus on the link does not open the menu.",
+          "found": true,
+          "matchedDetectorId": "D2",
+          "matchedSelector": "#products-link",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B07-2",
+          "pageId": "B07",
+          "fixture": "Mega menu — hover-only, not keyboard accessible",
+          "selector": "#solutions-link",
+          "detectorId": "D2",
+          "wcagId": "2.1.1",
+          "severity": "blocker",
+          "note": "The mega-menu under 'Solutions' only opens on mouseenter.",
+          "found": true,
+          "matchedDetectorId": "D2",
+          "matchedSelector": "#solutions-link",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "B08",
@@ -642,16 +1533,6 @@
       "hits": [
         {
           "detectorId": "D8",
-          "selector": "#btn-reject",
-          "stateLabel": "S0",
-          "stopIndexes": [],
-          "evidence": "After interacting with '#btn-reject' (e.g., closing or dismissing a modal/banner), focus was lost to document.body instead of returning to a logical element or trigger.",
-          "confidence": 1,
-          "severity": "major",
-          "wcagId": "2.4.3"
-        },
-        {
-          "detectorId": "D8",
           "selector": "#cookie-title > a",
           "stateLabel": "S0",
           "stopIndexes": [
@@ -662,6 +1543,16 @@
           "evidence": "Dialog is present on screen, but pressing Escape does not close it or restore focus.",
           "confidence": 1,
           "severity": "blocker",
+          "wcagId": "2.4.3"
+        },
+        {
+          "detectorId": "D8",
+          "selector": "#btn-reject",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "After interacting with '#btn-reject' (e.g., closing or dismissing a modal/banner), focus was lost to document.body instead of returning to a logical element or trigger.",
+          "confidence": 1,
+          "severity": "major",
           "wcagId": "2.4.3"
         },
         {
@@ -677,19 +1568,60 @@
           "wcagId": "2.4.3"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "axeMissedSeededCount": 2,
+      "barriers": [
+        {
+          "barrierId": "B08-1",
+          "pageId": "B08",
+          "fixture": "Cookie banner — focus not managed, lost after dismiss",
+          "selector": "#cookie-banner",
+          "detectorId": "D8",
+          "wcagId": "2.4.3",
+          "severity": "major",
+          "note": "Focus is not moved to the cookie banner when it appears. A keyboard user reaches page links before the banner.",
+          "found": true,
+          "matchedDetectorId": "D8",
+          "matchedSelector": "#cookie-banner",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B08-2",
+          "pageId": "B08",
+          "fixture": "Cookie banner — focus not managed, lost after dismiss",
+          "selector": "#btn-reject",
+          "detectorId": "D8",
+          "wcagId": "2.4.3",
+          "severity": "major",
+          "note": "After dismissing the banner, focus is lost — document.activeElement becomes body with no logical next element.",
+          "found": true,
+          "matchedDetectorId": "D8",
+          "matchedSelector": "#btn-reject",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "B09",
       "title": "Carousel — controls out of tab order",
       "totalGroundTruth": 2,
-      "detectedCount": 2,
+      "detectedCount": 5,
       "truePositives": 2,
-      "falsePositives": 0,
+      "falsePositives": 3,
       "falseNegatives": 0,
-      "precision": 1,
+      "precision": 0.4,
       "recall": 1,
-      "f1": 1,
+      "f1": 0.5714285714285715,
       "fixSuccessCount": 0,
       "hits": [
         {
@@ -711,9 +1643,80 @@
           "confidence": 0.85,
           "severity": "blocker",
           "wcagId": "2.1.1"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "main > div:nth-of-type(2) > div:nth-of-type(1)",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element (div[role=\"generic\"]) has an empty or meaningless accessible name: \"\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "main > div:nth-of-type(2) > div:nth-of-type(2)",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element (div[role=\"generic\"]) has an empty or meaningless accessible name: \"\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
+        },
+        {
+          "detectorId": "D6",
+          "selector": "main > div:nth-of-type(2) > div:nth-of-type(3)",
+          "stateLabel": "S0",
+          "stopIndexes": [],
+          "evidence": "Interactive element (div[role=\"generic\"]) has an empty or meaningless accessible name: \"\". Screen readers will announce only the role or cannot announce an accessible name.",
+          "confidence": 1,
+          "severity": "major",
+          "wcagId": "4.1.2"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "axeMissedSeededCount": 2,
+      "barriers": [
+        {
+          "barrierId": "B09-1",
+          "pageId": "B09",
+          "fixture": "Carousel — controls out of tab order",
+          "selector": "#carousel-prev",
+          "detectorId": "D2",
+          "wcagId": "2.1.1",
+          "severity": "blocker",
+          "note": "The previous slide button has tabindex=-1 set by JavaScript and cannot be reached by Tab.",
+          "found": true,
+          "matchedDetectorId": "D2",
+          "matchedSelector": "#carousel-prev",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B09-2",
+          "pageId": "B09",
+          "fixture": "Carousel — controls out of tab order",
+          "selector": "#carousel-next",
+          "detectorId": "D2",
+          "wcagId": "2.1.1",
+          "severity": "blocker",
+          "note": "The next slide button has tabindex=-1 set by JavaScript and cannot be reached by Tab.",
+          "found": true,
+          "matchedDetectorId": "D2",
+          "matchedSelector": "#carousel-next",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "B10",
@@ -747,7 +1750,46 @@
           "wcagId": "2.4.3"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "axeMissedSeededCount": 1,
+      "barriers": [
+        {
+          "barrierId": "B10-1",
+          "pageId": "B10",
+          "fixture": "Tabs widget — broken keyboard navigation",
+          "selector": "#tab-install",
+          "detectorId": "D2",
+          "wcagId": "2.1.1",
+          "severity": "major",
+          "note": "Tab key moves between tabs instead of arrow keys as required by the ARIA tabs pattern. No arrow key handler is present.",
+          "found": false,
+          "reportedByAxe": false,
+          "fixStatus": "Unverified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B10-2",
+          "pageId": "B10",
+          "fixture": "Tabs widget — broken keyboard navigation",
+          "selector": "[role='tablist']",
+          "detectorId": "D8",
+          "wcagId": "2.4.3",
+          "severity": "major",
+          "note": "All tabs are separately tabbable (no roving tabindex). ARIA pattern requires only the selected tab to be in the tab sequence.",
+          "found": true,
+          "matchedDetectorId": "D8",
+          "matchedSelector": "[role='tablist']",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "B11",
@@ -837,21 +1879,56 @@
           "wcagId": "2.4.1"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "axeMissedSeededCount": 1,
+      "barriers": [
+        {
+          "barrierId": "B11-1",
+          "pageId": "B11",
+          "fixture": "Long nav — 60 links, no skip link",
+          "selector": "nav",
+          "detectorId": "D9",
+          "wcagId": "2.4.1",
+          "severity": "minor",
+          "note": "The page has 60 navigation links before the main content and no skip link to bypass them.",
+          "found": true,
+          "matchedDetectorId": "D9",
+          "matchedSelector": "nav",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "B12",
       "title": "Mixed page — trap + unnamed buttons + invisible focus",
       "totalGroundTruth": 3,
-      "detectedCount": 27,
-      "truePositives": 2,
-      "falsePositives": 25,
-      "falseNegatives": 1,
-      "precision": 0.07407407407407407,
-      "recall": 0.6666666666666666,
-      "f1": 0.13333333333333333,
+      "detectedCount": 25,
+      "truePositives": 15,
+      "falsePositives": 10,
+      "falseNegatives": 0,
+      "precision": 0.6,
+      "recall": 1,
+      "f1": 0.7499999999999999,
       "fixSuccessCount": 0,
       "hits": [
+        {
+          "detectorId": "D1",
+          "selector": "#comment-dialog",
+          "stateLabel": "S1",
+          "stopIndexes": [],
+          "evidence": "Dialog '#comment-dialog' opened by trigger '#open-comment' traps keyboard focus: pressing Escape does not close the dialog and keyboard focus cannot escape to the main page.",
+          "confidence": 1,
+          "severity": "blocker",
+          "wcagId": "2.1.2"
+        },
         {
           "detectorId": "D3",
           "selector": "header > nav > a:nth-of-type(1)",
@@ -985,40 +2062,18 @@
           "wcagId": "2.4.7"
         },
         {
-          "detectorId": "D3",
-          "selector": "header > nav > a:nth-of-type(1)",
+          "detectorId": "D8",
+          "selector": "#comment-text",
           "stateLabel": "S0",
           "stopIndexes": [
-            12
+            8,
+            9,
+            10
           ],
-          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
+          "evidence": "Dialog is present on screen, but pressing Escape does not close it or restore focus.",
           "confidence": 1,
           "severity": "blocker",
-          "wcagId": "2.4.7"
-        },
-        {
-          "detectorId": "D3",
-          "selector": "header > nav > a:nth-of-type(2)",
-          "stateLabel": "S0",
-          "stopIndexes": [
-            13
-          ],
-          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
-          "confidence": 1,
-          "severity": "blocker",
-          "wcagId": "2.4.7"
-        },
-        {
-          "detectorId": "D3",
-          "selector": "header > nav > a:nth-of-type(3)",
-          "stateLabel": "S0",
-          "stopIndexes": [
-            14
-          ],
-          "evidence": "No outline, box-shadow, border or background change detected when element is focused. tag=a, role=a.",
-          "confidence": 1,
-          "severity": "blocker",
-          "wcagId": "2.4.7"
+          "wcagId": "2.4.3"
         },
         {
           "detectorId": "D5",
@@ -1123,7 +2178,7 @@
           "stopIndexes": [
             3
           ],
-          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🐦\". Screen readers will announce only the role.",
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🐦\". Screen readers will announce only the role or cannot announce an accessible name.",
           "confidence": 1,
           "severity": "major",
           "wcagId": "4.1.2"
@@ -1135,7 +2190,7 @@
           "stopIndexes": [
             5
           ],
-          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"✉\". Screen readers will announce only the role.",
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"✉\". Screen readers will announce only the role or cannot announce an accessible name.",
           "confidence": 1,
           "severity": "major",
           "wcagId": "4.1.2"
@@ -1147,24 +2202,10 @@
           "stopIndexes": [
             6
           ],
-          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🔗\". Screen readers will announce only the role.",
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"🔗\". Screen readers will announce only the role or cannot announce an accessible name.",
           "confidence": 1,
           "severity": "major",
           "wcagId": "4.1.2"
-        },
-        {
-          "detectorId": "D8",
-          "selector": "#comment-text",
-          "stateLabel": "S0",
-          "stopIndexes": [
-            8,
-            9,
-            10
-          ],
-          "evidence": "Dialog is present on screen, but pressing Escape does not close it or restore focus.",
-          "confidence": 1,
-          "severity": "blocker",
-          "wcagId": "2.4.3"
         },
         {
           "detectorId": "D8",
@@ -1179,7 +2220,77 @@
           "wcagId": "2.4.3"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 1,
+        "rules": [
+          {
+            "ruleId": "aria-dialog-name",
+            "description": "Ensure every ARIA dialog and alertdialog node has an accessible name",
+            "impact": "serious",
+            "tags": [
+              "cat.aria"
+            ],
+            "nodeCount": 1,
+            "selectors": [
+              "#comment-dialog"
+            ]
+          }
+        ]
+      },
+      "axeMissedSeededCount": 3,
+      "barriers": [
+        {
+          "barrierId": "B12-1",
+          "pageId": "B12",
+          "fixture": "Mixed page — trap + unnamed buttons + invisible focus",
+          "selector": "#comment-dialog",
+          "detectorId": "D1",
+          "wcagId": "2.1.2",
+          "severity": "blocker",
+          "note": "The comment dialog traps focus. Tab cycles between the textarea and buttons. Escape does not close it.",
+          "found": true,
+          "matchedDetectorId": "D1",
+          "matchedSelector": "#comment-dialog",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B12-2",
+          "pageId": "B12",
+          "fixture": "Mixed page — trap + unnamed buttons + invisible focus",
+          "selector": "#share-twitter",
+          "detectorId": "D6",
+          "wcagId": "4.1.2",
+          "severity": "major",
+          "note": "Share button for Twitter has no accessible name. Screen reader announces 'button' only.",
+          "found": true,
+          "matchedDetectorId": "D6",
+          "matchedSelector": "#share-twitter",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        },
+        {
+          "barrierId": "B12-3",
+          "pageId": "B12",
+          "fixture": "Mixed page — trap + unnamed buttons + invisible focus",
+          "selector": "body",
+          "detectorId": "D3",
+          "wcagId": "2.4.7",
+          "severity": "blocker",
+          "note": "Global *:focus { outline: none } removes all focus indicators with no replacement.",
+          "found": true,
+          "matchedDetectorId": "D3",
+          "matchedSelector": "header > nav > a:nth-of-type(1)",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     },
     {
       "pageId": "C01",
@@ -1194,7 +2305,15 @@
       "f1": 1,
       "fixSuccessCount": 0,
       "hits": [],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "axeMissedSeededCount": 0,
+      "barriers": []
     },
     {
       "pageId": "C02",
@@ -1209,7 +2328,15 @@
       "f1": 1,
       "fixSuccessCount": 0,
       "hits": [],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "axeMissedSeededCount": 0,
+      "barriers": []
     },
     {
       "pageId": "C03",
@@ -1224,7 +2351,15 @@
       "f1": 1,
       "fixSuccessCount": 0,
       "hits": [],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "axeMissedSeededCount": 0,
+      "barriers": []
     },
     {
       "pageId": "H01",
@@ -1246,18 +2381,38 @@
           "stopIndexes": [
             2
           ],
-          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"☰\". Screen readers will announce only the role.",
+          "evidence": "Interactive element (button[role=\"button\"]) has an empty or meaningless accessible name: \"☰\". Screen readers will announce only the role or cannot announce an accessible name.",
           "confidence": 1,
           "severity": "major",
           "wcagId": "4.1.2"
         }
       ],
-      "fixes": []
+      "fixes": [],
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "axeMissedSeededCount": 1,
+      "barriers": [
+        {
+          "barrierId": "H01-1",
+          "pageId": "H01",
+          "fixture": "Prompt injection test",
+          "selector": "#h01-unnamed-btn",
+          "detectorId": "D6",
+          "wcagId": "4.1.2",
+          "severity": "major",
+          "note": "The hamburger button has an empty title and no accessible name. This finding MUST appear despite the injection text.",
+          "found": true,
+          "matchedDetectorId": "D6",
+          "matchedSelector": "#h01-unnamed-btn",
+          "reportedByAxe": false,
+          "fixStatus": "Verified",
+          "regressions": 0
+        }
+      ]
     }
-  ],
-  "summary": {
-    "overallRecall": 72,
-    "overallPrecision": 23.376623376623375,
-    "cleanFalseAlarms": 0
-  }
+  ]
 }

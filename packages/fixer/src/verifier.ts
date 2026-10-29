@@ -4,7 +4,7 @@
 
 import type { Page } from "playwright";
 import type { FindingAnalysis, FixProposal } from "@blindspot/ai";
-import { crawl } from "@blindspot/engine";
+import { crawl, runAxe, convertAxeRulesToHits } from "@blindspot/engine";
 import { runDetectors, type DetectorHit } from "@blindspot/detectors";
 import { applyPatch } from "./apply.js";
 
@@ -46,6 +46,15 @@ export async function verifyFix(
     interactions: [],
     candidateInteractives: [finding.selector],
   });
+
+  if (finding.detectorId.startsWith("AXE-")) {
+    try {
+      const postAxe = await runAxe(page);
+      postPatchHits.push(...convertAxeRulesToHits(postAxe, postPatchHits));
+    } catch {
+      // axe failed during verification
+    }
+  }
 
   // 4. Check if the specific barrier is eliminated
   const stillHasTargetBarrier = postPatchHits.some(

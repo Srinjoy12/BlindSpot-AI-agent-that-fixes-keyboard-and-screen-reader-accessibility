@@ -83,6 +83,8 @@ export async function runFixLoop(
     // 1. Ultra generates fix proposal
     const patch = await generateFix({
       finding,
+      attempt,
+      findingId: (rawFinding as any)?.id || finding.detectorId,
       ...(snippet ? { elementHtmlSnippet: snippet } : {}),
       ...(previousAttempt ? { previousAttempt } : {}),
     });

@@ -6,6 +6,7 @@ import { getTokenFactoryClient, Models } from "./client.js";
 import { NANO_DIGEST_PROMPT } from "./prompts.js";
 import { StateDigestSchema, type StateDigest } from "./schemas.js";
 import { recordCall } from "./ledger.js";
+import { estimateModelCost } from "./pricing.js";
 
 export interface DigestInput {
   url: string;
@@ -70,12 +71,14 @@ export async function generateStateDigest(input: DigestInput): Promise<StateDige
     recordCall({
       id: crypto.randomUUID(),
       stage: "digest",
-      model,
+      tier: "Nano",
+      modelId: model,
       tokensIn,
       tokensOut,
       latencyMs,
       cacheHit: false,
-      outcome: "success",
+      outcome: "ok",
+      estimatedCostUsd: estimateModelCost(model, tokensIn, tokensOut),
       timestamp: new Date().toISOString(),
     });
 
@@ -85,12 +88,14 @@ export async function generateStateDigest(input: DigestInput): Promise<StateDige
     recordCall({
       id: crypto.randomUUID(),
       stage: "digest",
-      model,
+      tier: "Nano",
+      modelId: model,
       tokensIn: 0,
       tokensOut: 0,
       latencyMs,
       cacheHit: false,
-      outcome: "failed",
+      outcome: "fallback",
+      estimatedCostUsd: 0,
       timestamp: new Date().toISOString(),
     });
 

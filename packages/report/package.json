@@ -12,6 +12,7 @@
   "dependencies": {
     "@blindspot/ai": "*",
     "@blindspot/detectors": "*",
+    "@blindspot/engine": "*",
     "@blindspot/fixer": "*",
     "zod": "^3.23.0"
   },

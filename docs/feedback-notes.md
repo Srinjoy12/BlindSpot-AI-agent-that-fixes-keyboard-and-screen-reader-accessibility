@@ -20,12 +20,12 @@ Low-latency inference for all three Nemotron model tiers across real-time user a
 ### What worked well
 - **OpenAI API Compatibility**: Dropping the standard `openai` Node SDK directly in front of `https://api.tokenfactory.nebius.ai/v1` with a custom `apiKey` and `baseURL` worked seamlessly on the first try.
 - **Model Diversity**: Having Nano (30B), Super (120B), and Ultra (550B) available on the exact same endpoint allowed us to implement sophisticated model routing without multi-vendor orchestration overhead.
-- **High Token Throughput**: Nano digests consistently returned in ~1.0–1.4 seconds, allowing the user dashboard to stream live stage updates almost instantaneously.
+- **High Token Throughput**: Nano digests returned with rapid responsiveness, allowing the user dashboard to stream live stage updates swiftly without blocking the main workflow.
 
 ### What needs work & specific friction points
 1. **Strict JSON Schema Enforcement (`json_object` vs `json_schema`)**:
    - *Behavior*: While `response_format: { type: "json_object" }` is supported, occasionally models would wrap JSON in markdown code blocks (` ```json ... ``` `).
-   - *Recommendation*: Support OpenAI-style Structured Outputs (`response_format: { type: "json_schema", json_schema: { ... } }`) to guarantee strict conformance to JSON schemas at the decoding level.
+   - *Recommendation*: Support OpenAI-style Structured Outputs (`response_format: { type: "json_schema", json_schema: { ... } }`) to enforce strict conformance to JSON schemas at the decoding level.
 2. **Catalog Documentation & Model Identifiers**:
    - *Behavior*: Discovering the exact string identifier for each model tier required exploring the web portal.
    - *Recommendation*: Provide a public `/v1/models` endpoint returning detailed context limits, parameter sizes, and recommended system prompts for each Nemotron release.
@@ -50,7 +50,7 @@ Low-latency inference for all three Nemotron model tiers across real-time user a
 ### Nemotron-3 Ultra (550B)
 - **Role**: Writing surgical code repairs (CSS `:focus-visible` rules, `aria-label` attributes, DOM bypass links, and scoped keyboard event listeners).
 - **Strengths**: Outstanding code generation capability. The patches generated for dialog Escape handlers and focus indicator restorations passed our strict security linter on the first try.
-- **Improvements**: Latency on the 550B model averaged 3.2–4.8 seconds. While acceptable for a developer audit, streaming token support on patch generation would enhance the real-time UX.
+- **Improvements**: While latency was acceptable for a developer audit, streaming token support on patch generation would enhance the real-time UX.
 
 ---
 

@@ -10,9 +10,7 @@ export type DetectorId =
   | "D6" // Missing accessible name
   | "D7" // Positive tabindex
   | "D8" // Dialog focus mismanaged
-  | "D9" // Skip link missing (heuristic)
-  | "D10" // Generic link text (heuristic)
-  | "D11"; // Focus lost (heuristic)
+  | "D9"; // Skip link missing (heuristic)
 
 export type Severity = "blocker" | "major" | "minor";
 
@@ -53,10 +51,20 @@ export interface FocusStopLite {
 export interface InteractionRecordLite {
   triggerSelector: string;
   openedState?: string | undefined;
+  openedDialogSelector?: string | undefined;
   escapeClosed: boolean;
   focusReturnedToTrigger: boolean;
   focusMovedIntoSurface: boolean;
   focusLostAfterClose: boolean;
+}
+
+export interface InteractiveElementInfo {
+  selector: string;
+  tagName: string;
+  role: string;
+  accessibleName: string;
+  hasAriaLabel?: boolean;
+  hasHref?: boolean;
 }
 
 export interface DetectorInput {
@@ -65,4 +73,7 @@ export interface DetectorInput {
   interactions: InteractionRecordLite[];
   /** raw candidate interactive elements (selectors) found in the DOM */
   candidateInteractives: string[];
+  /** all interactive elements captured from AXTree / DOM */
+  interactiveElements?: InteractiveElementInfo[];
 }
+

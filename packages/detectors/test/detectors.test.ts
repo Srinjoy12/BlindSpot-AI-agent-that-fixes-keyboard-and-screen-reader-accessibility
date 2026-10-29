@@ -10,6 +10,7 @@ import {
   detectD7,
   detectD8,
   detectD9,
+  deduplicateHits,
   runDetectors,
 } from "../src/index.js";
 import type { DetectorInput, FocusStopLite } from "../src/types.js";
@@ -537,3 +538,143 @@ describe("runDetectors orchestrator", () => {
     expect(hits.length).toBe(0);
   });
 });
+
+describe("deduplicateHits — Hit deduplication & severity ranking", () => {
+  it("never lets D8 (Major, 2.4.3) swallow D1 (Blocker, 2.1.2) on the same container", () => {
+    const hits = [
+      {
+        detectorId: "D8",
+        selector: "#newsletter-dialog",
+        stateLabel: "S0",
+        stopIndexes: [],
+        evidence: "Focus is not moved into dialog on open",
+        confidence: 0.9,
+        severity: "major" as const,
+        wcagId: "2.4.3",
+      },
+      {
+        detectorId: "D1",
+        selector: "#newsletter-dialog",
+        stateLabel: "S0",
+        stopIndexes: [0, 1, 2],
+        evidence: "Focus cycles indefinitely inside modal; Escape key does not dismiss",
+        confidence: 0.95,
+        severity: "blocker" as const,
+        wcagId: "2.1.2",
+      },
+    ];
+
+    const deduped = deduplicateHits(hits);
+    expect(deduped.length).toBe(2);
+    expect(deduped.some((h) => h.detectorId === "D1" && h.wcagId === "2.1.2")).toBe(true);
+    expect(deduped.some((h) => h.detectorId === "D8" && h.wcagId === "2.4.3")).toBe(true);
+    // D1 blocker ranks first
+    expect(deduped[0]?.detectorId).toBe("D1");
+  });
+
+  it("suppresses redundant lower-severity hit when container and WCAG criterion are identical", () => {
+    const hits = [
+      {
+        detectorId: "D8",
+        selector: "#modal",
+        stateLabel: "S0",
+        stopIndexes: [],
+        evidence: "Minor focus issue",
+        confidence: 0.7,
+        severity: "minor" as const,
+        wcagId: "2.4.3",
+      },
+      {
+        detectorId: "D8",
+        selector: "#modal",
+        stateLabel: "S0",
+        stopIndexes: [],
+        evidence: "Major focus loss",
+        confidence: 0.9,
+        severity: "major" as const,
+        wcagId: "2.4.3",
+      },
+    ];
+
+    const deduped = deduplicateHits(hits);
+    expect(deduped.length).toBe(1);
+    expect(deduped[0]?.severity).toBe("major");
+  });
+});
+
+describe("D6 — Missing Accessible Name across full AXTree interactive elements", () => {
+  it("inspects captured interactive elements from AXTree beyond visited focus stops", () => {
+    const input: DetectorInput = {
+      stateLabel: "S0",
+      focusStops: [], // Crawler never reached these buttons due to sequence cap or custom markup
+      interactions: [],
+      candidateInteractives: [],
+      interactiveElements: [
+        {
+          selector: "#btn-bold",
+          tagName: "button",
+          role: "button",
+          accessibleName: "B",
+          hasAriaLabel: false,
+        },
+        {
+          selector: "#btn-italic",
+          tagName: "button",
+          role: "button",
+          accessibleName: "I",
+          hasAriaLabel: false,
+        },
+        {
+          selector: "#btn-undo",
+          tagName: "button",
+          role: "button",
+          accessibleName: "↺",
+          hasAriaLabel: false,
+        },
+        {
+          selector: "#btn-save",
+          tagName: "button",
+          role: "button",
+          accessibleName: "Save Document",
+          hasAriaLabel: true,
+        },
+      ],
+    };
+
+    const hits = detectD6(input);
+    expect(hits.length).toBe(3);
+    const selectors = hits.map((h) => h.selector);
+    expect(selectors).toContain("#btn-bold");
+    expect(selectors).toContain("#btn-italic");
+    expect(selectors).toContain("#btn-undo");
+    expect(selectors).not.toContain("#btn-save");
+  });
+});
+
+describe("D1 — Keyboard Trap on interactive modal dialogs", () => {
+  it("flags modal dialog opened during interaction that cannot be dismissed via Escape", () => {
+    const input: DetectorInput = {
+      stateLabel: "S0",
+      focusStops: [],
+      interactions: [
+        {
+          triggerSelector: "#open-comment-btn",
+          openedDialogSelector: "#comment-dialog",
+          escapeClosed: false,
+          focusReturnedToTrigger: false,
+          focusMovedIntoSurface: true,
+          focusLostAfterClose: false,
+        },
+      ],
+      candidateInteractives: [],
+    };
+
+    const hits = detectD1(input);
+    expect(hits.length).toBe(1);
+    expect(hits[0]?.detectorId).toBe("D1");
+    expect(hits[0]?.selector).toBe("#comment-dialog");
+    expect(hits[0]?.severity).toBe("blocker");
+    expect(hits[0]?.wcagId).toBe("2.1.2");
+  });
+});
+

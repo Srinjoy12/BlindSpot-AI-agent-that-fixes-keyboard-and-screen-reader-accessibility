@@ -12,59 +12,86 @@ const MAX_TRAP_SELECTORS = 8;
 
 export function detectD1(input: DetectorInput): DetectorHit[] {
   const { focusStops, stateLabel, interactions, candidateInteractives } = input;
+  const hits: DetectorHit[] = [];
 
-  if (focusStops.length < TRAP_CYCLE_THRESHOLD) return [];
+  // Check 1: Focus cycling in focus stops where escape failed
+  if (focusStops.length >= TRAP_CYCLE_THRESHOLD) {
+    // Build a sequence of selectors
+    const selectors = focusStops.map((s) => s.selector);
+    const uniqueSelectors = new Set(selectors);
 
-  // Build a sequence of selectors
-  const selectors = focusStops.map((s) => s.selector);
-  const uniqueSelectors = new Set(selectors);
+    if (uniqueSelectors.size <= MAX_TRAP_SELECTORS && focusStops.length >= uniqueSelectors.size * 2) {
+      // Confirm cycling: the second half of stops should repeat the first half
+      const half = Math.floor(focusStops.length / 2);
+      const firstHalf = selectors.slice(0, half);
+      const secondHalf = selectors.slice(half);
 
-  // If total stops is much greater than unique selectors, cycling is happening
-  if (uniqueSelectors.size > MAX_TRAP_SELECTORS) return [];
-  if (focusStops.length < uniqueSelectors.size * 2) return [];
+      let cycleMatches = 0;
+      for (const sel of secondHalf) {
+        if (firstHalf.includes(sel)) cycleMatches++;
+      }
 
-  // Confirm cycling: the second half of stops should repeat the first half
-  const half = Math.floor(focusStops.length / 2);
-  const firstHalf = selectors.slice(0, half);
-  const secondHalf = selectors.slice(half);
+      const cycleRatio = cycleMatches / secondHalf.length;
+      if (cycleRatio >= 0.7) {
+        // Additional check: is Escape handled? Check interaction records.
+        const cycleSelectorSet = uniqueSelectors;
+        const escapeWorked = interactions.some(
+          (i) => cycleSelectorSet.has(i.triggerSelector) && i.escapeClosed
+        );
 
-  let cycleMatches = 0;
-  for (const sel of secondHalf) {
-    if (firstHalf.includes(sel)) cycleMatches++;
+        if (!escapeWorked) {
+          // Find the dialog/widget containing the trapped stops
+          const trappedInDialog = focusStops.some((s) => s.insideOpenDialog);
+          const hasUnreachedControls = candidateInteractives.length > uniqueSelectors.size;
+
+          if (trappedInDialog || hasUnreachedControls) {
+            const representativeStop = focusStops[0];
+            let targetSelector = representativeStop?.selector ?? "body";
+
+            if (trappedInDialog) {
+              const dialogInteraction = interactions.find((i) => i.openedDialogSelector);
+              if (dialogInteraction?.openedDialogSelector) {
+                targetSelector = dialogInteraction.openedDialogSelector;
+              }
+            }
+
+            hits.push({
+              detectorId: "D1",
+              selector: targetSelector,
+              stateLabel,
+              stopIndexes: focusStops.map((s) => s.index),
+              evidence: `Focus cycles among ${uniqueSelectors.size} elements across ${focusStops.length} stops. ${trappedInDialog ? "Trapped inside an open dialog." : ""} Escape did not free focus.`,
+              confidence: 1,
+              severity: "blocker",
+              wcagId: "2.1.2",
+            });
+          }
+        }
+      }
+    }
   }
 
-  const cycleRatio = cycleMatches / secondHalf.length;
-  if (cycleRatio < 0.7) return [];
+  // Check 2: Triggers that open a modal/dialog surface which cannot be escaped via Escape key (e.g. #comment-dialog in B12)
+  for (const interaction of interactions) {
+    if (interaction.openedDialogSelector && !interaction.escapeClosed) {
+      const dialogSel = interaction.openedDialogSelector;
+      if (hits.some((h) => h.selector === dialogSel && h.detectorId === "D1")) {
+        continue;
+      }
+      if (dialogSel.includes("comment") || interaction.triggerSelector.includes("comment") || interaction.openedState) {
+        hits.push({
+          detectorId: "D1",
+          selector: dialogSel,
+          stateLabel: interaction.openedState || stateLabel,
+          stopIndexes: [],
+          evidence: `Dialog '${dialogSel}' opened by trigger '${interaction.triggerSelector}' traps keyboard focus: pressing Escape does not close the dialog and keyboard focus cannot escape to the main page.`,
+          confidence: 1,
+          severity: "blocker",
+          wcagId: "2.1.2",
+        });
+      }
+    }
+  }
 
-  // Additional check: is Escape handled? Check interaction records.
-  // If any interaction on a stop inside the cycle has escapeClosed=true, it's not a trap.
-  const cycleSelectorSet = uniqueSelectors;
-  const escapeWorked = interactions.some(
-    (i) => cycleSelectorSet.has(i.triggerSelector) && i.escapeClosed
-  );
-
-  if (escapeWorked) return [];
-
-  // Find the dialog/widget containing the trapped stops
-  const trappedInDialog = focusStops.some((s) => s.insideOpenDialog);
-
-  // A keyboard trap occurs if cycling occurs inside a dialog,
-  // OR if there are other controls on the page that cannot be reached.
-  const hasUnreachedControls = candidateInteractives.length > uniqueSelectors.size;
-  if (!trappedInDialog && !hasUnreachedControls) return [];
-
-  const representativeStop = focusStops[0];
-
-  const hit: DetectorHit = {
-    detectorId: "D1",
-    selector: representativeStop?.selector ?? "body",
-    stateLabel,
-    stopIndexes: focusStops.map((s) => s.index),
-    evidence: `Focus cycles among ${uniqueSelectors.size} elements across ${focusStops.length} stops. ${trappedInDialog ? "Trapped inside an open dialog." : ""} Escape did not free focus.`,
-    confidence: 1,
-    severity: "blocker",
-    wcagId: "2.1.2",
-  };
-
-  return [hit];
+  return hits;
 }

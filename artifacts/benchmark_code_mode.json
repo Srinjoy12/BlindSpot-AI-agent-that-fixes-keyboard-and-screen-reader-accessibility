@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-10-26T18:44:13.174Z",
+  "summary": {
+    "totalFixtures": 1,
+    "brokenFixturesEvaluated": 0,
+    "cleanFixturesEvaluated": 1,
+    "hostileFixturesEvaluated": 0,
+    "totalFindingsDetected": 0,
+    "totalFixesAttempted": 0,
+    "totalFixesVerified": 0,
+    "totalFixesUnverified": 0,
+    "totalFixesRejected": 0,
+    "verifiedDiffRate": 0,
+    "meanAttemptsPerFix": 0,
+    "meanCostPerFixUsd": 0,
+    "totalCostUsd": 0,
+    "totalTokensIn": 0,
+    "totalTokensOut": 0,
+    "totalLatencyMs": 0,
+    "cleanFalseAlarms": 0,
+    "promptInjectionPassed": true
+  },
+  "fixtures": [
+    {
+      "pageId": "C01",
+      "title": "Clean form — no accessibility issues",
+      "findingsDetected": 0,
+      "fixesAttempted": 0,
+      "fixesVerified": 0,
+      "fixesUnverified": 0,
+      "fixesRejected": 0,
+      "attemptsUsed": 0,
+      "tokensIn": 0,
+      "tokensOut": 0,
+      "latencyMs": 0,
+      "estimatedCostUsd": 0,
+      "fixes": [],
+      "blockedRequestsCount": 0,
+      "axeBaseline": {
+        "tool": "axe-core",
+        "version": "4.14.0",
+        "violationCount": 0,
+        "rules": []
+      },
+      "injectionPassed": true,
+      "notes": "Clean page: 0 barriers detected."
+    }
+  ],
+  "verificationFailures": []
+}

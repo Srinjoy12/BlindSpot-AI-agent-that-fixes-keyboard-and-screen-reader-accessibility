@@ -33,7 +33,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_2",
@@ -52,7 +53,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_3",
@@ -71,7 +73,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_4",
@@ -90,7 +93,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_5",
@@ -109,7 +113,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_6",
@@ -128,7 +133,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_7",
@@ -147,7 +153,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_8",
@@ -166,7 +173,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_9",
@@ -185,7 +193,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_10",
@@ -204,7 +213,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_11",
@@ -223,7 +233,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_12",
@@ -242,7 +253,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_13",
@@ -261,7 +273,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_14",
@@ -280,7 +293,8 @@
           "rationale": "Restores a high-contrast focus indicator satisfying WCAG 2.4.7."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_15",
@@ -298,7 +312,8 @@
           "body": "header > nav > a:nth-of-type(1) { scroll-margin-top: 100px !important; }",
           "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_16",
@@ -316,7 +331,8 @@
           "body": "header > nav > a:nth-of-type(2) { scroll-margin-top: 100px !important; }",
           "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_17",
@@ -334,7 +350,8 @@
           "body": "header > nav > a:nth-of-type(3) { scroll-margin-top: 100px !important; }",
           "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_18",
@@ -352,7 +369,8 @@
           "body": "#share-twitter { scroll-margin-top: 100px !important; }",
           "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_19",
@@ -370,7 +388,8 @@
           "body": "#share-linkedin { scroll-margin-top: 100px !important; }",
           "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_20",
@@ -388,7 +407,8 @@
           "body": "#share-email { scroll-margin-top: 100px !important; }",
           "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_21",
@@ -406,7 +426,8 @@
           "body": "#share-link { scroll-margin-top: 100px !important; }",
           "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_22",
@@ -424,7 +445,8 @@
           "body": "#open-comment { scroll-margin-top: 100px !important; }",
           "rationale": "Adds scroll-margin-top so element remains visible below sticky headers when focused."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_23",
@@ -443,7 +465,8 @@
           "rationale": "Provides an accessible name for screen readers on interactive control."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_24",
@@ -462,7 +485,8 @@
           "rationale": "Provides an accessible name for screen readers on interactive control."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_25",
@@ -481,7 +505,8 @@
           "rationale": "Provides an accessible name for screen readers on interactive control."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_26",
@@ -500,7 +525,8 @@
           "rationale": "Standard focus indicator repair."
         },
         "verified": true,
-        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions."
+        "verificationEvidence": "Chromium keyboard re-crawl confirmed barrier eliminated with 0 regressions.",
+        "alsoReportedByAxe": false
       },
       {
         "id": "barrier_27",
@@ -518,7 +544,8 @@
           "body": "#cookie-banner:focus-visible { outline: 2px solid #2563eb !important; }",
           "rationale": "Standard focus indicator repair."
         },
-        "verified": false
+        "verified": false,
+        "alsoReportedByAxe": false
       }
     ],
     "aiTransparency": {
@@ -542,6 +569,24 @@
       },
       "tavilyQueries": [
         "WCAG 2.4.7"
+      ]
+    },
+    "baseline": {
+      "tool": "axe-core",
+      "version": "4.14.0",
+      "violationCount": 1,
+      "rules": [
+        {
+          "ruleId": "aria-dialog-name",
+          "impact": "serious",
+          "tags": [
+            "cat.aria"
+          ],
+          "nodeCount": 1,
+          "selectors": [
+            "#comment-dialog"
+          ]
+        }
       ]
     }
   },

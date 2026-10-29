@@ -5,7 +5,7 @@
 
 ## 1. Executive Summary & Core Design Philosophy
 
-BlindSpot is an autonomous developer agent that audits web interfaces for keyboard navigation and screen-reader accessibility barriers, repairs them, and mathematically verifies each repair in a fresh Chromium browser session.
+BlindSpot is an autonomous developer agent that audits web interfaces for keyboard navigation and accessibility-tree checks, repairs them, and mathematically verifies each repair in a fresh Chromium browser session.
 
 ### The Fundamental Axiom:
 > **Models propose; the deterministic harness decides.**
@@ -36,7 +36,7 @@ flowchart TD
         PW["Playwright Headless Chromium\n(Isolated Context, No Cookies/Storage)"]
         Crawl["Keyboard Tab Crawler\n(Forward & Backward Cycles, Obscuration)"]
         Interact["Interaction Pass\n(Enter, Space, Escape, Focus Restoration)"]
-        Detectors["Pure Detectors D1–D11\n(Traps, Obscured, Positive Tabindex, Names)"]
+        Detectors["Pure Detectors D1–D9\n(Traps, Obscured, Positive Tabindex, Names)"]
         Verifier["In-Browser Verifier\n(Target Re-test + Regression Pass)"]
     end
 
@@ -78,12 +78,12 @@ flowchart TD
 ## 3. Subsystem Breakdown
 
 ### 1. Web Application (`apps/web`)
-- **Framework**: React 18, Vite, TypeScript, Lucide Icons, and Vanilla CSS Variables with high-contrast accessibility tokens (conforming to WCAG AAA color ratios).
+- **Framework**: React 18, Vite, TypeScript, Lucide Icons, and Vanilla CSS Variables with high-contrast accessibility tokens (conforming to WCAG 2.1 AA color ratios: 4.5:1 text, 3.0:1 UI components).
 - **Real-Time Telemetry**: Connects via Server-Sent Events (SSE) to `/api/audit`, streaming keyboard stops, detector hits, and model latency as they occur.
 - **Components**:
   - `AuditBar`: Target URL input, ownership attestation checkbox (`FR-03`), auto-fix toggle, and fixture preset picker.
   - `PhaseStepper`: Live phase progress timeline with polite ARIA live region announcements.
-  - `ScoreGauge`: Visual keyboard score (`100 - [blockers*25 + majors*10 + minors*3]`) with severity counts.
+  - `ResultsSummary`: Plain headline and three severity counts (blocks keyboard use, hard to use, minor); never claims legal compliance or uses a 0-100 score gauge.
   - `KeyboardReplay`: Sequential scrubber stepping through every physical Tab stop, displaying bounding boxes, `obscuredBy` overlays, and focus indicator diffs.
   - `BarrierList`: Filterable issue list with direct links to W3C WCAG 2.2 documentation.
   - `DiffModal`: Monospace code viewer showing proposed patches and browser verification proofs.

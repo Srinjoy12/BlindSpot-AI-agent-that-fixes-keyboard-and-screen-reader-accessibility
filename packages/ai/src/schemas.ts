@@ -40,7 +40,7 @@ export const WcagRefSchema = z.object({
 });
 
 export const FindingAnalysisSchema = z.object({
-  detectorId: z.enum(["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11"]),
+  detectorId: z.enum(["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9"]),
   severity: SeveritySchema,
   wcag: WcagRefSchema,
   selector: z.string(),
@@ -73,3 +73,27 @@ export const RepairRequestSchema = z.object({
   errorMessage: z.string(),
   schema: z.string(),
 });
+
+// ─── Source Fix Proposal (Ultra output in source mode) ──────────────────────
+
+export const UltraSourceFixOutputSchema = z.object({
+  modifiedSource: z.string().optional(),
+  targetString: z.string().optional(),
+  replacementString: z.string().optional(),
+  patchType: z.enum(["css", "attribute", "html", "script", "replace"]).optional(),
+  body: z.string().optional(),
+  targetSelector: z.string().optional(),
+  explanation: z.string(),
+  changedRegionsHint: z.array(z.string()).default([]),
+});
+
+export type UltraSourceFixOutput = z.infer<typeof UltraSourceFixOutputSchema>;
+
+export const SourceFixResponseSchema = z.object({
+  modifiedSource: z.string(),
+  explanation: z.string(),
+  changedRegionsHint: z.array(z.string()).default([]),
+});
+
+export type SourceFixResponse = z.infer<typeof SourceFixResponseSchema>;
+
