@@ -37,6 +37,7 @@ import {
   runFixLoop,
   runSourceFixLoop,
   runFileSetFixLoop,
+  translateFixToReact,
   type SourceFixResult,
   type FileSetEdit,
 } from "@blindspot/fixer";
@@ -637,6 +638,15 @@ app.post("/api/audit", rateLimitMiddleware, tokenBudgetMiddleware, async (req, r
               cssRule: fixResult.patchType === "css" ? fixResult.body : undefined,
               scriptContent: fixResult.patchType === "script" ? fixResult.body : undefined,
               htmlReplacement: fixResult.patchType === "html" ? fixResult.body : undefined,
+              reactEquivalent: translateFixToReact(
+                {
+                  patchType: fixResult.patchType || "css",
+                  body: fixResult.body || fixResult.cssRule || "",
+                  rationale: fixResult.rationale || fixResult.explanation,
+                  targetSelector: fixResult.targetSelector || hit.selector,
+                },
+                { detectorId: hit.detectorId, selector: hit.selector }
+              ) || undefined,
             }
           : undefined,
         verified: isVerified,

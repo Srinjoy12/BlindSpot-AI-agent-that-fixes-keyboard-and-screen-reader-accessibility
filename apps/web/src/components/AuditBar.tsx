@@ -26,7 +26,7 @@ export const AuditBar: React.FC<AuditBarProps> = ({
   isRunning,
 }) => {
   const [mode, setMode] = useState<InputMode>("url");
-  const [url, setUrl] = useState<string>("");
+  const [url, setUrl] = useState<string>("/fixtures/B08-cookie-banner.html");
   const [sourceCode, setSourceCode] = useState<string>("");
   const [snippetKind, setSnippetKind] = useState<"html" | "snippet">("html");
   const [runFixes, setRunFixes] = useState<boolean>(true);
@@ -100,6 +100,7 @@ export const AuditBar: React.FC<AuditBarProps> = ({
             <SegmentedControl
               name="audit-input-mode"
               ariaLabel="Audit input method"
+              role="tablist"
               options={MODE_OPTIONS}
               value={mode}
               onChange={(newMode) => setMode(newMode)}

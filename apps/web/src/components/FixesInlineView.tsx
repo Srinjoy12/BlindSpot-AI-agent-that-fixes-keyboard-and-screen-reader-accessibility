@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import type { BarrierItem } from "./BarrierList.js";
 import { Button } from "./ui/Button.js";
 import { StatusIcon } from "./ui/StatusIcon.js";
+import { SegmentedControl } from "./ui/SegmentedControl.js";
+import { translateFixToReact } from "@blindspot/fixer/reactTranslate";
 import { getProblemDetail } from "../utils/problemDescriptions.js";
 
 interface FixesInlineViewProps {
@@ -88,6 +90,7 @@ export const FixesInlineView: React.FC<FixesInlineViewProps> = ({
   onApplyToFolder,
 }) => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [barrierFormat, setBarrierFormat] = useState<Record<string, "html" | "react">>({});
 
   const barriersWithFixes = barriers.filter(
     (b) => b.fix || b.diff || b.modifiedSource
@@ -212,6 +215,23 @@ export const FixesInlineView: React.FC<FixesInlineViewProps> = ({
 
         const attemptsText = "1 attempt";
 
+        const reactEquivalent =
+          barrier.fix?.reactEquivalent ||
+          barrier.reactEquivalent ||
+          (barrier.fix?.body
+            ? translateFixToReact(
+                {
+                  patchType: barrier.fix.patchType,
+                  body: barrier.fix.body,
+                  rationale: barrier.fix.rationale || barrier.fix.explanation,
+                  targetSelector: barrier.selector,
+                },
+                { detectorId: barrier.detectorId, selector: barrier.selector }
+              )
+            : null);
+
+        const currentFormat = barrierFormat[barrier.id] || "html";
+
         return (
           <div
             key={barrier.id}
@@ -334,95 +354,228 @@ export const FixesInlineView: React.FC<FixesInlineViewProps> = ({
               </span>
             </div>
 
-            {/* Unified Diff with Line Numbers and +/- Markers */}
+            {/* Format Selector Toolbar if React Equivalent Exists */}
+            {reactEquivalent && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: "var(--space-2)",
+                }}
+              >
+                <SegmentedControl<"html" | "react">
+                  name={`format-${barrier.id}`}
+                  ariaLabel="Patch format"
+                  size="sm"
+                  value={currentFormat}
+                  onChange={(val) =>
+                    setBarrierFormat((prev) => ({ ...prev, [barrier.id]: val }))
+                  }
+                  options={[
+                    { value: "html", label: "HTML / DOM patch" },
+                    { value: "react", label: "React (JSX / TSX)" },
+                  ]}
+                />
+                <span
+                  style={{
+                    fontSize: "var(--font-size-xs)",
+                    color: "var(--color-text-muted)",
+                    fontFamily: "var(--font-mono)",
+                  }}
+                >
+                  Target: {barrier.selector}
+                </span>
+              </div>
+            )}
+
+            {/* Live region for announcing format changes to screen readers */}
             <div
-              tabIndex={0}
-              role="region"
-              aria-label="Code diff viewer"
+              aria-live="polite"
+              aria-atomic="true"
               style={{
-                backgroundColor: "var(--color-bg-canvas)",
-                border: "1px solid var(--color-border-subdued)",
-                borderRadius: "var(--radius-sm)",
-                overflowX: "auto",
-                fontFamily: "var(--font-mono)",
-                fontSize: "var(--font-size-sm)",
-                lineHeight: 1.5,
+                position: "absolute",
+                width: "1px",
+                height: "1px",
+                padding: 0,
+                margin: "-1px",
+                overflow: "hidden",
+                clip: "rect(0, 0, 0, 0)",
+                whiteSpace: "nowrap",
+                border: 0,
               }}
             >
-              {diffLines.map((line, lIdx) => {
-                const isAdd = line.prefix === "+";
-                const isRemove = line.prefix === "-";
-                const isHeader = line.type === "header";
-
-                return (
-                  <div
-                    key={lIdx}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "40px 40px 24px 1fr",
-                      backgroundColor: isAdd
-                        ? "rgba(118, 185, 0, 0.12)"
-                        : isRemove
-                        ? "rgba(224, 78, 64, 0.12)"
-                        : isHeader
-                        ? "var(--color-surface-3)"
-                        : "transparent",
-                      color: isAdd
-                        ? "var(--color-status-success)"
-                        : isRemove
-                        ? "var(--color-severity-blocker)"
-                        : isHeader
-                        ? "var(--color-text-muted)"
-                        : "var(--color-text-primary)",
-                      padding: "2px 8px",
-                      borderBottom: "1px solid rgba(255, 255, 255, 0.03)",
-                    }}
-                  >
-                    {/* Old line number */}
-                    <span
-                      style={{
-                        textAlign: "right",
-                        paddingRight: "8px",
-                        color: "var(--color-text-muted)",
-                        userSelect: "none",
-                        fontSize: "12px",
-                      }}
-                    >
-                      {line.oldLineNumber || ""}
-                    </span>
-
-                    {/* New line number */}
-                    <span
-                      style={{
-                        textAlign: "right",
-                        paddingRight: "8px",
-                        color: "var(--color-text-muted)",
-                        userSelect: "none",
-                        fontSize: "12px",
-                      }}
-                    >
-                      {line.newLineNumber || ""}
-                    </span>
-
-                    {/* +/- marker */}
-                    <span
-                      style={{
-                        textAlign: "center",
-                        fontWeight: 600,
-                        userSelect: "none",
-                      }}
-                    >
-                      {line.prefix}
-                    </span>
-
-                    {/* Content */}
-                    <span style={{ whiteSpace: "pre-wrap", wordBreak: "break-all" }}>
-                      {line.content}
-                    </span>
-                  </div>
-                );
-              })}
+              {currentFormat === "react"
+                ? "Switched to React JSX / TSX equivalent view"
+                : "Switched to HTML DOM patch view"}
             </div>
+
+            {currentFormat === "react" && reactEquivalent ? (
+              <div
+                tabIndex={0}
+                role="region"
+                aria-label="React equivalent snippet"
+                style={{
+                  backgroundColor: "var(--color-surface-2)",
+                  border: "1px solid var(--color-border-subdued)",
+                  borderRadius: "var(--radius-sm)",
+                  padding: "var(--space-3)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "var(--space-2)",
+                }}
+              >
+                <div
+                  style={{
+                    padding: "var(--space-2) var(--space-3)",
+                    backgroundColor: "var(--color-surface-3)",
+                    borderLeft: "3px solid var(--color-brand-primary)",
+                    borderRadius: "var(--radius-sm)",
+                    fontSize: "var(--font-size-xs)",
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  <strong style={{ color: "var(--color-brand-primary)" }}>React (JSX / TSX)</strong>: Translated from the verified HTML patch. The browser verified the DOM change, not this JSX.
+                </div>
+
+                <pre
+                  style={{
+                    margin: 0,
+                    padding: "var(--space-3)",
+                    backgroundColor: "var(--color-bg-canvas)",
+                    border: "1px solid var(--color-border-subdued)",
+                    borderRadius: "var(--radius-sm)",
+                    fontSize: "var(--font-size-sm)",
+                    fontFamily: "var(--font-mono)",
+                    color: "var(--color-status-success)",
+                    overflowX: "auto",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  <code>{reactEquivalent.code}</code>
+                </pre>
+
+                {reactEquivalent.notes && reactEquivalent.notes.length > 0 && (
+                  <div style={{ marginTop: "var(--space-1)" }}>
+                    <div
+                      style={{
+                        fontSize: "var(--font-size-xs)",
+                        fontWeight: 600,
+                        color: "var(--color-text-muted)",
+                        marginBottom: "4px",
+                      }}
+                    >
+                      Implementation Notes:
+                    </div>
+                    <ul
+                      style={{
+                        margin: 0,
+                        paddingLeft: "18px",
+                        fontSize: "var(--font-size-xs)",
+                        color: "var(--color-text-secondary)",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {reactEquivalent.notes.map((note, idx) => (
+                        <li key={idx}>{note}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* Unified Diff with Line Numbers and +/- Markers */
+              <div
+                tabIndex={0}
+                role="region"
+                aria-label="Code diff viewer"
+                style={{
+                  backgroundColor: "var(--color-bg-canvas)",
+                  border: "1px solid var(--color-border-subdued)",
+                  borderRadius: "var(--radius-sm)",
+                  overflowX: "auto",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "var(--font-size-sm)",
+                  lineHeight: 1.5,
+                }}
+              >
+                {diffLines.map((line, lIdx) => {
+                  const isAdd = line.prefix === "+";
+                  const isRemove = line.prefix === "-";
+                  const isHeader = line.type === "header";
+
+                  return (
+                    <div
+                      key={lIdx}
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "40px 40px 24px 1fr",
+                        backgroundColor: isAdd
+                          ? "rgba(118, 185, 0, 0.12)"
+                          : isRemove
+                          ? "rgba(224, 78, 64, 0.12)"
+                          : isHeader
+                          ? "var(--color-surface-3)"
+                          : "transparent",
+                        color: isAdd
+                          ? "var(--color-status-success)"
+                          : isRemove
+                          ? "var(--color-severity-blocker)"
+                          : isHeader
+                          ? "var(--color-text-muted)"
+                          : "var(--color-text-primary)",
+                        padding: "2px 8px",
+                        borderBottom: "1px solid rgba(255, 255, 255, 0.03)",
+                      }}
+                    >
+                      {/* Old line number */}
+                      <span
+                        style={{
+                          textAlign: "right",
+                          paddingRight: "8px",
+                          color: "var(--color-text-muted)",
+                          userSelect: "none",
+                          fontSize: "12px",
+                        }}
+                      >
+                        {line.oldLineNumber || ""}
+                      </span>
+
+                      {/* New line number */}
+                      <span
+                        style={{
+                          textAlign: "right",
+                          paddingRight: "8px",
+                          color: "var(--color-text-muted)",
+                          userSelect: "none",
+                          fontSize: "12px",
+                        }}
+                      >
+                        {line.newLineNumber || ""}
+                      </span>
+
+                      {/* +/- marker */}
+                      <span
+                        style={{
+                          textAlign: "center",
+                          fontWeight: 600,
+                          userSelect: "none",
+                        }}
+                      >
+                        {line.prefix}
+                      </span>
+
+                      {/* Content */}
+                      <span style={{ whiteSpace: "pre-wrap", wordBreak: "break-all" }}>
+                        {line.content}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Action Buttons Row */}
             <div
@@ -440,9 +593,22 @@ export const FixesInlineView: React.FC<FixesInlineViewProps> = ({
                 <Button
                   variant="secondary"
                   size="sm"
-                  onClick={() => handleCopy(`fix-${barrier.id}`, rawDiff)}
+                  onClick={() =>
+                    handleCopy(
+                      `fix-${barrier.id}`,
+                      currentFormat === "react" && reactEquivalent
+                        ? reactEquivalent.code
+                        : rawDiff
+                    )
+                  }
                 >
-                  {copiedId === `fix-${barrier.id}` ? "Copied fix ✓" : "Copy fix"}
+                  {copiedId === `fix-${barrier.id}`
+                    ? currentFormat === "react"
+                      ? "Copied React snippet ✓"
+                      : "Copied fix ✓"
+                    : currentFormat === "react"
+                    ? "Copy React snippet"
+                    : "Copy fix"}
                 </Button>
 
                 {/* Copy patched file or Apply to folder in paste-code/folder mode */}

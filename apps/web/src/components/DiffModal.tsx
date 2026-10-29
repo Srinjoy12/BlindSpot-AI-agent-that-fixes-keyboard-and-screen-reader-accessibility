@@ -3,6 +3,8 @@ import type { BarrierItem } from "./BarrierList.js";
 import { KeyboardReplay, type FocusStopItem } from "./KeyboardReplay.js";
 import { Button } from "./ui/Button.js";
 import { StatusIcon } from "./ui/StatusIcon.js";
+import { SegmentedControl } from "./ui/SegmentedControl.js";
+import { translateFixToReact } from "@blindspot/fixer/reactTranslate";
 
 interface DiffModalProps {
   barrier: BarrierItem | null;
@@ -66,6 +68,7 @@ export const DiffModal: React.FC<DiffModalProps> = ({ barrier, forwardStops = []
   const [copyFeedback, setCopyFeedback] = useState<"diff" | "file" | "patch" | null>(null);
   const [viewMode, setViewMode] = useState<"unified" | "side-by-side">("unified");
   const [pathView, setPathView] = useState<"before" | "after">("after");
+  const [codeFormat, setCodeFormat] = useState<"html" | "react">("html");
 
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -127,6 +130,21 @@ export const DiffModal: React.FC<DiffModalProps> = ({ barrier, forwardStops = []
 
   const parsedDiff = isSourceMode && rawDiff ? parseUnifiedDiff(rawDiff) : [];
 
+  const reactEquivalent =
+    barrier.fix?.reactEquivalent ||
+    barrier.reactEquivalent ||
+    (barrier.fix?.body
+      ? translateFixToReact(
+          {
+            patchType: barrier.fix.patchType,
+            body: barrier.fix.body,
+            rationale: barrier.fix.rationale || barrier.fix.explanation,
+            targetSelector: barrier.selector,
+          },
+          { detectorId: barrier.detectorId, selector: barrier.selector }
+        )
+      : null);
+
   const beforeStops: FocusStopItem[] = forwardStops.length > 0 ? forwardStops : [];
   const afterStops: FocusStopItem[] = barrier.afterStops && barrier.afterStops.length > 0
     ? barrier.afterStops
@@ -154,7 +172,10 @@ export const DiffModal: React.FC<DiffModalProps> = ({ barrier, forwardStops = []
     : beforeStops;
 
   const handleCopyDiff = () => {
-    const textToCopy = rawDiff || inPagePatchCode;
+    const textToCopy =
+      codeFormat === "react" && reactEquivalent
+        ? reactEquivalent.code
+        : rawDiff || inPagePatchCode;
     if (!textToCopy) return;
     navigator.clipboard.writeText(textToCopy);
     setCopyFeedback("diff");
@@ -370,7 +391,13 @@ export const DiffModal: React.FC<DiffModalProps> = ({ barrier, forwardStops = []
                 id="copy-diff-button"
                 onClick={handleCopyDiff}
               >
-                {copyFeedback === "diff" ? "Copied diff ✓" : "Copy diff"}
+                {copyFeedback === "diff"
+                  ? codeFormat === "react"
+                    ? "Copied React snippet ✓"
+                    : "Copied diff ✓"
+                  : codeFormat === "react"
+                  ? "Copy React snippet"
+                  : "Copy diff"}
               </Button>
 
               {modifiedSource && (
@@ -461,6 +488,8 @@ export const DiffModal: React.FC<DiffModalProps> = ({ barrier, forwardStops = []
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
+                flexWrap: "wrap",
+                gap: "var(--space-2)",
                 padding: "var(--space-2) var(--space-3)",
                 backgroundColor: "var(--color-surface-3)",
                 border: "1px solid var(--color-border-subdued)",
@@ -468,15 +497,114 @@ export const DiffModal: React.FC<DiffModalProps> = ({ barrier, forwardStops = []
                 borderRadius: "var(--radius-sm) var(--radius-sm) 0 0",
               }}
             >
-              <span style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)" }}>
-                {isSourceMode ? "Source code diff with line numbers" : "In-page patch"}
-              </span>
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", flexWrap: "wrap" }}>
+                <span style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)" }}>
+                  {codeFormat === "react"
+                    ? "React (JSX / TSX) Component"
+                    : isSourceMode
+                    ? "Source code diff with line numbers"
+                    : "In-page patch"}
+                </span>
+
+                {reactEquivalent && (
+                  <SegmentedControl<"html" | "react">
+                    name="diff-modal-format"
+                    ariaLabel="Patch format"
+                    size="sm"
+                    value={codeFormat}
+                    onChange={(val) => setCodeFormat(val)}
+                    options={[
+                      { value: "html", label: "HTML / DOM patch" },
+                      { value: "react", label: "React (JSX / TSX)" },
+                    ]}
+                  />
+                )}
+              </div>
+
               <span style={{ fontSize: "var(--font-size-sm)", fontFamily: "var(--font-mono)", color: "var(--color-text-muted)" }}>
                 Target: {barrier.selector}
               </span>
             </div>
 
-            {isSourceMode && rawDiff ? (
+            {/* Live region for announcing format changes to screen readers */}
+            <div
+              aria-live="polite"
+              aria-atomic="true"
+              style={{
+                position: "absolute",
+                width: "1px",
+                height: "1px",
+                padding: 0,
+                margin: "-1px",
+                overflow: "hidden",
+                clip: "rect(0, 0, 0, 0)",
+                whiteSpace: "nowrap",
+                border: 0,
+              }}
+            >
+              {codeFormat === "react" ? "Switched to React JSX / TSX equivalent view" : "Switched to HTML DOM patch view"}
+            </div>
+
+            {codeFormat === "react" && reactEquivalent ? (
+              <div
+                tabIndex={0}
+                role="region"
+                aria-label="React equivalent snippet"
+                style={{
+                  backgroundColor: "var(--color-surface-2)",
+                  border: "1px solid var(--color-border-subdued)",
+                  borderRadius: "0 0 var(--radius-sm) var(--radius-sm)",
+                  padding: "var(--space-3)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "var(--space-2)",
+                }}
+              >
+                <div
+                  style={{
+                    padding: "var(--space-2) var(--space-3)",
+                    backgroundColor: "var(--color-surface-3)",
+                    borderLeft: "3px solid var(--color-brand-primary)",
+                    borderRadius: "var(--radius-sm)",
+                    fontSize: "var(--font-size-xs)",
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  <strong style={{ color: "var(--color-brand-primary)" }}>React (JSX / TSX)</strong>: Translated from the verified HTML patch. The browser verified the DOM change, not this JSX.
+                </div>
+
+                <pre
+                  style={{
+                    margin: 0,
+                    padding: "var(--space-3)",
+                    backgroundColor: "var(--color-surface-1)",
+                    border: "1px solid var(--color-border-subdued)",
+                    borderRadius: "var(--radius-sm)",
+                    fontSize: "var(--font-size-sm)",
+                    fontFamily: "var(--font-mono)",
+                    color: "var(--color-status-success)",
+                    overflowX: "auto",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  <code>{reactEquivalent.code}</code>
+                </pre>
+
+                {reactEquivalent.notes && reactEquivalent.notes.length > 0 && (
+                  <div style={{ marginTop: "var(--space-1)" }}>
+                    <div style={{ fontSize: "var(--font-size-xs)", fontWeight: 600, color: "var(--color-text-muted)", marginBottom: "4px" }}>
+                      Implementation Notes:
+                    </div>
+                    <ul style={{ margin: 0, paddingLeft: "18px", fontSize: "var(--font-size-xs)", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
+                      {reactEquivalent.notes.map((note, idx) => (
+                        <li key={idx}>{note}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ) : isSourceMode && rawDiff ? (
               <div
                 tabIndex={0}
                 role="region"

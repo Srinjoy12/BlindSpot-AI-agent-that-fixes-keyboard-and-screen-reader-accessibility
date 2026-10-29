@@ -284,4 +284,35 @@ describe("Report Exports and Shape Snapshot", () => {
     expect(md).toContain("- **Crawl (Tab navigation):**");
     expect(md).toContain("- **Estimated Cost Per Verified Fix:**");
   });
+
+  it("generates Markdown and HTML reports containing React equivalent when present", () => {
+    const reportWithReact: AuditReport = {
+      ...sampleReport,
+      barriers: [
+        {
+          ...sampleReport.barriers[0]!,
+          fix: {
+            ...sampleReport.barriers[0]!.fix!,
+            reactEquivalent: {
+              code: "useEffect(() => { ... }, []);",
+              notes: ["Use window event listener with cleanup"],
+              source: "deterministic",
+            },
+          },
+        },
+      ],
+    };
+
+    const md = generateMarkdownReport(reportWithReact);
+    expect(md).toContain("##### React (JSX / TSX) Equivalent");
+    expect(md).toContain("Translated from the verified HTML patch. The browser verified the DOM change, not this JSX.");
+    expect(md).toContain("useEffect(() => { ... }, []);");
+    expect(md).toContain("- Use window event listener with cleanup");
+
+    const html = generateHtmlReport(reportWithReact);
+    expect(html).toContain("React (JSX / TSX) Equivalent");
+    expect(html).toContain("Translated from the verified HTML patch. The browser verified the DOM change, not this JSX.");
+    expect(html).toContain("useEffect");
+    expect(html).toContain("Use window event listener with cleanup");
+  });
 });

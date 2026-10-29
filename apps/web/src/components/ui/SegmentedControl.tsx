@@ -4,6 +4,7 @@ export interface SegmentOption<T extends string = string> {
   value: T;
   label: string;
   badge?: string | number;
+  id?: string;
 }
 
 interface SegmentedControlProps<T extends string = string> {
@@ -15,6 +16,7 @@ interface SegmentedControlProps<T extends string = string> {
   size?: "sm" | "md";
   className?: string;
   style?: React.CSSProperties;
+  role?: "tablist" | "radiogroup";
 }
 
 export function SegmentedControl<T extends string = string>({
@@ -26,6 +28,7 @@ export function SegmentedControl<T extends string = string>({
   size = "md",
   className = "",
   style = {},
+  role = "radiogroup",
 }: SegmentedControlProps<T>) {
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -52,10 +55,11 @@ export function SegmentedControl<T extends string = string>({
   };
 
   const isSmall = size === "sm";
+  const isTablist = role === "tablist";
 
   return (
     <div
-      role="radiogroup"
+      role={role}
       aria-label={ariaLabel || name}
       className={`ui-segmented-control ${className}`}
       style={{
@@ -71,15 +75,18 @@ export function SegmentedControl<T extends string = string>({
     >
       {options.map((opt, idx) => {
         const isSelected = opt.value === value;
+        const buttonId = opt.id ?? `tab-${opt.value}`;
         return (
           <button
             key={opt.value}
+            id={buttonId}
             ref={(el) => {
               buttonRefs.current[idx] = el;
             }}
             type="button"
-            role="radio"
-            aria-checked={isSelected}
+            role={isTablist ? "tab" : "radio"}
+            aria-selected={isTablist ? isSelected : undefined}
+            aria-checked={!isTablist ? isSelected : undefined}
             tabIndex={isSelected ? 0 : -1}
             onClick={() => onChange(opt.value)}
             onKeyDown={(e) => handleKeyDown(e, idx)}

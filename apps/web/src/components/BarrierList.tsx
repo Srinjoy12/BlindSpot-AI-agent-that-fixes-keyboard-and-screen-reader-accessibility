@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import type { ReactEquivalent } from "@blindspot/ai";
 import { StatusIcon, type StatusType } from "./ui/StatusIcon.js";
 import { Button } from "./ui/Button.js";
 import { getProblemDetail } from "../utils/problemDescriptions.js";
@@ -27,9 +28,11 @@ export interface BarrierItem {
     scriptContent?: string;
     filePath?: string;
     originalSource?: string;
+    reactEquivalent?: ReactEquivalent;
   };
   filePath?: string;
   originalSource?: string;
+  reactEquivalent?: ReactEquivalent;
   verified: boolean;
   status?: "verified" | "unverified" | "rejected";
   diff?: string;

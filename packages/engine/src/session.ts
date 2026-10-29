@@ -12,6 +12,7 @@ export interface SessionOptions {
   viewportWidth?: number; // default: 1280
   viewportHeight?: number; // default: 800
   appPort?: number;
+  allowSelfAudit?: boolean;
 }
 
 export interface Session {
@@ -40,7 +41,7 @@ async function getSharedBrowser(): Promise<Browser> {
 /** Starts a fresh isolated browser context for one audit. */
 export async function startSession(opts: SessionOptions): Promise<Session> {
   // Validate target URL before opening context
-  await checkUrl(opts.targetUrl, { allowFixtures: true, appPort: opts.appPort });
+  await checkUrl(opts.targetUrl, { allowFixtures: true, allowSelfAudit: opts.allowSelfAudit, appPort: opts.appPort });
 
   const browser = await getSharedBrowser();
 
@@ -60,6 +61,7 @@ export async function startSession(opts: SessionOptions): Promise<Session> {
   // Attach SSRF guard to every request in this context (main frame, redirects, fetches, subresources)
   await attachSsrfGuard(context, {
     allowFixtures: true,
+    allowSelfAudit: opts.allowSelfAudit,
     appPort: opts.appPort,
   });
 

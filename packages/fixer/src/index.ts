@@ -26,3 +26,7 @@ export type {
   RunFileSetFixLoopResult,
 } from "./fileSetLoop.js";
 
+// React JSX/TSX deterministic translator
+export { translateFixToReact } from "./reactTranslate.js";
+export type { FixTranslationInput, TranslationContext } from "./reactTranslate.js";
+

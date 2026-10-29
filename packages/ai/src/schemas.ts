@@ -57,11 +57,20 @@ export type FindingAnalysis = z.infer<typeof FindingAnalysisSchema>;
 export const PatchTypeSchema = z.enum(["css", "attribute", "html", "script"]);
 export type PatchType = z.infer<typeof PatchTypeSchema>;
 
+export const ReactEquivalentSchema = z.object({
+  code: z.string(),
+  notes: z.array(z.string()),
+  source: z.enum(["deterministic", "model"]),
+});
+
+export type ReactEquivalent = z.infer<typeof ReactEquivalentSchema>;
+
 export const FixProposalSchema = z.object({
   patchType: PatchTypeSchema,
   body: z.string(),
   rationale: z.string().max(300),
   targetSelector: z.string().optional(),
+  reactEquivalent: ReactEquivalentSchema.optional(),
 });
 
 export type FixProposal = z.infer<typeof FixProposalSchema>;
