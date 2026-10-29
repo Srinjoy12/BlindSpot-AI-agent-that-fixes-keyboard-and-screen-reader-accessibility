@@ -16,10 +16,13 @@ export {
   attachLocalDevBridgeGuard,
   isLoopbackAddress,
   isLoopbackHost,
+  validateBridgeRequestSecurity,
 } from "./localDevBridge.js";
 export type {
   ValidateLocalDevUrlOptions,
   LocalDevBridgeGuardOptions,
+  BridgeRequestSecurityInput,
+  BridgeRequestSecurityResult,
 } from "./localDevBridge.js";
 export { AuditConcurrencyController, auditConcurrency } from "./concurrency.js";
 export { captureAxTree, getInteractiveNodes } from "./axTree.js";

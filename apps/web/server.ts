@@ -21,6 +21,7 @@ import {
   loadSourceFileSet,
   validateLocalDevUrl,
   isLoopbackAddress,
+  validateBridgeRequestSecurity,
   AuditConcurrencyController,
   auditConcurrency,
   type FileSet,
@@ -1681,67 +1682,23 @@ app.post("/api/audit-files", rateLimitMiddleware, tokenBudgetMiddleware, async (
 });
 
 app.post("/api/audit-local-dev", rateLimitMiddleware, tokenBudgetMiddleware, async (req, res) => {
-  // 1. Bridge feature flag check
-  if (process.env.ENABLE_LOCAL_DEV_BRIDGE !== "true") {
-    res.status(403).json({
-      error: "Local dev server bridge is disabled. Set ENABLE_LOCAL_DEV_BRIDGE=true in the environment to enable local dev server auditing.",
-    });
+  // Shared security validation: feature flag, same-origin, Host header, remoteAddress, attestation
+  const securityCheck = validateBridgeRequestSecurity({
+    origin: req.headers.origin,
+    host: Array.isArray(req.headers.host) ? req.headers.host[0] : req.headers.host,
+    remoteAddress: req.socket.remoteAddress,
+    attested: req.body?.attested,
+    serverPort: PORT,
+  });
+
+  if (!securityCheck.valid) {
+    res.status(securityCheck.status).json({ error: securityCheck.error });
     return;
   }
 
-  // 2. Same-Origin check: Origin header must match BlindSpot server or be absent
-  const originHeader = req.headers.origin;
-  if (originHeader) {
-    try {
-      const u = new URL(originHeader);
-      const isLocal = u.hostname === "localhost" || u.hostname === "127.0.0.1" || u.hostname === "::1";
-      const portMatches = (u.port || (u.protocol === "https:" ? "443" : "80")) === String(PORT);
-      if (!isLocal || !portMatches) {
-        res.status(403).json({ error: "Cross-origin requests to local dev bridge are forbidden." });
-        return;
-      }
-    } catch {
-      res.status(400).json({ error: "Invalid Origin header." });
-      return;
-    }
-  }
+  const { targetUrl, files = [], runFixes = true, maxStops = 50 } = req.body || {};
 
-  // 2b. Host header check (DNS rebinding protection: localhost / 127.0.0.1 / [::1] + own port)
-  const rawHost = Array.isArray(req.headers.host) ? req.headers.host[0] : req.headers.host;
-  if (!rawHost) {
-    res.status(400).json({ error: "Host header is required." });
-    return;
-  }
-  const hostMatch = rawHost.match(/^(?:localhost|127\.0\.0\.1|\[::1\])(?::(\d+))?$/i);
-  if (!hostMatch) {
-    res.status(403).json({ error: `Invalid Host header '${rawHost}' for local dev bridge.` });
-    return;
-  }
-  const hostPort = hostMatch[1] ? parseInt(hostMatch[1], 10) : 80;
-  if (hostPort !== PORT) {
-    res.status(403).json({ error: `Host port '${hostPort}' does not match BlindSpot server port '${PORT}'.` });
-    return;
-  }
-
-  // 3. Loopback remoteAddress check (Docker caveat documented)
-  if (!isLoopbackAddress(req.socket.remoteAddress)) {
-    res.status(403).json({
-      error: `Dev server bridge only accepts connections from loopback addresses. Received: '${req.socket.remoteAddress}'. If running in Docker, see limitations.md regarding host networking.`,
-    });
-    return;
-  }
-
-  const { targetUrl, files = [], runFixes = true, attested, maxStops = 50 } = req.body || {};
-
-  // 4. Ownership attestation check
-  if (!attested) {
-    res.status(400).json({
-      error: "Ownership attestation is required to audit a local development server.",
-    });
-    return;
-  }
-
-  // 5. Target URL validation (rejects own-port, non-loopback, userinfo, etc.)
+  // Target URL validation (rejects own-port, non-loopback, userinfo, etc.)
   let validatedUrl: URL;
   try {
     validatedUrl = validateLocalDevUrl(targetUrl, { attested: true, ownPort: PORT });

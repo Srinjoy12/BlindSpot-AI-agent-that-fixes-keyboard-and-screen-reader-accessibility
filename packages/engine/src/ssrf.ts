@@ -299,9 +299,15 @@ export async function checkUrl(rawUrl: string, opts: CheckUrlOptions = {}): Prom
 
   // Documented exception for self-audit on own loopback origin
   if (opts.allowSelfAudit) {
+    if (opts.appPort === undefined || typeof opts.appPort !== "number") {
+      throw new SsrfError("Self-audit requires appPort to be explicitly defined.", rawUrl, "self_audit_no_port");
+    }
+    if (process.env.BLINDSPOT_SELF_AUDIT !== "1") {
+      throw new SsrfError("Self-audit requires BLINDSPOT_SELF_AUDIT=1 in environment.", rawUrl, "self_audit_env_disabled");
+    }
     const isLoopback = url.hostname === "localhost" || url.hostname === "127.0.0.1" || url.hostname === "::1" || url.hostname === "[::1]";
     const actualPort = url.port ? parseInt(url.port, 10) : (url.protocol === "https:" ? 443 : 80);
-    if (isLoopback && (opts.appPort === undefined || actualPort === opts.appPort)) {
+    if (isLoopback && actualPort === opts.appPort) {
       return url;
     }
   }
@@ -363,9 +369,19 @@ export async function attachSsrfGuard(
     }
 
     if (opts.allowSelfAudit) {
+      if (opts.appPort === undefined || typeof opts.appPort !== "number") {
+        opts.onBlocked?.(rawUrl, "self_audit_no_port");
+        await route.abort("blockedbyclient");
+        throw new SsrfError("Self-audit requires appPort to be explicitly defined.", rawUrl, "self_audit_no_port");
+      }
+      if (process.env.BLINDSPOT_SELF_AUDIT !== "1") {
+        opts.onBlocked?.(rawUrl, "self_audit_env_disabled");
+        await route.abort("blockedbyclient");
+        throw new SsrfError("Self-audit requires BLINDSPOT_SELF_AUDIT=1 in environment.", rawUrl, "self_audit_env_disabled");
+      }
       const isLoopback = parsedUrl.hostname === "localhost" || parsedUrl.hostname === "127.0.0.1" || parsedUrl.hostname === "::1" || parsedUrl.hostname === "[::1]";
       const actualPort = parsedUrl.port ? parseInt(parsedUrl.port, 10) : (parsedUrl.protocol === "https:" ? 443 : 80);
-      if (isLoopback && (opts.appPort === undefined || actualPort === opts.appPort)) {
+      if (isLoopback && actualPort === opts.appPort) {
         await route.continue();
         return;
       }
@@ -418,9 +434,19 @@ export async function attachSsrfGuard(
         }
 
         if (opts.allowSelfAudit) {
+          if (opts.appPort === undefined || typeof opts.appPort !== "number") {
+            opts.onBlocked?.(redirectUrl.href, "self_audit_no_port");
+            await route.abort("blockedbyclient");
+            throw new SsrfError("Self-audit requires appPort to be explicitly defined.", redirectUrl.href, "self_audit_no_port");
+          }
+          if (process.env.BLINDSPOT_SELF_AUDIT !== "1") {
+            opts.onBlocked?.(redirectUrl.href, "self_audit_env_disabled");
+            await route.abort("blockedbyclient");
+            throw new SsrfError("Self-audit requires BLINDSPOT_SELF_AUDIT=1 in environment.", redirectUrl.href, "self_audit_env_disabled");
+          }
           const isLoopback = redirectUrl.hostname === "localhost" || redirectUrl.hostname === "127.0.0.1" || redirectUrl.hostname === "::1" || redirectUrl.hostname === "[::1]";
           const actualPort = redirectUrl.port ? parseInt(redirectUrl.port, 10) : (redirectUrl.protocol === "https:" ? 443 : 80);
-          if (isLoopback && (opts.appPort === undefined || actualPort === opts.appPort)) {
+          if (isLoopback && actualPort === opts.appPort) {
             await route.fulfill({ response });
             return;
           }

@@ -2,6 +2,9 @@ import { chromium } from "playwright";
 import { startSession, crawl, runInteractionPass, runAxe } from "@blindspot/engine";
 import { runDetectors } from "@blindspot/detectors";
 
+// Explicitly authorize self-audit in this script process only
+process.env.BLINDSPOT_SELF_AUDIT = "1";
+
 async function main() {
   console.log("=== BlindSpot Self-Audit: Running on http://localhost:3000 ===");
 

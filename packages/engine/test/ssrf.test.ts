@@ -2,7 +2,7 @@
 // Verifies net.BlockList coverage, WHATWG IP normalization, fixture exceptions,
 // stubbed DNS resolvers, Playwright request routing, redirect guards, and script fetches.
 
-import { describe, it, expect, afterAll } from "vitest";
+import { describe, it, expect, afterAll, afterEach } from "vitest";
 import http from "node:http";
 import { chromium, type Browser } from "playwright";
 import {
@@ -263,6 +263,73 @@ describe("SSRF Hardening Suite", () => {
       expect(exfiltrated).toBeUndefined();
       expect(blockedList.some((u) => u.includes("169.254.169.254"))).toBe(true);
       await context.close();
+    });
+  });
+
+  describe("F. Hardened Self-Audit Protection (allowSelfAudit)", () => {
+    const originalEnv = process.env.BLINDSPOT_SELF_AUDIT;
+
+    afterEach(() => {
+      if (originalEnv !== undefined) {
+        process.env.BLINDSPOT_SELF_AUDIT = originalEnv;
+      } else {
+        delete process.env.BLINDSPOT_SELF_AUDIT;
+      }
+    });
+
+    it("rejects allowSelfAudit when appPort is not defined", async () => {
+      process.env.BLINDSPOT_SELF_AUDIT = "1";
+      await expect(
+        checkUrl("http://localhost:3000", { allowSelfAudit: true })
+      ).rejects.toThrow(SsrfError);
+      await expect(
+        checkUrl("http://localhost:3000", { allowSelfAudit: true })
+      ).rejects.toThrow(/requires appPort to be explicitly defined/i);
+    });
+
+    it("rejects allowSelfAudit when BLINDSPOT_SELF_AUDIT !== '1'", async () => {
+      delete process.env.BLINDSPOT_SELF_AUDIT;
+      await expect(
+        checkUrl("http://localhost:3000", { allowSelfAudit: true, appPort: 3000 })
+      ).rejects.toThrow(SsrfError);
+      await expect(
+        checkUrl("http://localhost:3000", { allowSelfAudit: true, appPort: 3000 })
+      ).rejects.toThrow(/requires BLINDSPOT_SELF_AUDIT=1/i);
+
+      process.env.BLINDSPOT_SELF_AUDIT = "0";
+      await expect(
+        checkUrl("http://localhost:3000", { allowSelfAudit: true, appPort: 3000 })
+      ).rejects.toThrow(SsrfError);
+    });
+
+    it("allows loopback self-audit when both appPort and BLINDSPOT_SELF_AUDIT='1' are present", async () => {
+      process.env.BLINDSPOT_SELF_AUDIT = "1";
+      const u1 = await checkUrl("http://localhost:3000", { allowSelfAudit: true, appPort: 3000 });
+      expect(u1.hostname).toBe("localhost");
+      expect(u1.port).toBe("3000");
+
+      const u2 = await checkUrl("http://127.0.0.1:3000/app", { allowSelfAudit: true, appPort: 3000 });
+      expect(u2.hostname).toBe("127.0.0.1");
+      expect(u2.port).toBe("3000");
+    });
+
+    it("rejects loopback when target port does not match appPort", async () => {
+      process.env.BLINDSPOT_SELF_AUDIT = "1";
+      // Even with allowSelfAudit, hitting port 5173 when appPort is 3000 must be blocked by SSRF
+      await expect(
+        checkUrl("http://localhost:5173", { allowSelfAudit: true, appPort: 3000 })
+      ).rejects.toThrow(SsrfError);
+    });
+
+    it("preserves default behavior when allowSelfAudit is false/undefined", async () => {
+      process.env.BLINDSPOT_SELF_AUDIT = "1";
+      // Without allowSelfAudit: true, checkUrl must block localhost
+      await expect(
+        checkUrl("http://localhost:3000", { appPort: 3000 })
+      ).rejects.toThrow(SsrfError);
+      await expect(
+        checkUrl("http://localhost:3000")
+      ).rejects.toThrow(SsrfError);
     });
   });
 });

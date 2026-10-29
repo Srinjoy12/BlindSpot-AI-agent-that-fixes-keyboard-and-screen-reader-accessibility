@@ -1,7 +1,12 @@
 // server-endpoints.test.ts — Unit tests for rate-limiting, daily token budgeting, code validation, and /api/audit-local-dev endpoint security.
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { isLoopbackAddress, checkUrl, validateFileSet } from "../src/index.js";
+import {
+  isLoopbackAddress,
+  checkUrl,
+  validateFileSet,
+  validateBridgeRequestSecurity,
+} from "../src/index.js";
 import { SsrfError } from "../src/ssrf.js";
 
 describe("Audit code validation rules", () => {
@@ -65,66 +70,21 @@ describe("Audit code validation rules", () => {
 describe("/api/audit-local-dev endpoint security validation", () => {
   const SERVER_PORT = 3000;
 
-  // Exact request validation logic matching apps/web/server.ts
+  // Calls the exact shared validation function exported from @blindspot/engine and used by apps/web/server.ts
   function validateBridgeRequest(req: {
     headers: { origin?: string | undefined; host?: string | undefined };
     remoteAddress?: string | undefined;
     body?: { targetUrl?: string | undefined; attested?: boolean | undefined } | undefined;
     envFlag?: string | undefined;
-  }): { status: number; error?: string } {
-    // 1. Feature flag
-    if (req.envFlag !== "true") {
-      return {
-        status: 403,
-        error: "Local dev server bridge is disabled. Set ENABLE_LOCAL_DEV_BRIDGE=true in the environment to enable local dev server auditing.",
-      };
-    }
-
-    // 2. Origin check
-    if (req.headers.origin) {
-      try {
-        const u = new URL(req.headers.origin);
-        const isLocal = u.hostname === "localhost" || u.hostname === "127.0.0.1" || u.hostname === "::1";
-        const portMatches = (u.port || (u.protocol === "https:" ? "443" : "80")) === String(SERVER_PORT);
-        if (!isLocal || !portMatches) {
-          return { status: 403, error: "Cross-origin requests to local dev bridge are forbidden." };
-        }
-      } catch {
-        return { status: 400, error: "Invalid Origin header." };
-      }
-    }
-
-    // 2b. Host header check
-    const rawHost = req.headers.host;
-    if (!rawHost) {
-      return { status: 400, error: "Host header is required." };
-    }
-    const hostMatch = rawHost.match(/^(?:localhost|127\.0\.0\.1|\[::1\])(?::(\d+))?$/i);
-    if (!hostMatch) {
-      return { status: 403, error: `Invalid Host header '${rawHost}' for local dev bridge.` };
-    }
-    const hostPort = hostMatch[1] ? parseInt(hostMatch[1], 10) : 80;
-    if (hostPort !== SERVER_PORT) {
-      return { status: 403, error: `Host port '${hostPort}' does not match BlindSpot server port '${SERVER_PORT}'.` };
-    }
-
-    // 3. Loopback remoteAddress check
-    if (!isLoopbackAddress(req.remoteAddress)) {
-      return {
-        status: 403,
-        error: `Dev server bridge only accepts connections from loopback addresses. Received: '${req.remoteAddress}'. If running in Docker, see limitations.md regarding host networking.`,
-      };
-    }
-
-    // 4. Ownership attestation
-    if (!req.body?.attested) {
-      return {
-        status: 400,
-        error: "Ownership attestation is required to audit a local development server.",
-      };
-    }
-
-    return { status: 200 };
+  }) {
+    return validateBridgeRequestSecurity({
+      origin: req.headers.origin,
+      host: req.headers.host,
+      remoteAddress: req.remoteAddress,
+      attested: req.body?.attested,
+      serverPort: SERVER_PORT,
+      envFlag: req.envFlag,
+    });
   }
 
   describe("1. Feature flag gating", () => {
