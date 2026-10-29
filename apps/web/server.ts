@@ -1706,6 +1706,23 @@ app.post("/api/audit-local-dev", rateLimitMiddleware, tokenBudgetMiddleware, asy
     }
   }
 
+  // 2b. Host header check (DNS rebinding protection: localhost / 127.0.0.1 / [::1] + own port)
+  const rawHost = Array.isArray(req.headers.host) ? req.headers.host[0] : req.headers.host;
+  if (!rawHost) {
+    res.status(400).json({ error: "Host header is required." });
+    return;
+  }
+  const hostMatch = rawHost.match(/^(?:localhost|127\.0\.0\.1|\[::1\])(?::(\d+))?$/i);
+  if (!hostMatch) {
+    res.status(403).json({ error: `Invalid Host header '${rawHost}' for local dev bridge.` });
+    return;
+  }
+  const hostPort = hostMatch[1] ? parseInt(hostMatch[1], 10) : 80;
+  if (hostPort !== PORT) {
+    res.status(403).json({ error: `Host port '${hostPort}' does not match BlindSpot server port '${PORT}'.` });
+    return;
+  }
+
   // 3. Loopback remoteAddress check (Docker caveat documented)
   if (!isLoopbackAddress(req.socket.remoteAddress)) {
     res.status(403).json({

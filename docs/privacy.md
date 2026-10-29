@@ -47,10 +47,9 @@ File limits enforced at client and server:
 
 BlindSpot does not dump your entire repository into a language model.
 - **Deterministic Localization First**: When an accessibility barrier is detected (e.g. `#submit-btn` missing focus outline), deterministic scoring identifies the 1–3 most relevant files (e.g. `styles.css` or `src/components/Button.tsx`) based on ID, class, selector, and detector affinity.
-- **Strict Byte Caps**: In React and folder modes, candidate source files sent to the model for inspection and repair are capped at a maximum of 60 KB across all candidate files.
-- **Surgical Snippet Prompts**: Only the localized file content (up to 60 KB) and specific barrier evidence are provided to NVIDIA Nemotron Ultra to generate a repair.
+- **Local Dev Server Bridge Data Isolation (Zero Model Transmission)**: When auditing a local development server with a React `src/` folder attached, candidate source files are held strictly in ephemeral server memory and analyzed 100% deterministically in-memory. **React source file contents are never sent to any model.** Nemotron only receives the runtime DOM snippet (up to 500 characters) and barrier metadata to propose runtime DOM patches. React equivalents are generated purely deterministically without model calls. No disk writes occur in local dev server mode.
+- **Static Folder Mode Surgical Snippet Caps**: In static HTML/CSS folder mode (`/api/audit-files`), localized source files are capped at a maximum of 60 KB across candidate files, and only the relevant surgical snippet and barrier evidence are provided to NVIDIA Nemotron Ultra to generate source repairs.
 - **Out-of-Bounds Edit Protection**: If a language model proposes modifying a path not explicitly present in the uploaded FileSet, the proposal is strictly rejected.
-- **Local Dev Server Bridge Data Isolation**: When auditing a local development server, candidate source files attached from your React `src/` folder are held in ephemeral server memory and inspected strictly for localization. No disk writes occur in local dev server mode.
 
 ---
 
