@@ -9,6 +9,7 @@ import { createServer as createViteServer } from "vite";
 
 import {
   startSession,
+  startLocalDevSession,
   crawl,
   runInteractionPass,
   checkUrl,
@@ -18,6 +19,8 @@ import {
   loadSource,
   validateFileSet,
   loadSourceFileSet,
+  validateLocalDevUrl,
+  isLoopbackAddress,
   AuditConcurrencyController,
   auditConcurrency,
   type FileSet,
@@ -38,6 +41,7 @@ import {
   runSourceFixLoop,
   runFileSetFixLoop,
   translateFixToReact,
+  localizeReactCandidateFiles,
   type SourceFixResult,
   type FileSetEdit,
 } from "@blindspot/fixer";
@@ -103,6 +107,7 @@ app.use(
 );
 
 app.use("/api/audit-files", express.json({ limit: "6mb" }));
+app.use("/api/audit-local-dev", express.json({ limit: "6mb" }));
 app.use(express.json({ limit: "200kb" }));
 
 // ── In-Memory Audit Report Storage (UUID, 1-Hour TTL, 200 Reports / 100 MB Cap) ──
@@ -1670,6 +1675,512 @@ app.post("/api/audit-files", rateLimitMiddleware, tokenBudgetMiddleware, async (
     }
     if (session) {
       await session.close();
+    }
+    res.end();
+  }
+});
+
+app.post("/api/audit-local-dev", rateLimitMiddleware, tokenBudgetMiddleware, async (req, res) => {
+  // 1. Bridge feature flag check
+  if (process.env.ENABLE_LOCAL_DEV_BRIDGE !== "true") {
+    res.status(403).json({
+      error: "Local dev server bridge is disabled. Set ENABLE_LOCAL_DEV_BRIDGE=true in the environment to enable local dev server auditing.",
+    });
+    return;
+  }
+
+  // 2. Same-Origin check: Origin header must match BlindSpot server or be absent
+  const originHeader = req.headers.origin;
+  if (originHeader) {
+    try {
+      const u = new URL(originHeader);
+      const isLocal = u.hostname === "localhost" || u.hostname === "127.0.0.1" || u.hostname === "::1";
+      const portMatches = (u.port || (u.protocol === "https:" ? "443" : "80")) === String(PORT);
+      if (!isLocal || !portMatches) {
+        res.status(403).json({ error: "Cross-origin requests to local dev bridge are forbidden." });
+        return;
+      }
+    } catch {
+      res.status(400).json({ error: "Invalid Origin header." });
+      return;
+    }
+  }
+
+  // 3. Loopback remoteAddress check (Docker caveat documented)
+  if (!isLoopbackAddress(req.socket.remoteAddress)) {
+    res.status(403).json({
+      error: `Dev server bridge only accepts connections from loopback addresses. Received: '${req.socket.remoteAddress}'. If running in Docker, see limitations.md regarding host networking.`,
+    });
+    return;
+  }
+
+  const { targetUrl, files = [], runFixes = true, attested, maxStops = 50 } = req.body || {};
+
+  // 4. Ownership attestation check
+  if (!attested) {
+    res.status(400).json({
+      error: "Ownership attestation is required to audit a local development server.",
+    });
+    return;
+  }
+
+  // 5. Target URL validation (rejects own-port, non-loopback, userinfo, etc.)
+  let validatedUrl: URL;
+  try {
+    validatedUrl = validateLocalDevUrl(targetUrl, { attested: true, ownPort: PORT });
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
+    return;
+  }
+
+  // 6. Source folder FileSet validation (if files attached)
+  let fileSetMap = new Map<string, string>();
+  if (Array.isArray(files) && files.length > 0) {
+    const fileCheck = validateFileSet(files, { projectKind: "react" });
+    if (!fileCheck.valid || !fileCheck.fileSet) {
+      res.status(400).json({ error: fileCheck.error || "Invalid React source files." });
+      return;
+    }
+    fileSetMap = fileCheck.fileSet;
+  }
+
+  // 7. Set up SSE stream
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+  res.flushHeaders?.();
+
+  const sendEvent = (event: string, data: any) => {
+    res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
+  };
+
+  const auditId = crypto.randomUUID();
+  const startTime = Date.now();
+  clearLedger();
+
+  // Acquire concurrency slot
+  let releaseSlot: (() => void) | null = null;
+  try {
+    releaseSlot = await auditConcurrency.acquire(res, req, auditId);
+  } catch (err: any) {
+    if (err.status === 503) {
+      sendEvent("error", { message: err.message });
+      res.end();
+      return;
+    }
+    throw err;
+  }
+
+  sendEvent("status", {
+    phase: "launch",
+    message: `Connecting to local dev server at ${validatedUrl.origin}...`,
+  });
+
+  let session: import("@blindspot/engine").Session | null = null;
+  let crawlMs = 0;
+  let axeMs = 0;
+  let modelsMs = 0;
+  let verificationMs = 0;
+
+  try {
+    session = await startLocalDevSession({
+      auditId,
+      targetUrl: validatedUrl.href,
+      attested: true,
+      ownPort: PORT,
+      navigationTimeoutMs: 25_000,
+    });
+
+    sendEvent("status", { phase: "axe", message: "Running axe-core baseline..." });
+    const axeStart = Date.now();
+    let baseline: any = null;
+    try {
+      baseline = await runAxe(session.page);
+    } catch (axeErr: any) {
+      console.warn("axe-core baseline run failed on dev server:", axeErr.message);
+    }
+    axeMs = Date.now() - axeStart;
+    sendEvent("baseline", { baseline });
+
+    sendEvent("status", { phase: "crawl", message: "Crawling keyboard focus path..." });
+    const crawlStart = Date.now();
+    const crawlResult = await crawl(session.page, {
+      maxStops,
+      pauseMs: 40,
+    });
+    for (const stop of crawlResult.forwardStops) {
+      sendEvent("stop", { stop });
+    }
+
+    const candidateData = (await session.page.evaluate(`(() => {
+      function getSelector(el) {
+        if (el.id) return "#" + CSS.escape(el.id);
+        const path = [];
+        let current = el;
+        while (current && current !== document.body) {
+          let seg = current.tagName.toLowerCase();
+          if (current.id) { seg = "#" + CSS.escape(current.id); path.unshift(seg); break; }
+          const siblings = Array.from(current.parentElement ? current.parentElement.children : []).filter(c => c.tagName === current.tagName);
+          if (siblings.length > 1) seg += ":nth-of-type(" + (siblings.indexOf(current) + 1) + ")";
+          path.unshift(seg);
+          current = current.parentElement;
+        }
+        return path.join(" > ");
+      }
+      const selectors = [];
+      document.querySelectorAll("button, a[href], input, select, textarea, [role='button'], [role='tab'], [tabindex], [onclick]").forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) return;
+        const style = window.getComputedStyle(el);
+        if (style.display === "none" || style.visibility === "hidden") return;
+        const sel = getSelector(el);
+        if (sel && !selectors.includes(sel)) selectors.push(sel);
+      });
+      const hoverTriggers = [];
+      document.querySelectorAll(".nav-item, nav li").forEach((item) => {
+        const trigger = item.querySelector("a, button");
+        const submenu = item.querySelector(".mega-menu, ul, .dropdown-menu, .submenu");
+        if (trigger && submenu) {
+          const subStyle = window.getComputedStyle(submenu);
+          if (subStyle.display === "none") {
+            const triggerSel = getSelector(trigger);
+            const hasKeyboardOpen = trigger.hasAttribute("aria-haspopup") || trigger.hasAttribute("onclick") || trigger.getAttribute("role") === "button";
+            if (!hasKeyboardOpen && triggerSel) hoverTriggers.push(triggerSel);
+          }
+        }
+      });
+      return { selectors, hoverTriggers };
+    })()`)) as { selectors: string[]; hoverTriggers: string[] };
+    crawlMs = Date.now() - crawlStart;
+
+    sendEvent("status", { phase: "interaction", message: "Running interaction pass on menus and dialogs..." });
+    const interactionResult = await runInteractionPass(session.page, { count: 3 });
+
+    sendEvent("status", { phase: "detect", message: "Evaluating deterministic detectors D1-D9..." });
+    const hits = runDetectors({
+      stateLabel: "S0",
+      focusStops: crawlResult.forwardStops,
+      interactions: interactionResult.interactions,
+      candidateInteractives: candidateData.selectors,
+    });
+
+    sendEvent("status", {
+      phase: "analyze",
+      message:
+        hits.length > 0
+          ? `Found ${hits.length} barrier${hits.length === 1 ? "" : "s"}. Localizing React source files & analyzing...`
+          : "No barriers detected.",
+    });
+
+    // Run Nemotron state digest & analysis if models configured and hits present
+    let stateDigest: any = null;
+    if (hits.length > 0) {
+      const digestStart = Date.now();
+      try {
+        stateDigest = await generateStateDigest({
+          url: validatedUrl.href,
+          stateLabel: "S0",
+          focusStops: crawlResult.forwardStops,
+        });
+        sendEvent("digest", { digest: stateDigest?.pagePurpose || "State digest complete." });
+      } catch (err: any) {
+        console.error("Digest failed:", err.message);
+      }
+      modelsMs += Date.now() - digestStart;
+      sendEvent("ledger", {
+        calls: Array.from(getLedger()),
+        aggregate: aggregateLedger(getLedger(), getTavilyLedger(), 0, Date.now() - startTime),
+      });
+    }
+
+    let analyzedFindings: any[] = [];
+    if (hits.length > 0) {
+      const analysisStart = Date.now();
+      try {
+        analyzedFindings = await analyzeFindings({
+          hits,
+          digests: stateDigest ? [stateDigest] : [],
+          url: validatedUrl.href,
+        });
+      } catch (err: any) {
+        console.error("Analysis failed:", err.message);
+      }
+      modelsMs += Date.now() - analysisStart;
+      sendEvent("ledger", {
+        calls: Array.from(getLedger()),
+        aggregate: aggregateLedger(getLedger(), getTavilyLedger(), 0, Date.now() - startTime),
+      });
+    }
+
+    const barrierItems: any[] = [];
+    let blockers = 0;
+    let majors = 0;
+    let minors = 0;
+    let verifiedCount = 0;
+
+    for (let i = 0; i < hits.length; i++) {
+      const hit = hits[i];
+      if (hit.severity === "blocker") blockers++;
+      else if (hit.severity === "major") majors++;
+      else minors++;
+
+      const analyzed = analyzedFindings.find(
+        (af) =>
+          af.detectorId === hit.detectorId &&
+          (af.selector === hit.selector || af.selector.includes(hit.selector.replace(/^[#.]/, "")))
+      ) || {
+        detectorId: hit.detectorId,
+        severity: hit.severity,
+        wcag: {
+          id: hit.wcagId,
+          name: "Keyboard Accessibility Requirement",
+          level: "A",
+          referenceUrl: `https://www.w3.org/WAI/WCAG22/quickref/#${hit.wcagId}`,
+        },
+        selector: hit.selector,
+        stateLabel: hit.stateLabel || "S0",
+        impact: hit.evidence,
+        confidence: hit.confidence || 1,
+      };
+
+      // Heuristic localization across React FileSet
+      const candidates =
+        fileSetMap.size > 0
+          ? localizeReactCandidateFiles(
+              { selector: hit.selector, detectorId: hit.detectorId, evidence: hit.evidence },
+              fileSetMap,
+              { maxCandidates: 3, maxTotalBytes: 60 * 1024 }
+            )
+          : [];
+      const topCandidate = candidates[0];
+      const likelySource = topCandidate
+        ? {
+            path: topCandidate.path,
+            confidence: topCandidate.confidence,
+            matchedSignals: topCandidate.matchedSignals,
+            candidates: candidates.map((c) => ({
+              path: c.path,
+              score: c.score,
+              confidence: c.confidence,
+              matchedSignals: c.matchedSignals,
+            })),
+          }
+        : undefined;
+
+      let fixResult: any = null;
+      let isVerified = false;
+      let evidenceText: string | undefined = undefined;
+
+      if (runFixes) {
+        sendEvent("status", {
+          phase: "fix",
+          message: `Testing runtime DOM patch for ${hit.selector} (${i + 1}/${hits.length})...`,
+        });
+
+        const fixStart = Date.now();
+        try {
+          const domSnippet = await session.page.evaluate((sel: string) => {
+            const el = document.querySelector(sel);
+            return el ? el.outerHTML.slice(0, 500) : "";
+          }, hit.selector);
+
+          const loopRes = await runFixLoop({
+            page: session.page,
+            finding: analyzed,
+            domSnippet: domSnippet || undefined,
+            maxAttempts: 2,
+          });
+
+          if (loopRes.verified && loopRes.finalPatch) {
+            isVerified = true;
+            verifiedCount++;
+            fixResult = loopRes.finalPatch;
+            evidenceText =
+              loopRes.verification?.evidence ||
+              "Browser verified runtime DOM patch in Chromium re-crawl.";
+          } else if (loopRes.finalPatch) {
+            fixResult = loopRes.finalPatch;
+            evidenceText =
+              loopRes.verification?.evidence ||
+              "Runtime patch proposed; barrier still present in re-crawl.";
+          }
+        } catch (fixErr: any) {
+          console.error("Fix loop error on dev server:", fixErr.message);
+          evidenceText = `Fix generation error: ${fixErr.message}`;
+        }
+        verificationMs += Date.now() - fixStart;
+
+        sendEvent("ledger", {
+          calls: Array.from(getLedger()),
+          aggregate: aggregateLedger(getLedger(), getTavilyLedger(), verifiedCount, Date.now() - startTime),
+        });
+      }
+
+      // Translate fix to React equivalent
+      const reactEq = fixResult
+        ? translateFixToReact(
+            {
+              patchType: fixResult.patchType || "css",
+              body: fixResult.body || fixResult.cssRule || "",
+              rationale: fixResult.rationale || fixResult.explanation,
+              targetSelector: fixResult.targetSelector || hit.selector,
+            },
+            { detectorId: hit.detectorId, selector: hit.selector }
+          ) || undefined
+        : undefined;
+
+      const barrierItem = {
+        id: `barrier_${i + 1}`,
+        detectorId: hit.detectorId,
+        severity: hit.severity,
+        selector: hit.selector,
+        wcagId: analyzed.wcag?.id || hit.wcagId,
+        wcagName: analyzed.wcag?.name || "Keyboard Accessibility Requirement",
+        wcagUrl: analyzed.wcag?.referenceUrl || `https://www.w3.org/WAI/WCAG22/quickref/#${hit.wcagId}`,
+        impact: analyzed.impact || hit.evidence,
+        evidence: hit.evidence,
+        likelySource,
+        filePath: likelySource?.path,
+        fix: fixResult
+          ? {
+              patchType: fixResult.patchType || "css",
+              body: fixResult.body || fixResult.cssRule || "",
+              rationale:
+                fixResult.rationale ||
+                fixResult.explanation ||
+                "Accessibility repair generated by Nemotron Ultra.",
+              targetSelector: fixResult.targetSelector || hit.selector,
+              explanation:
+                fixResult.rationale ||
+                fixResult.explanation ||
+                "Accessibility repair generated by Nemotron Ultra.",
+              cssRule: fixResult.patchType === "css" ? fixResult.body : undefined,
+              scriptContent: fixResult.patchType === "script" ? fixResult.body : undefined,
+              htmlReplacement: fixResult.patchType === "html" ? fixResult.body : undefined,
+              reactEquivalent: reactEq,
+            }
+          : undefined,
+        reactEquivalent: reactEq,
+        verified: isVerified,
+        status: isVerified ? "verified" : fixResult ? "unverified" : undefined,
+        verificationEvidence: evidenceText,
+        alsoReportedByAxe: baseline ? isFindingReportedByAxe(hit.selector, baseline) : false,
+      };
+
+      barrierItems.push(barrierItem);
+      sendEvent("barrier_resolved", { index: i, item: barrierItem });
+    }
+
+    const rawPenalty = blockers * 25 + majors * 10 + minors * 3;
+    const keyboardScore = Math.max(0, Math.min(100, 100 - rawPenalty));
+
+    const totals = ledgerTotals();
+    recordTokensConsumed(totals.totalTokensIn + totals.totalTokensOut);
+
+    const rawCalls = Array.from(getLedger());
+    const ledgerCalls = rawCalls.map((c) => ({
+      ...c,
+      tier: (c.stage === "digest" || (c.model ?? c.modelId).toLowerCase().includes("nano")
+        ? "nano"
+        : c.stage === "analysis" || (c.model ?? c.modelId).toLowerCase().includes("super")
+        ? "super"
+        : "ultra") as "nano" | "super" | "ultra",
+    }));
+    const nanoCalls = ledgerCalls.filter((c) => c.tier === "nano");
+    const superCalls = ledgerCalls.filter((c) => c.tier === "super");
+    const ultraCalls = ledgerCalls.filter((c) => c.tier === "ultra");
+    const tavilyCalls = ledgerCalls
+      .filter((c) => (c.model ?? c.modelId).includes("tavily"))
+      .map((c) => c.model ?? c.modelId);
+
+    const auditReport: AuditReport = {
+      auditId,
+      targetUrl: validatedUrl.href,
+      timestamp: new Date().toISOString(),
+      durationMs: Date.now() - startTime,
+      keyboardScore,
+      summary: {
+        totalStops: crawlResult.forwardStops.length,
+        barriersFound: hits.length,
+        blockers,
+        majors,
+        minors,
+        fixesVerified: verifiedCount,
+        axeViolations: baseline?.violationCount || 0,
+        foundOnlyByBlindspot: hits.filter((h) => !isFindingReportedByAxe(h.selector, baseline)).length,
+      },
+      barriers: barrierItems,
+      baseline: baseline
+        ? {
+            tool: baseline.tool,
+            version: baseline.version,
+            violationCount: baseline.violationCount,
+            rules: baseline.rules.map((r: any) => ({
+              id: r.ruleId,
+              tags: r.tags,
+              nodesCount: r.nodeCount,
+              selectors: r.selectors,
+              impact: r.impact,
+            })),
+          }
+        : undefined,
+      aiTransparency: {
+        totalCalls: totals.totalCalls,
+        totalTokensIn: totals.totalTokensIn,
+        totalTokensOut: totals.totalTokensOut,
+        totalLatencyMs: totals.totalLatencyMs,
+        tiers: {
+          nano: {
+            calls: nanoCalls.length,
+            tokens: nanoCalls.reduce((s, c) => s + c.tokensIn + c.tokensOut, 0),
+          },
+          super: {
+            calls: superCalls.length,
+            tokens: superCalls.reduce((s, c) => s + c.tokensIn + c.tokensOut, 0),
+          },
+          ultra: {
+            calls: ultraCalls.length,
+            tokens: ultraCalls.reduce((s, c) => s + c.tokensIn + c.tokensOut, 0),
+          },
+        },
+        tavilyQueries: tavilyCalls,
+      },
+      modelsAndCost: {
+        ...aggregateLedger(
+          getLedger(),
+          getTavilyLedger(),
+          verifiedCount,
+          Date.now() - startTime
+        ),
+        stageTimeline: {
+          crawlMs,
+          axeMs,
+          modelsMs,
+          verificationMs,
+          totalMs: Date.now() - startTime,
+        },
+      },
+    };
+
+    reportStore.set(auditId, auditReport);
+
+    sendEvent("complete", {
+      auditId,
+      report: auditReport,
+      summary: auditReport.summary,
+      keyboardScore,
+      modelsAndCost: auditReport.modelsAndCost,
+      ledger: Array.from(getLedger()),
+    });
+  } catch (err: any) {
+    console.error("Local dev audit error:", err);
+    sendEvent("error", { message: err.message || "Failed to audit local dev server." });
+  } finally {
+    if (releaseSlot) {
+      releaseSlot();
+    }
+    if (session) {
+      await session.close().catch(() => {});
     }
     res.end();
   }

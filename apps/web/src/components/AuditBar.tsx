@@ -1,28 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button } from "./ui/Button.js";
 import { StatusIcon } from "./ui/StatusIcon.js";
 import { SegmentedControl, type SegmentOption } from "./ui/SegmentedControl.js";
 import { FolderPicker } from "../project-folder/FolderPicker.js";
 import type { FolderProjectFile } from "../project-folder/types.js";
+import {
+  getFolderCapabilities,
+  walkDirectoryHandle,
+  walkWebkitDirectoryFileList,
+} from "../project-folder/fsWalk.js";
 import { EXAMPLES, CODE_PRESETS } from "../examples.js";
 
 interface AuditBarProps {
   onStartAudit: (target: string, runFixes: boolean, isSourceCode?: boolean, kind?: "html" | "snippet") => void;
   onStartFolderAudit?: (files: FolderProjectFile[], entryPath: string, dirHandle: any | null, folderName: string) => void;
+  onStartLocalDevAudit?: (targetUrl: string, files: FolderProjectFile[], attested: boolean, runFixes: boolean) => void;
   isRunning: boolean;
 }
 
-export type InputMode = "url" | "code" | "folder";
+export type InputMode = "url" | "code" | "folder" | "url_folder";
 
 const MODE_OPTIONS: SegmentOption<InputMode>[] = [
-  { value: "url", label: "URL" },
-  { value: "code", label: "Paste code" },
-  { value: "folder", label: "Open folder" },
+  { value: "url", label: "URL", id: "tab-url" },
+  { value: "code", label: "Paste code", id: "tab-code" },
+  { value: "folder", label: "Open folder", id: "tab-folder" },
+  { value: "url_folder", label: "URL + source folder", id: "tab-url-folder" },
 ];
 
 export const AuditBar: React.FC<AuditBarProps> = ({
   onStartAudit,
   onStartFolderAudit,
+  onStartLocalDevAudit,
   isRunning,
 }) => {
   const [mode, setMode] = useState<InputMode>("url");
@@ -31,6 +39,16 @@ export const AuditBar: React.FC<AuditBarProps> = ({
   const [snippetKind, setSnippetKind] = useState<"html" | "snippet">("html");
   const [runFixes, setRunFixes] = useState<boolean>(true);
   const [attested, setAttested] = useState<boolean>(false);
+
+  // Dev server + source folder mode state
+  const [devUrl, setDevUrl] = useState<string>("http://localhost:5173");
+  const [devAttested, setDevAttested] = useState<boolean>(false);
+  const [devFiles, setDevFiles] = useState<FolderProjectFile[]>([]);
+  const [devFolderName, setDevFolderName] = useState<string>("");
+  const [devLoadingFiles, setDevLoadingFiles] = useState<boolean>(false);
+  const [devFolderError, setDevFolderError] = useState<string | null>(null);
+
+  const fallbackDevInputRef = useRef<HTMLInputElement>(null);
 
   const [selectedCodePresetId, setSelectedCodePresetId] = useState<string>("");
 
@@ -50,14 +68,76 @@ export const AuditBar: React.FC<AuditBarProps> = ({
     }
   };
 
+  const handleOpenDevFolder = async () => {
+    setDevFolderError(null);
+    const caps = getFolderCapabilities();
+
+    if (caps.hasFsAccess && typeof (window as any).showDirectoryPicker === "function") {
+      try {
+        setDevLoadingFiles(true);
+        const handle = await (window as any).showDirectoryPicker({ mode: "read" });
+        const name = handle.name || "src";
+        setDevFolderName(name);
+        const projectFiles = await walkDirectoryHandle(handle, "", undefined, { projectKind: "react" });
+        if (projectFiles.length === 0) {
+          setDevFolderError("Selected folder contains no supported React code files (.tsx, .jsx, .ts, .js, .css, .scss, .html).");
+          setDevFiles([]);
+        } else {
+          setDevFiles(projectFiles);
+        }
+      } catch (err: any) {
+        if (err.name !== "AbortError") {
+          setDevFolderError(`Failed to read folder: ${err.message}`);
+        }
+      } finally {
+        setDevLoadingFiles(false);
+      }
+    } else {
+      fallbackDevInputRef.current?.click();
+    }
+  };
+
+  const handleDevFallbackFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files;
+    if (!fileList || fileList.length === 0) return;
+    try {
+      setDevLoadingFiles(true);
+      setDevFolderError(null);
+      const projectFiles = await walkWebkitDirectoryFileList(fileList, { projectKind: "react" });
+      if (projectFiles.length === 0) {
+        setDevFolderError("Selected folder contains no supported React code files.");
+        setDevFiles([]);
+      } else {
+        const rootName = fileList[0]?.webkitRelativePath.split("/")[0] || "src";
+        setDevFolderName(rootName);
+        setDevFiles(projectFiles);
+      }
+    } catch (err: any) {
+      setDevFolderError(`Failed to read files: ${err.message}`);
+    } finally {
+      setDevLoadingFiles(false);
+    }
+  };
+
   const isLocalFixture = url.startsWith("/fixtures/") || url.includes("localhost") || url.includes("127.0.0.1");
   const codeByteLength = new TextEncoder().encode(sourceCode).length;
   const isOverLimit = codeByteLength > 100 * 1024;
   const isCodeValid = sourceCode.trim().length > 0 && !isOverLimit;
   const canSubmit = !isRunning && (mode === "url" ? url.trim().length > 0 && (isLocalFixture || attested) : isCodeValid);
 
+  const devCanSubmit =
+    !isRunning &&
+    devUrl.trim().length > 0 &&
+    devAttested &&
+    !devLoadingFiles;
+
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
+    if (mode === "url_folder") {
+      if (!devCanSubmit) return;
+      onStartLocalDevAudit?.(devUrl.trim(), devFiles, devAttested, runFixes);
+      return;
+    }
     if (!canSubmit) return;
     if (mode === "code") {
       onStartAudit(sourceCode, runFixes, true, snippetKind);
@@ -501,6 +581,168 @@ export const AuditBar: React.FC<AuditBarProps> = ({
               onStartFolderAudit={onStartFolderAudit}
               isRunning={isRunning}
             />
+          )}
+
+          {/* URL + Source Folder Mode Panel */}
+          {mode === "url_folder" && (
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "var(--space-3)", alignItems: "end" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+                  <label
+                    htmlFor="dev-server-url-input"
+                    style={{
+                      fontSize: "var(--font-size-sm)",
+                      fontWeight: 600,
+                      color: "var(--color-text-primary)",
+                    }}
+                  >
+                    Local dev server URL
+                  </label>
+                  <input
+                    id="dev-server-url-input"
+                    type="url"
+                    value={devUrl}
+                    onChange={(e) => setDevUrl(e.target.value)}
+                    placeholder="http://localhost:5173"
+                    disabled={isRunning}
+                    style={{
+                      width: "100%",
+                      padding: "var(--space-2) var(--space-3)",
+                      backgroundColor: "var(--color-surface-2)",
+                      border: "1px solid var(--color-border-ui)",
+                      borderRadius: "var(--radius-sm)",
+                      color: "var(--color-text-primary)",
+                      fontSize: "var(--font-size-sm)",
+                      fontFamily: "var(--font-mono)",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <input
+                    ref={fallbackDevInputRef}
+                    id="dev-server-folder-file-input"
+                    type="file"
+                    /* @ts-expect-error webkitdirectory is a non-standard browser attribute */
+                    webkitdirectory="true"
+                    directory=""
+                    multiple
+                    style={{ display: "none" }}
+                    onChange={handleDevFallbackFileChange}
+                  />
+                  <Button
+                    id="dev-server-folder-btn"
+                    type="button"
+                    variant="secondary"
+                    onClick={handleOpenDevFolder}
+                    disabled={isRunning || devLoadingFiles}
+                  >
+                    <StatusIcon status={devFiles.length > 0 ? "success" : "info"} size={16} />
+                    <span>
+                      {devLoadingFiles
+                        ? "Scanning folder..."
+                        : devFiles.length > 0
+                        ? `Attached: ${devFolderName} (${devFiles.length} files)`
+                        : "Attach source folder (src/)"}
+                    </span>
+                  </Button>
+                </div>
+              </div>
+
+              {devFolderError && (
+                <div
+                  id="dev-folder-error"
+                  role="alert"
+                  style={{
+                    fontSize: "var(--font-size-xs)",
+                    color: "var(--color-severity-blocker)",
+                    backgroundColor: "var(--color-surface-2)",
+                    padding: "var(--space-2)",
+                    borderRadius: "var(--radius-sm)",
+                    border: "1px solid var(--color-severity-blocker)",
+                  }}
+                >
+                  {devFolderError}
+                </div>
+              )}
+
+              {devFiles.length > 0 && (
+                <div
+                  id="dev-attached-summary"
+                  style={{
+                    fontSize: "var(--font-size-xs)",
+                    color: "var(--color-text-secondary)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--space-2)",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <span>✓ {devFiles.length} source files indexed (.tsx, .jsx, .ts, .css).</span>
+                  <span style={{ color: "var(--color-text-muted)" }}>
+                    Build artifacts (dist/, .next/) automatically excluded.
+                  </span>
+                </div>
+              )}
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: "var(--space-3)",
+                  paddingTop: "var(--space-2)",
+                  borderTop: "1px solid var(--color-border-subdued)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+                  <input
+                    id="dev-server-attest-checkbox"
+                    type="checkbox"
+                    checked={devAttested}
+                    onChange={(e) => setDevAttested(e.target.checked)}
+                    disabled={isRunning}
+                    style={{
+                      width: "16px",
+                      height: "16px",
+                      accentColor: "var(--color-brand-primary)",
+                      cursor: isRunning ? "not-allowed" : "pointer",
+                    }}
+                  />
+                  <label
+                    htmlFor="dev-server-attest-checkbox"
+                    style={{
+                      fontSize: "var(--font-size-xs)",
+                      color: "var(--color-text-secondary)",
+                      cursor: isRunning ? "not-allowed" : "pointer",
+                    }}
+                  >
+                    I own or have permission to audit this local development server and attached source folder.
+                  </label>
+                </div>
+
+                <Button
+                  id="btn-audit-dev"
+                  type="submit"
+                  variant="primary"
+                  disabled={!devCanSubmit}
+                >
+                  <span>{isRunning ? "Running audit..." : "Audit dev server"}</span>
+                  <span
+                    style={{
+                      fontSize: "var(--font-size-sm)",
+                      fontFamily: "var(--font-mono)",
+                      color: "var(--color-text-muted)",
+                      opacity: 0.8,
+                    }}
+                  >
+                    ⌘↵
+                  </span>
+                </Button>
+              </div>
+            </div>
           )}
         </div>
       </form>

@@ -181,6 +181,22 @@ sequenceDiagram
 
 ---
 
+### 6. Local Dev Server Bridge & React Source Localization (`localDevBridge.ts` & `reactLocalizer.ts`)
+- **Bridge Endpoint (`/api/audit-local-dev`)**: Enables auditing running dev servers (e.g. `http://localhost:5173`) while developers attach their React `src/` folder:
+  - Requires `ENABLE_LOCAL_DEV_BRIDGE=true`, explicit user ownership attestation, same-origin origin validation, and loopback socket verification.
+  - Rejects own-port self-targeting, non-loopback addresses, userinfo injection (`@evil.com`), and DNS rebinding domains (`*.nip.io`).
+- **In-Session Bridge Guard (`attachLocalDevBridgeGuard`)**:
+  - Confines session network traffic strictly to the audited host and port; allows Vite/Next.js HMR WebSockets on that same port.
+  - Cross-port loopback access (e.g. fetching `localhost:8080`) and internal subnet redirects are strictly blocked.
+  - Avoids buffering streaming SSE responses (e.g. Next.js HMR EventSource) by using `route.continue()` for non-document requests while Chromium re-routes redirect hops.
+- **Deterministic React Source Localization (`reactLocalizer.ts`)**:
+  - Scans `.tsx`, `.jsx`, and `.css` files using regex heuristics for IDs (+30), selectors (+25), class names & CSS modules (+15), ARIA/roles (+8), component tags (+4), and detector affinities (+20).
+  - Computed classNames (`clsx`, `cn`, template strings) receive partial credit (+7) with low confidence.
+  - Returns top 3 candidate files under a strict 60 KB limit.
+- **Verification Honesty**: Dev server runs mathematically verify the runtime DOM patch in Chromium. Source-level JSX/TSX changes are rendered with clear honesty indicators: *"Translated from the verified HTML patch. The browser verified the DOM change, not this JSX."*
+
+---
+
 ## 5. Security & Isolation Model
 
 1. **Ephemeral Sandboxing**: Headless Chromium executes as unprivileged user `pwuser` inside a sandboxed container. Storage, cookies, and network state are cleared after each run.

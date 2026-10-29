@@ -272,22 +272,44 @@ export const FixesInlineView: React.FC<FixesInlineViewProps> = ({
                 </h3>
 
                 <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", flexWrap: "wrap" }}>
-                  {(barrier.filePath || barrier.fix?.filePath) && (
-                    <span
-                      style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: "var(--font-size-xs)",
-                        fontWeight: 600,
-                        color: "var(--color-accent-primary)",
-                        backgroundColor: "var(--color-surface-3)",
-                        padding: "2px 6px",
-                        borderRadius: "var(--radius-sm)",
-                        border: "1px solid var(--color-border-subdued)",
-                      }}
-                    >
-                      {barrier.filePath || barrier.fix?.filePath}
-                    </span>
-                  )}
+                  {(() => {
+                    const displayPath = barrier.filePath || barrier.fix?.filePath || barrier.likelySource?.path;
+                    if (!displayPath) return null;
+                    const isReact = displayPath.endsWith(".tsx") || displayPath.endsWith(".jsx");
+                    return (
+                      <div style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                        {isReact && (
+                          <span
+                            style={{
+                              fontSize: "var(--font-size-xs)",
+                              fontWeight: 700,
+                              padding: "2px 6px",
+                              borderRadius: "var(--radius-sm)",
+                              backgroundColor: "var(--color-surface-2)",
+                              color: "var(--color-accent-primary)",
+                              border: "1px solid var(--color-border-subdued)",
+                            }}
+                          >
+                            React
+                          </span>
+                        )}
+                        <span
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: "var(--font-size-xs)",
+                            fontWeight: 600,
+                            color: "var(--color-accent-primary)",
+                            backgroundColor: "var(--color-surface-3)",
+                            padding: "2px 6px",
+                            borderRadius: "var(--radius-sm)",
+                            border: "1px solid var(--color-border-subdued)",
+                          }}
+                        >
+                          {displayPath}
+                        </span>
+                      </div>
+                    );
+                  })()}
 
                   <code
                     style={{

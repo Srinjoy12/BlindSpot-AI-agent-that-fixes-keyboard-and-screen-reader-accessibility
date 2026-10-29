@@ -33,6 +33,17 @@ export interface BarrierItem {
   filePath?: string;
   originalSource?: string;
   reactEquivalent?: ReactEquivalent;
+  likelySource?: {
+    path: string;
+    confidence: "high" | "low";
+    matchedSignals: string[];
+    candidates?: {
+      path: string;
+      score?: number;
+      confidence: "high" | "low";
+      matchedSignals: string[];
+    }[];
+  };
   verified: boolean;
   status?: "verified" | "unverified" | "rejected";
   diff?: string;
@@ -320,6 +331,22 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
                       >
                         {b.wcagId} {b.wcagName} ↗
                       </a>
+
+                      {b.likelySource && (
+                        <span
+                          style={{
+                            fontSize: "var(--font-size-xs)",
+                            fontFamily: "var(--font-mono)",
+                            backgroundColor: "var(--color-surface-3)",
+                            border: "1px solid var(--color-border-subdued)",
+                            padding: "1px 6px",
+                            borderRadius: "var(--radius-sm)",
+                            color: "var(--color-accent-primary)",
+                          }}
+                        >
+                          Likely source: {b.likelySource.path} ({b.likelySource.confidence} confidence)
+                        </span>
+                      )}
                     </div>
 
                     {/* Fix tested or Fix not tested with icon */}
@@ -412,6 +439,52 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
                     {selectedBarrier.selector}
                   </code>
                 </div>
+
+                {selectedBarrier.likelySource && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px", marginTop: "var(--space-2)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", flexWrap: "wrap" }}>
+                      <span style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-muted)" }}>Likely source:</span>
+                      <code
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: "var(--font-size-sm)",
+                          backgroundColor: "var(--color-surface-1)",
+                          border: "1px solid var(--color-border-subdued)",
+                          padding: "2px 6px",
+                          borderRadius: "var(--radius-sm)",
+                          color: "var(--color-accent-primary)",
+                          wordBreak: "break-all",
+                        }}
+                      >
+                        {selectedBarrier.likelySource.path}
+                      </code>
+                      <span
+                        style={{
+                          fontSize: "var(--font-size-xs)",
+                          fontWeight: 600,
+                          padding: "2px 6px",
+                          borderRadius: "var(--radius-sm)",
+                          backgroundColor:
+                            selectedBarrier.likelySource.confidence === "high"
+                              ? "var(--color-surface-3)"
+                              : "var(--color-surface-2)",
+                          color:
+                            selectedBarrier.likelySource.confidence === "high"
+                              ? "var(--color-status-success)"
+                              : "var(--color-text-muted)",
+                          border: "1px solid var(--color-border-subdued)",
+                        }}
+                      >
+                        {selectedBarrier.likelySource.confidence} confidence
+                      </span>
+                    </div>
+                    {selectedBarrier.likelySource.matchedSignals && selectedBarrier.likelySource.matchedSignals.length > 0 && (
+                      <div style={{ fontSize: "var(--font-size-xs)", color: "var(--color-text-muted)", paddingLeft: "var(--space-2)" }}>
+                        Matched signals: {selectedBarrier.likelySource.matchedSignals.join(", ")}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Section 1: What happens (keyboard steps) */}

@@ -46,9 +46,11 @@ File limits enforced at client and server:
 ## 4. AI Token Exposure & Localization
 
 BlindSpot does not dump your entire repository into a language model.
-- **Deterministic Localization First**: When an accessibility barrier is detected (e.g. `#submit-btn` missing focus outline), deterministic scoring identifies the 1–3 most relevant files (e.g. `styles.css`) based on ID, class, selector, and detector affinity.
-- **Surgical Snippet Prompts**: Only the localized file content and specific barrier evidence are provided to NVIDIA Nemotron Ultra to generate a repair.
+- **Deterministic Localization First**: When an accessibility barrier is detected (e.g. `#submit-btn` missing focus outline), deterministic scoring identifies the 1–3 most relevant files (e.g. `styles.css` or `src/components/Button.tsx`) based on ID, class, selector, and detector affinity.
+- **Strict Byte Caps**: In React and folder modes, candidate source files sent to the model for inspection and repair are capped at a maximum of 60 KB across all candidate files.
+- **Surgical Snippet Prompts**: Only the localized file content (up to 60 KB) and specific barrier evidence are provided to NVIDIA Nemotron Ultra to generate a repair.
 - **Out-of-Bounds Edit Protection**: If a language model proposes modifying a path not explicitly present in the uploaded FileSet, the proposal is strictly rejected.
+- **Local Dev Server Bridge Data Isolation**: When auditing a local development server, candidate source files attached from your React `src/` folder are held in ephemeral server memory and inspected strictly for localization. No disk writes occur in local dev server mode.
 
 ---
 

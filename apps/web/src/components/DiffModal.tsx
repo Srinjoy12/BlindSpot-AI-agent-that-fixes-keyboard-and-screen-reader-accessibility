@@ -293,22 +293,44 @@ export const DiffModal: React.FC<DiffModalProps> = ({ barrier, forwardStops = []
               {barrier.detectorId} · {barrier.selector}
             </h2>
 
-            {(barrier.filePath || barrier.fix?.filePath) && (
-              <span
-                style={{
-                  fontSize: "var(--font-size-xs)",
-                  fontFamily: "var(--font-mono)",
-                  fontWeight: 600,
-                  padding: "2px 8px",
-                  borderRadius: "var(--radius-sm)",
-                  backgroundColor: "var(--color-surface-3)",
-                  color: "var(--color-accent-primary)",
-                  border: "1px solid var(--color-border-subdued)",
-                }}
-              >
-                {barrier.filePath || barrier.fix?.filePath}
-              </span>
-            )}
+            {(() => {
+              const displayPath = barrier.filePath || barrier.fix?.filePath || barrier.likelySource?.path;
+              if (!displayPath) return null;
+              const isReact = displayPath.endsWith(".tsx") || displayPath.endsWith(".jsx");
+              return (
+                <div style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                  {isReact && (
+                    <span
+                      style={{
+                        fontSize: "var(--font-size-xs)",
+                        fontWeight: 700,
+                        padding: "2px 6px",
+                        borderRadius: "var(--radius-sm)",
+                        backgroundColor: "var(--color-surface-2)",
+                        color: "var(--color-accent-primary)",
+                        border: "1px solid var(--color-border-subdued)",
+                      }}
+                    >
+                      React
+                    </span>
+                  )}
+                  <span
+                    style={{
+                      fontSize: "var(--font-size-xs)",
+                      fontFamily: "var(--font-mono)",
+                      fontWeight: 600,
+                      padding: "2px 8px",
+                      borderRadius: "var(--radius-sm)",
+                      backgroundColor: "var(--color-surface-3)",
+                      color: "var(--color-accent-primary)",
+                      border: "1px solid var(--color-border-subdued)",
+                    }}
+                  >
+                    {displayPath}
+                  </span>
+                </div>
+              );
+            })()}
           </div>
 
           <button

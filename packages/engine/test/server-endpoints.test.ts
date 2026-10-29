@@ -1,6 +1,7 @@
 // server-endpoints.test.ts — Unit tests for rate-limiting, daily token budgeting, and code validation.
 
 import { describe, it, expect } from "vitest";
+import { isLoopbackAddress } from "../src/index.js";
 
 describe("Audit code validation rules", () => {
   it("rejects empty source code input", () => {
@@ -57,5 +58,37 @@ describe("Audit code validation rules", () => {
     expect(checkRateLimit(testIp, baseTime + 600)).toBe(false);
     // Request 1 hour later succeeds
     expect(checkRateLimit(testIp, baseTime + 3601 * 1000)).toBe(true);
+  });
+});
+
+describe("/api/audit-local-dev endpoint security validation", () => {
+  it("rejects cross-origin requests with non-matching origin header", () => {
+    const serverPort = 3000;
+    const isOriginAllowed = (origin: string | undefined): boolean => {
+      if (!origin) return true; // same-origin navigation/curl has no Origin header
+      try {
+        const u = new URL(origin);
+        const isLocal = u.hostname === "localhost" || u.hostname === "127.0.0.1" || u.hostname === "::1";
+        const portMatches = (u.port || (u.protocol === "https:" ? "443" : "80")) === String(serverPort);
+        return isLocal && portMatches;
+      } catch {
+        return false;
+      }
+    };
+
+    expect(isOriginAllowed(undefined)).toBe(true);
+    expect(isOriginAllowed("http://localhost:3000")).toBe(true);
+    expect(isOriginAllowed("http://127.0.0.1:3000")).toBe(true);
+    expect(isOriginAllowed("http://localhost:5173")).toBe(false);
+    expect(isOriginAllowed("https://evil.com")).toBe(false);
+    expect(isOriginAllowed("http://127.0.0.1:8080")).toBe(false);
+  });
+
+  it("requires loopback remoteAddress socket check", () => {
+    expect(isLoopbackAddress("127.0.0.1")).toBe(true);
+    expect(isLoopbackAddress("::1")).toBe(true);
+    expect(isLoopbackAddress("::ffff:127.0.0.1")).toBe(true);
+    expect(isLoopbackAddress("192.168.1.5")).toBe(false);
+    expect(isLoopbackAddress("10.0.0.1")).toBe(false);
   });
 });

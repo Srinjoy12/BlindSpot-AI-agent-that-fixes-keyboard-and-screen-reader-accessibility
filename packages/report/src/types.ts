@@ -15,6 +15,21 @@ export const AxeBaselineResultSchema = z.object({
   rules: z.array(AxeRuleSummarySchema),
 });
 
+export const LikelySourceCandidateSchema = z.object({
+  path: z.string(),
+  score: z.number().optional(),
+  confidence: z.enum(["high", "low"]),
+  matchedSignals: z.array(z.string()),
+});
+
+export const LikelySourceSchema = z.object({
+  path: z.string(),
+  confidence: z.enum(["high", "low"]),
+  matchedSignals: z.array(z.string()),
+  candidates: z.array(LikelySourceCandidateSchema).optional(),
+});
+export type LikelySource = z.infer<typeof LikelySourceSchema>;
+
 export const BarrierReportItemSchema = z.object({
   id: z.string(),
   detectorId: z.string(),
@@ -29,6 +44,7 @@ export const BarrierReportItemSchema = z.object({
   verified: z.boolean(),
   verificationEvidence: z.string().optional(),
   alsoReportedByAxe: z.boolean().optional(),
+  likelySource: LikelySourceSchema.optional(),
 });
 
 export type BarrierReportItem = z.infer<typeof BarrierReportItemSchema>;

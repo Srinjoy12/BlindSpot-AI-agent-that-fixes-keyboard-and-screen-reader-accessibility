@@ -372,6 +372,126 @@ export const App: React.FC = () => {
     }
   };
 
+  const handleStartLocalDevAudit = async (
+    targetUrl: string,
+    files: FolderProjectFile[],
+    attested: boolean,
+    runFixes: boolean
+  ) => {
+    setIsRateLimited(false);
+    setIsRunning(true);
+    setRunFixesEnabled(runFixes);
+    setCurrentPhase("launch");
+    setStatusMessage(`Connecting to local dev server at ${targetUrl}...`);
+    setForwardStops([]);
+    setBarriers([]);
+    setLedger([]);
+    setModelsAndCost(null);
+    setReport(null);
+    setFolderEdits([]);
+
+    try {
+      const response = await fetch("/api/audit-local-dev", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          targetUrl,
+          files: files.map((f) => ({ path: f.path, content: f.content })),
+          attested,
+          runFixes,
+          maxStops: 50,
+        }),
+      });
+
+      if (!response.ok) {
+        if (response.status === 429) {
+          setIsRateLimited(true);
+          throw new Error("Hourly scan limit reached (60 audits per hour).");
+        }
+        if (response.status === 503) {
+          const errJson = await response.json().catch(() => ({}));
+          throw new Error(errJson.error || "Server busy: audit queue is full. Please try again shortly.");
+        }
+        const errJson = await response.json().catch(() => ({}));
+        throw new Error(errJson.error || `Server returned status ${response.status}`);
+      }
+
+      if (!response.body) {
+        throw new Error("Browser stream connection failed.");
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n\n");
+        buffer = lines.pop() || "";
+
+        for (const block of lines) {
+          if (!block.trim()) continue;
+          const matchEvent = block.match(/^event: (.*)$/m);
+          const matchData = block.match(/^data: (.*)$/m);
+
+          if (matchEvent && matchData) {
+            const eventName = matchEvent[1].trim();
+            const eventData = JSON.parse(matchData[1]);
+
+            if (eventName === "queued") {
+              const ahead = eventData.aheadCount ?? (eventData.position - 1);
+              const queueMsg =
+                ahead === 0
+                  ? "Waiting: your audit will begin momentarily"
+                  : `Waiting: ${ahead} audit${ahead === 1 ? "" : "s"} ahead of yours`;
+              setStatusMessage(queueMsg);
+            } else if (eventName === "status") {
+              setCurrentPhase(eventData.phase);
+              if (eventData.phase !== "complete") {
+                setStatusMessage(eventData.message);
+              }
+            } else if (eventName === "stop") {
+              setForwardStops((prev) => [...prev, eventData.stop]);
+            } else if (eventName === "barrier_resolved") {
+              setBarriers((prev) => [...prev, eventData.item]);
+            } else if (eventName === "ledger") {
+              if (eventData.calls) setLedger(eventData.calls);
+              if (eventData.aggregate) setModelsAndCost(eventData.aggregate);
+            } else if (eventName === "complete") {
+              const finalReport = eventData.report || (eventData.summary ? eventData : null);
+              setReport(finalReport);
+              if (eventData.forwardStops) {
+                setForwardStops(eventData.forwardStops);
+              }
+              if (finalReport?.barriers) {
+                setBarriers(finalReport.barriers);
+              }
+              setLedger(eventData.ledger || []);
+              if (eventData.modelsAndCost) {
+                setModelsAndCost(eventData.modelsAndCost);
+              } else if (finalReport?.modelsAndCost) {
+                setModelsAndCost(finalReport.modelsAndCost);
+              }
+              setCurrentPhase("complete");
+              setStatusMessage("");
+            } else if (eventName === "error") {
+              setCurrentPhase("error");
+              setStatusMessage(eventData.message || "Audit run failed unexpectedly.");
+            }
+          }
+        }
+      }
+    } catch (err: any) {
+      setCurrentPhase("error");
+      setStatusMessage(err.message || "Failed to audit local dev server.");
+    } finally {
+      setIsRunning(false);
+    }
+  };
+
   // Cost string calculation for Models and cost tab label summary
   const costValue =
     modelsAndCost?.totalEstimatedCostUsd ??
@@ -527,6 +647,7 @@ export const App: React.FC = () => {
         <AuditBar
           onStartAudit={handleStartAudit}
           onStartFolderAudit={handleStartFolderAudit}
+          onStartLocalDevAudit={handleStartLocalDevAudit}
           isRunning={isRunning}
         />
 
