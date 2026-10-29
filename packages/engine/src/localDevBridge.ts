@@ -63,6 +63,7 @@ export interface BridgeRequestSecurityInput {
   attested?: boolean | undefined;
   serverPort: number;
   envFlag?: string | undefined; // Defaults to process.env.ENABLE_LOCAL_DEV_BRIDGE
+  skipAttestationCheck?: boolean | undefined; // When true, validates transport/headers before JSON body parsing
 }
 
 export interface BridgeRequestSecurityResult {
@@ -149,8 +150,8 @@ export function validateBridgeRequestSecurity(
     };
   }
 
-  // 5. Ownership attestation
-  if (!input.attested) {
+  // 5. Ownership attestation (evaluated after body parsing)
+  if (!input.skipAttestationCheck && !input.attested) {
     return {
       valid: false,
       status: 400,

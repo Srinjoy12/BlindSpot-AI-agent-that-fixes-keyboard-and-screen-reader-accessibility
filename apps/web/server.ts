@@ -107,8 +107,25 @@ app.use(
   })
 );
 
+// Pre-body security guard for /api/audit-local-dev:
+// Enforces feature flag, Origin, Host, and socket remoteAddress checks BEFORE parsing the 6 MB JSON body.
+const bridgePreBodyGuard: express.RequestHandler = (req, res, next) => {
+  const security = validateBridgeRequestSecurity({
+    origin: req.headers.origin,
+    host: Array.isArray(req.headers.host) ? req.headers.host[0] : req.headers.host,
+    remoteAddress: req.socket.remoteAddress,
+    serverPort: PORT,
+    skipAttestationCheck: true,
+  });
+  if (!security.valid) {
+    res.status(security.status).json({ error: security.error });
+    return;
+  }
+  next();
+};
+
 app.use("/api/audit-files", express.json({ limit: "6mb" }));
-app.use("/api/audit-local-dev", express.json({ limit: "6mb" }));
+app.use("/api/audit-local-dev", bridgePreBodyGuard, express.json({ limit: "6mb" }));
 app.use(express.json({ limit: "200kb" }));
 
 // ── In-Memory Audit Report Storage (UUID, 1-Hour TTL, 200 Reports / 100 MB Cap) ──

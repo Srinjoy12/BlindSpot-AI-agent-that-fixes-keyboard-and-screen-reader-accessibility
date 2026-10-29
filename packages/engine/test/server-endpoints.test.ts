@@ -308,6 +308,59 @@ describe("/api/audit-local-dev endpoint security validation", () => {
       expect(res.status).toBe(200);
     });
   });
+
+  describe("6. Pre-body vs post-body validation phase separation", () => {
+    it("pre-body check blocks invalid origin before body is parsed even without body", () => {
+      const res = validateBridgeRequestSecurity({
+        origin: "https://evil.com",
+        host: "localhost:3000",
+        remoteAddress: "127.0.0.1",
+        serverPort: SERVER_PORT,
+        envFlag: "true",
+        skipAttestationCheck: true,
+      });
+      expect(res.valid).toBe(false);
+      expect(res.status).toBe(403);
+    });
+
+    it("pre-body check blocks non-loopback IP before body is parsed even without body", () => {
+      const res = validateBridgeRequestSecurity({
+        host: "localhost:3000",
+        remoteAddress: "192.168.1.5",
+        serverPort: SERVER_PORT,
+        envFlag: "true",
+        skipAttestationCheck: true,
+      });
+      expect(res.valid).toBe(false);
+      expect(res.status).toBe(403);
+    });
+
+    it("pre-body check succeeds for valid loopback request before body is parsed", () => {
+      const res = validateBridgeRequestSecurity({
+        host: "localhost:3000",
+        remoteAddress: "127.0.0.1",
+        serverPort: SERVER_PORT,
+        envFlag: "true",
+        skipAttestationCheck: true,
+      });
+      expect(res.valid).toBe(true);
+      expect(res.status).toBe(200);
+    });
+
+    it("post-body check requires attestation after body parsing", () => {
+      const res = validateBridgeRequestSecurity({
+        host: "localhost:3000",
+        remoteAddress: "127.0.0.1",
+        serverPort: SERVER_PORT,
+        envFlag: "true",
+        skipAttestationCheck: false,
+        attested: false,
+      });
+      expect(res.valid).toBe(false);
+      expect(res.status).toBe(400);
+      expect(res.error).toContain("attestation is required");
+    });
+  });
 });
 
 describe("Regression Tests: URL, Paste code, and Open folder modes with flag off", () => {
