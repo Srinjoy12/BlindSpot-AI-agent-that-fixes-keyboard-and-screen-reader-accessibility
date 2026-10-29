@@ -7,12 +7,32 @@ import net from "node:net";
 import type { BrowserContext, Page } from "playwright";
 import { SsrfError, blockList, resolveAndCheckHost, extractEmbeddedIpv4 } from "./ssrf.js";
 
-const LOOPBACK_HOSTS = new Set(["localhost", "127.0.0.1", "::1", "[::1]"]);
-
 export interface ValidateLocalDevUrlOptions {
   attested: boolean;
   ownPort?: number | undefined;
   envFlag?: string | undefined; // Defaults to process.env.ENABLE_LOCAL_DEV_BRIDGE
+}
+
+/**
+ * Checks whether a hostname is a valid loopback host:
+ * - "localhost"
+ * - IPv4 in 127.0.0.0/8 (e.g. 127.0.0.1, 127.0.0.2)
+ * - IPv6 ::1
+ * Rejects domain tricks like 127.0.0.1.nip.io, 127.evil.com, or 0.0.0.0.
+ */
+export function isLoopbackHost(hostname: string): boolean {
+  const clean = hostname.toLowerCase().replace(/^\[|\]$/g, "");
+  if (clean === "localhost") return true;
+
+  const ipVer = net.isIP(clean);
+  if (ipVer === 4) {
+    // 127.0.0.0/8 is IPv4 loopback
+    return clean.startsWith("127.");
+  }
+  if (ipVer === 6) {
+    return clean === "::1" || clean === "0:0:0:0:0:0:0:1";
+  }
+  return false;
 }
 
 /**
@@ -41,10 +61,11 @@ export function isLoopbackAddress(remoteAddress: string | undefined): boolean {
  * Requirements:
  * 1. ENABLE_LOCAL_DEV_BRIDGE === "true"
  * 2. Ownership attestation ticked (attested: true)
- * 3. Host is strictly loopback (localhost, 127.0.0.1, ::1)
- * 4. Explicit non-zero port provided
- * 5. Port must NOT match the BlindSpot server's own port
- * 6. Scheme must be http or https
+ * 3. Host is strictly loopback (localhost, 127.0.0.1, ::1, 127.0.0.0/8)
+ * 4. Userinfo (username/password) is prohibited
+ * 5. Explicit non-zero port provided
+ * 6. Port must NOT match the BlindSpot server's own port
+ * 7. Scheme must be http or https
  */
 export function validateLocalDevUrl(
   rawUrl: string,
@@ -74,6 +95,15 @@ export function validateLocalDevUrl(
     throw new SsrfError(`Invalid URL: ${rawUrl}`, rawUrl, "parse_error");
   }
 
+  // Reject userinfo (e.g. http://localhost:5173@evil.com)
+  if (url.username || url.password) {
+    throw new SsrfError(
+      "Userinfo (username/password) is not permitted in local dev bridge URLs.",
+      rawUrl,
+      "userinfo_not_permitted"
+    );
+  }
+
   const protocol = url.protocol.toLowerCase();
   if (protocol !== "http:" && protocol !== "https:") {
     throw new SsrfError(
@@ -84,7 +114,7 @@ export function validateLocalDevUrl(
   }
 
   const hostname = url.hostname.toLowerCase().replace(/^\[|\]$/g, "");
-  if (!LOOPBACK_HOSTS.has(hostname) && !hostname.startsWith("127.")) {
+  if (!isLoopbackHost(hostname)) {
     throw new SsrfError(
       `Target host '${hostname}' is not a permitted loopback address. Local dev bridge permits localhost / 127.0.0.1 / ::1 only.`,
       rawUrl,
@@ -137,7 +167,9 @@ export interface LocalDevBridgeGuardOptions {
  * - HMR WebSockets (ws: or wss:) are allowed ONLY to the exact audited dev server port.
  * - Cross-port loopback requests (e.g. to localhost:3000, 8080, etc.) are strictly blocked.
  * - Public external requests (e.g. CDNs or external APIs) are checked against the standard SSRF blockList.
- * - Redirects are inspected: redirecting to a different loopback port or private/metadata address is blocked.
+ * - Avoids buffering streaming responses (EventSource/SSE for Next.js/Vite HMR): uses route.continue()
+ *   for subresources/fetches while Chromium re-routes redirect hops through context.route("**").
+ * - Only uses route.fetch({ maxRedirects: 0 }) for top-level document navigations to inspect redirects.
  */
 export async function attachLocalDevBridgeGuard(
   context: BrowserContext,
@@ -160,7 +192,7 @@ export async function attachLocalDevBridgeGuard(
 
     const protocol = parsedUrl.protocol.toLowerCase();
     const cleanHost = parsedUrl.hostname.toLowerCase().replace(/^\[|\]$/g, "");
-    const isLoopback = LOOPBACK_HOSTS.has(cleanHost) || cleanHost.startsWith("127.");
+    const isLoopback = isLoopbackHost(cleanHost);
 
     // 1. Data: and Blob: are allowed
     if (protocol === "data:" || protocol === "blob:") {
@@ -209,7 +241,20 @@ export async function attachLocalDevBridgeGuard(
       }
     }
 
-    // 6. Redirect inspection before following
+    // 6. Navigation vs Subresource handling:
+    // Avoid buffering streaming responses (Next.js/Vite HMR EventSource, chunked SSE):
+    // Only use route.fetch({ maxRedirects: 0 }) for document navigations.
+    // For other requests, validate the URL and call route.continue(), relying on Chromium
+    // re-routing redirect hops back through context.route("**").
+    const isDocumentNavigation =
+      req.isNavigationRequest() && (req.resourceType() === "document" || req.resourceType() === "");
+
+    if (!isDocumentNavigation) {
+      await route.continue();
+      return;
+    }
+
+    // 7. Inspect document navigation redirects before following
     try {
       const response = await route.fetch({ maxRedirects: 0 });
       const status = response.status();
@@ -232,7 +277,7 @@ export async function attachLocalDevBridgeGuard(
         }
 
         const redirHost = redirectUrl.hostname.toLowerCase().replace(/^\[|\]$/g, "");
-        const isRedirLoopback = LOOPBACK_HOSTS.has(redirHost) || redirHost.startsWith("127.");
+        const isRedirLoopback = isLoopbackHost(redirHost);
         const redirPort = redirectUrl.port
           ? parseInt(redirectUrl.port, 10)
           : (redirProto === "https:" ? 443 : 80);

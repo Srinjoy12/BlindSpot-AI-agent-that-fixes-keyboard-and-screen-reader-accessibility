@@ -15,6 +15,7 @@ export {
   validateLocalDevUrl,
   attachLocalDevBridgeGuard,
   isLoopbackAddress,
+  isLoopbackHost,
 } from "./localDevBridge.js";
 export type {
   ValidateLocalDevUrlOptions,

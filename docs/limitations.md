@@ -25,7 +25,13 @@ BlindSpot is an autonomous developer agent designed to catch, repair, and verify
 ## 2. Known Failure Cases & Edge Cases
 
 Documenting boundaries and failure modes is a core engineering principle:
-- **Airgapped External CDN Blocking**: In Project Folder mode, the ephemeral sandbox aborts all outgoing network requests to preserve privacy and safety. Projects that rely on remote CDN scripts (e.g. jQuery CDN), remote font stylesheets (e.g. Google Fonts), or remote CSS frameworks will render without them unless those assets are hosted locally in the folder.
+- **Airgapped External CDN & Font Blocking**:
+  - In Project Folder mode and Local Dev Server Bridge mode, the sandbox blocks all outgoing network requests to external third-party origins (e.g. Google Fonts, Adobe Typekit, external CDN scripts, analytics) to maintain isolation and prevent SSRF / egress leaks.
+  - Sites that rely on third-party fonts or remote stylesheets will fall back to system fonts or local CSS, which may cause layout, metrics, or rendering to differ slightly from production environments.
+- **Local Dev Server Bridge Boundaries**:
+  - Works only when the BlindSpot server runs on the same physical host as the local dev server.
+  - If running in Docker, `localhost` resolves to the container environment unless host networking (`--network host`) is configured.
+  - In this mode, verification is performed strictly on the runtime DOM patch. Source-level JSX/TSX files are identified via heuristic localization but not built/re-compiled; JSX snippets are provided as unverified suggestions.
 - **Canvas and WebGL Elements**: Custom controls rendered purely inside HTML5 `<canvas>` or WebGL shaders without fallback ARIA DOM subtrees are invisible to the focus crawler.
 - **Custom Faux-Focus Widgets**: Single-page apps that capture keyboard events and manually paint CSS classes onto container divs without updating `document.activeElement` may report unreachable controls.
 - **Lazy-Loaded Content Beyond Scroll Depth**: Elements that only mount into the DOM after infinite scrolling beyond viewport limits may not be captured in the initial 150-stop crawl.

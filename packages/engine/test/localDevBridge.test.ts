@@ -113,6 +113,41 @@ describe("Local Dev Server Bridge (validateLocalDevUrl)", () => {
 
       const u3 = validateLocalDevUrl("http://[::1]:4000", { attested: true, ownPort: 3000 });
       expect(u3.port).toBe("4000");
+
+      const u4 = validateLocalDevUrl("http://127.0.0.2:5173", { attested: true, ownPort: 3000 });
+      expect(u4.hostname).toBe("127.0.0.2");
+      expect(u4.port).toBe("5173");
+    });
+
+    it("rejects userinfo injection tricks (e.g. http://localhost:5173@evil.com)", () => {
+      expect(() =>
+        validateLocalDevUrl("http://localhost:5173@evil.com", { attested: true })
+      ).toThrow(SsrfError);
+      expect(() =>
+        validateLocalDevUrl("http://localhost:5173@evil.com", { attested: true })
+      ).toThrow(/userinfo/i);
+    });
+
+    it("rejects DNS rebinding / wildcard domains like 127.0.0.1.nip.io", () => {
+      expect(() =>
+        validateLocalDevUrl("http://127.0.0.1.nip.io:5173", { attested: true })
+      ).toThrow(SsrfError);
+      expect(() =>
+        validateLocalDevUrl("http://127.0.0.1.nip.io:5173", { attested: true })
+      ).toThrow(/not a permitted loopback/i);
+
+      expect(() =>
+        validateLocalDevUrl("http://127.evil.com:5173", { attested: true })
+      ).toThrow(SsrfError);
+    });
+
+    it("rejects 0.0.0.0 (INADDR_ANY)", () => {
+      expect(() =>
+        validateLocalDevUrl("http://0.0.0.0:5173", { attested: true })
+      ).toThrow(SsrfError);
+      expect(() =>
+        validateLocalDevUrl("http://0.0.0.0:5173", { attested: true })
+      ).toThrow(/not a permitted loopback/i);
     });
 
     it("strictly blocks private RFC 1918 subnets even when bridge flag is on", () => {
@@ -279,6 +314,122 @@ describe("Local Dev Server Bridge (validateLocalDevUrl)", () => {
         await context.close();
       } finally {
         await new Promise<void>((res) => redirectServer.close(() => res()));
+      }
+    });
+
+    it("blocks redirects from audited origin to a different loopback port (cross-port redirect)", async () => {
+      // Create target loopback server on a second port
+      const targetServer = http.createServer((req, res) => {
+        res.writeHead(200, { "Content-Type": "text/plain" });
+        res.end("secret admin");
+      });
+      let targetPort = 0;
+      await new Promise<void>((resolve) => {
+        targetServer.listen(0, "127.0.0.1", () => {
+          targetPort = (targetServer.address() as any).port;
+          resolve();
+        });
+      });
+
+      // Create audited server that redirects to targetPort
+      const redirectServer = http.createServer((req, res) => {
+        res.writeHead(302, { Location: `http://127.0.0.1:${targetPort}/admin` });
+        res.end();
+      });
+      let auditedPort = 0;
+      await new Promise<void>((resolve) => {
+        redirectServer.listen(0, "127.0.0.1", () => {
+          auditedPort = (redirectServer.address() as any).port;
+          resolve();
+        });
+      });
+
+      try {
+        const context = await browser.newContext();
+        await attachLocalDevBridgeGuard(context, {
+          devOrigin: `http://127.0.0.1:${auditedPort}`,
+          devPort: auditedPort,
+          ownPort: 3000,
+          onBlocked: (url, reason) => blockedEvents.push({ url, reason }),
+        });
+
+        const page = await context.newPage();
+        await page.goto(`http://127.0.0.1:${auditedPort}`, { timeout: 3000 }).catch(() => {});
+
+        expect(
+          blockedEvents.some(
+            (e) =>
+              e.reason.includes(`cross_port_loopback_redirect_blocked_${targetPort}`) ||
+              e.url.includes(String(targetPort))
+          )
+        ).toBe(true);
+        await context.close();
+      } finally {
+        await new Promise<void>((res) => redirectServer.close(() => res()));
+        await new Promise<void>((res) => targetServer.close(() => res()));
+      }
+    });
+
+    it("supports streaming endpoints (Next.js HMR EventSource / chunked SSE) without hanging", async () => {
+      // Create server with an SSE streaming endpoint
+      const sseServer = http.createServer((req, res) => {
+        if (req.url === "/events") {
+          res.writeHead(200, {
+            "Content-Type": "text/event-stream",
+            "Cache-Control": "no-cache",
+            Connection: "keep-alive",
+          });
+          res.write("data: ping\n\n");
+          // Keep connection open indefinitely like real HMR SSE
+          return;
+        }
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(`<!DOCTYPE html><html><body><h1>HMR SSE Test</h1></body></html>`);
+      });
+
+      let ssePort = 0;
+      await new Promise<void>((resolve) => {
+        sseServer.listen(0, "127.0.0.1", () => {
+          ssePort = (sseServer.address() as any).port;
+          resolve();
+        });
+      });
+
+      try {
+        const context = await browser.newContext();
+        await attachLocalDevBridgeGuard(context, {
+          devOrigin: `http://127.0.0.1:${ssePort}`,
+          devPort: ssePort,
+          ownPort: 3000,
+          onBlocked: (url, reason) => blockedEvents.push({ url, reason }),
+        });
+
+        const page = await context.newPage();
+        await page.goto(`http://127.0.0.1:${ssePort}`, { waitUntil: "domcontentloaded" });
+
+        // Connect to the EventSource stream from inside the page
+        const messageReceived = await page.evaluate(async () => {
+          return new Promise<string>((resolve, reject) => {
+            const timeout = setTimeout(() => reject(new Error("EventSource timed out")), 2000);
+            const es = new EventSource("/events");
+            es.onmessage = (event) => {
+              clearTimeout(timeout);
+              es.close();
+              resolve(event.data);
+            };
+            es.onerror = (err) => {
+              clearTimeout(timeout);
+              es.close();
+              reject(new Error("EventSource error"));
+            };
+          });
+        });
+
+        expect(messageReceived).toBe("ping");
+        expect(blockedEvents.length).toBe(0);
+        await context.close();
+      } finally {
+        await new Promise<void>((res) => sseServer.close(() => res()));
       }
     });
   });
