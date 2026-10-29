@@ -27,6 +27,30 @@ describe("Project Folder — Directory Traversal & Exclusions", () => {
     expect(shouldExcludeFile("styles.css")).toBe(false);
   });
 
+  it("filters files by React mode extensions and build artifacts when projectKind: 'react'", () => {
+    // React mode excludes non-code files like .txt, .md, .vue
+    expect(shouldExcludeFile("docs/readme.txt", undefined, { projectKind: "react" })).toBe(true);
+    expect(shouldExcludeFile("notes.md", undefined, { projectKind: "react" })).toBe(true);
+    expect(shouldExcludeFile("App.vue", undefined, { projectKind: "react" })).toBe(true);
+
+    // React mode excludes build outputs
+    expect(shouldExcludeFile("dist/bundle.js", undefined, { projectKind: "react" })).toBe(true);
+    expect(shouldExcludeFile(".next/server.js", undefined, { projectKind: "react" })).toBe(true);
+
+    // React mode allows supported extensions
+    expect(shouldExcludeFile("src/App.tsx", undefined, { projectKind: "react" })).toBe(false);
+    expect(shouldExcludeFile("src/Button.jsx", undefined, { projectKind: "react" })).toBe(false);
+    expect(shouldExcludeFile("src/utils.ts", undefined, { projectKind: "react" })).toBe(false);
+    expect(shouldExcludeFile("src/main.js", undefined, { projectKind: "react" })).toBe(false);
+    expect(shouldExcludeFile("src/styles.css", undefined, { projectKind: "react" })).toBe(false);
+    expect(shouldExcludeFile("src/theme.scss", undefined, { projectKind: "react" })).toBe(false);
+    expect(shouldExcludeFile("public/index.html", undefined, { projectKind: "react" })).toBe(false);
+    expect(shouldExcludeFile("package.json", undefined, { projectKind: "react" })).toBe(false);
+
+    // Default static mode allows .txt and .md
+    expect(shouldExcludeFile("docs/readme.txt")).toBe(false);
+  });
+
   it("parses .gitignore globs and matches ignored files", () => {
     const gitignoreContent = `
 # dependencies

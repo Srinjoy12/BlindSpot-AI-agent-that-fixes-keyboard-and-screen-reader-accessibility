@@ -46,6 +46,48 @@ describe("FileSet — Path Validation & Security Rules", () => {
     expect(res.valid).toBe(true);
     expect(res.normalized).toBe("src/components/Button.js");
   });
+
+  it("handles projectKind: 'react' opt-in exclusions for dist/, build/, .next/, and coverage/", () => {
+    // With projectKind: "react", build artifact directories are rejected
+    expect(validateFilePath("dist/bundle.js", { projectKind: "react" }).valid).toBe(false);
+    expect(validateFilePath("build/index.html", { projectKind: "react" }).valid).toBe(false);
+    expect(validateFilePath(".next/static/chunks/main.js", { projectKind: "react" }).valid).toBe(false);
+    expect(validateFilePath("coverage/lcov-report/index.html", { projectKind: "react" }).valid).toBe(false);
+
+    // Default (no option or static) does not reject build/ unless restricted by sensitive checks
+    expect(validateFilePath("src/components/Button.tsx", { projectKind: "react" }).valid).toBe(true);
+    expect(validateFilePath("src/components/Button.tsx").valid).toBe(true);
+  });
+});
+
+describe("FileSet — React Mode Extension Filtering", () => {
+  it("restricts file types in React mode to .tsx, .jsx, .ts, .js, .css, .scss, .html, package.json", () => {
+    const validReactFiles = [
+      { path: "src/App.tsx", content: "export const App = () => null;" },
+      { path: "src/button.jsx", content: "export const Btn = () => null;" },
+      { path: "src/utils.ts", content: "export const x = 1;" },
+      { path: "src/index.js", content: "console.log(1);" },
+      { path: "src/styles.css", content: "body { margin: 0; }" },
+      { path: "src/theme.scss", content: "$color: red;" },
+      { path: "index.html", content: "<div id='root'></div>" },
+      { path: "package.json", content: '{"name":"app"}' },
+    ];
+    const validRes = validateFileSet(validReactFiles, { projectKind: "react" });
+    expect(validRes.valid).toBe(true);
+
+    // Disallowed extension in React mode
+    const invalidFiles = [
+      { path: "src/App.tsx", content: "export const App = () => null;" },
+      { path: "docs/readme.txt", content: "Some docs" },
+    ];
+    const invalidRes = validateFileSet(invalidFiles, { projectKind: "react" });
+    expect(invalidRes.valid).toBe(false);
+    expect(invalidRes.error).toContain("unsupported extension '.txt' for React mode");
+
+    // In default static mode, readme.txt is valid
+    const defaultRes = validateFileSet(invalidFiles);
+    expect(defaultRes.valid).toBe(true);
+  });
 });
 
 describe("FileSet — Size, Count, and Binary Limits", () => {

@@ -51,7 +51,10 @@ export async function closeSharedBrowser(): Promise<void> {
  * - Reject null bytes (\0)
  * - Reject sensitive files (.env*, *.pem, *.key, .git/*, node_modules/*, .blindspot/*)
  */
-export function validateFilePath(rawPath: string): { valid: boolean; normalized?: string; error?: string } {
+export function validateFilePath(
+  rawPath: string,
+  options?: { projectKind?: "static" | "react" }
+): { valid: boolean; normalized?: string; error?: string } {
   if (typeof rawPath !== "string" || !rawPath.trim()) {
     return { valid: false, error: "File path must be a non-empty string." };
   }
@@ -110,6 +113,22 @@ export function validateFilePath(rawPath: string): { valid: boolean; normalized?
     return { valid: false, error: `Hidden or restricted directory files cannot be uploaded: '${rawPath}'.` };
   }
 
+  // React mode build artifact exclusions
+  if (options?.projectKind === "react") {
+    if (
+      lowerNorm.startsWith("dist/") ||
+      lowerNorm === "dist" ||
+      lowerNorm.startsWith("build/") ||
+      lowerNorm === "build" ||
+      lowerNorm.startsWith(".next/") ||
+      lowerNorm === ".next" ||
+      lowerNorm.startsWith("coverage/") ||
+      lowerNorm === "coverage"
+    ) {
+      return { valid: false, error: `Build artifact files cannot be uploaded: '${rawPath}'.` };
+    }
+  }
+
   if (lowerBase === ".ds_store" || lowerBase === "thumbs.db") {
     return { valid: false, error: `System metadata files cannot be uploaded: '${rawPath}'.` };
   }
@@ -122,7 +141,8 @@ export function validateFilePath(rawPath: string): { valid: boolean; normalized?
  * Enforces total size <= 5MB, count <= 300, per-file <= 200KB, text only, no duplicates.
  */
 export function validateFileSet(
-  files: FileInputItem[] | FileSet
+  files: FileInputItem[] | FileSet,
+  options?: { projectKind?: "static" | "react" }
 ): { valid: boolean; error?: string; fileSet?: FileSet } {
   const fileList: FileInputItem[] =
     files instanceof Map
@@ -150,13 +170,27 @@ export function validateFileSet(
       return { valid: false, error: "Invalid file item format: must contain 'path' and 'content' strings." };
     }
 
-    const pathCheck = validateFilePath(item.path);
+    const pathCheck = validateFilePath(item.path, options);
     if (!pathCheck.valid || !pathCheck.normalized) {
       return { valid: false, error: pathCheck.error || `Invalid path '${item.path}'.` };
     }
 
     if (normalizedMap.has(pathCheck.normalized)) {
       return { valid: false, error: `Duplicate file path after normalization: '${pathCheck.normalized}'.` };
+    }
+
+    if (options?.projectKind === "react") {
+      const allowedExts = new Set([".tsx", ".jsx", ".ts", ".js", ".css", ".scss", ".html"]);
+      const baseName = pathCheck.normalized.split("/").pop() || "";
+      const dotIndex = baseName.lastIndexOf(".");
+      const ext = dotIndex !== -1 ? baseName.slice(dotIndex).toLowerCase() : "";
+      const isPkgJson = baseName.toLowerCase() === "package.json";
+      if (!allowedExts.has(ext) && !isPkgJson) {
+        return {
+          valid: false,
+          error: `File '${pathCheck.normalized}' has unsupported extension '${ext}' for React mode. Allowed: .tsx, .jsx, .ts, .js, .css, .scss, .html, package.json.`,
+        };
+      }
     }
 
     // Check for null bytes in content (indicates binary)

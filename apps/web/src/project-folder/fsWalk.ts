@@ -106,7 +106,11 @@ export function parseGitignore(content: string): (relPath: string) => boolean {
 /**
  * Checks whether a relative path or file name should be skipped.
  */
-export function shouldExcludeFile(relPath: string, size?: number): boolean {
+export function shouldExcludeFile(
+  relPath: string,
+  size?: number,
+  options?: { projectKind?: "static" | "react" }
+): boolean {
   const segments = relPath.replace(/^\/+/, "").split("/");
   const baseName = segments[segments.length - 1]!;
   const lowerBase = baseName.toLowerCase();
@@ -134,6 +138,16 @@ export function shouldExcludeFile(relPath: string, size?: number): boolean {
   if (dotIndex !== -1) {
     const ext = baseName.slice(dotIndex).toLowerCase();
     if (BINARY_EXTENSIONS.has(ext)) return true;
+  }
+
+  // React mode: only accept .tsx, .jsx, .ts, .js, .css, .scss, .html, package.json
+  if (options?.projectKind === "react") {
+    const REACT_EXTENSIONS = new Set([".tsx", ".jsx", ".ts", ".js", ".css", ".scss", ".html"]);
+    const ext = dotIndex !== -1 ? baseName.slice(dotIndex).toLowerCase() : "";
+    const isPkgJson = lowerBase === "package.json";
+    if (!REACT_EXTENSIONS.has(ext) && !isPkgJson) {
+      return true;
+    }
   }
 
   // Size limit (200 KB)
@@ -178,7 +192,8 @@ export function detectFrameworkProject(
 export async function walkDirectoryHandle(
   dirHandle: any,
   basePath: string = "",
-  gitignoreMatcher?: (relPath: string) => boolean
+  gitignoreMatcher?: (relPath: string) => boolean,
+  options?: { projectKind?: "static" | "react" }
 ): Promise<FolderProjectFile[]> {
   const result: FolderProjectFile[] = [];
 
@@ -200,13 +215,13 @@ export async function walkDirectoryHandle(
     }
 
     if (entry.kind === "directory") {
-      if (EXCLUDED_DIRS.has(entry.name) || shouldExcludeFile(entryPath)) {
+      if (EXCLUDED_DIRS.has(entry.name) || shouldExcludeFile(entryPath, undefined, options)) {
         continue;
       }
-      const subFiles = await walkDirectoryHandle(entry, entryPath, gitignoreMatcher);
+      const subFiles = await walkDirectoryHandle(entry, entryPath, gitignoreMatcher, options);
       result.push(...subFiles);
     } else if (entry.kind === "file") {
-      if (shouldExcludeFile(entryPath)) {
+      if (shouldExcludeFile(entryPath, undefined, options)) {
         continue;
       }
       try {
@@ -247,7 +262,8 @@ export async function walkDirectoryHandle(
  * Fallback: walks a FileList from `<input type="file" webkitdirectory>`.
  */
 export async function walkWebkitDirectoryFileList(
-  fileList: FileList
+  fileList: FileList,
+  options?: { projectKind?: "static" | "react" }
 ): Promise<FolderProjectFile[]> {
   const files: File[] = Array.from(fileList);
   const result: FolderProjectFile[] = [];
@@ -276,7 +292,7 @@ export async function walkWebkitDirectoryFileList(
       continue;
     }
 
-    if (shouldExcludeFile(relPath, file.size)) {
+    if (shouldExcludeFile(relPath, file.size, options)) {
       continue;
     }
 
