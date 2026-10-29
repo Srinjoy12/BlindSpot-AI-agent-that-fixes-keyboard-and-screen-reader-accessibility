@@ -9,8 +9,17 @@ export {
   attachSsrfGuard,
   extractEmbeddedIpv4,
 } from "./ssrf.js";
-export { startSession } from "./session.js";
-export type { Session, SessionOptions } from "./session.js";
+export { startSession, startLocalDevSession } from "./session.js";
+export type { Session, SessionOptions, LocalDevSessionOptions } from "./session.js";
+export {
+  validateLocalDevUrl,
+  attachLocalDevBridgeGuard,
+  isLoopbackAddress,
+} from "./localDevBridge.js";
+export type {
+  ValidateLocalDevUrlOptions,
+  LocalDevBridgeGuardOptions,
+} from "./localDevBridge.js";
 export { AuditConcurrencyController, auditConcurrency } from "./concurrency.js";
 export { captureAxTree, getInteractiveNodes } from "./axTree.js";
 export type { AXNode, AXTreeSnapshot } from "./axTree.js";
