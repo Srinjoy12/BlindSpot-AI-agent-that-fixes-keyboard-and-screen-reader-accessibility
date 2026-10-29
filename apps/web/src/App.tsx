@@ -358,11 +358,11 @@ export const App: React.FC = () => {
     try {
       setStatusMessage("Re-scanning folder from disk...");
       const walkResult = await walkDirectoryHandle(folderDirectoryHandle);
-      if (walkResult.files.length === 0) {
+      if (walkResult.length === 0) {
         throw new Error("No files found in folder upon re-scan.");
       }
       await handleStartFolderAudit(
-        walkResult.files,
+        walkResult,
         folderEntryPath || "index.html",
         folderDirectoryHandle,
         folderName
@@ -637,7 +637,7 @@ export const App: React.FC = () => {
             {isFolderMode && (
               <FolderActionToolbar
                 directoryHandle={folderDirectoryHandle}
-                capabilities={getFolderCapabilities(folderDirectoryHandle)}
+                capabilities={getFolderCapabilities()}
                 edits={folderEdits}
                 inMemoryOriginals={inMemoryOriginals}
                 onRescanFolder={handleRescanFolder}

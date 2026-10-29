@@ -27,7 +27,7 @@ if (!fs.existsSync(REPLAYS_DIR)) {
 }
 
 async function seedFixture(fixtureFile: string) {
-  const pageId = fixtureFile.replace(/\.html$/, "").split("-")[0];
+  const pageId = fixtureFile.replace(/\.html$/, "").split("-")[0] || fixtureFile;
   const manifestPath = path.join(MANIFESTS_DIR, `${pageId}.json`);
   let manifest: any = { barriers: [] };
   if (fs.existsSync(manifestPath)) {
@@ -159,6 +159,7 @@ async function seedFixture(fixtureFile: string) {
 
     for (let i = 0; i < hits.length; i++) {
       const hit = hits[i];
+      if (!hit) continue;
       if (hit.severity === "blocker") blockers++;
       else if (hit.severity === "major") majors++;
       else minors++;
@@ -192,7 +193,7 @@ async function seedFixture(fixtureFile: string) {
         const loopRes = await runFixLoop({
           page: session.page,
           finding: analyzed,
-          domSnippet: domSnippet || undefined,
+          ...(domSnippet ? { domSnippet } : {}),
           maxAttempts: 2,
         });
 
@@ -231,9 +232,9 @@ async function seedFixture(fixtureFile: string) {
     const totals = ledgerTotals();
     const ledgerCalls = Array.from(getLedger()).map((c) => ({
       ...c,
-      tier: (c.stage === "digest" || c.model.toLowerCase().includes("nano")
+      tier: (c.stage === "digest" || (c.model ?? c.modelId).toLowerCase().includes("nano")
         ? "nano"
-        : c.stage === "analysis" || c.model.toLowerCase().includes("super")
+        : c.stage === "analysis" || (c.model ?? c.modelId).toLowerCase().includes("super")
         ? "super"
         : "ultra") as "nano" | "super" | "ultra",
     }));
@@ -244,7 +245,20 @@ async function seedFixture(fixtureFile: string) {
       timestamp: new Date().toISOString(),
       durationMs: Date.now() - startTime,
       keyboardScore,
-      baseline: axeBaseline,
+      baseline: axeBaseline
+        ? {
+            tool: axeBaseline.tool,
+            version: axeBaseline.version,
+            violationCount: axeBaseline.violationCount,
+            rules: axeBaseline.rules.map((r: any) => ({
+              id: r.ruleId,
+              tags: r.tags,
+              nodesCount: r.nodeCount,
+              selectors: r.selectors,
+              impact: r.impact,
+            })),
+          }
+        : undefined,
       summary: {
         totalStops: crawlResult.forwardStops.length,
         barriersFound: hits.length,

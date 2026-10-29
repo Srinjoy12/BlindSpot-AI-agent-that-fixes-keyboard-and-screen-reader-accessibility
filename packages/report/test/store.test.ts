@@ -22,15 +22,17 @@ function createMockReport(id: string): AuditReport {
       fixesVerified: 1,
     },
     barriers: [],
-    stops: [],
     aiTransparency: {
+      totalCalls: 3,
+      totalTokensIn: 600,
+      totalTokensOut: 0,
+      totalLatencyMs: 0,
       tiers: {
         nano: { calls: 1, tokens: 100 },
         super: { calls: 1, tokens: 200 },
         ultra: { calls: 1, tokens: 300 },
       },
-      tavilyQueries: 0,
-      totalCostUsd: 0,
+      tavilyQueries: [],
     },
     durationMs: 1200,
   };

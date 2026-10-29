@@ -87,7 +87,7 @@ export const ExportTab: React.FC<ExportTabProps> = ({ auditId, report }) => {
       `BlindSpot Keyboard Audit Summary`,
       `Target: ${report.targetUrl || "Source code snippet"}`,
       `Time taken: ${((report.durationMs || 0) / 1000).toFixed(1)}s`,
-      `Tab stops: ${report.summary?.totalStops ?? report.forwardStops?.length ?? 0}`,
+      `Tab stops: ${report.summary?.totalStops ?? 0}`,
       ``,
       `Problems found: ${barriers.length}`,
       `- Blocks keyboard use: ${blockers}`,

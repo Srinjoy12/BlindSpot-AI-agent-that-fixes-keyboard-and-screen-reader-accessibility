@@ -14,8 +14,8 @@ async function main() {
   console.log(`   axe-core reported ${axeResult.violationCount} violations.`);
   if (axeResult.rules && axeResult.rules.length > 0) {
     for (const v of axeResult.rules) {
-      console.log(`   - [${v.id}] ${v.help} (${v.nodeCount} nodes)`);
-      for (const target of v.targets.slice(0, 3)) {
+      console.log(`   - [${v.ruleId}] ${v.description || ""} (${v.nodeCount} nodes)`);
+      for (const target of v.selectors.slice(0, 3)) {
         console.log(`     target: ${target}`);
       }
     }
@@ -69,7 +69,7 @@ async function main() {
 
   console.log(`   Detectors found ${detectorResult.length} barriers.`);
   for (const b of detectorResult) {
-    console.log(`   - [${b.detectorId}] (${b.severity}) ${b.criterion}: ${b.impact} on ${b.selector}`);
+    console.log(`   - [${b.detectorId}] (${b.severity}) ${b.wcagId}: ${b.evidence} on ${b.selector}`);
   }
 
   await session.context.close();

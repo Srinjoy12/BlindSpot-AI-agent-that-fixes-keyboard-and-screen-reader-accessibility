@@ -543,7 +543,7 @@ describe("deduplicateHits — Hit deduplication & severity ranking", () => {
   it("never lets D8 (Major, 2.4.3) swallow D1 (Blocker, 2.1.2) on the same container", () => {
     const hits = [
       {
-        detectorId: "D8",
+        detectorId: "D8" as const,
         selector: "#newsletter-dialog",
         stateLabel: "S0",
         stopIndexes: [],
@@ -553,7 +553,7 @@ describe("deduplicateHits — Hit deduplication & severity ranking", () => {
         wcagId: "2.4.3",
       },
       {
-        detectorId: "D1",
+        detectorId: "D1" as const,
         selector: "#newsletter-dialog",
         stateLabel: "S0",
         stopIndexes: [0, 1, 2],
@@ -575,7 +575,7 @@ describe("deduplicateHits — Hit deduplication & severity ranking", () => {
   it("suppresses redundant lower-severity hit when container and WCAG criterion are identical", () => {
     const hits = [
       {
-        detectorId: "D8",
+        detectorId: "D8" as const,
         selector: "#modal",
         stateLabel: "S0",
         stopIndexes: [],
@@ -585,7 +585,7 @@ describe("deduplicateHits — Hit deduplication & severity ranking", () => {
         wcagId: "2.4.3",
       },
       {
-        detectorId: "D8",
+        detectorId: "D8" as const,
         selector: "#modal",
         stateLabel: "S0",
         stopIndexes: [],

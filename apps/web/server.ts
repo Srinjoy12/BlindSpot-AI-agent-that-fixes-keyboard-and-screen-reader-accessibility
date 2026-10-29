@@ -660,15 +660,15 @@ app.post("/api/audit", rateLimitMiddleware, tokenBudgetMiddleware, async (req, r
     const rawCalls = Array.from(getLedger());
     const ledgerCalls = rawCalls.map((c) => ({
       ...c,
-      tier: (c.stage === "digest" || c.model.toLowerCase().includes("nano")
+      tier: (c.stage === "digest" || (c.model ?? c.modelId).toLowerCase().includes("nano")
         ? "nano"
-        : c.stage === "analysis" || c.model.toLowerCase().includes("super")
+        : c.stage === "analysis" || (c.model ?? c.modelId).toLowerCase().includes("super")
         ? "super"
         : "ultra") as "nano" | "super" | "ultra",
     }));
     const tavilyCalls = ledgerCalls
-      .filter((c) => c.model.includes("tavily"))
-      .map((c) => c.model);
+      .filter((c) => (c.model ?? c.modelId).includes("tavily"))
+      .map((c) => c.model ?? c.modelId);
 
     const nanoCalls = ledgerCalls.filter((c) => c.tier === "nano");
     const superCalls = ledgerCalls.filter((c) => c.tier === "super");
@@ -691,7 +691,20 @@ app.post("/api/audit", rateLimitMiddleware, tokenBudgetMiddleware, async (req, r
         foundOnlyByBlindspot: hits.filter((h) => !isFindingReportedByAxe(h.selector, baseline)).length,
       },
       barriers: barrierItems,
-      baseline: baseline || undefined,
+      baseline: baseline
+        ? {
+            tool: baseline.tool,
+            version: baseline.version,
+            violationCount: baseline.violationCount,
+            rules: baseline.rules.map((r: any) => ({
+              id: r.ruleId,
+              tags: r.tags,
+              nodesCount: r.nodeCount,
+              selectors: r.selectors,
+              impact: r.impact,
+            })),
+          }
+        : undefined,
       aiTransparency: {
         totalCalls: totals.totalCalls,
         totalTokensIn: totals.totalTokensIn,
@@ -1057,15 +1070,15 @@ app.post("/api/audit-code", rateLimitMiddleware, tokenBudgetMiddleware, async (r
     const rawCalls = Array.from(getLedger());
     const ledgerCalls = rawCalls.map((c) => ({
       ...c,
-      tier: (c.stage === "digest" || c.model.toLowerCase().includes("nano")
+      tier: (c.stage === "digest" || (c.model ?? c.modelId).toLowerCase().includes("nano")
         ? "nano"
-        : c.stage === "analysis" || c.model.toLowerCase().includes("super")
+        : c.stage === "analysis" || (c.model ?? c.modelId).toLowerCase().includes("super")
         ? "super"
         : "ultra") as "nano" | "super" | "ultra",
     }));
     const tavilyCalls = ledgerCalls
-      .filter((c) => c.model.includes("tavily"))
-      .map((c) => c.model);
+      .filter((c) => (c.model ?? c.modelId).includes("tavily"))
+      .map((c) => c.model ?? c.modelId);
 
     const nanoCalls = ledgerCalls.filter((c) => c.tier === "nano");
     const superCalls = ledgerCalls.filter((c) => c.tier === "super");
@@ -1089,7 +1102,20 @@ app.post("/api/audit-code", rateLimitMiddleware, tokenBudgetMiddleware, async (r
         blockedResourcesCount: session.blockedRequestsCount,
       },
       barriers: barrierItems,
-      baseline: baseline || undefined,
+      baseline: baseline
+        ? {
+            tool: baseline.tool,
+            version: baseline.version,
+            violationCount: baseline.violationCount,
+            rules: baseline.rules.map((r: any) => ({
+              id: r.ruleId,
+              tags: r.tags,
+              nodesCount: r.nodeCount,
+              selectors: r.selectors,
+              impact: r.impact,
+            })),
+          }
+        : undefined,
       aiTransparency: {
         totalCalls: totals.totalCalls,
         totalTokensIn: totals.totalTokensIn,
@@ -1330,19 +1356,23 @@ app.post("/api/audit-files", rateLimitMiddleware, tokenBudgetMiddleware, async (
 
     sendEvent("status", { phase: "digest", message: "Nemotron Nano generating page digest..." });
     const modelsStart = Date.now();
-    let digest = "";
+    let digest: import("@blindspot/ai").StateDigest | null = null;
     try {
       const pageHtml = fileSet.get(resolvedEntry) || "";
       const textSnippet = pageHtml.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().slice(0, 500);
       digest = await generateStateDigest({
-        label: "S0",
+        stateLabel: "S0",
         url: resolvedEntry,
-        axTreeSnapshot: { root: "html" },
-        focusStopsCount: crawlResult.forwardStops.length,
-        visibleTextSnippet: textSnippet,
+        focusStops: crawlResult.forwardStops.slice(0, 20).map((s) => ({
+          selector: s.selector,
+          tagName: s.tagName ?? "unknown",
+          role: s.role ?? "",
+          accessibleName: s.accessibleName ?? "",
+        })),
+        landmarkSummary: [textSnippet],
       });
     } catch {
-      digest = `Static multi-file project entry '${resolvedEntry}' with ${fileSet.size} files and ${crawlResult.forwardStops.length} focus stops.`;
+      // digest stays null; analyzeFindings will work with empty digests
     }
 
     sendEvent("status", {
@@ -1351,7 +1381,7 @@ app.post("/api/audit-files", rateLimitMiddleware, tokenBudgetMiddleware, async (
     });
     let analyzedFindings: any[] = [];
     try {
-      analyzedFindings = await analyzeFindings(hits, digest);
+      analyzedFindings = await analyzeFindings({ hits, digests: digest ? [digest] : [], url: resolvedEntry });
     } catch {
       analyzedFindings = hits.map((hit) => ({
         detectorId: hit.detectorId,
@@ -1523,15 +1553,15 @@ app.post("/api/audit-files", rateLimitMiddleware, tokenBudgetMiddleware, async (
     const rawCalls = Array.from(getLedger());
     const ledgerCalls = rawCalls.map((c) => ({
       ...c,
-      tier: (c.stage === "digest" || c.model.toLowerCase().includes("nano")
+      tier: (c.stage === "digest" || (c.model ?? c.modelId).toLowerCase().includes("nano")
         ? "nano"
-        : c.stage === "analysis" || c.model.toLowerCase().includes("super")
+        : c.stage === "analysis" || (c.model ?? c.modelId).toLowerCase().includes("super")
         ? "super"
         : "ultra") as "nano" | "super" | "ultra",
     }));
     const tavilyCalls = ledgerCalls
-      .filter((c) => c.model.includes("tavily"))
-      .map((c) => c.model);
+      .filter((c) => (c.model ?? c.modelId).includes("tavily"))
+      .map((c) => c.model ?? c.modelId);
 
     const nanoCalls = ledgerCalls.filter((c) => c.tier === "nano");
     const superCalls = ledgerCalls.filter((c) => c.tier === "super");
@@ -1555,7 +1585,20 @@ app.post("/api/audit-files", rateLimitMiddleware, tokenBudgetMiddleware, async (
         blockedResourcesCount: session.blockedRequestsCount,
       },
       barriers: barrierItems,
-      baseline: baseline || undefined,
+      baseline: baseline
+        ? {
+            tool: baseline.tool,
+            version: baseline.version,
+            violationCount: baseline.violationCount,
+            rules: baseline.rules.map((r: any) => ({
+              id: r.ruleId,
+              tags: r.tags,
+              nodesCount: r.nodeCount,
+              selectors: r.selectors,
+              impact: r.impact,
+            })),
+          }
+        : undefined,
       aiTransparency: {
         totalCalls: totals.totalCalls,
         totalTokensIn: totals.totalTokensIn,
