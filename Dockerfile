@@ -7,9 +7,8 @@ FROM mcr.microsoft.com/playwright:v1.64.1-noble
 # Set working directory
 WORKDIR /app
 
-# Set non-interactive environment and production flag
-ENV NODE_ENV=production \
-    PORT=3000
+# Set port environment
+ENV PORT=3000
 
 # Copy root manifest and workspace package files for efficient layer caching
 COPY package.json package-lock.json ./
@@ -21,8 +20,8 @@ COPY packages/fixer/package.json ./packages/fixer/
 COPY packages/report/package.json ./packages/report/
 COPY packages/bench/package.json ./packages/bench/
 
-# Install dependencies
-RUN npm ci
+# Install dependencies including devDependencies (needed for tsc build and tsx runtime)
+RUN npm ci --include=dev
 
 # Copy repository source code and fixtures
 COPY tsconfig.json ./
@@ -30,18 +29,15 @@ COPY fixtures ./fixtures
 COPY packages ./packages
 COPY apps ./apps
 
-# Build all workspace packages and UI assets
-RUN npm run build --workspace=@blindspot/engine && \
-    npm run build --workspace=@blindspot/detectors && \
-    npm run build --workspace=@blindspot/ai && \
-    npm run build --workspace=@blindspot/fixer && \
-    npm run build --workspace=@blindspot/report && \
-    npm run build --workspace=@blindspot/bench && \
-    npm run build --workspace=@blindspot/web
+# Build all workspace packages and UI assets using the root build pipeline
+RUN npm run build
 
 # Create data directories and set permissions for pwuser
 RUN mkdir -p /app/data/replays /app/artifacts && \
     chown -R pwuser:pwuser /app
+
+# Set production environment flag for runtime
+ENV NODE_ENV=production
 
 # Switch to unprivileged non-root user
 USER pwuser
