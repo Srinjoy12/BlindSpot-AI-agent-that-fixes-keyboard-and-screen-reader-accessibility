@@ -215,11 +215,11 @@ npm run bench -- B01
 # (Spends Nebius model tokens; because LLM output is non-deterministic, generated patches and exact verification counts can vary between runs)
 npm run bench -- --fixes
 
-# Run code-mode benchmark across all fixtures (spends Nebius model tokens, outputs artifacts/benchmark_code_mode.json)
+# Run code-mode benchmark across fixtures (spends Nebius model tokens; artifacts/benchmark_code_mode.json is a smoke-run output)
 npm run bench:code
 ```
 
-> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier offline run reflecting 18 / 25 seeded barriers detected and 12 / 25 verified (with B01 D1 unverified in `data/replays/B01.json`), whereas the benchmark run in `artifacts/benchmark_results.json` achieves 23 / 25 detected (92.0% recall) and 23 / 25 verified (92.0% verified-fix rate via live `--fixes`). Verification counts vary across runs because LLM patch generation is non-deterministic.
+> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier offline run reflecting 18 / 25 seeded barriers detected and 12 / 25 verified (with B01 D1 unverified in `data/replays/B01.json`), whereas the benchmark run in `artifacts/benchmark_results.json` achieves 23 / 25 detected (92.0% recall) and 23 / 25 verified (92.0% verified-fix rate). Verification counts vary across runs because LLM patch generation is non-deterministic.
 
 ### Security & Secret Scanning
 

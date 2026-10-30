@@ -51,11 +51,11 @@ npm run bench -- B01
 # (Spends Nebius model tokens; because LLM output is non-deterministic, generated patches and exact verification counts can vary between runs)
 npm run bench -- --fixes
 
-# Run code-mode benchmark across all fixtures (spends Nebius model tokens, outputs artifacts/benchmark_code_mode.json)
+# Run code-mode benchmark across fixtures (spends Nebius model tokens; artifacts/benchmark_code_mode.json is a smoke-run output)
 npm run bench:code
 ```
 
-> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier offline run reflecting 18 / 25 seeded barriers detected and 12 / 25 verified (with B01 D1 unverified in `data/replays/B01.json`), whereas the benchmark run in `artifacts/benchmark_results.json` achieves 23 / 25 detected (92.0% recall) and 23 / 25 verified (92.0% verified-fix rate via live `--fixes`). Verification counts vary across runs because LLM patch generation is non-deterministic.
+> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier offline run reflecting 18 / 25 seeded barriers detected and 12 / 25 verified (with B01 D1 unverified in `data/replays/B01.json`), whereas the benchmark run in `artifacts/benchmark_results.json` achieves 23 / 25 detected (92.0% recall) and 23 / 25 verified (92.0% verified-fix rate). Verification counts vary across runs because LLM patch generation is non-deterministic.
 
 ---
 
@@ -195,6 +195,9 @@ flowchart LR
 ## 6. Code Mode (Paste-Code Sandbox) Benchmark Results
 
 To evaluate BlindSpot's autonomous source-repair capability on raw HTML/CSS/JS snippets, `packages/bench/src/cli-code.ts` executes the complete paste-code pipeline inside ephemeral airgapped Chromium containers (`npm run bench:code`). The runner tests broken fixtures B01–B12, clean fixtures C01–C03, and prompt-injection fixture H01 with live NVIDIA Nemotron models (Nano, Super, Ultra) on Nebius Token Factory.
+
+> [!NOTE]
+> **Provenance & Smoke-Run Artifact Disclosure**: The per-fixture numbers and failure analysis below reflect an earlier evaluation run conducted on October 26, 2026 whose raw output was not retained as a tracked repository artifact. The tracked repository file `artifacts/benchmark_code_mode.json` is a 1-fixture smoke-run output (`C01`) used to verify pipeline execution and schema compliance without spending production model tokens, and should not be cited as a multi-fixture benchmark result.
 
 ### Code Mode Summary Scorecard
 
