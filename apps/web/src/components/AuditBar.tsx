@@ -635,33 +635,15 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                   role="note"
                   className="neo-sunken"
                   style={{
-                    padding: "var(--space-3) var(--space-4)",
+                    padding: "var(--space-2) var(--space-3)",
                     borderRadius: "var(--radius-md)",
-                    borderLeft: "4px solid var(--color-brand-primary)",
-                    backgroundColor: "var(--color-bg-sunken)",
-                    fontSize: "var(--font-size-sm)",
+                    borderLeft: "3px solid var(--color-brand-primary)",
+                    fontSize: "var(--font-size-xs)",
+                    color: "var(--color-text-secondary)",
                     lineHeight: 1.5,
                   }}
                 >
-                  <div
-                    style={{
-                      fontWeight: 600,
-                      color: "var(--color-text-primary)",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "var(--space-2)",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    <span>🔒 Local Dev Bridge requires local execution</span>
-                  </div>
-                  <p style={{ margin: 0, color: "var(--color-text-secondary)" }}>
-                    Because this demo is running on a cloud container (Render), it cannot access <code>localhost:5173</code> or local folders on your computer (SSRF protection).
-                  </p>
-                  <p style={{ margin: "var(--space-2) 0 0 0", color: "var(--color-text-secondary)" }}>
-                    👉 <strong>To test on this cloud deployment:</strong> Use <strong>URL mode</strong> (choose any of the 16 seeded fixtures from the dropdown), <strong>Paste code mode</strong>, or <strong>Open folder mode</strong>.
-                    To audit your own local dev server, run BlindSpot locally via <code>npm run dev</code> at <code>localhost:3000</code>.
-                  </p>
+                  <strong style={{ color: "var(--color-text-primary)" }}>Localhost Only:</strong> This mode bridges local development servers (<code style={{ fontFamily: "var(--font-mono)" }}>localhost:5173</code>) with source files. Disabled on cloud deployments for SSRF security. For cloud testing, use <strong>URL</strong>, <strong>Paste code</strong>, or <strong>Open folder</strong> mode.
                 </div>
               )}
               <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "var(--space-3)", alignItems: "end" }}>
@@ -694,18 +676,6 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                       boxSizing: "border-box",
                     }}
                   />
-                  <span
-                    id="dev-bridge-instruction-note"
-                    style={{
-                      fontSize: "var(--font-size-xs)",
-                      color: "var(--color-text-secondary)",
-                      lineHeight: 1.4,
-                      display: "block",
-                      marginTop: "var(--space-1)",
-                    }}
-                  >
-                    ⚠️ <strong>Note for Judges:</strong> This mode only works when running BlindSpot on a local server (<code style={{ fontFamily: "var(--font-mono)" }}>http://localhost:3000</code>). On deployed cloud servers, connecting to local servers is blocked by security policy. For live cloud testing, please use <strong>URL mode</strong> (with the 16 preset fixtures), <strong>Paste code mode</strong>, or <strong>Open folder mode</strong>.
-                  </span>
                 </div>
 
                 <div>
