@@ -35,10 +35,11 @@
 
 ---
 
-### [1:40 – 2:10] Real-World Coverage & Benchmark Rigor
-**Visual**: Scrolling through the Results view showing the interactive **Keyboard Replay scrubber**, the **WCAG criterion tags**, and export options (HTML report, Markdown, JSON). Then showing the benchmark results scorecard.
+### [1:40 – 2:10] Real-World Coverage, React Dev Bridge & Benchmark Rigor
+**Visual**: Scrolling through the Results view showing the interactive **Keyboard Replay scrubber**, the **WCAG criterion tags**, export options (HTML report, Markdown, JSON), and switching between **HTML/DOM** and **React JSX** patch formats. Demonstrating the **URL + Source Folder local dev bridge** auditing a local React Vite app.
 **Voice-over**:
-> "We tested BlindSpot across a 16-page benchmark suite covering keyboard traps, obscured focus under sticky headers, hover-only mega menus, and missing accessible names.
+> "BlindSpot audits live URLs, static folders, and local React dev servers via our loopback bridge—mapping barriers directly to your .tsx components with idiomatic React JSX fixes.
+> We tested BlindSpot across a 16-page benchmark suite covering keyboard traps, obscured focus under sticky headers, hover-only mega menus, and missing accessible names.
 > On our clean control pages, BlindSpot produced zero false alarms.
 > And when tested against a hostile prompt injection designed to deceive the AI, our delimiter guardrails held firm."
 

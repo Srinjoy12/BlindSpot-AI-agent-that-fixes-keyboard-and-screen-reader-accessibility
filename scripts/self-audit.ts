@@ -2,20 +2,23 @@ import { chromium } from "playwright";
 import { startSession, crawl, runInteractionPass, runAxe } from "@blindspot/engine";
 import { runDetectors } from "@blindspot/detectors";
 
+// Explicitly authorize self-audit in this script process only
+process.env.BLINDSPOT_SELF_AUDIT = "1";
+
 async function main() {
   console.log("=== BlindSpot Self-Audit: Running on http://localhost:3000 ===");
 
   // 1. Run Engine + Detectors on http://localhost:3000
   console.log("1. Starting engine session on http://localhost:3000...");
-  const session = await startSession({ auditId: "self-audit-test", targetUrl: "http://localhost:3000" });
+  const session = await startSession({ auditId: "self-audit-test", targetUrl: "http://localhost:3000", allowSelfAudit: true, appPort: 3000 });
   
   console.log("2. Running axe-core baseline...");
   const axeResult = await runAxe(session.page);
   console.log(`   axe-core reported ${axeResult.violationCount} violations.`);
   if (axeResult.rules && axeResult.rules.length > 0) {
     for (const v of axeResult.rules) {
-      console.log(`   - [${v.id}] ${v.help} (${v.nodeCount} nodes)`);
-      for (const target of v.targets.slice(0, 3)) {
+      console.log(`   - [${v.ruleId}] ${v.description || ""} (${v.nodeCount} nodes)`);
+      for (const target of v.selectors.slice(0, 3)) {
         console.log(`     target: ${target}`);
       }
     }
@@ -25,10 +28,7 @@ async function main() {
   const crawlResult = await crawl(session.page, { maxStops: 100, pauseMs: 50 });
   console.log(`   Captured ${crawlResult.forwardStops.length} forward stops, ${crawlResult.backwardStops.length} backward stops.`);
 
-  console.log("4. Running interaction pass...");
-  const interactionResult = await runInteractionPass(session.page, { count: 3 });
-
-  console.log("5. Evaluating candidate elements for D2...");
+  console.log("4. Evaluating candidate elements for D2...");
   const candidateData = (await session.page.evaluate(`(() => {
     function getSelector(el) {
       if (el.id) return "#" + CSS.escape(el.id);
@@ -53,11 +53,16 @@ async function main() {
       if (rect.width <= 0 || rect.height <= 0) return;
       const style = window.getComputedStyle(el);
       if (style.display === "none" || style.visibility === "hidden") return;
+      if (el.disabled || el.hasAttribute("disabled")) return;
+      if (el.getAttribute("tabindex") === "-1") return;
       const sel = getSelector(el);
       if (sel && !selectors.includes(sel)) selectors.push(sel);
     });
     return { selectors, hoverTriggers: [] };
   })()`)) as any;
+
+  console.log("5. Running interaction pass...");
+  const interactionResult = await runInteractionPass(session.page, { count: 3 });
 
   console.log("6. Running deterministic detectors D1-D9...");
   const detectorResult = runDetectors({
@@ -69,7 +74,7 @@ async function main() {
 
   console.log(`   Detectors found ${detectorResult.length} barriers.`);
   for (const b of detectorResult) {
-    console.log(`   - [${b.detectorId}] (${b.severity}) ${b.criterion}: ${b.impact} on ${b.selector}`);
+    console.log(`   - [${b.detectorId}] (${b.severity}) ${b.wcagId}: ${b.evidence} on ${b.selector}`);
   }
 
   await session.context.close();

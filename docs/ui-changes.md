@@ -43,7 +43,7 @@ All after screenshots have been captured at 1440px desktop and 390px mobile view
 ## 3. Comprehensive Breakdown of Changes
 
 ### A. First Screen & Input Bar
-- **Single Sentence under H1**: Replaced generic description paragraphs with a single plain sentence: *"BlindSpot presses Tab through your page like a keyboard user, finds where it breaks, and tests a fix."*
+- **Single Sentence under H1**: Replaced generic description paragraphs with a single plain sentence: *"Beyond static scans: BlindSpot actively navigates your live interface—finding hidden WCAG violations, broken screen reader semantics, and keyboard barriers, then testing verified code fixes."*
 - **SegmentedControl**: Implemented an accessible radiogroup (`URL | Paste code`) with roving tabindex. Built to allow adding *"Open folder"* as a third option without layout shifts.
 - **Plain-Language Controls**: Primary button labelled *"Run audit"* with a muted `⌘↵` keyboard shortcut hint. Checkbox rephrased to *"Suggest fixes and test them"*.
 - **Focused Input Bar**: Streamlined to URL, Paste code, and Open folder without distraction. Removed demo cards and example dropdowns for a clean, professional interface.
@@ -67,35 +67,33 @@ All after screenshots have been captured at 1440px desktop and 390px mobile view
   - *Blocks keyboard use* (Blockers)
   - *Hard to use* (Majors)
   - *Minor* (Minors)
-  - *Fixes tested* (e.g. 1 of 3)
-- **axe-core Comparison Row**: A quiet horizontal bar comparing static violations against keyboard discoveries (*"axe-core found 0 issues. BlindSpot found 3 more that need a keyboard to discover."*).
+  - *Verified fixes* (e.g. 1 of 3)
+- **axe-core Comparison Card**: A quiet debossed card comparing static violations against keyboard discoveries (*"axe-core found 0 issues. BlindSpot found 3 more that need a keyboard to discover."*).
 
-### D. Working Tabs
-1. **Overview Tab**: Highlights the most serious barrier on the page, summarizes who is affected, and provides a clear *"What to do next"* direction.
-2. **Problems Tab**:
-   - Master list: One row per barrier showing severity icon + text, plain title, code selector in monospace, WCAG criterion link label, and fix status.
-   - Detail panel: Displays on select (side-by-side on wide screens, below on mobile) with five sections: *What happens (keyboard reproduction)*, *Who it affects* (Super model summary, max 2–3 sentences), *Evidence*, *Guidance source* (Tavily/WCAG link), and *The fix*.
-   - Fallback transparency: If a model call timed out, clearly marks *"Deterministic fallback used"*.
-3. **Keyboard Path Tab**:
+### D. Working Tabs & Tactile Neomorphic Redesign
+1. **Tactile Neomorphic Design System**:
+   - Soft embossed convex tiles (`.neo-extruded`) for interactive cards and stat widgets.
+   - Deep recessed debossed wells (`.neo-sunken`) for terminal outputs, diff regions, and comparison metrics.
+   - High-contrast tactile pills (`.neo-pill`) with WCAG 2.1 AA compliant border highlights.
+2. **Overview Tab**: Highlights the most serious barrier on the page, summarizes who is affected, and provides a clear *"What to do next"* direction.
+3. **Problems Tab**:
+   - Master list: One row per barrier showing severity badge, plain title, code selector in monospace, WCAG criterion link, and static scanner comparison badges (**"axe-core missed this"** vs **"Reported by axe-core"**).
+   - Detail panel: Displays on select with master-detail side inspection, plain-language explanation, who it affects, how to fix it, keyboard reproduction steps, and candidate source file path when available.
+4. **Keyboard Path Tab**:
    - Interactive 2D SVG bounding-box path visualization.
    - Step scrubber with *Previous* / *Next* buttons and full keyboard arrow key support (`ArrowLeft`, `ArrowRight`, `Home`, `End`).
-   - Plain English text panel: *"Step 12: Close button in the cookie banner. Focus is visible. Next Tab goes back to step 9."*
-   - Problem nodes highlighted with red accent and `[Problem]` badges.
-4. **Fixes Tab**:
+   - Plain English text panel with focus indicator status.
+5. **Fixes Tab & React Equivalent Toggle**:
    - Inline verified patch view with unified diffs, line numbers, and `+`/`-` syntax markers.
-   - Keyboard-scrollable diff region (`tabIndex={0}`, `role="region"`).
-   - Clear status labels: *"Tested: the problem is gone"*, *"Not tested"*, *"Rejected: change too large"*.
-   - Actions to *"Copy fix"*, *"Copy patched file"*, and *"Download patched file"*.
-5. **Models and Cost Tab**:
+   - **SegmentedControl Format Selector**: Toggle between **"HTML / DOM patch"** and **"React (JSX / TSX)"** format for verified fixes.
+   - React view presents idiomatic component patterns (e.g. `useEffect` with cleanup or inline `onKeyDown` handlers) with polite ARIA live region announcements.
+6. **Models and Cost Tab**:
    - Top stats: *Estimated cost*, *Tokens used*, *Model calls*, *Time taken*.
    - Disclaimer: *"Estimated from configured per-token prices. Actual billing may differ."*
    - Pipeline table: *Which model did what* with Model vs Code markers, real model identifiers, call counts, token in/out, latencies, and costs.
-   - Visual latency breakdown: *Where the time went* stacked bar.
-   - Today's budget progress using semantic HTML `<progress>` element.
-   - Collapsible individual call log (*"Show each call"*).
-   - Privacy guarantee: *"Only DOM structure and accessibility tree data are sent to inference models. No keystroke content, cookies, or local storage data are transmitted."*
-6. **Export Tab**:
-   - Clean download cards for HTML report, GitHub-ready Markdown summary, and JSON data payload.
+   - Visual latency breakdown stacked bar.
+7. **Export Tab**:
+   - Clean download cards for standalone HTML report, GitHub-ready Markdown summary, and JSON data payload.
    - Plain-text summary copy button with instant feedback (*"✓ Summary copied"*).
 
 ---
@@ -103,7 +101,7 @@ All after screenshots have been captured at 1440px desktop and 390px mobile view
 ## 4. Verification & Quality Evidence
 
 - **Responsive Viewport Reflow**: Tested at 1440px, 1024px, 768px, and 390px. Verified zero horizontal page scroll across all tabs and states.
-- **Self-Audit**: Ran BlindSpot against its own UI. Passed with 0 axe-core violations, 100% keyboard operability, 2px/3:1 focus rings, correct tab roving tabindex, and no keyboard traps.
+- **Self-Audit**: Ran BlindSpot against its own UI. Passed with 0 axe-core violations, 100% keyboard operability, 3px/3:1 focus rings, correct tab roving tabindex, and no keyboard traps.
 - **Contrast Test (`npm run test:contrast`)**: 114/114 assertions passed across dark and light palettes.
-- **Unit & Detector Tests (`npm test`)**: 59/59 tests passed across 9 suites.
+- **Unit & Detector Tests (`npm test`)**: 184/184 tests passed across 18 test files.
 - **Security Secret Scan (`scripts/scan-secrets.sh`)**: Passed with zero credentials in working tree or git history.

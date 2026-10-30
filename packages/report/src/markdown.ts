@@ -156,6 +156,25 @@ export function generateMarkdownReport(report: AuditReport): string {
           "```",
           ``
         );
+
+        if (b.fix.reactEquivalent) {
+          lines.push(
+            `##### React (JSX / TSX) Equivalent`,
+            `> *Translated from the verified HTML patch. The browser verified the DOM change, not this JSX.*`,
+            ``,
+            "```tsx",
+            b.fix.reactEquivalent.code,
+            "```",
+            ``
+          );
+          if (b.fix.reactEquivalent.notes && b.fix.reactEquivalent.notes.length > 0) {
+            lines.push(
+              `**Implementation Notes:**`,
+              ...b.fix.reactEquivalent.notes.map((n) => `- ${n}`),
+              ``
+            );
+          }
+        }
       }
 
       if (b.verificationEvidence) {

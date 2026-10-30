@@ -70,6 +70,7 @@ describe("FileSet Localizer & Fix Loop", () => {
       return {
         modifiedSource: fixedCss,
         explanation: "Replaced outline suppression with accessible focus-visible outline.",
+        changedRegionsHint: [],
       };
     };
 

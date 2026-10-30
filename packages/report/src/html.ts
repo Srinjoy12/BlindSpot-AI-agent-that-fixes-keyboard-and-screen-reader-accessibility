@@ -112,6 +112,26 @@ export function generateHtmlReport(report: AuditReport): string {
               </div>
               <pre class="code-block"><code>${escapeHtml(b.fix.body)}</code></pre>
             </div>
+            ${
+              b.fix.reactEquivalent
+                ? `
+            <div class="fix-box react-fix-box" style="margin-top: 10px; border-color: rgba(118, 185, 0, 0.4);">
+              <div class="fix-header" style="background: rgba(118, 185, 0, 0.08);">
+                <strong>React (JSX / TSX) Equivalent</strong>
+                <span class="rationale" style="color: #a3a3a3; font-style: italic;">Translated from the verified HTML patch. The browser verified the DOM change, not this JSX.</span>
+              </div>
+              <pre class="code-block"><code class="language-tsx">${escapeHtml(b.fix.reactEquivalent.code)}</code></pre>
+              ${
+                b.fix.reactEquivalent.notes && b.fix.reactEquivalent.notes.length > 0
+                  ? `<ul class="react-notes" style="margin: 8px 14px 12px; padding-left: 20px; font-size: 0.85rem; color: #a3a3a3;">
+                      ${b.fix.reactEquivalent.notes.map((n) => `<li>${escapeHtml(n)}</li>`).join("")}
+                    </ul>`
+                  : ""
+              }
+            </div>
+            `
+                : ""
+            }
             `
                 : ""
             }

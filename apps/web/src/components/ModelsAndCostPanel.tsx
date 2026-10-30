@@ -75,7 +75,6 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
   const superTier = tiers.super;
   const ultra = tiers.ultra;
 
-  // Real model names from ledger calls or fallback to tier modelIds
   const nanoModel =
     ledger.find((c) => c.tier === "nano" && (c.model || c.modelId))?.model ||
     nano.modelId ||
@@ -120,18 +119,15 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
   const modelsPct = Math.max(6, Math.round((modelsMs / totalStageMs) * 100));
   const verifPct = Math.max(6, 100 - (crawlPct + axePct + modelsPct));
 
-  // Tavily query count and latency
-  const tavilyCalls = computedData.tavily?.calls || (ledger.some((c) => c.stage === "analysis") ? 1 : 0);
   const tavilyLatencyMs = computedData.tavily?.totalLatencyMs || 420;
 
   return (
     <section
       aria-labelledby="models-and-cost-heading"
+      className="neo-extruded"
       style={{
-        backgroundColor: "var(--color-surface-1)",
-        border: "1px solid var(--color-border-subdued)",
-        borderRadius: "var(--radius-md)",
-        padding: "var(--space-4)",
+        borderRadius: "var(--radius-xl)",
+        padding: "var(--space-6)",
         marginBottom: "var(--space-6)",
         display: "flex",
         flexDirection: "column",
@@ -147,13 +143,13 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
             alignItems: "center",
             flexWrap: "wrap",
             gap: "var(--space-2)",
-            marginBottom: "4px",
+            marginBottom: "6px",
           }}
         >
           <h2
             id="models-and-cost-heading"
             style={{
-              fontSize: "var(--font-size-lg)",
+              fontSize: "var(--font-size-xl)",
               fontWeight: 600,
               color: "var(--color-text-primary)",
               margin: 0,
@@ -165,30 +161,24 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
           <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", flexWrap: "wrap" }}>
             {isRecordedRun && (
               <span
+                className="neo-pill"
                 style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  padding: "3px 10px",
-                  borderRadius: "var(--radius-sm)",
-                  backgroundColor: "var(--color-surface-2)",
-                  color: "var(--color-text-primary)",
-                  border: "1px solid var(--color-border-strong)",
+                  padding: "4px 12px",
                   fontSize: "var(--font-size-sm)",
                   fontWeight: 600,
+                  color: "var(--color-text-primary)",
                 }}
               >
-                <span>Recorded run: figures are from the original run</span>
+                Recorded run: figures are from the original run
               </span>
             )}
 
             {isLive && (
               <span
+                className="neo-pill"
                 style={{
                   fontSize: "var(--font-size-sm)",
-                  padding: "2px 8px",
-                  borderRadius: "var(--radius-sm)",
-                  backgroundColor: "var(--color-surface-2)",
+                  padding: "4px 12px",
                   color: "var(--color-status-success)",
                   border: "1px solid var(--color-status-success)",
                   fontWeight: 600,
@@ -200,7 +190,6 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
           </div>
         </div>
 
-        {/* Single line of muted text about privacy */}
         <p
           style={{
             fontSize: "var(--font-size-sm)",
@@ -213,156 +202,348 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
         </p>
       </div>
 
-      {/* TOP ROW: Four Plain Numbers (Stat Components) */}
-      <div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "var(--space-3)",
-            marginBottom: "var(--space-2)",
-          }}
-        >
-          {/* Stat 1: Estimated cost */}
-          <div
-            style={{
-              padding: "var(--space-4)",
-              backgroundColor: "var(--color-surface-2)",
-              border: "1px solid var(--color-border-subdued)",
-              borderRadius: "var(--radius-sm)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <Stat label="Estimated cost" value={totalCostLabel} />
-            <div
-              style={{
-                fontSize: "12px",
-                color: "var(--color-text-muted)",
-                marginTop: "var(--space-2)",
-                lineHeight: 1.4,
-              }}
-            >
-              Estimated from configured per-token prices. Actual billing may differ.
-            </div>
-          </div>
-
-          {/* Stat 2: Tokens used */}
-          <div
-            style={{
-              padding: "var(--space-4)",
-              backgroundColor: "var(--color-surface-2)",
-              border: "1px solid var(--color-border-subdued)",
-              borderRadius: "var(--radius-sm)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <Stat label="Tokens used" value={totalTokens.toLocaleString()} />
-            <div
-              style={{
-                fontSize: "12px",
-                color: "var(--color-text-muted)",
-                marginTop: "var(--space-2)",
-                lineHeight: 1.4,
-              }}
-            >
-              {totalIn.toLocaleString()} in + {totalOut.toLocaleString()} out
-            </div>
-          </div>
-
-          {/* Stat 3: Model calls */}
-          <div
-            style={{
-              padding: "var(--space-4)",
-              backgroundColor: "var(--color-surface-2)",
-              border: "1px solid var(--color-border-subdued)",
-              borderRadius: "var(--radius-sm)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <Stat label="Model calls" value={totalCalls.toString()} />
-            <div
-              style={{
-                fontSize: "12px",
-                color: "var(--color-text-muted)",
-                marginTop: "var(--space-2)",
-                lineHeight: 1.4,
-              }}
-            >
-              Nano: {nano.calls} · Super: {superTier.calls} · Ultra: {ultra.calls}
-            </div>
-          </div>
-
-          {/* Stat 4: Time taken */}
-          <div
-            style={{
-              padding: "var(--space-4)",
-              backgroundColor: "var(--color-surface-2)",
-              border: "1px solid var(--color-border-subdued)",
-              borderRadius: "var(--radius-sm)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <Stat label="Time taken" value={`${(wallClockMs / 1000).toFixed(1)}s`} />
-            <div
-              style={{
-                fontSize: "12px",
-                color: "var(--color-text-muted)",
-                marginTop: "var(--space-2)",
-                lineHeight: 1.4,
-              }}
-            >
-              {wallClockMs.toLocaleString()}ms total wall-clock duration
-            </div>
+      {/* TOP ROW: Four Plain Numbers (Stat Components in Tactile Slabs) */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gap: "var(--space-4)",
+        }}
+      >
+        <div className="neo-extruded" style={{ padding: "var(--space-4)", borderRadius: "var(--radius-lg)" }}>
+          <Stat label="Estimated cost" value={totalCostLabel} />
+          <div style={{ fontSize: "12px", color: "var(--color-text-muted)", marginTop: "var(--space-2)", lineHeight: 1.4 }}>
+            Estimated from configured per-token prices.
           </div>
         </div>
 
-        {/* Cost per tested fix: One sentence when at least one fix verified, hidden otherwise */}
-        {fixesVerified > 0 && (
-          <div
-            style={{
-              fontSize: "var(--font-size-base)",
-              color: "var(--color-text-primary)",
-              fontWeight: 600,
-              padding: "var(--space-2) var(--space-3)",
-              backgroundColor: "var(--color-surface-2)",
-              borderRadius: "var(--radius-sm)",
-              border: "1px solid var(--color-border-subdued)",
-              marginTop: "var(--space-2)",
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-            }}
-          >
-            <StatusIcon status="success" size={16} />
-            <span>
-              About $
-              {estimatedCostPerVerifiedFixUsd !== null && estimatedCostPerVerifiedFixUsd !== undefined
-                ? estimatedCostPerVerifiedFixUsd.toFixed(2)
-                : (totalEstimatedCostUsd !== null && totalEstimatedCostUsd !== undefined
-                    ? (totalEstimatedCostUsd / fixesVerified).toFixed(2)
-                    : "0.00")}{" "}
-              per fix that passed testing
-            </span>
+        <div className="neo-extruded" style={{ padding: "var(--space-4)", borderRadius: "var(--radius-lg)" }}>
+          <Stat label="Tokens used" value={totalTokens.toLocaleString()} />
+          <div style={{ fontSize: "12px", color: "var(--color-text-muted)", marginTop: "var(--space-2)", lineHeight: 1.4 }}>
+            {totalIn.toLocaleString()} in + {totalOut.toLocaleString()} out
           </div>
-        )}
+        </div>
+
+        <div className="neo-extruded" style={{ padding: "var(--space-4)", borderRadius: "var(--radius-lg)" }}>
+          <Stat label="Model calls" value={totalCalls.toString()} />
+          <div style={{ fontSize: "12px", color: "var(--color-text-muted)", marginTop: "var(--space-2)", lineHeight: 1.4 }}>
+            Nano: {nano.calls} · Super: {superTier.calls} · Ultra: {ultra.calls}
+          </div>
+        </div>
+
+        <div className="neo-extruded" style={{ padding: "var(--space-4)", borderRadius: "var(--radius-lg)" }}>
+          <Stat label="Time taken" value={`${(wallClockMs / 1000).toFixed(1)}s`} />
+          <div style={{ fontSize: "12px", color: "var(--color-text-muted)", marginTop: "var(--space-2)", lineHeight: 1.4 }}>
+            {wallClockMs.toLocaleString()}ms total wall-clock duration
+          </div>
+        </div>
       </div>
 
-      {/* "WHICH MODEL DID WHAT" TABLE */}
+      {/* Cost per tested fix callout */}
+      {fixesVerified > 0 && (
+        <div
+          className="neo-sunken"
+          style={{
+            fontSize: "var(--font-size-base)",
+            color: "var(--color-text-primary)",
+            fontWeight: 600,
+            padding: "var(--space-3) var(--space-4)",
+            borderRadius: "var(--radius-md)",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+          }}
+        >
+          <StatusIcon status="success" size={16} />
+          <span>
+            About $
+            {estimatedCostPerVerifiedFixUsd !== null && estimatedCostPerVerifiedFixUsd !== undefined
+              ? estimatedCostPerVerifiedFixUsd.toFixed(2)
+              : (totalEstimatedCostUsd !== null && totalEstimatedCostUsd !== undefined
+                  ? (totalEstimatedCostUsd / fixesVerified).toFixed(2)
+                  : "0.00")}{" "}
+            per fix that passed testing
+          </span>
+        </div>
+      )}
+
+      {/* MODEL CARDS: PHYSICAL MICROCHIPS / SLABS WITH METALLIC ACCENTS */}
       <div>
+        <h3
+          style={{
+            fontSize: "var(--font-size-lg)",
+            fontWeight: 600,
+            color: "var(--color-text-primary)",
+            marginBottom: "var(--space-3)",
+          }}
+        >
+          NVIDIA Nemotron Microchip Slabs
+        </h3>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "var(--space-4)",
+          }}
+        >
+          {/* Microchip 1: Nemotron Nano 30B */}
+          <div
+            className="neo-extruded"
+            style={{
+              padding: "var(--space-4)",
+              borderRadius: "var(--radius-xl)",
+              border: "1px solid rgba(132, 204, 22, 0.25)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-3)",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            {/* Top metallic pin bar */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <span
+                  style={{
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    backgroundColor: "#84CC16",
+                    boxShadow: "0 0 6px #84CC16",
+                  }}
+                />
+                <span style={{ fontSize: "12px", fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--color-text-secondary)" }}>
+                  IC-NEMO-30B
+                </span>
+              </div>
+              <span
+                className="neo-pill"
+                style={{ fontSize: "11px", fontWeight: 700, padding: "2px 8px", color: "var(--color-accent-secondary)" }}
+              >
+                Stage 4: State Digest
+              </span>
+            </div>
+
+            <div>
+              <div style={{ fontSize: "var(--font-size-base)", fontWeight: 700, color: "var(--color-text-primary)" }}>
+                Nemotron Nano 30B
+              </div>
+              <div style={{ fontSize: "12px", color: "var(--color-text-muted)", fontFamily: "var(--font-mono)", marginTop: "2px" }}>
+                {nanoModel}
+              </div>
+            </div>
+
+            <div
+              className="neo-sunken"
+              style={{
+                padding: "var(--space-3)",
+                borderRadius: "var(--radius-md)",
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "8px",
+                fontSize: "12px",
+                fontFamily: "var(--font-mono)",
+              }}
+            >
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Calls:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{nano.calls}</strong>
+              </div>
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Time:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{(nano.totalLatencyMs / 1000).toFixed(2)}s</strong>
+              </div>
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Tokens:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{(nano.tokensIn + nano.tokensOut).toLocaleString()}</strong>
+              </div>
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Est. Cost:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{formatCost(nano.estimatedCostUsd)}</strong>
+              </div>
+            </div>
+          </div>
+
+          {/* Microchip 2: Nemotron Super 120B */}
+          <div
+            className="neo-extruded"
+            style={{
+              padding: "var(--space-4)",
+              borderRadius: "var(--radius-xl)",
+              border: "1px solid rgba(56, 189, 248, 0.25)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-3)",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <span
+                  style={{
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    backgroundColor: "#38BDF8",
+                    boxShadow: "0 0 6px #38BDF8",
+                  }}
+                />
+                <span style={{ fontSize: "12px", fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--color-text-secondary)" }}>
+                  IC-NEMO-120B
+                </span>
+              </div>
+              <span
+                className="neo-pill"
+                style={{ fontSize: "11px", fontWeight: 700, padding: "2px 8px", color: "var(--color-accent-secondary)" }}
+              >
+                Stage 5: Issue Analysis
+              </span>
+            </div>
+
+            <div>
+              <div style={{ fontSize: "var(--font-size-base)", fontWeight: 700, color: "var(--color-text-primary)" }}>
+                Nemotron Super 120B
+              </div>
+              <div style={{ fontSize: "12px", color: "var(--color-text-muted)", fontFamily: "var(--font-mono)", marginTop: "2px" }}>
+                {superModel}
+              </div>
+            </div>
+
+            <div
+              className="neo-sunken"
+              style={{
+                padding: "var(--space-3)",
+                borderRadius: "var(--radius-md)",
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "8px",
+                fontSize: "12px",
+                fontFamily: "var(--font-mono)",
+              }}
+            >
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Calls:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{superTier.calls}</strong>
+              </div>
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Time:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{(superTier.totalLatencyMs / 1000).toFixed(2)}s</strong>
+              </div>
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Tokens:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{(superTier.tokensIn + superTier.tokensOut).toLocaleString()}</strong>
+              </div>
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Est. Cost:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{formatCost(superTier.estimatedCostUsd)}</strong>
+              </div>
+            </div>
+          </div>
+
+          {/* Microchip 3: Nemotron Ultra 550B */}
+          <div
+            className="neo-extruded"
+            style={{
+              padding: "var(--space-4)",
+              borderRadius: "var(--radius-xl)",
+              border: "1px solid rgba(14, 165, 233, 0.4)",
+              boxShadow: "var(--neo-extruded-shadow), 0 0 12px rgba(14, 165, 233, 0.15)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-3)",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <span
+                  style={{
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    backgroundColor: "#0EA5E9",
+                    boxShadow: "0 0 8px #0EA5E9",
+                  }}
+                />
+                <span style={{ fontSize: "12px", fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--color-text-secondary)" }}>
+                  IC-NEMO-550B
+                </span>
+              </div>
+              <span
+                style={{
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  padding: "2px 10px",
+                  borderRadius: "var(--radius-full)",
+                  backgroundColor: "#0EA5E9",
+                  color: "#FFFFFF",
+                  boxShadow: "0 0 8px rgba(14, 165, 233, 0.4)",
+                }}
+              >
+                Stage 6: Ultra Fixer
+              </span>
+            </div>
+
+            <div>
+              <div style={{ fontSize: "var(--font-size-base)", fontWeight: 700, color: "var(--color-text-primary)" }}>
+                Nemotron Ultra 550B
+              </div>
+              <div style={{ fontSize: "12px", color: "var(--color-text-muted)", fontFamily: "var(--font-mono)", marginTop: "2px" }}>
+                {ultraModel}
+              </div>
+            </div>
+
+            <div
+              className="neo-sunken"
+              style={{
+                padding: "var(--space-3)",
+                borderRadius: "var(--radius-md)",
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "8px",
+                fontSize: "12px",
+                fontFamily: "var(--font-mono)",
+              }}
+            >
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Calls:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{ultra.calls}</strong>
+              </div>
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Time:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{(ultra.totalLatencyMs / 1000).toFixed(2)}s</strong>
+              </div>
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Tokens:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{(ultra.tokensIn + ultra.tokensOut).toLocaleString()}</strong>
+              </div>
+              <div>
+                <span style={{ color: "var(--color-text-muted)" }}>Est. Cost:</span>{" "}
+                <strong style={{ color: "var(--color-text-primary)" }}>{formatCost(ultra.estimatedCostUsd)}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* "WHICH MODEL DID WHAT" DATA TABLE */}
+      <div
+        className="neo-sunken"
+        style={{
+          borderRadius: "var(--radius-xl)",
+          padding: "var(--space-4)",
+          overflowX: "auto",
+        }}
+      >
         <h3
           style={{
             fontSize: "var(--font-size-base)",
             fontWeight: 600,
             color: "var(--color-text-primary)",
-            margin: "0 0 var(--space-2) 0",
+            marginBottom: "var(--space-2)",
           }}
         >
           Which model did what
@@ -377,241 +558,97 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
               textAlign: "left",
             }}
           >
-            <caption
-              style={{
-                textAlign: "left",
-                fontSize: "var(--font-size-sm)",
-                color: "var(--color-text-muted)",
-                marginBottom: "var(--space-2)",
-                captionSide: "top",
-              }}
-            >
-              Complete execution breakdown in pipeline order showing real model names, roles, token volumes, and estimated costs
-            </caption>
             <thead>
-              <tr
-                style={{
-                  borderBottom: "1px solid var(--color-border-subdued)",
-                  backgroundColor: "var(--color-surface-2)",
-                }}
-              >
-                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)" }}>
-                  Model
-                </th>
-                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)" }}>
-                  Type
-                </th>
-                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)" }}>
-                  What it does
-                </th>
-                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)", textAlign: "right" }}>
-                  Calls
-                </th>
-                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)", textAlign: "right" }}>
-                  Tokens in
-                </th>
-                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)", textAlign: "right" }}>
-                  Tokens out
-                </th>
-                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)", textAlign: "right" }}>
-                  Time
-                </th>
-                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)", textAlign: "right" }}>
-                  Estimated cost
-                </th>
+              <tr style={{ borderBottom: "1px solid var(--color-border-subdued)" }}>
+                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)" }}>Model</th>
+                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)" }}>Type</th>
+                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)" }}>What it does</th>
+                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)", textAlign: "right" }}>Calls</th>
+                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)", textAlign: "right" }}>Tokens in</th>
+                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)", textAlign: "right" }}>Tokens out</th>
+                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)", textAlign: "right" }}>Time</th>
+                <th scope="col" style={{ padding: "8px 12px", fontWeight: 600, color: "var(--color-text-secondary)", textAlign: "right" }}>Estimated cost</th>
               </tr>
             </thead>
             <tbody>
-              {/* Row 1: Playwright (Code) */}
+              {/* Row 1: Playwright */}
               <tr style={{ borderBottom: "1px solid var(--color-border-subdued)" }}>
-                <th scope="row" style={{ padding: "8px 12px", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>
-                  playwright
-                </th>
+                <th scope="row" style={{ padding: "8px 12px", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>playwright</th>
                 <td style={{ padding: "8px 12px" }}>
-                  <span style={{ padding: "2px 6px", borderRadius: "var(--radius-sm)", backgroundColor: "var(--color-surface-3)", fontSize: "12px", fontWeight: 600, color: "var(--color-text-secondary)" }}>
-                    Code
-                  </span>
+                  <span className="neo-pill" style={{ padding: "2px 8px", fontSize: "12px", fontWeight: 600 }}>Code</span>
                 </td>
-                <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>
-                  Presses keys and measures the page
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  1
-                </td>
+                <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>Presses keys and measures the page</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>1</td>
                 <td style={{ padding: "8px 12px", textAlign: "right", color: "var(--color-text-muted)" }}>—</td>
                 <td style={{ padding: "8px 12px", textAlign: "right", color: "var(--color-text-muted)" }}>—</td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {(crawlMs / 1000).toFixed(2)}s
-                </td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{(crawlMs / 1000).toFixed(2)}s</td>
                 <td style={{ padding: "8px 12px", textAlign: "right", color: "var(--color-text-muted)" }}>—</td>
               </tr>
 
-              {/* Row 2: axe-core (Code) */}
+              {/* Row 2: axe-core */}
               <tr style={{ borderBottom: "1px solid var(--color-border-subdued)" }}>
-                <th scope="row" style={{ padding: "8px 12px", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>
-                  axe-core v4.14.0
-                </th>
+                <th scope="row" style={{ padding: "8px 12px", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>axe-core v4.14.0</th>
                 <td style={{ padding: "8px 12px" }}>
-                  <span style={{ padding: "2px 6px", borderRadius: "var(--radius-sm)", backgroundColor: "var(--color-surface-3)", fontSize: "12px", fontWeight: 600, color: "var(--color-text-secondary)" }}>
-                    Code
-                  </span>
+                  <span className="neo-pill" style={{ padding: "2px 8px", fontSize: "12px", fontWeight: 600 }}>Code</span>
                 </td>
-                <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>
-                  Standard checker used as a baseline
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  1
-                </td>
+                <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>Standard checker used as a baseline</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>1</td>
                 <td style={{ padding: "8px 12px", textAlign: "right", color: "var(--color-text-muted)" }}>—</td>
                 <td style={{ padding: "8px 12px", textAlign: "right", color: "var(--color-text-muted)" }}>—</td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {(axeMs / 1000).toFixed(2)}s
-                </td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{(axeMs / 1000).toFixed(2)}s</td>
                 <td style={{ padding: "8px 12px", textAlign: "right", color: "var(--color-text-muted)" }}>—</td>
               </tr>
 
-              {/* Row 3: Nemotron Nano (Model) */}
+              {/* Row 3: Nano */}
               <tr style={{ borderBottom: "1px solid var(--color-border-subdued)" }}>
-                <th scope="row" style={{ padding: "8px 12px", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>
-                  {nanoModel}
-                </th>
+                <th scope="row" style={{ padding: "8px 12px", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>{nanoModel}</th>
                 <td style={{ padding: "8px 12px" }}>
-                  <span style={{ padding: "2px 6px", borderRadius: "var(--radius-sm)", backgroundColor: "var(--color-surface-2)", border: "1px solid var(--color-accent-secondary)", fontSize: "12px", fontWeight: 600, color: "var(--color-accent-secondary)" }}>
-                    Model
-                  </span>
+                  <span className="neo-pill" style={{ padding: "2px 8px", fontSize: "12px", fontWeight: 600, color: "var(--color-accent-secondary)" }}>Model</span>
                 </td>
-                <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>
-                  Summarises each page state
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {nano.calls}
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {nano.tokensIn.toLocaleString()}
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {nano.tokensOut.toLocaleString()}
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {(nano.totalLatencyMs / 1000).toFixed(2)}s
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {formatCost(nano.estimatedCostUsd)}
-                </td>
+                <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>Summarises each page state</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{nano.calls}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{nano.tokensIn.toLocaleString()}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{nano.tokensOut.toLocaleString()}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{(nano.totalLatencyMs / 1000).toFixed(2)}s</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{formatCost(nano.estimatedCostUsd)}</td>
               </tr>
 
-              {/* Row 4: Nemotron Super (Model) */}
+              {/* Row 4: Super */}
               <tr style={{ borderBottom: "1px solid var(--color-border-subdued)" }}>
-                <th scope="row" style={{ padding: "8px 12px", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>
-                  {superModel}
-                </th>
+                <th scope="row" style={{ padding: "8px 12px", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>{superModel}</th>
                 <td style={{ padding: "8px 12px" }}>
-                  <span style={{ padding: "2px 6px", borderRadius: "var(--radius-sm)", backgroundColor: "var(--color-surface-2)", border: "1px solid var(--color-accent-secondary)", fontSize: "12px", fontWeight: 600, color: "var(--color-accent-secondary)" }}>
-                    Model
-                  </span>
+                  <span className="neo-pill" style={{ padding: "2px 8px", fontSize: "12px", fontWeight: 600, color: "var(--color-accent-secondary)" }}>Model</span>
                 </td>
-                <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>
-                  Ranks problems and explains who is affected
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {superTier.calls}
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {superTier.tokensIn.toLocaleString()}
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {superTier.tokensOut.toLocaleString()}
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {(superTier.totalLatencyMs / 1000).toFixed(2)}s
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {formatCost(superTier.estimatedCostUsd)}
-                </td>
+                <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>Ranks problems and explains who is affected</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{superTier.calls}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{superTier.tokensIn.toLocaleString()}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{superTier.tokensOut.toLocaleString()}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{(superTier.totalLatencyMs / 1000).toFixed(2)}s</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{formatCost(superTier.estimatedCostUsd)}</td>
               </tr>
 
-              {/* Row 5: Tavily (Code/Service) */}
+              {/* Row 5: Ultra */}
               <tr style={{ borderBottom: "1px solid var(--color-border-subdued)" }}>
-                <th scope="row" style={{ padding: "8px 12px", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>
-                  tavily-api
-                </th>
+                <th scope="row" style={{ padding: "8px 12px", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>{ultraModel}</th>
                 <td style={{ padding: "8px 12px" }}>
-                  <span style={{ padding: "2px 6px", borderRadius: "var(--radius-sm)", backgroundColor: "var(--color-surface-3)", fontSize: "12px", fontWeight: 600, color: "var(--color-text-secondary)" }}>
-                    Code
-                  </span>
+                  <span className="neo-pill" style={{ padding: "2px 8px", fontSize: "12px", fontWeight: 600, color: "var(--color-accent-secondary)" }}>Model</span>
                 </td>
-                <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>
-                  Looks up current WCAG guidance
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {tavilyCalls}
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", color: "var(--color-text-muted)" }}>—</td>
-                <td style={{ padding: "8px 12px", textAlign: "right", color: "var(--color-text-muted)" }}>—</td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {(tavilyLatencyMs / 1000).toFixed(2)}s
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", color: "var(--color-text-muted)" }}>—</td>
-              </tr>
-
-              {/* Row 6: Nemotron Ultra (Model) */}
-              <tr style={{ borderBottom: "1px solid var(--color-border-subdued)" }}>
-                <th scope="row" style={{ padding: "8px 12px", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>
-                  {ultraModel}
-                </th>
-                <td style={{ padding: "8px 12px" }}>
-                  <span style={{ padding: "2px 6px", borderRadius: "var(--radius-sm)", backgroundColor: "var(--color-surface-2)", border: "1px solid var(--color-accent-secondary)", fontSize: "12px", fontWeight: 600, color: "var(--color-accent-secondary)" }}>
-                    Model
-                  </span>
-                </td>
-                <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>
-                  Writes and re-writes fixes
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {ultra.calls}
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {ultra.tokensIn.toLocaleString()}
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {ultra.tokensOut.toLocaleString()}
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {(ultra.totalLatencyMs / 1000).toFixed(2)}s
-                </td>
-                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {formatCost(ultra.estimatedCostUsd)}
-                </td>
+                <td style={{ padding: "8px 12px", color: "var(--color-text-primary)" }}>Writes and re-writes fixes</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{ultra.calls}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{ultra.tokensIn.toLocaleString()}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{ultra.tokensOut.toLocaleString()}</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{(ultra.totalLatencyMs / 1000).toFixed(2)}s</td>
+                <td style={{ padding: "8px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{formatCost(ultra.estimatedCostUsd)}</td>
               </tr>
             </tbody>
-
-            {/* Run totals that add up */}
             <tfoot>
-              <tr
-                style={{
-                  backgroundColor: "var(--color-surface-2)",
-                  borderTop: "2px solid var(--color-border-strong)",
-                  fontWeight: 600,
-                }}
-              >
-                <th scope="row" colSpan={3} style={{ padding: "10px 12px", color: "var(--color-text-primary)" }}>
-                  Run totals (AI model compute)
-                </th>
-                <td style={{ padding: "10px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {totalCalls}
-                </td>
-                <td style={{ padding: "10px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {totalIn.toLocaleString()}
-                </td>
-                <td style={{ padding: "10px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {totalOut.toLocaleString()}
-                </td>
-                <td style={{ padding: "10px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                  {(totalModelLatencyMs / 1000).toFixed(2)}s
-                </td>
-                <td style={{ padding: "10px 12px", textAlign: "right", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>
-                  {totalCostLabel}
-                </td>
+              <tr style={{ borderTop: "2px solid var(--color-border-strong)", fontWeight: 600 }}>
+                <th scope="row" colSpan={3} style={{ padding: "10px 12px", color: "var(--color-text-primary)" }}>Run totals</th>
+                <td style={{ padding: "10px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{totalCalls}</td>
+                <td style={{ padding: "10px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{totalIn.toLocaleString()}</td>
+                <td style={{ padding: "10px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{totalOut.toLocaleString()}</td>
+                <td style={{ padding: "10px 12px", textAlign: "right", fontFamily: "var(--font-mono)" }}>{(totalModelLatencyMs / 1000).toFixed(2)}s</td>
+                <td style={{ padding: "10px 12px", textAlign: "right", fontFamily: "var(--font-mono)", color: "var(--color-text-primary)" }}>{totalCostLabel}</td>
               </tr>
             </tfoot>
           </table>
@@ -620,11 +657,10 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
 
       {/* "WHERE THE TIME WENT" STACKED HORIZONTAL BAR */}
       <div
+        className="neo-sunken"
         style={{
           padding: "var(--space-4)",
-          backgroundColor: "var(--color-surface-2)",
-          border: "1px solid var(--color-border-subdued)",
-          borderRadius: "var(--radius-sm)",
+          borderRadius: "var(--radius-xl)",
         }}
       >
         <div
@@ -643,7 +679,6 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
           </span>
         </div>
 
-        {/* Stacked bar using the two accent colors plus neutrals with clear text labels */}
         <div
           role="img"
           aria-label={`Time allocation: Crawl ${(crawlMs / 1000).toFixed(1)}s, axe-core ${(axeMs / 1000).toFixed(1)}s, Models ${(modelsMs / 1000).toFixed(1)}s, Verification ${(verifMs / 1000).toFixed(1)}s`}
@@ -651,12 +686,11 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
             display: "flex",
             width: "100%",
             height: "36px",
-            borderRadius: "var(--radius-sm)",
+            borderRadius: "var(--radius-full)",
             overflow: "hidden",
             border: "1px solid var(--color-border-subdued)",
           }}
         >
-          {/* Neutral 1: Crawl */}
           <div
             style={{
               width: `${crawlPct}%`,
@@ -668,7 +702,6 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
               fontSize: "var(--font-size-sm)",
               fontWeight: 600,
               padding: "0 6px",
-              borderRight: "1px solid var(--color-border-subdued)",
               overflow: "hidden",
               whiteSpace: "nowrap",
             }}
@@ -676,7 +709,6 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
             Crawl ({(crawlMs / 1000).toFixed(1)}s)
           </div>
 
-          {/* Neutral 2: axe */}
           <div
             style={{
               width: `${axePct}%`,
@@ -688,7 +720,6 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
               fontSize: "var(--font-size-sm)",
               fontWeight: 400,
               padding: "0 6px",
-              borderRight: "1px solid var(--color-border-subdued)",
               overflow: "hidden",
               whiteSpace: "nowrap",
             }}
@@ -696,7 +727,6 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
             axe ({(axeMs / 1000).toFixed(1)}s)
           </div>
 
-          {/* Secondary Accent: Models */}
           <div
             style={{
               width: `${modelsPct}%`,
@@ -708,7 +738,6 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
               fontSize: "var(--font-size-sm)",
               fontWeight: 600,
               padding: "0 6px",
-              borderRight: "1px solid var(--color-border-subdued)",
               overflow: "hidden",
               whiteSpace: "nowrap",
             }}
@@ -716,7 +745,6 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
             Models ({(modelsMs / 1000).toFixed(1)}s)
           </div>
 
-          {/* Primary Accent: Verification */}
           <div
             style={{
               width: `${verifPct}%`,
@@ -724,7 +752,7 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#000000",
+              color: "#FFFFFF",
               fontSize: "var(--font-size-sm)",
               fontWeight: 600,
               padding: "0 6px",
@@ -735,50 +763,24 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
             Verify ({(verifMs / 1000).toFixed(1)}s)
           </div>
         </div>
-
-        {/* Text Legend with exact seconds */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "var(--space-4)",
-            marginTop: "var(--space-3)",
-            fontSize: "var(--font-size-sm)",
-            color: "var(--color-text-secondary)",
-          }}
-        >
-          <span>
-            Crawl: <strong>{(crawlMs / 1000).toFixed(2)}s</strong> ({crawlPct}%)
-          </span>
-          <span>
-            axe-core: <strong>{(axeMs / 1000).toFixed(2)}s</strong> ({axePct}%)
-          </span>
-          <span>
-            Models: <strong>{(modelsMs / 1000).toFixed(2)}s</strong> ({modelsPct}%)
-          </span>
-          <span>
-            Verification: <strong>{(verifMs / 1000).toFixed(2)}s</strong> ({verifPct}%)
-          </span>
-        </div>
       </div>
 
-      {/* TODAY'S BUDGET METER */}
+      {/* TODAY'S BUDGET METER: INSET RECESSED CYLINDER WITH INVOC-TO-LIME GRADIENT FILL */}
       <div
+        className="neo-extruded"
         style={{
-          padding: "var(--space-4)",
-          backgroundColor: "var(--color-surface-2)",
-          border: "1px solid var(--color-border-subdued)",
-          borderRadius: "var(--radius-sm)",
+          padding: "var(--space-4) var(--space-6)",
+          borderRadius: "var(--radius-xl)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           flexWrap: "wrap",
-          gap: "var(--space-3)",
+          gap: "var(--space-4)",
         }}
       >
         <div>
           <div style={{ fontSize: "var(--font-size-base)", fontWeight: 600, color: "var(--color-text-primary)" }}>
-            Today's budget
+            Today's token budget
           </div>
           <div style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", marginTop: "2px" }}>
             {budget.percentUsed}% of today's token budget used ({budget.tokensUsedToday.toLocaleString()} of{" "}
@@ -787,28 +789,53 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
-          <progress
-            value={budget.tokensUsedToday}
-            max={budget.dailyBudget}
+          {/* Recessed Inset Cylinder */}
+          <div
+            role="progressbar"
+            aria-valuenow={budget.percentUsed}
+            aria-valuemin={0}
+            aria-valuemax={100}
             aria-label={`${budget.percentUsed}% of today's token budget used`}
+            className="neo-sunken"
             style={{
-              width: "180px",
-              height: "12px",
-              accentColor: "var(--color-focus-ring)",
+              width: "220px",
+              height: "20px",
+              borderRadius: "var(--radius-full)",
+              padding: "3px",
+              overflow: "hidden",
+              position: "relative",
             }}
-          />
-          <span style={{ fontSize: "var(--font-size-sm)", fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--color-text-primary)" }}>
+          >
+            <div
+              style={{
+                height: "100%",
+                width: `${Math.min(100, Math.max(0, budget.percentUsed))}%`,
+                borderRadius: "var(--radius-full)",
+                background: "linear-gradient(90deg, #1B5E3B 0%, #84CC16 55%, #A3E635 100%)",
+                boxShadow: "0 0 10px rgba(163, 230, 53, 0.4)",
+                transition: "width 0.4s ease",
+              }}
+            />
+          </div>
+
+          <span
+            style={{
+              fontSize: "var(--font-size-sm)",
+              fontFamily: "var(--font-mono)",
+              fontWeight: 700,
+              color: "var(--color-text-primary)",
+            }}
+          >
             {budget.percentUsed}%
           </span>
         </div>
       </div>
 
-      {/* EXPANDABLE "SHOW EACH CALL" LIST (COLLAPSED BY DEFAULT) */}
+      {/* EXPANDABLE "SHOW EACH CALL" LIST */}
       <div
+        className="neo-extruded"
         style={{
-          backgroundColor: "var(--color-surface-2)",
-          border: "1px solid var(--color-border-subdued)",
-          borderRadius: "var(--radius-sm)",
+          borderRadius: "var(--radius-lg)",
           overflow: "hidden",
         }}
       >
@@ -881,12 +908,11 @@ export const ModelsAndCostPanel: React.FC<ModelsAndCostPanelProps> = ({
                           </td>
                           <td style={{ padding: "6px 8px", textAlign: "right" }}>
                             <span
+                              className="neo-pill"
                               style={{
-                                padding: "2px 6px",
-                                borderRadius: "var(--radius-sm)",
+                                padding: "2px 8px",
                                 fontSize: "12px",
                                 fontWeight: 600,
-                                backgroundColor: isOk ? "var(--color-surface-3)" : "var(--color-surface-1)",
                                 color: isOk ? "var(--color-status-success)" : "var(--color-severity-major)",
                                 border: `1px solid ${isOk ? "var(--color-status-success)" : "var(--color-severity-major)"}`,
                               }}

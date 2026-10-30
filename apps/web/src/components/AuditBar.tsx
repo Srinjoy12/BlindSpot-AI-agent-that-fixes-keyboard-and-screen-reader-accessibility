@@ -1,44 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button } from "./ui/Button.js";
 import { StatusIcon } from "./ui/StatusIcon.js";
 import { SegmentedControl, type SegmentOption } from "./ui/SegmentedControl.js";
 import { FolderPicker } from "../project-folder/FolderPicker.js";
 import type { FolderProjectFile } from "../project-folder/types.js";
+import {
+  getFolderCapabilities,
+  walkDirectoryHandle,
+  walkWebkitDirectoryFileList,
+} from "../project-folder/fsWalk.js";
 import { EXAMPLES, CODE_PRESETS } from "../examples.js";
 
 interface AuditBarProps {
-  onStartAudit: (target: string, runFixes: boolean, isSourceCode?: boolean, kind?: "html" | "snippet") => void;
+  onStartAudit: (target: string, runFixes: boolean, isSourceCode?: boolean, kind?: "html" | "snippet", useReplay?: boolean) => void;
   onStartFolderAudit?: (files: FolderProjectFile[], entryPath: string, dirHandle: any | null, folderName: string) => void;
+  onStartLocalDevAudit?: (targetUrl: string, files: FolderProjectFile[], attested: boolean, runFixes: boolean) => void;
   isRunning: boolean;
 }
 
-export type InputMode = "url" | "code" | "folder";
+export type InputMode = "url" | "code" | "folder" | "url_folder";
 
 const MODE_OPTIONS: SegmentOption<InputMode>[] = [
-  { value: "url", label: "URL" },
-  { value: "code", label: "Paste code" },
-  { value: "folder", label: "Open folder" },
+  { value: "url", label: "URL", id: "tab-url" },
+  { value: "code", label: "Paste code", id: "tab-code" },
+  { value: "folder", label: "Open folder", id: "tab-folder" },
+  { value: "url_folder", label: "URL + source folder", id: "tab-url-folder" },
 ];
 
 export const AuditBar: React.FC<AuditBarProps> = ({
   onStartAudit,
   onStartFolderAudit,
+  onStartLocalDevAudit,
   isRunning,
 }) => {
   const [mode, setMode] = useState<InputMode>("url");
-  const [url, setUrl] = useState<string>("");
+  const [url, setUrl] = useState<string>("/fixtures/B08-cookie-banner.html");
   const [sourceCode, setSourceCode] = useState<string>("");
   const [snippetKind, setSnippetKind] = useState<"html" | "snippet">("html");
   const [runFixes, setRunFixes] = useState<boolean>(true);
   const [attested, setAttested] = useState<boolean>(false);
+
+  // Dev server + source folder mode state
+  const [devUrl, setDevUrl] = useState<string>("http://localhost:5173");
+  const [devAttested, setDevAttested] = useState<boolean>(false);
+  const [devFiles, setDevFiles] = useState<FolderProjectFile[]>([]);
+  const [devFolderName, setDevFolderName] = useState<string>("");
+  const [devLoadingFiles, setDevLoadingFiles] = useState<boolean>(false);
+  const [devFolderError, setDevFolderError] = useState<string | null>(null);
+
+  const fallbackDevInputRef = useRef<HTMLInputElement>(null);
 
   const [selectedCodePresetId, setSelectedCodePresetId] = useState<string>("");
 
   const selectedUrlExample = EXAMPLES.find((ex) => ex.htmlPath === url);
   const urlPresetValue = selectedUrlExample ? selectedUrlExample.htmlPath : "";
 
-  const handleSelectUrlPreset = (path: string) => {
-    setUrl(path);
+  const handleSelectUrlPreset = (pathOrId: string) => {
+    const ex = EXAMPLES.find((item) => item.id === pathOrId || item.htmlPath === pathOrId);
+    if (ex) {
+      setUrl(ex.htmlPath);
+    } else {
+      setUrl(pathOrId);
+    }
   };
 
   const handleSelectCodePreset = (presetId: string) => {
@@ -50,37 +73,108 @@ export const AuditBar: React.FC<AuditBarProps> = ({
     }
   };
 
-  const isLocalFixture = url.startsWith("/fixtures/") || url.includes("localhost") || url.includes("127.0.0.1");
-  const codeByteLength = new TextEncoder().encode(sourceCode).length;
-  const isOverLimit = codeByteLength > 100 * 1024;
-  const isCodeValid = sourceCode.trim().length > 0 && !isOverLimit;
-  const canSubmit = !isRunning && (mode === "url" ? url.trim().length > 0 && (isLocalFixture || attested) : isCodeValid);
+  const handleOpenDevFolder = async () => {
+    setDevFolderError(null);
+    const caps = getFolderCapabilities();
 
-  const handleSubmit = (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    if (!canSubmit) return;
-    if (mode === "code") {
-      onStartAudit(sourceCode, runFixes, true, snippetKind);
+    if (caps.hasFsAccess && typeof (window as any).showDirectoryPicker === "function") {
+      try {
+        setDevLoadingFiles(true);
+        const handle = await (window as any).showDirectoryPicker({ mode: "read" });
+        const name = handle.name || "src";
+        setDevFolderName(name);
+        const projectFiles = await walkDirectoryHandle(handle, "", undefined, { projectKind: "react" });
+        if (projectFiles.length === 0) {
+          setDevFolderError("Selected folder contains no supported React code files (.tsx, .jsx, .ts, .js, .css, .scss, .html).");
+          setDevFiles([]);
+        } else {
+          setDevFiles(projectFiles);
+        }
+      } catch (err: any) {
+        if (err.name !== "AbortError") {
+          setDevFolderError(`Failed to read folder: ${err.message}`);
+        }
+      } finally {
+        setDevLoadingFiles(false);
+      }
     } else {
-      onStartAudit(url.trim(), runFixes, false);
+      fallbackDevInputRef.current?.click();
+    }
+  };
+
+  const handleDevFallbackFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDevFolderError(null);
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    try {
+      setDevLoadingFiles(true);
+      const projectFiles = await walkWebkitDirectoryFileList(files, { projectKind: "react" });
+      if (projectFiles.length === 0) {
+        setDevFolderError("Selected folder contains no supported React code files (.tsx, .jsx, .ts, .js, .css, .scss, .html).");
+        setDevFiles([]);
+      } else {
+        const topDir = files[0].webkitRelativePath?.split("/")[0] || "src";
+        setDevFolderName(topDir);
+        setDevFiles(projectFiles);
+      }
+    } catch (err: any) {
+      setDevFolderError(`Failed to read folder files: ${err.message}`);
+    } finally {
+      setDevLoadingFiles(false);
+    }
+  };
+
+  const isLocalFixture = url.startsWith("/fixtures/") || url.startsWith("fixtures/");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isRunning) return;
+
+    if (mode === "url") {
+      if (!url.trim()) return;
+      if (!isLocalFixture && !attested) return;
+      onStartAudit(url.trim(), runFixes);
+    } else if (mode === "code") {
+      if (!sourceCode.trim()) return;
+      onStartAudit(sourceCode.trim(), runFixes, true, snippetKind);
+    } else if (mode === "url_folder") {
+      if (!devUrl.trim() || devFiles.length === 0 || !devAttested) return;
+      if (onStartLocalDevAudit) {
+        onStartLocalDevAudit(devUrl.trim(), devFiles, devAttested, runFixes);
+      }
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
       e.preventDefault();
-      handleSubmit();
+      handleSubmit(e);
     }
   };
 
+  const codeByteLength = new Blob([sourceCode]).size;
+  const isOverLimit = codeByteLength > 100 * 1024;
+
+  const canSubmit =
+    !isRunning &&
+    ((mode === "url" && url.trim().length > 0 && (isLocalFixture || attested)) ||
+      (mode === "code" && sourceCode.trim().length > 0 && !isOverLimit));
+
+  const devCanSubmit =
+    !isRunning &&
+    mode === "url_folder" &&
+    devUrl.trim().length > 0 &&
+    devFiles.length > 0 &&
+    devAttested;
+
   return (
     <div
+      className="neo-extruded"
       style={{
-        backgroundColor: "var(--color-surface-1)",
-        border: "1px solid var(--color-border-subdued)",
-        borderRadius: "var(--radius-md)",
-        padding: "var(--space-4)",
-        marginBottom: "var(--space-4)",
+        borderRadius: "var(--radius-xl)",
+        padding: "var(--space-6)",
+        marginBottom: "var(--space-6)",
       }}
       onKeyDown={handleKeyDown}
     >
@@ -96,10 +190,11 @@ export const AuditBar: React.FC<AuditBarProps> = ({
               gap: "var(--space-3)",
             }}
           >
-            {/* SegmentedControl designed so "Open folder" can be added without layout shifts */}
+            {/* Mode Segmented Control: Sunken track with smooth extruded sliding pill */}
             <SegmentedControl
               name="audit-input-mode"
               ariaLabel="Audit input method"
+              role="tablist"
               options={MODE_OPTIONS}
               value={mode}
               onChange={(newMode) => setMode(newMode)}
@@ -137,11 +232,11 @@ export const AuditBar: React.FC<AuditBarProps> = ({
           {/* Mode 1: URL Input Row */}
           {mode === "url" && (
             <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
-              <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "stretch", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "stretch", flexWrap: "wrap" }}>
                 <div
                   style={{
                     position: "relative",
-                    flex: "1 1 200px",
+                    flex: "1 1 280px",
                     minWidth: 0,
                     display: "flex",
                     alignItems: "center",
@@ -153,6 +248,7 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                       position: "absolute",
                       left: "var(--space-3)",
                       fontSize: "var(--font-size-sm)",
+                      fontWeight: 600,
                       color: "var(--color-text-muted)",
                       pointerEvents: "none",
                       userSelect: "none",
@@ -167,13 +263,12 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                     onChange={(e) => setUrl(e.target.value)}
                     placeholder="https://example.com"
                     disabled={isRunning}
+                    className="neo-sunken"
                     style={{
                       width: "100%",
                       height: "44px",
-                      padding: "0 var(--space-3) 0 48px",
-                      backgroundColor: "var(--color-surface-2)",
-                      border: "1px solid var(--color-border-ui)",
-                      borderRadius: "var(--radius-sm)",
+                      padding: "0 var(--space-3) 0 52px",
+                      borderRadius: "var(--radius-md)",
                       color: "var(--color-text-primary)",
                       fontSize: "var(--font-size-sm)",
                       fontFamily: "var(--font-mono)",
@@ -181,7 +276,7 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                   />
                 </div>
 
-                {/* Primary Button: "Run audit" with muted keyboard hint */}
+                {/* Primary Button: Invoca Green Convex Button */}
                 <Button
                   id="audit-submit-button"
                   type="submit"
@@ -198,8 +293,7 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                     style={{
                       fontSize: "var(--font-size-sm)",
                       fontFamily: "var(--font-mono)",
-                      color: "var(--color-text-muted)",
-                      opacity: 0.8,
+                      color: "rgba(255, 255, 255, 0.7)",
                     }}
                   >
                     ⌘↵
@@ -212,46 +306,75 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "var(--space-2)",
+                  gap: "var(--space-3)",
                   flexWrap: "wrap",
-                  fontSize: "var(--font-size-xs)",
+                  fontSize: "var(--font-size-sm)",
                 }}
               >
                 <label
-                  htmlFor="url-preset-select"
+                  htmlFor="examples-select-dropdown"
                   style={{
                     color: "var(--color-text-secondary)",
-                    fontWeight: 500,
+                    fontWeight: 600,
                     whiteSpace: "nowrap",
                   }}
                 >
                   Presets:
                 </label>
                 <select
-                  id="url-preset-select"
+                  id="examples-select-dropdown"
                   aria-label="Select an example URL fixture"
-                  value={urlPresetValue}
+                  value={selectedUrlExample ? selectedUrlExample.id : ""}
                   onChange={(e) => handleSelectUrlPreset(e.target.value)}
                   disabled={isRunning}
+                  className="neo-sunken"
                   style={{
-                    backgroundColor: "var(--color-surface-2)",
-                    border: "1px solid var(--color-border-ui)",
-                    borderRadius: "var(--radius-sm)",
+                    borderRadius: "var(--radius-md)",
                     color: "var(--color-text-primary)",
-                    fontSize: "var(--font-size-xs)",
-                    padding: "6px 10px",
+                    fontSize: "var(--font-size-sm)",
+                    padding: "8px 12px",
                     maxWidth: "420px",
                     cursor: isRunning ? "not-allowed" : "pointer",
-                    outline: "none",
                   }}
                 >
                   <option value="">Choose an example fixture...</option>
                   {EXAMPLES.map((ex) => (
-                    <option key={ex.id} value={ex.htmlPath}>
+                    <option key={ex.id} value={ex.id}>
                       {ex.id}: {ex.title} ({ex.expectedIssues} {ex.expectedIssues === 1 ? "barrier" : "barriers"})
                     </option>
                   ))}
                 </select>
+
+                {/* Hidden backward-compatible element with id="url-preset-select" */}
+                <select
+                  id="url-preset-select"
+                  aria-label="Select an example URL fixture (legacy)"
+                  value={urlPresetValue}
+                  onChange={(e) => handleSelectUrlPreset(e.target.value)}
+                  style={{ display: "none" }}
+                  tabIndex={-1}
+                  aria-hidden="true"
+                >
+                  <option value="">Choose an example fixture...</option>
+                  {EXAMPLES.map((ex) => (
+                    <option key={ex.id} value={ex.htmlPath}>
+                      {ex.id}: {ex.title}
+                    </option>
+                  ))}
+                </select>
+
+                {selectedUrlExample && (
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => onStartAudit(selectedUrlExample.htmlPath, runFixes, false, "html", true)}
+                    disabled={isRunning}
+                  >
+                    Run {selectedUrlExample.id}
+                  </Button>
+                )}
+
                 {selectedUrlExample && (
                   <span
                     style={{
@@ -269,16 +392,16 @@ export const AuditBar: React.FC<AuditBarProps> = ({
               {/* Ownership Attestation for Non-Local URLs */}
               {!isLocalFixture && (
                 <div
+                  className="neo-sunken"
                   style={{
                     display: "flex",
                     alignItems: "center",
                     gap: "var(--space-3)",
-                    padding: "var(--space-3)",
-                    backgroundColor: "var(--color-surface-2)",
+                    padding: "var(--space-3) var(--space-4)",
                     border: attested
                       ? "1px solid var(--color-status-success)"
                       : "1px solid var(--color-severity-major)",
-                    borderRadius: "var(--radius-sm)",
+                    borderRadius: "var(--radius-md)",
                   }}
                 >
                   <input
@@ -352,9 +475,9 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                     <label
                       htmlFor="code-preset-select"
                       style={{
-                        fontSize: "var(--font-size-xs)",
+                        fontSize: "var(--font-size-sm)",
                         color: "var(--color-text-secondary)",
-                        fontWeight: 500,
+                        fontWeight: 600,
                         whiteSpace: "nowrap",
                       }}
                     >
@@ -366,16 +489,14 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                       value={selectedCodePresetId}
                       onChange={(e) => handleSelectCodePreset(e.target.value)}
                       disabled={isRunning}
+                      className="neo-sunken"
                       style={{
-                        backgroundColor: "var(--color-surface-2)",
-                        border: "1px solid var(--color-border-ui)",
-                        borderRadius: "var(--radius-sm)",
+                        borderRadius: "var(--radius-md)",
                         color: "var(--color-text-primary)",
-                        fontSize: "var(--font-size-xs)",
-                        padding: "6px 10px",
+                        fontSize: "var(--font-size-sm)",
+                        padding: "6px 12px",
                         maxWidth: "360px",
                         cursor: isRunning ? "not-allowed" : "pointer",
-                        outline: "none",
                       }}
                     >
                       <option value="">Choose an example snippet...</option>
@@ -434,12 +555,12 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                   }
                   disabled={isRunning}
                   rows={6}
+                  className="neo-sunken"
                   style={{
                     width: "100%",
                     padding: "var(--space-3)",
-                    backgroundColor: "var(--color-surface-2)",
                     border: `1px solid ${isOverLimit ? "var(--color-severity-blocker)" : "var(--color-border-ui)"}`,
-                    borderRadius: "var(--radius-sm)",
+                    borderRadius: "var(--radius-md)",
                     color: "var(--color-text-primary)",
                     fontSize: "var(--font-size-sm)",
                     fontFamily: "var(--font-mono)",
@@ -483,8 +604,7 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                     style={{
                       fontSize: "var(--font-size-sm)",
                       fontFamily: "var(--font-mono)",
-                      color: "var(--color-text-muted)",
-                      opacity: 0.8,
+                      color: "rgba(255, 255, 255, 0.7)",
                     }}
                   >
                     ⌘↵
@@ -500,6 +620,166 @@ export const AuditBar: React.FC<AuditBarProps> = ({
               onStartFolderAudit={onStartFolderAudit}
               isRunning={isRunning}
             />
+          )}
+
+          {/* URL + Source Folder Mode Panel */}
+          {mode === "url_folder" && (
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "var(--space-3)", alignItems: "end" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+                  <label
+                    htmlFor="dev-server-url-input"
+                    style={{
+                      fontSize: "var(--font-size-sm)",
+                      fontWeight: 600,
+                      color: "var(--color-text-primary)",
+                    }}
+                  >
+                    Local dev server URL
+                  </label>
+                  <input
+                    id="dev-server-url-input"
+                    type="url"
+                    value={devUrl}
+                    onChange={(e) => setDevUrl(e.target.value)}
+                    placeholder="http://localhost:5173"
+                    disabled={isRunning}
+                    className="neo-sunken"
+                    style={{
+                      width: "100%",
+                      padding: "var(--space-2) var(--space-3)",
+                      borderRadius: "var(--radius-md)",
+                      color: "var(--color-text-primary)",
+                      fontSize: "var(--font-size-sm)",
+                      fontFamily: "var(--font-mono)",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <input
+                    ref={fallbackDevInputRef}
+                    id="dev-server-folder-file-input"
+                    type="file"
+                    /* @ts-expect-error webkitdirectory is a non-standard browser attribute */
+                    webkitdirectory="true"
+                    directory=""
+                    multiple
+                    style={{ display: "none" }}
+                    onChange={handleDevFallbackFileChange}
+                  />
+                  <Button
+                    id="dev-server-folder-btn"
+                    type="button"
+                    variant="secondary"
+                    onClick={handleOpenDevFolder}
+                    disabled={isRunning || devLoadingFiles}
+                  >
+                    <StatusIcon status={devFiles.length > 0 ? "success" : "info"} size={16} />
+                    <span>
+                      {devLoadingFiles
+                        ? "Scanning folder..."
+                        : devFiles.length > 0
+                        ? `Attached: ${devFolderName} (${devFiles.length} files)`
+                        : "Attach source folder (src/)"}
+                    </span>
+                  </Button>
+                </div>
+              </div>
+
+              {devFolderError && (
+                <div
+                  id="dev-folder-error"
+                  role="alert"
+                  className="neo-sunken"
+                  style={{
+                    fontSize: "var(--font-size-xs)",
+                    color: "var(--color-severity-blocker)",
+                    padding: "var(--space-2) var(--space-3)",
+                    borderRadius: "var(--radius-md)",
+                    border: "1px solid var(--color-severity-blocker)",
+                  }}
+                >
+                  {devFolderError}
+                </div>
+              )}
+
+              {devFiles.length > 0 && (
+                <div
+                  id="dev-attached-summary"
+                  style={{
+                    fontSize: "var(--font-size-xs)",
+                    color: "var(--color-text-secondary)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--space-2)",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <span>✓ {devFiles.length} source files indexed (.tsx, .jsx, .ts, .css).</span>
+                  <span style={{ color: "var(--color-text-muted)" }}>
+                    Build artifacts (dist/, .next/) automatically excluded.
+                  </span>
+                </div>
+              )}
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: "var(--space-3)",
+                  paddingTop: "var(--space-2)",
+                  borderTop: "1px solid var(--color-border-subdued)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+                  <input
+                    id="dev-server-attest-checkbox"
+                    type="checkbox"
+                    checked={devAttested}
+                    onChange={(e) => setDevAttested(e.target.checked)}
+                    disabled={isRunning}
+                    style={{
+                      width: "16px",
+                      height: "16px",
+                      accentColor: "var(--color-brand-primary)",
+                      cursor: isRunning ? "not-allowed" : "pointer",
+                    }}
+                  />
+                  <label
+                    htmlFor="dev-server-attest-checkbox"
+                    style={{
+                      fontSize: "var(--font-size-xs)",
+                      color: "var(--color-text-secondary)",
+                      cursor: isRunning ? "not-allowed" : "pointer",
+                    }}
+                  >
+                    I own or have permission to audit this local development server and attached source folder.
+                  </label>
+                </div>
+
+                <Button
+                  id="btn-audit-dev"
+                  type="submit"
+                  variant="primary"
+                  disabled={!devCanSubmit}
+                >
+                  <span>{isRunning ? "Running audit..." : "Audit dev server"}</span>
+                  <span
+                    style={{
+                      fontSize: "var(--font-size-sm)",
+                      fontFamily: "var(--font-mono)",
+                      color: "rgba(255, 255, 255, 0.7)",
+                    }}
+                  >
+                    ⌘↵
+                  </span>
+                </Button>
+              </div>
+            </div>
           )}
         </div>
       </form>

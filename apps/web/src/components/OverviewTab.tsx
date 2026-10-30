@@ -17,17 +17,16 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
   if (barriers.length === 0) {
     return (
       <div
+        className="neo-extruded"
         style={{
-          backgroundColor: "var(--color-surface-1)",
-          border: "1px solid var(--color-border-subdued)",
-          borderRadius: "var(--radius-md)",
-          padding: "var(--space-6)",
+          borderRadius: "var(--radius-xl)",
+          padding: "var(--space-8)",
           textAlign: "center",
         }}
       >
         <p
           style={{
-            fontSize: "var(--font-size-base)",
+            fontSize: "var(--font-size-lg)",
             fontWeight: 600,
             color: "var(--color-status-success)",
             margin: "0 0 var(--space-2) 0",
@@ -37,9 +36,10 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
         </p>
         <p
           style={{
-            fontSize: "var(--font-size-sm)",
+            fontSize: "var(--font-size-base)",
             color: "var(--color-text-secondary)",
             margin: "0 0 var(--space-4) 0",
+            lineHeight: 1.5,
           }}
         >
           Deterministic sequential crawl completed with zero detected keyboard traps or missing focus indicators.
@@ -80,18 +80,16 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
     severityColor = "var(--color-severity-major)";
   }
 
-  // One sentence for what to do next
   const whatToDoNext = isVerified
     ? "Review the verified fix in the Fixes tab and apply the suggested patch to your stylesheet or component markup."
     : "Review the problem details in the Problems tab to inspect manual remediation steps for this barrier.";
 
   return (
     <div
+      className="neo-extruded"
       style={{
-        backgroundColor: "var(--color-surface-1)",
-        border: "1px solid var(--color-border-subdued)",
-        borderRadius: "var(--radius-md)",
-        padding: "var(--space-4)",
+        borderRadius: "var(--radius-xl)",
+        padding: "var(--space-6)",
       }}
     >
       <div
@@ -100,16 +98,16 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
           justifyContent: "space-between",
           alignItems: "center",
           flexWrap: "wrap",
-          gap: "var(--space-2)",
-          marginBottom: "var(--space-3)",
-          paddingBottom: "var(--space-3)",
+          gap: "var(--space-3)",
+          marginBottom: "var(--space-4)",
+          paddingBottom: "var(--space-4)",
           borderBottom: "1px solid var(--color-border-subdued)",
         }}
       >
         <div>
           <h2
             style={{
-              fontSize: "var(--font-size-base)",
+              fontSize: "var(--font-size-lg)",
               fontWeight: 600,
               color: "var(--color-text-primary)",
               margin: 0,
@@ -150,10 +148,9 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
 
       {/* Expanded Most Serious Problem Card */}
       <div
+        className="neo-sunken"
         style={{
-          backgroundColor: "var(--color-surface-2)",
-          border: "1px solid var(--color-border-subdued)",
-          borderRadius: "var(--radius-sm)",
+          borderRadius: "var(--radius-lg)",
           padding: "var(--space-4)",
           marginBottom: "var(--space-4)",
         }}
@@ -166,18 +163,17 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
             justifyContent: "space-between",
             flexWrap: "wrap",
             gap: "var(--space-2)",
-            marginBottom: "var(--space-2)",
+            marginBottom: "var(--space-3)",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
             <span
+              className="neo-pill"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "6px",
-                padding: "2px 8px",
-                borderRadius: "var(--radius-sm)",
-                backgroundColor: "var(--color-surface-1)",
+                padding: "4px 10px",
                 color: severityColor,
                 border: `1px solid ${severityColor}`,
                 fontSize: "var(--font-size-sm)",
@@ -217,148 +213,74 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
         {/* Target Selector */}
         <div style={{ margin: "var(--space-2) 0" }}>
           <span
-            style={{
-              fontSize: "var(--font-size-sm)",
-              color: "var(--color-text-muted)",
-              display: "block",
-              marginBottom: "2px",
-            }}
-          >
-            Element:
-          </span>
-          <code
+            className="neo-pill"
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: "var(--font-size-sm)",
               color: "var(--color-text-primary)",
-              backgroundColor: "var(--color-surface-1)",
-              padding: "2px 6px",
-              borderRadius: "var(--radius-sm)",
-              border: "1px solid var(--color-border-subdued)",
-              display: "inline-block",
-              wordBreak: "break-all",
+              padding: "4px 12px",
             }}
           >
             {mostSerious.selector}
-          </code>
+          </span>
         </div>
 
-        {/* Impact & Evidence */}
-        <div
+        {/* Plain-English Evidence */}
+        <p
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "var(--space-2)",
-            margin: "var(--space-3) 0",
-          }}
-        >
-          <div>
-            <span
-              style={{
-                fontSize: "var(--font-size-sm)",
-                fontWeight: 600,
-                color: "var(--color-text-secondary)",
-              }}
-            >
-              Impact:{" "}
-            </span>
-            <span
-              style={{
-                fontSize: "var(--font-size-sm)",
-                color: "var(--color-text-primary)",
-              }}
-            >
-              {mostSerious.impact}
-            </span>
-          </div>
-
-          <div>
-            <span
-              style={{
-                fontSize: "var(--font-size-sm)",
-                fontWeight: 600,
-                color: "var(--color-text-secondary)",
-              }}
-            >
-              Evidence:{" "}
-            </span>
-            <span
-              style={{
-                fontSize: "var(--font-size-sm)",
-                color: "var(--color-text-primary)",
-                fontFamily: "var(--font-mono)",
-              }}
-            >
-              {mostSerious.evidence}
-            </span>
-          </div>
-        </div>
-
-        {/* Verified Fix Status */}
-        <div
-          style={{
-            paddingTop: "var(--space-2)",
-            borderTop: "1px solid var(--color-border-subdued)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "var(--space-2)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <StatusIcon status={isVerified ? "success" : "warning"} size={14} />
-            <span
-              style={{
-                fontSize: "var(--font-size-sm)",
-                fontWeight: 600,
-                color: isVerified ? "var(--color-status-success)" : "var(--color-text-secondary)",
-              }}
-            >
-              {isVerified
-                ? "Fix tested in a real browser: barrier eliminated with zero regressions."
-                : "Fix pending test: proposed changes require browser verification."}
-            </span>
-          </div>
-
-          {isVerified && onOpenDiff && (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => onOpenDiff(mostSerious)}
-            >
-              Inspect fix diff →
-            </Button>
-          )}
-        </div>
-      </div>
-
-      {/* What to do next (single sentence) */}
-      <div
-        style={{
-          padding: "var(--space-3) var(--space-4)",
-          backgroundColor: "var(--color-surface-2)",
-          borderRadius: "var(--radius-sm)",
-          borderLeft: "3px solid var(--color-accent-secondary)",
-        }}
-      >
-        <span
-          style={{
-            fontSize: "var(--font-size-sm)",
-            fontWeight: 600,
+            fontSize: "var(--font-size-base)",
             color: "var(--color-text-primary)",
+            lineHeight: 1.5,
+            margin: "var(--space-2) 0",
           }}
         >
-          What to do next:{" "}
-        </span>
-        <span
+          {mostSerious.evidence}
+        </p>
+
+        {/* Impact Explanation */}
+        <div
           style={{
             fontSize: "var(--font-size-sm)",
             color: "var(--color-text-secondary)",
+            lineHeight: 1.5,
+            marginTop: "var(--space-2)",
           }}
         >
-          {whatToDoNext}
-        </span>
+          <strong>Impact:</strong> {mostSerious.impact}
+        </div>
+      </div>
+
+      {/* Next Actions & Next Step */}
+      <div
+        className="neo-extruded"
+        style={{
+          padding: "var(--space-4)",
+          borderRadius: "var(--radius-md)",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "var(--space-3)",
+        }}
+      >
+        <div style={{ flex: "1 1 300px" }}>
+          <strong style={{ display: "block", color: "var(--color-text-primary)", marginBottom: "2px" }}>
+            Recommended next step:
+          </strong>
+          <span style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)" }}>
+            {whatToDoNext}
+          </span>
+        </div>
+
+        {isVerified && onOpenDiff && (
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => onOpenDiff(mostSerious)}
+          >
+            Inspect verified fix →
+          </Button>
+        )}
       </div>
     </div>
   );

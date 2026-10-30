@@ -3,7 +3,7 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "lib": ["ES2022"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
@@ -19,5 +19,13 @@
     "baseUrl": ".",
     "paths": {}
   },
-  "exclude": ["node_modules", "dist", "**/dist/**"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/dist/**",
+    "apps/web/src",
+    "apps/web/server.ts",
+    "apps/web/vite.config.ts",
+    "apps/web/index.html",
+  ]
 }

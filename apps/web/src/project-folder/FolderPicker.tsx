@@ -532,7 +532,7 @@ export const FolderPicker: React.FC<FolderPickerProps> = ({
               id="send-folder-audit-btn"
               type="button"
               variant="primary"
-              size="lg"
+              size="md"
               disabled={includedFiles.length === 0 || isRunning}
               onClick={handleSendAndScan}
             >

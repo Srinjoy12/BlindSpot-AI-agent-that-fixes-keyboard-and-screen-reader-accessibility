@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import type { ReactEquivalent } from "@blindspot/ai";
 import { StatusIcon, type StatusType } from "./ui/StatusIcon.js";
 import { Button } from "./ui/Button.js";
 import { getProblemDetail } from "../utils/problemDescriptions.js";
@@ -27,9 +28,22 @@ export interface BarrierItem {
     scriptContent?: string;
     filePath?: string;
     originalSource?: string;
+    reactEquivalent?: ReactEquivalent;
   };
   filePath?: string;
   originalSource?: string;
+  reactEquivalent?: ReactEquivalent;
+  likelySource?: {
+    path: string;
+    confidence: "high" | "low";
+    matchedSignals: string[];
+    candidates?: {
+      path: string;
+      score?: number;
+      confidence: "high" | "low";
+      matchedSignals: string[];
+    }[];
+  };
   verified: boolean;
   status?: "verified" | "unverified" | "rejected";
   diff?: string;
@@ -87,13 +101,12 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
 
     return (
       <span
+        className="neo-pill"
         style={{
           display: "inline-flex",
           alignItems: "center",
           gap: "6px",
-          padding: "2px 8px",
-          borderRadius: "var(--radius-sm)",
-          backgroundColor: "var(--color-surface-1)",
+          padding: "3px 10px",
           color,
           border: `1px solid ${color}`,
           fontSize: "var(--font-size-sm)",
@@ -109,11 +122,10 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
 
   return (
     <div
+      className="neo-extruded"
       style={{
-        backgroundColor: "var(--color-surface-1)",
-        border: "1px solid var(--color-border-subdued)",
-        borderRadius: "var(--radius-md)",
-        padding: "var(--space-4)",
+        borderRadius: "var(--radius-xl)",
+        padding: "var(--space-6)",
         marginBottom: "var(--space-6)",
       }}
     >
@@ -126,14 +138,14 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
           flexWrap: "wrap",
           gap: "var(--space-3)",
           marginBottom: "var(--space-4)",
-          paddingBottom: "var(--space-3)",
+          paddingBottom: "var(--space-4)",
           borderBottom: "1px solid var(--color-border-subdued)",
         }}
       >
         <div>
           <h2
             style={{
-              fontSize: "var(--font-size-lg)",
+              fontSize: "var(--font-size-xl)",
               fontWeight: 600,
               color: "var(--color-text-primary)",
               margin: "0 0 4px 0",
@@ -141,7 +153,6 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
           >
             Problems ({barriers.length})
           </h2>
-          {/* One-line definition for first-time users - no tooltips needed */}
           <p
             style={{
               fontSize: "var(--font-size-sm)",
@@ -170,17 +181,16 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
               <button
                 key={f.id}
                 onClick={() => setFilter(f.id)}
+                className="neo-pill"
+                aria-pressed={isSelected}
                 style={{
-                  padding: "var(--space-2) var(--space-3)",
-                  borderRadius: "var(--radius-sm)",
-                  backgroundColor: isSelected ? "var(--color-surface-3)" : "var(--color-surface-2)",
-                  border: isSelected ? "1px solid var(--color-border-strong)" : "1px solid var(--color-border-subdued)",
-                  color: isSelected ? "var(--color-text-primary)" : "var(--color-text-secondary)",
+                  padding: "6px 14px",
+                  backgroundColor: isSelected ? "var(--color-accent-primary)" : "var(--neo-pill-bg)",
+                  color: isSelected ? "#FFFFFF" : "var(--color-text-secondary)",
                   fontSize: "var(--font-size-sm)",
                   fontWeight: isSelected ? 600 : 400,
-                  cursor: "pointer",
                   minHeight: "36px",
-                  transition: "background-color var(--transition-duration) var(--transition-timing)",
+                  border: isSelected ? "1px solid var(--color-accent-primary)" : "1px solid var(--color-border-subdued)",
                 }}
               >
                 {f.label}
@@ -192,13 +202,13 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
 
       {filtered.length === 0 ? (
         <div
+          className="neo-sunken"
           style={{
-            padding: "var(--space-6)",
+            padding: "var(--space-8)",
             textAlign: "center",
-            backgroundColor: "var(--color-surface-2)",
-            borderRadius: "var(--radius-sm)",
+            borderRadius: "var(--radius-lg)",
             color: "var(--color-text-muted)",
-            fontSize: "var(--font-size-sm)",
+            fontSize: "var(--font-size-base)",
           }}
         >
           {barriers.length === 0
@@ -206,424 +216,305 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
             : "No problems match the selected filter."}
         </div>
       ) : (
-        /* Master-Detail Responsive Container */
         <div
-          className="master-detail-container"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
             gap: "var(--space-4)",
-            alignItems: "start",
           }}
         >
-          {/* List Column: One row per problem */}
+          {/* Column 1: List of Problems */}
           <div
+            tabIndex={0}
+            role="region"
+            aria-label="List of detected accessibility problems"
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "var(--space-2)",
+              gap: "var(--space-3)",
+              maxHeight: "560px",
+              overflowY: "auto",
+              paddingRight: "var(--space-2)",
             }}
-            role="region"
-            aria-label="Problem list"
           >
             {filtered.map((b) => {
               const itemDetail = getProblemDetail(b);
-              const isSelected = selectedBarrier?.id === b.id;
-              const isFixTested = b.verified || b.status === "verified";
+              const isSelected = b.id === (selectedBarrier?.id || "");
+              const isVerified = b.status === "verified" || b.verified;
 
               return (
-                <div
+                <button
                   key={b.id}
                   onClick={() => setSelectedId(b.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setSelectedId(b.id);
-                    }
-                  }}
-                  tabIndex={0}
-                  role="button"
-                  aria-pressed={isSelected}
-                  aria-label={`${itemDetail.plainTitle}, element ${b.selector}`}
+                  aria-selected={isSelected}
+                  className={isSelected ? "neo-extruded" : "neo-pill"}
                   style={{
-                    backgroundColor: isSelected ? "var(--color-surface-3)" : "var(--color-surface-2)",
-                    border: isSelected ? "1px solid var(--color-border-strong)" : "1px solid var(--color-border-subdued)",
-                    borderRadius: "var(--radius-sm)",
-                    padding: "var(--space-3) var(--space-4)",
-                    cursor: "pointer",
                     display: "flex",
                     flexDirection: "column",
-                    gap: "var(--space-2)",
-                    transition: "all var(--transition-duration) var(--transition-timing)",
-                    outline: "none",
+                    alignItems: "flex-start",
+                    gap: "6px",
+                    padding: "var(--space-3)",
+                    borderRadius: "var(--radius-lg)",
+                    backgroundColor: isSelected ? "var(--neo-extruded-bg)" : "var(--neo-pill-bg)",
+                    border: isSelected
+                      ? "2px solid var(--color-focus-ring)"
+                      : "1px solid var(--color-border-subdued)",
+                    cursor: "pointer",
+                    textAlign: "left",
+                    width: "100%",
                   }}
                 >
-                  {/* Row Top: Severity + Plain Title */}
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-2)", flexWrap: "wrap" }}>
-                    {getSeverityBadge(b.severity)}
-                    <div
-                      style={{
-                        fontSize: "var(--font-size-base)",
-                        fontWeight: 600,
-                        color: "var(--color-text-primary)",
-                        lineHeight: 1.4,
-                        flex: 1,
-                      }}
-                    >
-                      {itemDetail.plainTitle}
+                  <div style={{ display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center", flexWrap: "wrap", gap: "6px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px", flexWrap: "wrap" }}>
+                      {getSeverityBadge(b.severity)}
+                      {b.alsoReportedByAxe ? (
+                        <span
+                          className="neo-pill"
+                          style={{
+                            fontSize: "11px",
+                            fontFamily: "var(--font-mono)",
+                            padding: "1px 6px",
+                            color: "var(--color-text-muted)",
+                            border: "1px solid var(--color-border-subdued)",
+                          }}
+                        >
+                          Reported by axe-core
+                        </span>
+                      ) : (
+                        <span
+                          className="neo-pill"
+                          style={{
+                            fontSize: "11px",
+                            fontFamily: "var(--font-mono)",
+                            padding: "1px 6px",
+                            color: "var(--color-accent-secondary)",
+                            border: "1px solid rgba(14, 165, 233, 0.4)",
+                            backgroundColor: "rgba(14, 165, 233, 0.08)",
+                          }}
+                        >
+                          axe-core missed this
+                        </span>
+                      )}
                     </div>
+
+                    {isVerified && (
+                      <span
+                        className="neo-pill"
+                        style={{
+                          fontSize: "12px",
+                          fontWeight: 700,
+                          backgroundColor: "var(--color-accent-primary)",
+                          color: "#FFFFFF",
+                          padding: "2px 10px",
+                          border: "1px solid var(--color-status-success)",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "4px",
+                        }}
+                      >
+                        <span>✓</span>
+                        <span>Fix tested</span>
+                      </span>
+                    )}
                   </div>
 
-                  {/* Row Bottom: Monospace Element, WCAG criterion label, Fix Tested status */}
                   <div
                     style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      flexWrap: "wrap",
-                      gap: "var(--space-2)",
-                      fontSize: "var(--font-size-sm)",
-                      paddingTop: "var(--space-1)",
+                      fontSize: "var(--font-size-base)",
+                      fontWeight: 600,
+                      color: "var(--color-text-primary)",
+                      lineHeight: 1.4,
+                      marginTop: "2px",
                     }}
                   >
-                    <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", flexWrap: "wrap" }}>
-                      {/* Page element in monospace */}
-                      <code
-                        style={{
-                          fontFamily: "var(--font-mono)",
-                          fontSize: "var(--font-size-sm)",
-                          backgroundColor: "var(--color-surface-1)",
-                          border: "1px solid var(--color-border-subdued)",
-                          padding: "1px 6px",
-                          borderRadius: "var(--radius-sm)",
-                          color: "var(--color-text-primary)",
-                          wordBreak: "break-all",
-                        }}
-                      >
-                        {b.selector}
-                      </code>
-
-                      {/* WCAG criterion as short link-styled label */}
-                      <a
-                        href={b.wcagUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        style={{
-                          fontSize: "var(--font-size-sm)",
-                          color: "var(--color-accent-secondary)",
-                          textDecoration: "underline",
-                        }}
-                      >
-                        {b.wcagId} {b.wcagName} ↗
-                      </a>
-                    </div>
-
-                    {/* Fix tested or Fix not tested with icon */}
-                    <div
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "6px",
-                        fontSize: "var(--font-size-sm)",
-                        fontWeight: 600,
-                        color: isFixTested ? "var(--color-status-success)" : "var(--color-text-muted)",
-                      }}
-                    >
-                      <StatusIcon status={isFixTested ? "success" : "warning"} size={14} />
-                      <span>{isFixTested ? "Fix tested" : "Fix not tested"}</span>
-                    </div>
+                    {itemDetail.plainTitle}
                   </div>
-                </div>
+
+                  <div
+                    style={{
+                      fontSize: "var(--font-size-xs)",
+                      fontFamily: "var(--font-mono)",
+                      color: "var(--color-text-muted)",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      maxWidth: "100%",
+                    }}
+                  >
+                    {b.selector}
+                  </div>
+                </button>
               );
             })}
           </div>
 
-          {/* Detail Panel Column: Opens on select */}
+          {/* Column 2: Detailed Problem View */}
           {selectedBarrier && detail && (
             <div
+              className="neo-sunken"
               style={{
-                backgroundColor: "var(--color-surface-2)",
-                border: "1px solid var(--color-border-strong)",
-                borderRadius: "var(--radius-sm)",
-                padding: "var(--space-4)",
+                borderRadius: "var(--radius-xl)",
+                padding: "var(--space-6)",
                 display: "flex",
                 flexDirection: "column",
                 gap: "var(--space-4)",
-                position: "sticky",
-                top: "var(--space-4)",
               }}
-              role="region"
-              aria-label={`Details for problem: ${detail.plainTitle}`}
             >
-              {/* Detail Header */}
-              <div
-                style={{
-                  paddingBottom: "var(--space-3)",
-                  borderBottom: "1px solid var(--color-border-subdued)",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", marginBottom: "var(--space-2)" }}>
-                  {getSeverityBadge(selectedBarrier.severity)}
-                  <span
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "var(--space-2)" }}>
+                <div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                    {getSeverityBadge(selectedBarrier.severity)}
+                    {selectedBarrier.alsoReportedByAxe ? (
+                      <span
+                        className="neo-pill"
+                        style={{
+                          fontSize: "12px",
+                          fontFamily: "var(--font-mono)",
+                          padding: "2px 8px",
+                          color: "var(--color-text-muted)",
+                          border: "1px solid var(--color-border-subdued)",
+                        }}
+                      >
+                        Reported by axe-core
+                      </span>
+                    ) : (
+                      <span
+                        className="neo-pill"
+                        style={{
+                          fontSize: "12px",
+                          fontFamily: "var(--font-mono)",
+                          padding: "2px 8px",
+                          color: "var(--color-accent-secondary)",
+                          border: "1px solid rgba(14, 165, 233, 0.4)",
+                          backgroundColor: "rgba(14, 165, 233, 0.08)",
+                        }}
+                      >
+                        axe-core missed this
+                      </span>
+                    )}
+                  </div>
+                  <h3
                     style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "var(--font-size-sm)",
-                      padding: "2px 8px",
-                      borderRadius: "var(--radius-sm)",
-                      backgroundColor: "var(--color-surface-1)",
-                      color: "var(--color-text-secondary)",
-                      border: "1px solid var(--color-border-subdued)",
-                    }}
-                  >
-                    Detector {selectedBarrier.detectorId}
-                  </span>
-                </div>
-
-                <h3
-                  style={{
-                    fontSize: "var(--font-size-lg)",
-                    fontWeight: 600,
-                    color: "var(--color-text-primary)",
-                    margin: "0 0 6px 0",
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {detail.plainTitle}
-                </h3>
-
-                <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", flexWrap: "wrap" }}>
-                  <span style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-muted)" }}>Target:</span>
-                  <code
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "var(--font-size-sm)",
-                      backgroundColor: "var(--color-surface-1)",
-                      border: "1px solid var(--color-border-subdued)",
-                      padding: "2px 6px",
-                      borderRadius: "var(--radius-sm)",
+                      fontSize: "var(--font-size-xl)",
+                      fontWeight: 600,
                       color: "var(--color-text-primary)",
-                      wordBreak: "break-all",
+                      marginTop: "var(--space-2)",
+                      lineHeight: 1.3,
                     }}
                   >
-                    {selectedBarrier.selector}
-                  </code>
+                    {detail.plainTitle}
+                  </h3>
                 </div>
-              </div>
 
-              {/* Section 1: What happens (keyboard steps) */}
-              <div>
-                <h4
-                  style={{
-                    fontSize: "var(--font-size-sm)",
-                    fontWeight: 600,
-                    color: "var(--color-text-primary)",
-                    margin: "0 0 var(--space-2) 0",
-                  }}
-                >
-                  What happens (keyboard reproduction)
-                </h4>
-                <div
-                  style={{
-                    backgroundColor: "var(--color-surface-1)",
-                    border: "1px solid var(--color-border-subdued)",
-                    borderRadius: "var(--radius-sm)",
-                    padding: "var(--space-3)",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "6px",
-                  }}
-                >
-                  {detail.keyboardSteps.map((step, sIdx) => (
-                    <div
-                      key={sIdx}
-                      style={{
-                        fontSize: "var(--font-size-sm)",
-                        color: "var(--color-text-secondary)",
-                        lineHeight: 1.5,
-                      }}
-                    >
-                      {step}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Section 2: Who it affects (Super model impact, max 2-3 sentences) */}
-              <div>
-                <h4
-                  style={{
-                    fontSize: "var(--font-size-sm)",
-                    fontWeight: 600,
-                    color: "var(--color-text-primary)",
-                    margin: "0 0 var(--space-2) 0",
-                  }}
-                >
-                  Who it affects
-                </h4>
-                <div
-                  style={{
-                    fontSize: "var(--font-size-sm)",
-                    color: "var(--color-text-secondary)",
-                    lineHeight: 1.5,
-                    backgroundColor: "var(--color-surface-1)",
-                    borderLeft: "3px solid var(--color-accent-secondary)",
-                    padding: "var(--space-2) var(--space-3)",
-                    borderRadius: "0 var(--radius-sm) var(--radius-sm) 0",
-                  }}
-                >
-                  {detail.whoItAffects}
-                </div>
-              </div>
-
-              {/* Section 3: Evidence */}
-              <div>
-                <h4
-                  style={{
-                    fontSize: "var(--font-size-sm)",
-                    fontWeight: 600,
-                    color: "var(--color-text-primary)",
-                    margin: "0 0 var(--space-2) 0",
-                  }}
-                >
-                  Evidence
-                </h4>
-                <div
-                  style={{
-                    fontSize: "var(--font-size-sm)",
-                    color: "var(--color-text-secondary)",
-                    backgroundColor: "var(--color-surface-1)",
-                    border: "1px solid var(--color-border-subdued)",
-                    borderRadius: "var(--radius-sm)",
-                    padding: "var(--space-3)",
-                    lineHeight: 1.5,
-                    fontFamily: "var(--font-mono)",
-                  }}
-                >
-                  {detail.evidence}
-                </div>
-              </div>
-
-              {/* Section 4: Tavily / WCAG Guidance Source Link */}
-              <div>
-                <h4
-                  style={{
-                    fontSize: "var(--font-size-sm)",
-                    fontWeight: 600,
-                    color: "var(--color-text-primary)",
-                    margin: "0 0 var(--space-2) 0",
-                  }}
-                >
-                  Guidance source
-                </h4>
                 <a
-                  href={detail.tavilyGuidanceUrl}
+                  href={selectedBarrier.wcagUrl}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   style={{
                     fontSize: "var(--font-size-sm)",
                     color: "var(--color-accent-secondary)",
                     textDecoration: "underline",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "4px",
+                    fontWeight: 500,
                   }}
                 >
-                  <span>{detail.tavilyGuidanceLabel} ↗</span>
+                  WCAG {selectedBarrier.wcagId}
                 </a>
               </div>
 
-              {/* Section 5: The Fix */}
-              <div
-                style={{
-                  paddingTop: "var(--space-3)",
-                  borderTop: "1px solid var(--color-border-subdued)",
-                }}
-              >
-                <div
+              <div>
+                <strong style={{ display: "block", fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", marginBottom: "4px" }}>
+                  Element selector:
+                </strong>
+                <code
+                  className="neo-sunken"
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "var(--space-2)",
+                    display: "block",
+                    padding: "var(--space-2) var(--space-3)",
+                    borderRadius: "var(--radius-sm)",
+                    fontSize: "var(--font-size-sm)",
+                    fontFamily: "var(--font-mono)",
+                    color: "var(--color-text-primary)",
+                    wordBreak: "break-all",
                   }}
                 >
-                  <h4
-                    style={{
-                      fontSize: "var(--font-size-sm)",
-                      fontWeight: 600,
-                      color: "var(--color-text-primary)",
-                      margin: 0,
-                    }}
-                  >
-                    The fix
-                  </h4>
-
-                  <span
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      fontSize: "var(--font-size-sm)",
-                      fontWeight: 600,
-                      color: selectedBarrier.verified ? "var(--color-status-success)" : "var(--color-text-muted)",
-                    }}
-                  >
-                    <StatusIcon status={selectedBarrier.verified ? "success" : "warning"} size={14} />
-                    <span>{selectedBarrier.verified ? "Fix tested" : "Fix not tested"}</span>
-                  </span>
-                </div>
-
-                {selectedBarrier.fix ? (
-                  <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
-                    <div style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)" }}>
-                      {selectedBarrier.fix.rationale || "Standard deterministic accessibility fix."}
-                    </div>
-
-                    <pre
-                      style={{
-                        margin: 0,
-                        padding: "var(--space-3)",
-                        backgroundColor: "var(--color-bg-canvas)",
-                        border: "1px solid var(--color-border-subdued)",
-                        borderRadius: "var(--radius-sm)",
-                        fontFamily: "var(--font-mono)",
-                        fontSize: "var(--font-size-sm)",
-                        color: "var(--color-text-primary)",
-                        overflowX: "auto",
-                        whiteSpace: "pre-wrap",
-                      }}
-                    >
-                      {selectedBarrier.fix.body ||
-                        selectedBarrier.fix.cssRule ||
-                        selectedBarrier.fix.diff ||
-                        selectedBarrier.fix.htmlReplacement ||
-                        "Automated code repair available."}
-                    </pre>
-
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => onOpenDiff(selectedBarrier)}
-                      style={{ alignSelf: "flex-start", marginTop: "var(--space-1)" }}
-                    >
-                      {selectedBarrier.verified ? "✓ Inspect tested fix in full diff" : "Inspect proposed fix"}
-                    </Button>
-                  </div>
-                ) : (
-                  <div
-                    style={{
-                      fontSize: "var(--font-size-sm)",
-                      color: "var(--color-text-muted)",
-                      backgroundColor: "var(--color-surface-1)",
-                      padding: "var(--space-3)",
-                      borderRadius: "var(--radius-sm)",
-                    }}
-                  >
-                    No fix generated for this barrier.
-                  </div>
-                )}
+                  {selectedBarrier.selector}
+                </code>
               </div>
+
+              <div>
+                <strong style={{ display: "block", fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", marginBottom: "4px" }}>
+                  What went wrong:
+                </strong>
+                <p style={{ margin: 0, fontSize: "var(--font-size-base)", color: "var(--color-text-primary)", lineHeight: 1.5 }}>
+                  {selectedBarrier.impact || detail.evidence}
+                </p>
+              </div>
+
+              <div>
+                <strong style={{ display: "block", fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", marginBottom: "4px" }}>
+                  Who is affected:
+                </strong>
+                <p style={{ margin: 0, fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
+                  {detail.whoItAffects}
+                </p>
+              </div>
+
+              <div>
+                <strong style={{ display: "block", fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", marginBottom: "4px" }}>
+                  How to fix it:
+                </strong>
+                <p style={{ margin: 0, fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
+                  {selectedBarrier.fix?.explanation || selectedBarrier.fix?.rationale || detail.tavilyGuidanceLabel || "Apply accessible keyboard navigation handlers or appropriate ARIA roles and labels."}
+                </p>
+              </div>
+
+              {detail.keyboardSteps && detail.keyboardSteps.length > 0 && (
+                <div>
+                  <strong style={{ display: "block", fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", marginBottom: "4px" }}>
+                    Keyboard reproduction steps:
+                  </strong>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                    {detail.keyboardSteps.map((step, idx) => (
+                      <span key={idx} style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", lineHeight: 1.4 }}>
+                        {step}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {selectedBarrier.likelySource && (
+                <div>
+                  <strong style={{ display: "block", fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", marginBottom: "4px" }}>
+                    Likely source file:
+                  </strong>
+                  <code
+                    className="neo-sunken"
+                    style={{
+                      display: "inline-block",
+                      padding: "var(--space-2) var(--space-3)",
+                      borderRadius: "var(--radius-sm)",
+                      fontSize: "var(--font-size-sm)",
+                      fontFamily: "var(--font-mono)",
+                      color: "var(--color-accent-primary)",
+                    }}
+                  >
+                    {selectedBarrier.likelySource.path} ({selectedBarrier.likelySource.confidence} confidence)
+                  </code>
+                </div>
+              )}
+
+              {(selectedBarrier.fix || selectedBarrier.diff || selectedBarrier.modifiedSource) && (
+                <div style={{ marginTop: "auto", paddingTop: "var(--space-3)", borderTop: "1px solid var(--color-border-subdued)" }}>
+                  <Button
+                    variant="primary"
+                    onClick={() => onOpenDiff(selectedBarrier)}
+                    style={{ width: "100%" }}
+                  >
+                    Inspect verified fix →
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </div>

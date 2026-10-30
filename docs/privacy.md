@@ -15,12 +15,16 @@ When you grant BlindSpot access to a local project folder:
 
 ---
 
-## 2. Airgapped Sandbox Egress Blocking
+## 2. Airgapped Sandbox Egress & Local Dev Bridge Security
 
 To protect user code and prevent data exfiltration:
-- The Playwright Chromium sandbox uses strict request interception (`page.route("**/*")`).
-- Any outbound request attempting to access external origins (such as external CDNs, third-party analytics, remote scripts, or tracking pixels) is immediately aborted.
-- Egress attempts are counted and reported directly in the audit summary (`blockedResourcesCount`).
+- **Playwright Network Guard**: The Chromium sandbox uses strict request interception (`page.route("**/*")`). Any outbound request attempting to access external origins (such as external CDNs, third-party analytics, remote scripts, or tracking pixels) is immediately aborted. Egress attempts are counted and reported directly in the audit summary (`blockedResourcesCount`).
+- **Pre-Body Parsing Security Middleware**: The Local Dev Bridge endpoint (`/api/audit-local-dev`) executes security validation before parsing JSON bodies:
+  - Requires `ENABLE_LOCAL_DEV_BRIDGE=true` in the server environment.
+  - Rejects third-party `Origin` headers via CORS (same-origin loopback only).
+  - Validates `Host` header to prevent DNS rebinding attacks.
+  - Enforces loopback-only targets (`127.0.0.1` or `localhost`) with an explicit port.
+  - Refuses BlindSpot's own port (e.g. 3000) to prevent denial-of-service or recursive loopback exhaustion.
 
 ---
 
@@ -46,8 +50,9 @@ File limits enforced at client and server:
 ## 4. AI Token Exposure & Localization
 
 BlindSpot does not dump your entire repository into a language model.
-- **Deterministic Localization First**: When an accessibility barrier is detected (e.g. `#submit-btn` missing focus outline), deterministic scoring identifies the 1–3 most relevant files (e.g. `styles.css`) based on ID, class, selector, and detector affinity.
-- **Surgical Snippet Prompts**: Only the localized file content and specific barrier evidence are provided to NVIDIA Nemotron Ultra to generate a repair.
+- **Deterministic Localization First**: When an accessibility barrier is detected (e.g. `#submit-btn` missing focus outline), deterministic scoring identifies the 1–3 most relevant files (e.g. `styles.css` or `src/components/Button.tsx`) based on ID, class, selector, and detector affinity.
+- **Local Dev Server Bridge Data Isolation (Zero Model Transmission)**: When auditing a local development server with a React `src/` folder attached, candidate source files are held strictly in ephemeral server memory and analyzed 100% deterministically in-memory. **React source files stay in memory and are not sent to models.** Nemotron only receives the runtime DOM snippet (up to 500 characters) and barrier metadata to propose runtime DOM patches. React equivalents are generated purely deterministically without model calls. No disk writes occur in local dev server mode.
+- **Static Folder Mode Surgical Snippet Caps**: In static HTML/CSS folder mode (`/api/audit-files`), localized source files are capped at a maximum of 60 KB across candidate files, and only the relevant surgical snippet and barrier evidence are provided to NVIDIA Nemotron Ultra to generate source repairs.
 - **Out-of-Bounds Edit Protection**: If a language model proposes modifying a path not explicitly present in the uploaded FileSet, the proposal is strictly rejected.
 
 ---

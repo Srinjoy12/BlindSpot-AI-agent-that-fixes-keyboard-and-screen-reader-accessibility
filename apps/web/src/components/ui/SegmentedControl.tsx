@@ -4,6 +4,7 @@ export interface SegmentOption<T extends string = string> {
   value: T;
   label: string;
   badge?: string | number;
+  id?: string;
 }
 
 interface SegmentedControlProps<T extends string = string> {
@@ -15,6 +16,7 @@ interface SegmentedControlProps<T extends string = string> {
   size?: "sm" | "md";
   className?: string;
   style?: React.CSSProperties;
+  role?: "tablist" | "radiogroup";
 }
 
 export function SegmentedControl<T extends string = string>({
@@ -26,6 +28,7 @@ export function SegmentedControl<T extends string = string>({
   size = "md",
   className = "",
   style = {},
+  role = "radiogroup",
 }: SegmentedControlProps<T>) {
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -52,55 +55,67 @@ export function SegmentedControl<T extends string = string>({
   };
 
   const isSmall = size === "sm";
+  const isTablist = role === "tablist";
 
   return (
     <div
-      role="radiogroup"
+      role={role}
       aria-label={ariaLabel || name}
-      className={`ui-segmented-control ${className}`}
+      className={`ui-segmented-control neo-sunken ${className}`}
       style={{
         display: "inline-flex",
         alignItems: "center",
-        backgroundColor: "var(--color-surface-2)",
-        border: "1px solid var(--color-border-subdued)",
-        borderRadius: "var(--radius-sm)",
-        padding: "2px",
-        gap: "2px",
+        backgroundColor: "var(--neo-sunken-bg)",
+        boxShadow: "var(--neo-sunken-shadow)",
+        border: "var(--neo-sunken-border)",
+        borderRadius: "var(--radius-lg)",
+        padding: "4px",
+        gap: "4px",
+        maxWidth: "100%",
+        overflowX: "auto",
+        WebkitOverflowScrolling: "touch",
+        scrollbarWidth: "none",
         ...style,
       }}
     >
       {options.map((opt, idx) => {
         const isSelected = opt.value === value;
+        const buttonId = opt.id ?? `tab-${opt.value}`;
         return (
           <button
             key={opt.value}
+            id={buttonId}
             ref={(el) => {
               buttonRefs.current[idx] = el;
             }}
             type="button"
-            role="radio"
-            aria-checked={isSelected}
+            role={isTablist ? "tab" : "radio"}
+            aria-selected={isTablist ? isSelected : undefined}
+            aria-checked={!isTablist ? isSelected : undefined}
             tabIndex={isSelected ? 0 : -1}
             onClick={() => onChange(opt.value)}
             onKeyDown={(e) => handleKeyDown(e, idx)}
+            className={isSelected ? "neo-extruded" : ""}
             style={{
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
               gap: "6px",
               minHeight: isSmall ? "32px" : "38px",
-              padding: isSmall ? "0 10px" : "0 14px",
-              borderRadius: "var(--radius-sm)",
-              backgroundColor: isSelected ? "var(--color-surface-3)" : "transparent",
+              padding: isSmall ? "0 12px" : "0 16px",
+              borderRadius: "var(--radius-md)",
+              backgroundColor: isSelected ? "var(--neo-extruded-bg)" : "transparent",
+              boxShadow: isSelected ? "var(--neo-extruded-shadow)" : "none",
+              border: isSelected ? "var(--neo-extruded-border)" : "1px solid transparent",
               color: isSelected ? "var(--color-text-primary)" : "var(--color-text-secondary)",
-              border: isSelected ? "1px solid var(--color-border-strong)" : "1px solid transparent",
               fontSize: isSmall ? "14px" : "15px",
               fontFamily: "var(--font-sans)",
               fontWeight: isSelected ? 600 : 400,
               cursor: "pointer",
-              transition: "background-color var(--transition-duration) var(--transition-timing), color var(--transition-duration) var(--transition-timing), border-color var(--transition-duration) var(--transition-timing)",
+              transition: "all var(--transition-duration) var(--transition-timing)",
               userSelect: "none",
               whiteSpace: "nowrap",
+              flexShrink: 0,
             }}
           >
             <span>{opt.label}</span>
@@ -109,7 +124,7 @@ export function SegmentedControl<T extends string = string>({
                 style={{
                   fontSize: "14px",
                   fontWeight: 600,
-                  color: isSelected ? "var(--color-text-primary)" : "var(--color-text-muted)",
+                  color: isSelected ? "var(--color-accent-primary)" : "var(--color-text-muted)",
                 }}
               >
                 ({opt.badge})

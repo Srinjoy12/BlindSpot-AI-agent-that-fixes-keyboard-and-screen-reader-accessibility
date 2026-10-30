@@ -64,32 +64,29 @@ export function detectD8(input: DetectorInput): DetectorHit[] {
 
   // Check 2: Banner or dialog present in DOM, but focus started elsewhere before reaching it
   // (e.g., #cookie-banner rendered or alertdialog present, but earlier stops are outside of it)
-  const bannerStop = focusStops.find(
-    (s) =>
-      s.insideOpenDialog ||
+  const isBannerStop = (s: { selector: string; insideOpenDialog?: boolean; role?: string }) => {
+    if (s.insideOpenDialog || s.role === "alertdialog") return true;
+    if (s.selector.includes("try-cookie-banner")) return false;
+    return (
       s.selector.includes("cookie-banner") ||
       s.selector.includes("reject") ||
       s.selector.includes("accept") ||
-      s.role === "alertdialog" ||
       s.selector.includes("banner")
-  );
+    );
+  };
+
+  const bannerStop = focusStops.find(isBannerStop);
 
   if (bannerStop && bannerStop.index > 0) {
     const stopsBefore = focusStops.filter((s) => s.index < bannerStop.index);
-    const nonBannerStopsBefore = stopsBefore.filter(
-      (s) =>
-        !s.insideOpenDialog &&
-        !s.selector.includes("cookie-banner") &&
-        !s.selector.includes("reject") &&
-        !s.selector.includes("accept") &&
-        s.role !== "alertdialog"
-    );
+    const nonBannerStopsBefore = stopsBefore.filter((s) => !isBannerStop(s));
 
     if (nonBannerStopsBefore.length > 0) {
       hits.push({
         detectorId: "D8",
         selector:
-          bannerStop.insideOpenDialog || bannerStop.selector.includes("cookie-banner")
+          bannerStop.insideOpenDialog ||
+          (bannerStop.selector.includes("cookie-banner") && !bannerStop.selector.includes("try-cookie-banner"))
             ? "#cookie-banner"
             : bannerStop.selector,
         stateLabel,

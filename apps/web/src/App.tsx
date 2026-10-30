@@ -102,7 +102,8 @@ export const App: React.FC = () => {
     target: string,
     runFixes: boolean,
     isSourceCode = false,
-    kind: "html" | "snippet" = "html"
+    kind: "html" | "snippet" = "html",
+    useReplay = false
   ) => {
     setIsRunning(true);
     setIsFolderMode(false);
@@ -118,9 +119,10 @@ export const App: React.FC = () => {
 
     try {
       const endpoint = isSourceCode ? "/api/audit-code" : "/api/audit";
+      const isFixture = target.startsWith("/fixtures/") || target.startsWith("fixtures/");
       const payload = isSourceCode
         ? { source: target, kind, runFixes, maxStops: 50 }
-        : { targetUrl: target, runFixes, maxStops: 50 };
+        : { targetUrl: target, runFixes, maxStops: 50, useReplay: useReplay || isFixture };
 
       const response = await fetch(endpoint, {
         method: "POST",
@@ -358,17 +360,137 @@ export const App: React.FC = () => {
     try {
       setStatusMessage("Re-scanning folder from disk...");
       const walkResult = await walkDirectoryHandle(folderDirectoryHandle);
-      if (walkResult.files.length === 0) {
+      if (walkResult.length === 0) {
         throw new Error("No files found in folder upon re-scan.");
       }
       await handleStartFolderAudit(
-        walkResult.files,
+        walkResult,
         folderEntryPath || "index.html",
         folderDirectoryHandle,
         folderName
       );
     } catch (err: any) {
       setStatusMessage(err.message || "Failed to re-scan folder.");
+    }
+  };
+
+  const handleStartLocalDevAudit = async (
+    targetUrl: string,
+    files: FolderProjectFile[],
+    attested: boolean,
+    runFixes: boolean
+  ) => {
+    setIsRateLimited(false);
+    setIsRunning(true);
+    setRunFixesEnabled(runFixes);
+    setCurrentPhase("launch");
+    setStatusMessage(`Connecting to local dev server at ${targetUrl}...`);
+    setForwardStops([]);
+    setBarriers([]);
+    setLedger([]);
+    setModelsAndCost(null);
+    setReport(null);
+    setFolderEdits([]);
+
+    try {
+      const response = await fetch("/api/audit-local-dev", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          targetUrl,
+          files: files.map((f) => ({ path: f.path, content: f.content })),
+          attested,
+          runFixes,
+          maxStops: 50,
+        }),
+      });
+
+      if (!response.ok) {
+        if (response.status === 429) {
+          setIsRateLimited(true);
+          throw new Error("Hourly scan limit reached (60 audits per hour).");
+        }
+        if (response.status === 503) {
+          const errJson = await response.json().catch(() => ({}));
+          throw new Error(errJson.error || "Server busy: audit queue is full. Please try again shortly.");
+        }
+        const errJson = await response.json().catch(() => ({}));
+        throw new Error(errJson.error || `Server returned status ${response.status}`);
+      }
+
+      if (!response.body) {
+        throw new Error("Browser stream connection failed.");
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n\n");
+        buffer = lines.pop() || "";
+
+        for (const block of lines) {
+          if (!block.trim()) continue;
+          const matchEvent = block.match(/^event: (.*)$/m);
+          const matchData = block.match(/^data: (.*)$/m);
+
+          if (matchEvent && matchData) {
+            const eventName = matchEvent[1].trim();
+            const eventData = JSON.parse(matchData[1]);
+
+            if (eventName === "queued") {
+              const ahead = eventData.aheadCount ?? (eventData.position - 1);
+              const queueMsg =
+                ahead === 0
+                  ? "Waiting: your audit will begin momentarily"
+                  : `Waiting: ${ahead} audit${ahead === 1 ? "" : "s"} ahead of yours`;
+              setStatusMessage(queueMsg);
+            } else if (eventName === "status") {
+              setCurrentPhase(eventData.phase);
+              if (eventData.phase !== "complete") {
+                setStatusMessage(eventData.message);
+              }
+            } else if (eventName === "stop") {
+              setForwardStops((prev) => [...prev, eventData.stop]);
+            } else if (eventName === "barrier_resolved") {
+              setBarriers((prev) => [...prev, eventData.item]);
+            } else if (eventName === "ledger") {
+              if (eventData.calls) setLedger(eventData.calls);
+              if (eventData.aggregate) setModelsAndCost(eventData.aggregate);
+            } else if (eventName === "complete") {
+              const finalReport = eventData.report || (eventData.summary ? eventData : null);
+              setReport(finalReport);
+              if (eventData.forwardStops) {
+                setForwardStops(eventData.forwardStops);
+              }
+              if (finalReport?.barriers) {
+                setBarriers(finalReport.barriers);
+              }
+              setLedger(eventData.ledger || []);
+              if (eventData.modelsAndCost) {
+                setModelsAndCost(eventData.modelsAndCost);
+              } else if (finalReport?.modelsAndCost) {
+                setModelsAndCost(finalReport.modelsAndCost);
+              }
+              setCurrentPhase("complete");
+              setStatusMessage("");
+            } else if (eventName === "error") {
+              setCurrentPhase("error");
+              setStatusMessage(eventData.message || "Audit run failed unexpectedly.");
+            }
+          }
+        }
+      }
+    } catch (err: any) {
+      setCurrentPhase("error");
+      setStatusMessage(err.message || "Failed to audit local dev server.");
+    } finally {
+      setIsRunning(false);
     }
   };
 
@@ -508,7 +630,7 @@ export const App: React.FC = () => {
             color: "var(--color-text-primary)",
           }}
         >
-          Accessibility audit
+          Autonomous Accessibility Engine
         </h1>
 
         {/* Single sentence under h1: explains itself in 10 seconds. No second paragraph. */}
@@ -520,13 +642,14 @@ export const App: React.FC = () => {
             lineHeight: 1.5,
           }}
         >
-          BlindSpot presses Tab through your page like a keyboard user, finds where it breaks, and tests a fix.
+          Beyond static scans: BlindSpot actively navigates your live interface—finding hidden WCAG violations, broken screen reader semantics, and keyboard barriers, then testing verified code fixes.
         </p>
 
         {/* Audit Input Hero Card */}
         <AuditBar
           onStartAudit={handleStartAudit}
           onStartFolderAudit={handleStartFolderAudit}
+          onStartLocalDevAudit={handleStartLocalDevAudit}
           isRunning={isRunning}
         />
 
@@ -637,7 +760,7 @@ export const App: React.FC = () => {
             {isFolderMode && (
               <FolderActionToolbar
                 directoryHandle={folderDirectoryHandle}
-                capabilities={getFolderCapabilities(folderDirectoryHandle)}
+                capabilities={getFolderCapabilities()}
                 edits={folderEdits}
                 inMemoryOriginals={inMemoryOriginals}
                 onRescanFolder={handleRescanFolder}
@@ -656,11 +779,13 @@ export const App: React.FC = () => {
         )}
 
         {/* Diff Inspection Modal */}
-        <DiffModal
-          barrier={selectedDiffBarrier}
-          forwardStops={forwardStops}
-          onClose={() => setSelectedDiffBarrier(null)}
-        />
+        {selectedDiffBarrier && (
+          <DiffModal
+            barrier={selectedDiffBarrier}
+            forwardStops={forwardStops}
+            onClose={() => setSelectedDiffBarrier(null)}
+          />
+        )}
       </main>
 
       {/* Footer Landmark */}

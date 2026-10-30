@@ -33,16 +33,30 @@ BlindSpot bridges this gap by driving an isolated Chromium session with physical
 
 ---
 
-## 📁 In-Browser Project Folder Scanner: "Open project folder"
+## 🕹️ The Four Audit Modes
 
-BlindSpot operates as an in-browser project scanner using the browser's native File System Access API without requiring local software installation or terminal setup:
+BlindSpot supports four distinct developer workflows:
 
-1. **Pick Folder**: Switch the input mode to **"Open folder"** and click **"Open project folder"**. On Chromium desktop browsers (Chrome, Edge, Brave, Opera), this invokes the native **File System Access API** (`window.showDirectoryPicker`). On Firefox and Safari, a read-only directory upload fallback is provided.
-2. **Review & Exclude**: Inspect the project structure, select the entry HTML page (default `index.html`), and see live file counts and token estimates. Sensitive files (`.env*`, `*.pem`, `*.key`, `.git/*`, `node_modules/*`) are automatically excluded.
-3. **Scan & Verify**: BlindSpot loads the files into an ephemeral, in-memory Node.js HTTP server (`127.0.0.1`), executes the Chromium keyboard crawl, detects barriers, localizes the responsible file (e.g. `styles.css`), synthesizes a patch with **NVIDIA Nemotron Ultra**, and verifies resolution in the sandbox.
-4. **Inspect & Apply**: Review the verified unified diffs with line numbers. Click **"Apply all verified fixes"** to write changes directly back to your local folder on disk.
-5. **Safety Backups & Byte-for-Byte Revert**: Before the first write, an automated safety backup is saved to `.blindspot/backup/<ISO-timestamp>/<path>`. Click **"Revert changes"** at any time to restore your original files with automated byte-for-byte verification.
-6. **Scope Honesty**: This mode is strictly designed for **static projects** (HTML, CSS, JS with an `index.html` entry point). Framework projects (Next.js, Vite, React) requiring a compilation step, bundler, or dev server are not supported. Details in [docs/privacy.md](docs/privacy.md) and [docs/limitations.md](docs/limitations.md).
+1. **URL Mode**: Audits live public websites or local fixture pages by driving an isolated Chromium session with physical keyboard keystrokes (`Tab`, `Shift+Tab`, `Enter`, `Space`, `Escape`), protected by strict SSRF blocklists against private subnets and cloud metadata endpoints.
+2. **Paste Code Snippet Mode**: Audits pasted HTML fragments, accessible widget patterns, or standalone components directly in an airgapped sandbox with zero model calls or network requests.
+3. **Open Project Folder Mode**: In-browser static project scanner using the native File System Access API (`window.showDirectoryPicker` on Chromium desktop with read-only upload fallback). Automatically excludes secrets (`.env*`, `*.pem`, `*.key`), node_modules, and git directories. Provides automated `.blindspot/backup/` snapshots and byte-for-byte reverts. Scoped to static projects with an `index.html` entry point.
+4. **URL + Source Folder (Local Dev Server Bridge)**: Bridges a running local dev server (e.g. Vite or Next.js on `http://localhost:5173`) with your project's component source files (`src/`). BlindSpot actively navigates the live dev server, detects keyboard barriers, deterministically localizes the responsible React `.tsx` components (`likelySource`), and presents idiomatic React JSX fixes alongside the verified DOM patches.
+
+---
+
+## ⚛️ React Features & Local Dev Server Bridge
+
+BlindSpot provides native first-class workflows for modern React engineering teams:
+
+- **HTML / React Format Toggle**: In the **Fixes** tab, verified patches provide a segmented format switcher toggling between **"HTML / DOM patch"** and **"React (JSX / TSX)"**. React translations provide idiomatic component patterns (e.g. `useEffect` with keydown cleanup or inline `onKeyDown` container handlers) with live ARIA announcements.
+- **Deterministic Component Localization (`reactLocalizer.ts`)**: When source files are attached, BlindSpot ranks `.tsx`, `.jsx`, and `.css` files using regex heuristics for IDs (+30), selectors (+25), class names (+15), ARIA attributes (+8), component tags (+4), and detector affinities (+20), returning the top candidate source files (`likelySource`) with confidence scores.
+- **Strict Loopback Isolation Guard**: The Local Dev Bridge operates with strict security controls:
+  - Requires `ENABLE_LOCAL_DEV_BRIDGE=true` explicitly in the server environment.
+  - Requires explicit user ownership attestation on the target dev server URL.
+  - Restricts traffic strictly to loopback (`127.0.0.1` or `localhost`) with an explicit port.
+  - **Own-port refusal**: Refuses requests targeting BlindSpot's own port (3000) to prevent self-audit recursion loops.
+  - **CORS enforcement**: Blocks third-party origins; allows only same-origin loopback requests.
+  - **Verification honesty**: Runtime DOM patches are verified in headless Chromium; suggested `.tsx` translations are marked as unverified in the browser build pipeline because BlindSpot does not invoke the project's compilation toolchain.
 
 ---
 
@@ -131,29 +145,45 @@ We evaluated BlindSpot across 16 reproducible fixture pages (12 seeded barrier p
 
 ### Prerequisites
 - Node.js 20+ (tested on Node 22 / 24)
-- Playwright Chromium dependencies installed (`npx playwright install chromium`)
+- Playwright Chromium browser binary
 
 ### Quickstart
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/srinjoyr/blindspot.git
+git clone https://github.com/Srinjoy12/BlindSpot-AI-agent-that-fixes-keyboard-and-screen-reader-accessibility.git
 cd blindspot
 
-# 2. Install dependencies
-npm install
+# 2. Clean install dependencies
+npm ci
 
-# 3. Configure environment
+# 3. Install Playwright browser engine
+npx playwright install chromium
+
+# 4. Configure environment
 cp .env.example .env
 # Fill in your TF_API_KEY (Nebius Token Factory) and TAVILY_API_KEY
 
-# 4. Run unit and detector tests
+# 5. Run unit, integration, and security test suite (184 tests across 18 test files)
 npm test
 
-# 5. Start web development server
+# 6. Start the web application and API server (Port 3000)
 npm run dev
-# Open http://localhost:3000
+# Open http://localhost:3000 in your browser
 ```
+
+### Environment Variables
+
+| Variable | Required | Default / Example | Purpose |
+| :--- | :---: | :--- | :--- |
+| `TF_BASE_URL` | Yes | `https://api.tokenfactory.nebius.ai/v1` | Nebius Token Factory OpenAI-compatible API base URL |
+| `TF_API_KEY` | Yes | `<your-token-factory-key>` | Nebius Token Factory authentication API key |
+| `MODEL_NANO` | Yes | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | State digest and landmark summarization model tier |
+| `MODEL_SUPER` | Yes | `nvidia/nemotron-3-super-120b-a12b` | Issue synthesis, ranking, and human impact reasoning tier |
+| `MODEL_ULTRA` | Yes | `nvidia/Nemotron-3-Ultra-550b-a55b` | Surgical patch generation and repair tier |
+| `TAVILY_API_KEY` | Yes | `<your-tavily-api-key>` | Authoritative WCAG 2.2 guidance retrieval |
+| `ENABLE_LOCAL_DEV_BRIDGE` | No | `false` | Set `true` to enable auditing local dev servers. **Security Caveat**: Must run on the same physical host; loopback-only (`localhost`/`127.0.0.1`); BlindSpot's own port (3000) is refused; third-party origins blocked. |
+| `PORT` | No | `3000` | Port for BlindSpot server and web UI |
 
 ### Running the Benchmark Suite
 
@@ -195,12 +225,23 @@ docker run -p 3000:3000 --env-file .env blindspot:latest
 
 ## 📖 Documentation Directory
 
-- [Architecture Specification](docs/architecture.md) — Comprehensive technical design and data flow.
-- [Benchmark Results](docs/benchmark-results.md) — Complete 16-page evaluation scorecard and lift over static scanners.
-- [Privacy & Project Folder Security](docs/privacy.md) — Ephemeral in-memory sandboxing, egress blocking, and backup/revert safeguards.
-- [Limitations & Ethics](docs/limitations.md) — Transparent boundaries, non-goals, and responsible use guidelines.
+- [Architecture Specification](docs/architecture.md) — Comprehensive technical design, subsystem breakdown, and data flow.
+- [Benchmark Results](docs/benchmark-results.md) — Complete 16-page evaluation scorecard, lift over static scanners, and per-barrier breakdown.
+- [Privacy & Local Dev Bridge Security](docs/privacy.md) — Ephemeral in-memory sandboxing, loopback isolation, and backup/revert safeguards.
+- [Limitations & Ethics](docs/limitations.md) — Transparent engineering boundaries, non-goals, and self-audit results.
 - [Platform & Model Feedback](docs/feedback-notes.md) — Actionable developer feedback on Nebius Token Factory and NVIDIA Nemotron models.
+- [UI Redesign & Tactile Changelog](docs/ui-changes.md) — Before/after visual audit and neomorphic component documentation.
+- [QA & Verification Log](docs/qa-log.md) — Complete append-only verification log and test evidence.
 - [Video Demo Script](docs/video-transcript.md) — The 2m 45s pitch script with voice-over cues.
+
+---
+
+## 🏆 Attribution & Hackathon Track
+
+- **Hackathon Track**: Best Apps & Agents (Nebius x NVIDIA Global AI Hackathon)
+- **Inference Cloud**: [Nebius Token Factory](https://nebius.com)
+- **AI Models**: [NVIDIA Nemotron-3 Family](https://build.nvidia.com) (Nemotron-3-Nano-30B, nemotron-3-super-120b, Nemotron-3-Ultra-550b)
+- **Grounding Search**: [Tavily Search API](https://tavily.com)
 
 ---
 

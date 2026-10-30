@@ -4,6 +4,7 @@
 import { chromium, type Browser, type BrowserContext, type Page } from "playwright";
 
 import { attachSsrfGuard, checkUrl } from "./ssrf.js";
+import { validateLocalDevUrl, attachLocalDevBridgeGuard } from "./localDevBridge.js";
 
 export interface SessionOptions {
   auditId: string;
@@ -12,6 +13,7 @@ export interface SessionOptions {
   viewportWidth?: number; // default: 1280
   viewportHeight?: number; // default: 800
   appPort?: number;
+  allowSelfAudit?: boolean;
 }
 
 export interface Session {
@@ -40,7 +42,7 @@ async function getSharedBrowser(): Promise<Browser> {
 /** Starts a fresh isolated browser context for one audit. */
 export async function startSession(opts: SessionOptions): Promise<Session> {
   // Validate target URL before opening context
-  await checkUrl(opts.targetUrl, { allowFixtures: true, appPort: opts.appPort });
+  await checkUrl(opts.targetUrl, { allowFixtures: true, allowSelfAudit: opts.allowSelfAudit, appPort: opts.appPort });
 
   const browser = await getSharedBrowser();
 
@@ -60,6 +62,7 @@ export async function startSession(opts: SessionOptions): Promise<Session> {
   // Attach SSRF guard to every request in this context (main frame, redirects, fetches, subresources)
   await attachSsrfGuard(context, {
     allowFixtures: true,
+    allowSelfAudit: opts.allowSelfAudit,
     appPort: opts.appPort,
   });
 
@@ -86,6 +89,87 @@ export async function startSession(opts: SessionOptions): Promise<Session> {
     // Network may never go fully idle on some pages; continue anyway
   }
 
+  await waitForDomStability(page, 500);
+
+  return {
+    page,
+    context,
+    browser,
+    async close() {
+      await context.close();
+    },
+  };
+}
+
+export interface LocalDevSessionOptions {
+  auditId: string;
+  targetUrl: string;
+  attested: boolean;
+  ownPort?: number;
+  navigationTimeoutMs?: number; // default: 20_000
+  viewportWidth?: number; // default: 1280
+  viewportHeight?: number; // default: 800
+}
+
+/**
+ * Starts an isolated browser session specifically for local development servers.
+ * - Validates local dev URL using validateLocalDevUrl (strict loopback, explicit port, own-port rejection).
+ * - Attaches attachLocalDevBridgeGuard (allows exact dev port, blocks cross-port loopback, allows HMR ws).
+ * - Avoids networkidle wait to support active HMR servers; uses domcontentloaded + load + DOM stability poll.
+ */
+export async function startLocalDevSession(opts: LocalDevSessionOptions): Promise<Session> {
+  const validatedUrl = validateLocalDevUrl(opts.targetUrl, {
+    attested: opts.attested,
+    ownPort: opts.ownPort,
+  });
+
+  const browser = await getSharedBrowser();
+
+  const context = await browser.newContext({
+    viewport: {
+      width: opts.viewportWidth ?? 1280,
+      height: opts.viewportHeight ?? 800,
+    },
+    serviceWorkers: "block",
+    acceptDownloads: false,
+    userAgent:
+      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 BlindSpot-LocalDevBridge/1.0",
+  });
+
+  // Attach local dev bridge guard
+  await attachLocalDevBridgeGuard(context, {
+    devOrigin: validatedUrl.origin,
+    devPort: parseInt(validatedUrl.port, 10),
+    ownPort: opts.ownPort,
+  });
+
+  const page = await context.newPage();
+
+  // Dismiss native dialogs automatically
+  page.on("dialog", (dialog) => {
+    dialog.dismiss().catch(() => {});
+  });
+
+  // Block popup windows and new tabs
+  context.on("page", (newPage) => {
+    if (newPage !== page) {
+      void newPage.close().catch(() => {});
+    }
+  });
+
+  const navTimeout = opts.navigationTimeoutMs ?? 20_000;
+  page.setDefaultNavigationTimeout(navTimeout);
+  page.setDefaultTimeout(navTimeout);
+
+  // Navigate using domcontentloaded and load — no networkidle because dev server HMR/polling holds connections open
+  await page.goto(opts.targetUrl, { waitUntil: "domcontentloaded", timeout: navTimeout });
+  try {
+    await page.waitForLoadState("load", { timeout: 10_000 });
+  } catch {
+    // Continue if load event is delayed
+  }
+
+  // Poll DOM stability for 500ms
   await waitForDomStability(page, 500);
 
   return {

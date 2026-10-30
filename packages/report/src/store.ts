@@ -136,6 +136,21 @@ export class ReportStore {
   }
 
   /**
+   * Returns an iterator over all stored AuditReports (insertion order).
+   * Expired entries are cleaned before iteration.
+   */
+  values(): IterableIterator<AuditReport> {
+    this.cleanExpired();
+    const reports = this.reports;
+    function* gen() {
+      for (const item of reports.values()) {
+        yield item.report;
+      }
+    }
+    return gen();
+  }
+
+  /**
    * Cleans all reports whose age exceeds the TTL.
    */
   cleanExpired(referenceTime: number = Date.now()): void {

@@ -8,7 +8,7 @@ import "dotenv/config";
 // Fill in TF_API_KEY, TF_BASE_URL, MODEL_NANO, MODEL_SUPER, MODEL_ULTRA,
 // and TAVILY_API_KEY in .env before running this script.
 import { getTokenFactoryClient, Models, recordCall, ledgerTotals } from "../packages/ai/src/index.js";
-import type { ModelCallRecord } from "../packages/ai/src/index.js";
+import type { ModelCallRecord, ModelTier } from "../packages/ai/src/index.js";
 
 const PROBE_PROMPT = "Reply with exactly this JSON and nothing else: {\"status\":\"ok\",\"model_responded\":true}";
 
@@ -47,15 +47,19 @@ async function probeModel(tier: "NANO" | "SUPER" | "ULTRA"): Promise<ProbeResult
     const tokensIn = response.usage?.prompt_tokens ?? 0;
     const tokensOut = response.usage?.completion_tokens ?? 0;
 
+    const modelTier: ModelTier = tier === "NANO" ? "Nano" : tier === "SUPER" ? "Super" : "Ultra";
     const record: ModelCallRecord = {
       id: crypto.randomUUID(),
       stage: "digest",
+      tier: modelTier,
+      modelId: model,
       model,
       tokensIn,
       tokensOut,
       latencyMs,
+      estimatedCostUsd: null,
       cacheHit: false,
-      outcome: "success",
+      outcome: "ok",
       timestamp: new Date().toISOString(),
     };
     recordCall(record);
@@ -65,15 +69,19 @@ async function probeModel(tier: "NANO" | "SUPER" | "ULTRA"): Promise<ProbeResult
     const latencyMs = Date.now() - start;
     const error = err instanceof Error ? err.message : String(err);
 
+    const modelTier: ModelTier = tier === "NANO" ? "Nano" : tier === "SUPER" ? "Super" : "Ultra";
     const record: ModelCallRecord = {
       id: crypto.randomUUID(),
       stage: "digest",
+      tier: modelTier,
+      modelId: model,
       model,
       tokensIn: 0,
       tokensOut: 0,
       latencyMs,
+      estimatedCostUsd: null,
       cacheHit: false,
-      outcome: "failed",
+      outcome: "error",
       timestamp: new Date().toISOString(),
     };
     recordCall(record);

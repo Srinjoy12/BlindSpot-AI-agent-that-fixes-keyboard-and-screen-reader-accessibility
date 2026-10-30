@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "./ui/Button.js";
 
 interface HeaderProps {
   theme?: "dark" | "light";
@@ -14,40 +13,53 @@ export const Header: React.FC<HeaderProps> = ({
     <header
       role="banner"
       style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        borderBottom: "1px solid var(--color-border-subdued)",
-        backgroundColor: "var(--color-surface-1)",
         position: "sticky",
-        top: 0,
+        top: "var(--space-3)",
         zIndex: 100,
+        padding: "0 var(--space-4)",
+        marginBottom: "var(--space-4)",
       }}
     >
       <div
-        className="app-container"
+        className="app-container neo-extruded"
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           flexWrap: "wrap",
-          gap: "var(--space-3)",
-          paddingTop: "var(--space-3)",
-          paddingBottom: "var(--space-3)",
+          gap: "var(--space-4)",
+          borderRadius: "var(--radius-xl)",
+          padding: "var(--space-3) var(--space-6)",
+          maxWidth: "1120px",
+          margin: "0 auto",
         }}
       >
-        {/* Left: Product Name & Navigation */}
+        {/* Left: Brand Name with Mint Glow Dot & Navigation */}
         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-6)" }}>
-          <span
-            style={{
-              fontSize: "var(--font-size-lg)",
-              fontWeight: 600,
-              color: "var(--color-text-primary)",
-              letterSpacing: "-0.01em",
-            }}
-          >
-            BlindSpot
-          </span>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <span
+              style={{
+                width: "10px",
+                height: "10px",
+                borderRadius: "50%",
+                backgroundColor: "var(--color-status-success)",
+                boxShadow: "0 0 10px var(--color-status-success)",
+                display: "inline-block",
+                flexShrink: 0,
+              }}
+              aria-hidden="true"
+            />
+            <span
+              style={{
+                fontSize: "var(--font-size-xl)",
+                fontWeight: 600,
+                color: theme === "light" ? "#132A1E" : "var(--color-text-primary)",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              BlindSpot
+            </span>
+          </div>
 
           <nav aria-label="Main navigation">
             <ul
@@ -69,8 +81,8 @@ export const Header: React.FC<HeaderProps> = ({
                     fontWeight: 600,
                     color: "var(--color-text-primary)",
                     textDecoration: "none",
-                    borderBottom: "2px solid var(--color-accent-secondary)",
-                    paddingBottom: "4px",
+                    borderBottom: "2px solid var(--color-accent-primary)",
+                    paddingBottom: "2px",
                   }}
                 >
                   Audit
@@ -80,36 +92,35 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
         </div>
 
-        {/* Right: Theme Toggle & Attribution Line */}
+        {/* Right: Debossed Theme Toggle */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "var(--space-4)",
-            flexWrap: "wrap",
+            gap: "var(--space-3)",
           }}
         >
-          <span
-            style={{
-              fontSize: "var(--font-size-sm)",
-              color: "var(--color-text-muted)",
-              lineHeight: 1.5,
-            }}
-          >
-            Built with Nebius Token Factory and NVIDIA Nemotron
-          </span>
-
+          {/* Tactile debossed Theme Toggle button */}
           {onToggleTheme && (
-            <Button
+            <button
               id="theme-toggle-button"
-              variant="secondary"
-              size="sm"
+              type="button"
               onClick={onToggleTheme}
               aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
               title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+              className="neo-pill"
+              style={{
+                padding: "6px 14px",
+                minHeight: "36px",
+                fontSize: "var(--font-size-sm)",
+                fontWeight: 600,
+                color: "var(--color-text-primary)",
+                gap: "6px",
+              }}
             >
-              {theme === "dark" ? "Light theme" : "Dark theme"}
-            </Button>
+              <span aria-hidden="true">{theme === "dark" ? "☀️" : "🌙"}</span>
+              <span>{theme === "dark" ? "Light theme" : "Dark theme"}</span>
+            </button>
           )}
         </div>
       </div>
