@@ -18,7 +18,7 @@
   5. In-Browser Surgical Patch & Unified Diff Code Fixer with Security Linter.
   6. In-Browser Project Folder Scanner ("Open project folder" via File System Access API with automated backups and byte-for-byte revert).
   7. Multi-format Deliverable Export Engine (Standalone HTML, GitHub-flavored Markdown, JSON).
-  8. 16-Fixture Benchmark Suite (B01–B12, C01–C03, H01) evaluated with 92% recall, 92% verified fix rate (in benchmark artifact; 22/25 in replay run), 0 false alarms, and 100% prompt injection defense.
+  8. 16-Fixture Benchmark Suite (B01–B12, C01–C03, H01) evaluated with 92% recall, 92% verified fix rate in `artifacts/benchmark_results.json` (12/25 in `data/replays/`), 0 false alarms, and 100% prompt injection defense.
 
 ---
 
@@ -510,7 +510,7 @@ Evaluated across 16 reproducible fixture test pages (`fixtures/pages/` and `fixt
 ### Benchmark Evaluation Summary
 - **Seeded Barrier Recall:** **92.0%** (23 / 25 seeded barriers detected across B01–B12; 2 missed).
 - **Detection Precision:** **76.5%** (65 / 85 detections matched ground-truth defects; multi-element defect coverage on B03, B04, B05, B06, B12).
-- **Verified Fix Rate:** **92.0%** (23 / 25 seeded barriers verified by deterministic re-crawl in `artifacts/benchmark_results.json`; 23 of 23 detected barriers. Note: in offline replay/code-mode runs, B01 D1 was marked unverified yielding 22/25 [88.0%], as LLM fix output varies across runs).
+- **Verified Fix Rate:** **92.0%** (23 / 25 seeded barriers verified by deterministic re-crawl in `artifacts/benchmark_results.json`; 23 of 23 detected barriers. Note: in `data/replays/B01.json`, B01 D1 is recorded as unverified, and total replay verified count across `data/replays/*.json` is 12 / 25, as LLM fix output varies across runs).
 - **Regressions Introduced:** **0** (0% regression rate across all verified fixes).
 - **Clean Control Precision:** **100%** (0 false alarms across C01, C02, C03; 3 / 3 verified clean).
 - **Prompt Injection Defense:** **100% (PASSED)**. Adversarial instructions in DOM text and attributes were safely quarantined inside `<page_data>` and completely ignored.
@@ -529,7 +529,7 @@ Evaluated across 16 reproducible fixture test pages (`fixtures/pages/` and `fixt
 
 | # | Page | Target Selector | Detector | WCAG | Seeded Barrier Description | BlindSpot Status | axe-core Status | Ultra Fix Status | Regress. | Technical Reason & Failure Analysis |
 | :-: | :---: | :--- | :---: | :---: | :--- | :---: | :---: | :---: | :--- | :---: | :--- |
-| 1 | **B01** | `#newsletter-dialog` | D1 | 2.1.2 | Tab cycles indefinitely inside dialog; Escape does not close dialog. | ✅ Detected | ❌ Misses | ✅ Verified | 0 | Detected by D1 (focus cycle + Escape failure). Verified via deterministic headless re-crawl in the October 27, 2026 benchmark run (`artifacts/benchmark_results.json`). Note: In separate offline replay and code-mode runs, B01 D1 was marked unverified (yielding 22/25 verified fixes) when model-generated modal loop rewrites exceeded the diff size threshold, illustrating that verification counts vary across runs due to LLM non-determinism. (axe reported unrelated `aria-dialog-name`). |
+| 1 | **B01** | `#newsletter-dialog` | D1 | 2.1.2 | Tab cycles indefinitely inside dialog; Escape does not close dialog. | ✅ Detected | ❌ Misses | ✅ Verified | 0 | Detected by D1 (focus cycle + Escape failure). Verified via deterministic headless re-crawl in the October 27, 2026 benchmark run (`artifacts/benchmark_results.json`). Note: In `data/replays/B01.json`, B01 D1 is recorded as unverified when model-generated modal loop rewrites exceeded the diff size threshold, illustrating that verification counts vary across runs due to LLM non-determinism. (axe reported unrelated `aria-dialog-name`). |
 | 2 | **B01** | `#newsletter-dialog` | D8 | 2.4.3 | Focus not moved into dialog on open; not restored to trigger on close. | ✅ Detected | ❌ Misses | ✅ Verified | 0 | Detected by D8 (`#newsletter-dialog`). (axe reported unrelated `aria-dialog-name`). |
 | 3 | **B02** | `#dept-trigger` | D2 | 2.1.1 | Custom dropdown select div lacks `tabindex` and cannot receive keyboard focus. | ✅ Detected | ❌ Misses | ✅ Verified | 0 | Detected by D2 (`#dept-trigger`). |
 | 4 | **B02** | `#dept-trigger` | D6 | 4.1.2 | Dropdown trigger has no role or accessible name in the accessibility tree. | ✅ Detected | ❌ Misses | ✅ Verified | 0 | Detected by D6 (`#dept-trigger`) via AXTree interactive elements inspection. |

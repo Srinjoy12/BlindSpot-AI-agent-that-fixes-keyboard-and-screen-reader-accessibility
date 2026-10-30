@@ -55,7 +55,7 @@ npm run bench -- --fixes
 npm run bench:code
 ```
 
-> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier offline run reflecting 18 / 25 seeded barriers detected and 12 / 25 verified, whereas the full benchmark suite (`artifacts/benchmark_results.json`) achieves 23 / 25 detected (92.0% recall) and 23 / 25 verified (92.0% verified-fix rate via live `--fixes`). Verification counts can vary across runs (e.g., 22/25 when B01 D1 was unverified in replay/code-mode runs) because LLM patch generation is non-deterministic.
+> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier offline run reflecting 18 / 25 seeded barriers detected and 12 / 25 verified (with B01 D1 unverified in `data/replays/B01.json`), whereas the benchmark run in `artifacts/benchmark_results.json` achieves 23 / 25 detected (92.0% recall) and 23 / 25 verified (92.0% verified-fix rate via live `--fixes`). Verification counts vary across runs because LLM patch generation is non-deterministic.
 
 ---
 
@@ -92,7 +92,7 @@ The table below itemizes every individual barrier seeded in the B01–B12 test s
 
 - **Total Seeded Barriers**: 25 across 12 broken fixtures (B01–B12).
 - **Detected by BlindSpot**: 23 of 25 (**92.0% Recall**; 2 missed).
-- **Verified Fix Rate**: 23 of 25 (**92.0% Verified Fixes** in `artifacts/benchmark_results.json`; 23 of 23 detected barriers verified via deterministic re-crawl). Note: In offline replay and code-mode runs, B01 D1 was marked unverified (yielding 22/25 verified fixes, 88.0%) when model-generated modal loop rewrites exceeded the diff size threshold, illustrating that verification counts vary across runs due to LLM non-determinism.
+- **Verified Fix Rate**: 23 of 25 (**92.0% Verified Fixes** in `artifacts/benchmark_results.json`; 23 of 23 detected barriers verified via deterministic re-crawl). Note: In `data/replays/B01.json`, B01 D1 is recorded as unverified (and total replay verified count across `data/replays/*.json` is 12 of 25) when model-generated modal loop rewrites exceeded the diff size threshold, illustrating that verification counts vary across runs due to LLM non-determinism.
 - **Regressions Introduced**: **0** (0% regression rate across all verified fixes).
 - **Clean Control Precision**: **100%** (0 false alarms across C01, C02, C03).
 - **Detected by axe-core**: 1 of 25 (axe-core's `tabindex` rule detected the positive tabindex barrier on B06; all other 24 dynamic keyboard barriers were missed by axe-core).
@@ -106,7 +106,7 @@ The table below itemizes every individual barrier seeded in the B01–B12 test s
 
 | # | Page | Target Selector | Detector | WCAG | Seeded Barrier Description | BlindSpot Status | axe-core Status | Ultra Fix Status | Regress. | Technical Reason & Failure Analysis |
 | :-: | :---: | :--- | :---: | :---: | :--- | :---: | :---: | :---: | :---: | :--- |
-| 1 | **B01** | `#newsletter-dialog` | D1 | 2.1.2 | Tab cycles indefinitely inside dialog; Escape does not close dialog. | ✅ Detected | ❌ Misses | ✅ Verified | 0 | Detected by D1 (focus cycle + Escape failure). Verified via deterministic headless re-crawl in the October 27, 2026 benchmark run (`artifacts/benchmark_results.json`). Note: In separate offline replay and code-mode runs, B01 D1 was marked unverified (yielding 22/25 verified fixes) when model-generated modal loop rewrites exceeded the diff size threshold, illustrating that verification counts vary across runs due to LLM non-determinism. (axe reported unrelated `aria-dialog-name`). |
+| 1 | **B01** | `#newsletter-dialog` | D1 | 2.1.2 | Tab cycles indefinitely inside dialog; Escape does not close dialog. | ✅ Detected | ❌ Misses | ✅ Verified | 0 | Detected by D1 (focus cycle + Escape failure). Verified via deterministic headless re-crawl in the October 27, 2026 benchmark run (`artifacts/benchmark_results.json`). Note: In `data/replays/B01.json`, B01 D1 is recorded as unverified when model-generated modal loop rewrites exceeded the diff size threshold, illustrating that verification counts vary across runs due to LLM non-determinism. (axe reported unrelated `aria-dialog-name`). |
 | 2 | **B01** | `#newsletter-dialog` | D8 | 2.4.3 | Focus not moved into dialog on open; not restored to trigger on close. | ✅ Detected | ❌ Misses | ✅ Verified | 0 | Detected by D8 (`#newsletter-dialog`). (axe reported unrelated `aria-dialog-name`). |
 | 3 | **B02** | `#dept-trigger` | D2 | 2.1.1 | Custom dropdown select div lacks `tabindex` and cannot receive keyboard focus. | ✅ Detected | ❌ Misses | ✅ Verified | 0 | Detected by D2 (`#dept-trigger`). |
 | 4 | **B02** | `#dept-trigger` | D6 | 4.1.2 | Dropdown trigger has no role or accessible name in the accessibility tree. | ✅ Detected | ❌ Misses | ✅ Verified | 0 | Detected by D6 (`#dept-trigger`) via AXTree interactive elements inspection. |

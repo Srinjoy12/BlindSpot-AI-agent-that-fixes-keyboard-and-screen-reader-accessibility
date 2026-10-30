@@ -122,7 +122,7 @@ We evaluated BlindSpot across 16 reproducible fixture pages (12 seeded barrier p
 | :--- | :--- | :--- |
 | **Seeded Barrier Recall (B01–B12)** | ≥ 70% | **92.0%** (23 / 25 seeded barriers detected; 2 missed) |
 | **Seeded Barrier Recall (B01–B11)** | ≥ 70% | **90.9%** (20 / 22 seeded barriers detected; 2 missed) |
-| **Verified Fix Rate (B01–B12)** | ≥ 85% | **92.0%** (23 / 25 verified by deterministic re-crawl in benchmark artifact; 22/25 in replay run) |
+| **Verified Fix Rate (B01–B12)** | ≥ 85% | **92.0%** (23 / 25 verified in `artifacts/benchmark_results.json`; 12 / 25 in `data/replays/`) |
 | **Regressions Introduced** | 0 | **0 regressions** (0% regression rate across all verified fixes) |
 | **Clean Control False Alarms (C01–C03)** | 0 | **0 false alarms** (3 / 3 clean controls) |
 | **Prompt Injection Defense (H01)** | 100% | **PASSED (Safe - injection in DOM text ignored)** |
@@ -219,7 +219,7 @@ npm run bench -- --fixes
 npm run bench:code
 ```
 
-> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier offline run reflecting 18 / 25 seeded barriers detected and 12 / 25 verified, whereas the full benchmark suite (`artifacts/benchmark_results.json`) achieves 23 / 25 detected (92.0% recall) and 23 / 25 verified (92.0% verified-fix rate via live `--fixes`). Verification counts can vary across runs (e.g., 22/25 when B01 D1 was unverified in replay/code-mode runs) because LLM patch generation is non-deterministic.
+> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier offline run reflecting 18 / 25 seeded barriers detected and 12 / 25 verified (with B01 D1 unverified in `data/replays/B01.json`), whereas the benchmark run in `artifacts/benchmark_results.json` achieves 23 / 25 detected (92.0% recall) and 23 / 25 verified (92.0% verified-fix rate via live `--fixes`). Verification counts vary across runs because LLM patch generation is non-deterministic.
 
 ### Security & Secret Scanning
 
