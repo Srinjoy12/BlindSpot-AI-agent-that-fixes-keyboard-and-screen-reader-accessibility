@@ -29,6 +29,26 @@ BlindSpot evaluates accessibility barriers by actually navigating the page using
 > [!NOTE]
 > **Important Benchmark Disclosure**: The fixtures were written by the same team as the detectors, and several were designed to contain problems a static checker cannot see, so recall on them is optimistic. Test fixtures B01–B11 were specifically authored to test dynamic runtime and keyboard interaction barriers (such as traps, dynamic focus obscuration, hover menus, and focus drops) that static AST/DOM checkers are structurally blind to. The benchmark tests how an interactive keyboard agent compares against static DOM scanning on interaction-dependent failures.
 
+### Benchmark Reproduction & Regeneration Command
+
+To reproduce the benchmark and regenerate `artifacts/benchmark_results.json`:
+
+```bash
+# Run full benchmark across all 16 fixtures (deterministic headless browser crawl, 0 model tokens)
+npm run bench
+
+# Run a single benchmark page
+npm run bench -- B01
+
+# Run with live model fix generation (spends Nebius model tokens)
+npm run bench -- --fixes
+
+# Run code-mode benchmark across all fixtures (spends Nebius model tokens, outputs artifacts/benchmark_code_mode.json)
+npm run bench:code
+```
+
+> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier run and may differ from the benchmark figures, which come from `artifacts/benchmark_results.json`.
+
 ---
 
 ## 2. Per-Page Benchmark Fixture Suite Results

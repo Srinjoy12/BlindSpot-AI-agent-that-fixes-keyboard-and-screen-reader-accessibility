@@ -196,13 +196,23 @@ npm run dev
 
 ### Running the Benchmark Suite
 
+To reproduce the benchmark and regenerate `artifacts/benchmark_results.json`:
+
 ```bash
-# Run full benchmark across all 16 fixtures
+# Run full benchmark across all 16 fixtures (deterministic headless browser crawl, 0 model tokens)
 npm run bench
 
 # Run a single benchmark page
 npm run bench -- B01
+
+# Run with live model fix generation (spends Nebius model tokens)
+npm run bench -- --fixes
+
+# Run code-mode benchmark across all fixtures (spends Nebius model tokens, outputs artifacts/benchmark_code_mode.json)
+npm run bench:code
 ```
+
+> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier run and may differ from the benchmark figures, which come from `artifacts/benchmark_results.json`.
 
 ### Security & Secret Scanning
 
