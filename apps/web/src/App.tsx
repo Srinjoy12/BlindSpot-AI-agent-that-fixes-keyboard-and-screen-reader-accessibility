@@ -73,13 +73,13 @@ export const App: React.FC = () => {
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
-  // Theme state: dark is default, toggleable, preserves user preference
+  // Theme state: light is default, toggleable, preserves user preference
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("blindspot-theme");
       if (saved === "light" || saved === "dark") return saved;
     }
-    return "dark";
+    return "light";
   });
 
   useEffect(() => {

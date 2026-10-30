@@ -6,7 +6,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({
-  theme = "dark",
+  theme = "light",
   onToggleTheme,
 }) => {
   return (
