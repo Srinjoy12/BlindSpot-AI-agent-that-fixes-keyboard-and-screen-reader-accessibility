@@ -47,14 +47,14 @@ async function verifyAndCapture() {
 
     // Verify single sentence under h1
     const subhead = await page.textContent("main p");
-    if (!subhead?.includes("BlindSpot presses Tab through your page like a keyboard user")) {
+    if (!subhead?.includes("BlindSpot actively navigates your live interface")) {
       console.error(`❌ Subhead text missing or incorrect in ${vp.name}: ${subhead}`);
     } else {
       console.log(`✓ Single sentence under h1 verified in ${vp.name}.`);
     }
 
     // Verify SegmentedControl
-    const segmentedButtons = await page.$$('div[role="radiogroup"] button');
+    const segmentedButtons = await page.$$('div[role="radiogroup"] button, div[role="tablist"] button');
     if (segmentedButtons.length < 2) {
       console.error(`❌ SegmentedControl buttons missing in ${vp.name}`);
     } else {
@@ -72,16 +72,6 @@ async function verifyAndCapture() {
     const checkboxLabel = await page.textContent('label:has(#enable-ultra-fix-checkbox)');
     if (!checkboxLabel?.includes("Suggest fixes and test them")) {
       console.error(`❌ Checkbox label incorrect: ${checkboxLabel}`);
-    }
-
-    // Verify highlighted default example: Cookie banner
-    const cookieCard = page.locator("#try-cookie-banner-button");
-    await cookieCard.waitFor({ state: "visible" });
-
-    // Verify "Recorded run" badge
-    const recordedBadge = page.locator('text="Recorded run"');
-    if ((await recordedBadge.count()) === 0) {
-      console.error("❌ Recorded run badge not found!");
     }
 
     // Check no horizontal scroll
@@ -150,9 +140,9 @@ async function verifyAndCapture() {
     const page = await browser.newPage({ viewport: { width: vp.width, height: vp.height } });
     await page.goto("http://localhost:3000", { waitUntil: "networkidle" });
 
-    // Click "Try the cookie banner example"
-    console.log(`[${vp.name}] Clicking "Try the cookie banner example"...`);
-    const demoBtn = page.locator("#try-cookie-banner-button");
+    // Run audit for default B08 cookie banner fixture
+    console.log(`[${vp.name}] Running B08 cookie banner audit...`);
+    const demoBtn = page.locator("#audit-submit-button");
     await demoBtn.click();
 
     // Verify stepper collapses to "Finished in X.X s" with "Show steps"

@@ -102,7 +102,8 @@ export const App: React.FC = () => {
     target: string,
     runFixes: boolean,
     isSourceCode = false,
-    kind: "html" | "snippet" = "html"
+    kind: "html" | "snippet" = "html",
+    useReplay = false
   ) => {
     setIsRunning(true);
     setIsFolderMode(false);
@@ -118,9 +119,10 @@ export const App: React.FC = () => {
 
     try {
       const endpoint = isSourceCode ? "/api/audit-code" : "/api/audit";
+      const isFixture = target.startsWith("/fixtures/") || target.startsWith("fixtures/");
       const payload = isSourceCode
         ? { source: target, kind, runFixes, maxStops: 50 }
-        : { targetUrl: target, runFixes, maxStops: 50 };
+        : { targetUrl: target, runFixes, maxStops: 50, useReplay: useReplay || isFixture };
 
       const response = await fetch(endpoint, {
         method: "POST",
@@ -628,7 +630,7 @@ export const App: React.FC = () => {
             color: "var(--color-text-primary)",
           }}
         >
-          Accessibility audit
+          Autonomous Accessibility Engine
         </h1>
 
         {/* Single sentence under h1: explains itself in 10 seconds. No second paragraph. */}
@@ -640,7 +642,7 @@ export const App: React.FC = () => {
             lineHeight: 1.5,
           }}
         >
-          BlindSpot presses Tab through your page like a keyboard user, finds where it breaks, and tests a fix.
+          Beyond static scans: BlindSpot actively navigates your live interface—finding hidden WCAG violations, broken screen reader semantics, and keyboard barriers, then testing verified code fixes.
         </p>
 
         {/* Audit Input Hero Card */}
@@ -777,11 +779,13 @@ export const App: React.FC = () => {
         )}
 
         {/* Diff Inspection Modal */}
-        <DiffModal
-          barrier={selectedDiffBarrier}
-          forwardStops={forwardStops}
-          onClose={() => setSelectedDiffBarrier(null)}
-        />
+        {selectedDiffBarrier && (
+          <DiffModal
+            barrier={selectedDiffBarrier}
+            forwardStops={forwardStops}
+            onClose={() => setSelectedDiffBarrier(null)}
+          />
+        )}
       </main>
 
       {/* Footer Landmark */}

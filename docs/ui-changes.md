@@ -43,7 +43,7 @@ All after screenshots have been captured at 1440px desktop and 390px mobile view
 ## 3. Comprehensive Breakdown of Changes
 
 ### A. First Screen & Input Bar
-- **Single Sentence under H1**: Replaced generic description paragraphs with a single plain sentence: *"BlindSpot presses Tab through your page like a keyboard user, finds where it breaks, and tests a fix."*
+- **Single Sentence under H1**: Replaced generic description paragraphs with a single plain sentence: *"Beyond static scans: BlindSpot actively navigates your live interface—finding hidden WCAG violations, broken screen reader semantics, and keyboard barriers, then testing verified code fixes."*
 - **SegmentedControl**: Implemented an accessible radiogroup (`URL | Paste code`) with roving tabindex. Built to allow adding *"Open folder"* as a third option without layout shifts.
 - **Plain-Language Controls**: Primary button labelled *"Run audit"* with a muted `⌘↵` keyboard shortcut hint. Checkbox rephrased to *"Suggest fixes and test them"*.
 - **Focused Input Bar**: Streamlined to URL, Paste code, and Open folder without distraction. Removed demo cards and example dropdowns for a clean, professional interface.

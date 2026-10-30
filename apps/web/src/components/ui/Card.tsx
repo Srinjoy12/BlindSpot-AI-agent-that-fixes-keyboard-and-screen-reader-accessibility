@@ -3,7 +3,7 @@ import React from "react";
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   padding?: "sm" | "md" | "lg" | "none";
-  surface?: "surface1" | "surface2";
+  surface?: "surface1" | "surface2" | "sunken";
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -27,15 +27,14 @@ export const Card: React.FC<CardProps> = ({
     }
   };
 
+  const isSunken = surface === "sunken" || surface === "surface2";
+
   return (
     <div
-      className={`ui-card ${className}`}
+      className={`ui-card ${isSunken ? "neo-sunken" : "neo-extruded"} ${className}`}
       style={{
-        backgroundColor: surface === "surface1" ? "var(--color-surface-1)" : "var(--color-surface-2)",
-        border: "1px solid var(--color-border-subdued)",
-        borderRadius: "var(--radius-md)", // Strictly 10px
         padding: getPadding(),
-        boxShadow: "var(--shadow-subtle)",
+        borderRadius: "var(--radius-lg)",
         ...style,
       }}
       {...rest}

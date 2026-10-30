@@ -77,15 +77,14 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
   if (!stops || stops.length === 0) {
     return (
       <div
+        className="neo-extruded"
         style={{
-          backgroundColor: "var(--color-surface-1)",
-          border: "1px solid var(--color-border-subdued)",
-          borderRadius: "var(--radius-md)",
-          padding: "var(--space-6)",
+          borderRadius: "var(--radius-xl)",
+          padding: "var(--space-8)",
           marginBottom: "var(--space-6)",
           color: "var(--color-text-muted)",
           textAlign: "center",
-          fontSize: "var(--font-size-sm)",
+          fontSize: "var(--font-size-base)",
         }}
       >
         No keyboard trace data loaded. Run an audit to inspect the focus sequence.
@@ -130,8 +129,6 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
       ? `${currentStop.accessibleName} (${currentStop.tagName.toLowerCase()})`
       : currentStop.selector;
 
-  // Build the plain English current-step sentence required:
-  // "Step 12: Close button in the cookie banner. Focus is visible. Next Tab goes back to step 9."
   let nextActionSentence = "";
   if (nextStop) {
     const nextDesc = nextStop.accessibleName
@@ -153,7 +150,6 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
   // SVG bounding-box coordinate computation
   const svgWidth = 840;
   const svgHeight = 440;
-  // Compute bounds across all stops
   const maxX = Math.max(...activeStops.map((s) => (s.box.x || 0) + (s.box.width || 100)), 800);
   const maxY = Math.max(...activeStops.map((s) => (s.box.y || 0) + (s.box.height || 50)), 500);
 
@@ -162,11 +158,10 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
 
   return (
     <div
+      className="neo-extruded"
       style={{
-        backgroundColor: "var(--color-surface-1)",
-        border: "1px solid var(--color-border-subdued)",
-        borderRadius: "var(--radius-md)",
-        padding: "var(--space-4)",
+        borderRadius: "var(--radius-xl)",
+        padding: "var(--space-6)",
         marginBottom: "var(--space-6)",
       }}
     >
@@ -179,25 +174,24 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
           flexWrap: "wrap",
           gap: "var(--space-3)",
           marginBottom: "var(--space-4)",
-          paddingBottom: "var(--space-3)",
+          paddingBottom: "var(--space-4)",
           borderBottom: "1px solid var(--color-border-subdued)",
         }}
       >
         <div>
           <h2
             style={{
-              fontSize: "var(--font-size-lg)",
+              fontSize: "var(--font-size-xl)",
               fontWeight: 600,
               color: "var(--color-text-primary)",
-              margin: "0 0 4px 0",
+              margin: "0 0 6px 0",
             }}
           >
             Keyboard path
           </h2>
-          {/* One-line definition for first-time users */}
           <p
             style={{
-              fontSize: "var(--font-size-sm)",
+              fontSize: "var(--font-size-base)",
               color: "var(--color-text-secondary)",
               margin: 0,
               lineHeight: 1.5,
@@ -207,30 +201,32 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
           </p>
         </div>
 
-        {/* Before / After run toggle (when afterStops exists) */}
+        {/* Before / After run toggle */}
         {resolvedAfterStops && (
           <div
             role="group"
             aria-label="Crawl run comparison"
-            style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}
+            className="neo-sunken"
+            style={{
+              display: "flex",
+              gap: "4px",
+              padding: "4px",
+              borderRadius: "var(--radius-full)",
+              alignItems: "center",
+            }}
           >
-            <span style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-muted)" }}>
-              Run view:
-            </span>
             <button
               onClick={() => {
                 setRunMode("before");
                 setSelectedIdx(0);
               }}
+              className="neo-pill"
+              aria-selected={runMode === "before"}
               style={{
-                padding: "var(--space-2) var(--space-3)",
-                borderRadius: "var(--radius-sm)",
-                backgroundColor: runMode === "before" ? "var(--color-surface-3)" : "var(--color-surface-2)",
-                border: runMode === "before" ? "1px solid var(--color-border-strong)" : "1px solid var(--color-border-subdued)",
-                color: runMode === "before" ? "var(--color-text-primary)" : "var(--color-text-secondary)",
+                padding: "6px 14px",
                 fontSize: "var(--font-size-sm)",
                 fontWeight: runMode === "before" ? 600 : 400,
-                cursor: "pointer",
+                color: runMode === "before" ? "var(--color-text-primary)" : "var(--color-text-secondary)",
               }}
             >
               Original run ({stops.length} stops)
@@ -240,15 +236,14 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
                 setRunMode("after");
                 setSelectedIdx(0);
               }}
+              className="neo-pill"
+              aria-selected={runMode === "after"}
               style={{
-                padding: "var(--space-2) var(--space-3)",
-                borderRadius: "var(--radius-sm)",
-                backgroundColor: runMode === "after" ? "var(--color-surface-3)" : "var(--color-surface-2)",
-                border: runMode === "after" ? "1px solid var(--color-border-strong)" : "1px solid var(--color-border-subdued)",
-                color: runMode === "after" ? "var(--color-status-success)" : "var(--color-text-secondary)",
+                padding: "6px 14px",
                 fontSize: "var(--font-size-sm)",
                 fontWeight: runMode === "after" ? 600 : 400,
-                cursor: "pointer",
+                backgroundColor: runMode === "after" ? "var(--color-accent-primary)" : undefined,
+                color: runMode === "after" ? "#FFFFFF" : "var(--color-text-secondary)",
               }}
             >
               ✓ After fix ({resolvedAfterStops.length} stops)
@@ -264,11 +259,11 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
           justifyContent: "space-between",
           alignItems: "center",
           flexWrap: "wrap",
-          gap: "var(--space-2)",
+          gap: "var(--space-3)",
           marginBottom: "var(--space-3)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
           <Button
             variant="secondary"
             size="sm"
@@ -280,12 +275,13 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
           </Button>
 
           <span
+            className="neo-pill"
             style={{
               fontSize: "var(--font-size-sm)",
               fontFamily: "var(--font-mono)",
               color: "var(--color-text-primary)",
               fontWeight: 600,
-              padding: "0 var(--space-2)",
+              padding: "6px 14px",
             }}
           >
             Tab stop {selectedIdx + 1} of {activeStops.length}
@@ -303,22 +299,24 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
         </div>
 
         <div style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-muted)" }}>
-          Use <kbd style={{ padding: "1px 4px", borderRadius: "3px", backgroundColor: "var(--color-surface-2)" }}>←</kbd> and <kbd style={{ padding: "1px 4px", borderRadius: "3px", backgroundColor: "var(--color-surface-2)" }}>→</kbd> keys to step through
+          Use <kbd style={{ padding: "2px 6px", borderRadius: "4px", backgroundColor: "var(--neo-sunken-bg)", border: "1px solid var(--color-border-subdued)" }}>←</kbd> and <kbd style={{ padding: "2px 6px", borderRadius: "4px", backgroundColor: "var(--neo-sunken-bg)", border: "1px solid var(--color-border-subdued)" }}>→</kbd> keys to step through
         </div>
       </div>
 
-      {/* Scrubber Ribbon with Arrow-Key Support */}
+      {/* Scrubber Ribbon: Inset Well with Raised Pill Buttons */}
       <div
         ref={scrubberContainerRef}
         tabIndex={0}
         onKeyDown={handleKeyDown}
         role="region"
         aria-label="Keyboard tab stop timeline. Use left and right arrow keys to navigate."
+        className="neo-sunken"
         style={{
           display: "flex",
           gap: "var(--space-2)",
           overflowX: "auto",
-          paddingBottom: "var(--space-3)",
+          padding: "var(--space-3)",
+          borderRadius: "var(--radius-lg)",
           marginBottom: "var(--space-4)",
           outline: "none",
         }}
@@ -337,11 +335,13 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
               key={idx}
               onClick={() => setSelectedIdx(idx)}
               aria-label={`Tab stop ${idx + 1}: ${s.accessibleName || s.selector}${hasIssue ? " (Problem detected)" : ""}`}
+              className={isSelected ? "neo-extruded" : "neo-pill"}
               style={{
                 flexShrink: 0,
-                padding: "var(--space-2) var(--space-3)",
-                borderRadius: "var(--radius-sm)",
-                backgroundColor: isSelected ? "var(--color-surface-3)" : "var(--color-surface-2)",
+                padding: "8px 12px",
+                borderRadius: "var(--radius-md)",
+                backgroundColor: isSelected ? "var(--neo-extruded-bg)" : "var(--neo-pill-bg)",
+                boxShadow: isSelected ? "var(--neo-extruded-shadow)" : "var(--neo-pill-shadow)",
                 border: isSelected
                   ? "2px solid var(--color-focus-ring)"
                   : hasIssue
@@ -354,7 +354,6 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
                 minWidth: "130px",
                 textAlign: "left",
                 cursor: "pointer",
-                transition: "all var(--transition-duration) var(--transition-timing)",
               }}
             >
               <div
@@ -370,7 +369,6 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
                 }}
               >
                 <span>#{idx + 1}</span>
-                {/* Clearly show problem point with ICON AND LABEL, not only a color */}
                 {hasIssue && (
                   <span
                     style={{
@@ -406,74 +404,40 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
         })}
       </div>
 
-      {/* Plain Language Step Narrative Panel (Strict user requirement) */}
+      {/* Step Narrative Note */}
       <div
         style={{
-          padding: "var(--space-3) var(--space-4)",
-          backgroundColor: isStopProblematic ? "var(--color-surface-2)" : "var(--color-surface-2)",
-          border: isStopProblematic
-            ? "1px solid var(--color-severity-major)"
-            : "1px solid var(--color-border-subdued)",
-          borderLeft: isStopProblematic
-            ? "4px solid var(--color-severity-blocker)"
-            : "4px solid var(--color-focus-ring)",
-          borderRadius: "var(--radius-sm)",
+          fontSize: "var(--font-size-base)",
+          fontWeight: 600,
+          color: "var(--color-text-primary)",
           marginBottom: "var(--space-4)",
+          lineHeight: 1.5,
         }}
       >
-        <div style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-3)" }}>
-          <div style={{ marginTop: "2px" }}>
-            <StatusIcon status={isStopProblematic ? "blocker" : "success"} size={18} />
-          </div>
-          <div>
-            <div
-              style={{
-                fontSize: "var(--font-size-base)",
-                fontWeight: 600,
-                color: "var(--color-text-primary)",
-                lineHeight: 1.5,
-              }}
-            >
-              {stepSummarySentence}
-            </div>
-
-            {isStopProblematic && matchingBarrier && (
-              <div
-                style={{
-                  marginTop: "6px",
-                  fontSize: "var(--font-size-sm)",
-                  color: "var(--color-severity-major)",
-                  fontWeight: 600,
-                }}
-              >
-                Barrier flagged here: {matchingBarrier.wcagName} ({matchingBarrier.wcagId}) — {matchingBarrier.evidence}
-              </div>
-            )}
-          </div>
-        </div>
+        {stepSummarySentence}
       </div>
 
-      {/* 2D Bounding-Box View with Numbered Path */}
+      {/* Visual SVG Canvas Framed Inside an Extruded Bevel Viewport Frame */}
       <div
+        className="neo-extruded"
         style={{
-          backgroundColor: "var(--color-bg-canvas)",
-          border: "1px solid var(--color-border-subdued)",
-          borderRadius: "var(--radius-sm)",
+          borderRadius: "var(--radius-xl)",
           padding: "var(--space-4)",
           overflowX: "auto",
+          border: "1px solid var(--color-border-ui)",
         }}
       >
         <div
           style={{
             fontSize: "var(--font-size-sm)",
             color: "var(--color-text-muted)",
-            marginBottom: "var(--space-2)",
+            marginBottom: "var(--space-3)",
             display: "flex",
             justifyContent: "space-between",
           }}
         >
-          <span>Viewport sequential path map</span>
-          <span>{activeStops.length} stops mapped</span>
+          <span style={{ fontWeight: 600, color: "var(--color-text-secondary)" }}>Tactile Viewport Coordinate Map</span>
+          <span style={{ fontFamily: "var(--font-mono)" }}>{activeStops.length} stops mapped</span>
         </div>
 
         <svg
@@ -481,10 +445,11 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
           style={{
             width: "100%",
             height: "auto",
-            maxHeight: "360px",
-            backgroundColor: "var(--color-surface-1)",
-            borderRadius: "var(--radius-sm)",
-            border: "1px solid var(--color-border-subdued)",
+            maxHeight: "380px",
+            backgroundColor: "var(--neo-sunken-bg)",
+            borderRadius: "var(--radius-lg)",
+            border: "var(--neo-sunken-border)",
+            boxShadow: "var(--neo-sunken-shadow)",
           }}
           role="img"
           aria-label="Interactive 2D path map showing sequential tab stops across viewport coordinates"
@@ -506,10 +471,10 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
                 y1={y1}
                 x2={x2}
                 y2={y2}
-                stroke={isPast ? "var(--color-focus-ring)" : "var(--color-border-strong)"}
-                strokeWidth={isPast ? "2" : "1.5"}
+                stroke={isPast ? "var(--color-accent-secondary)" : "var(--color-border-ui)"}
+                strokeWidth={isPast ? "2.5" : "1.5"}
                 strokeDasharray={isPast ? "none" : "4,4"}
-                opacity={isPast ? 0.9 : 0.4}
+                opacity={isPast ? 0.95 : 0.45}
               />
             );
           })}
@@ -530,16 +495,31 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
                 onClick={() => setSelectedIdx(idx)}
                 style={{ cursor: "pointer" }}
               >
-                {/* Outer highlight for selected node */}
+                {/* Active Focus Node: Dual-Ring Sky Blue / Lime Green Glowing Marker */}
                 {isSelected && (
-                  <circle
-                    cx={cx}
-                    cy={cy}
-                    r={18}
-                    fill="none"
-                    stroke="var(--color-focus-ring)"
-                    strokeWidth={3}
-                  />
+                  <>
+                    {/* Outer glowing Sky Blue halo ring */}
+                    <circle
+                      cx={cx}
+                      cy={cy}
+                      r={22}
+                      fill="none"
+                      stroke="#0EA5E9"
+                      strokeWidth={3}
+                      strokeOpacity={0.7}
+                      style={{ filter: "drop-shadow(0 0 6px #0EA5E9)" }}
+                    />
+                    {/* Inner glowing Lime Green ring */}
+                    <circle
+                      cx={cx}
+                      cy={cy}
+                      r={16}
+                      fill="none"
+                      stroke="#A3E635"
+                      strokeWidth={2}
+                      strokeDasharray="2,2"
+                    />
+                  </>
                 )}
 
                 {/* Main node circle */}
@@ -549,13 +529,13 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
                   r={12}
                   fill={
                     isSelected
-                      ? "var(--color-focus-ring)"
+                      ? "#1B5E3B"
                       : isBarrier
                       ? "var(--color-severity-blocker)"
-                      : "var(--color-surface-3)"
+                      : "var(--neo-extruded-bg)"
                   }
-                  stroke={isSelected ? "#000000" : "var(--color-border-strong)"}
-                  strokeWidth={1.5}
+                  stroke={isSelected ? "#A3E635" : "var(--color-border-ui)"}
+                  strokeWidth={2}
                 />
 
                 {/* Step number label */}
@@ -563,23 +543,23 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
                   x={cx}
                   y={cy + 4}
                   textAnchor="middle"
-                  fill={isSelected ? "#000000" : "var(--color-text-primary)"}
-                  fontSize="10"
+                  fill={isSelected ? "#FFFFFF" : "var(--color-text-primary)"}
+                  fontSize="11"
                   fontFamily="var(--font-mono)"
-                  fontWeight="600"
+                  fontWeight="700"
                 >
                   {idx + 1}
                 </text>
 
-                {/* Label problem stops with text flag */}
+                {/* Barrier indicator flag */}
                 {isBarrier && (
                   <text
                     x={cx}
                     y={cy - 16}
                     textAnchor="middle"
                     fill="var(--color-severity-blocker)"
-                    fontSize="9"
-                    fontWeight="600"
+                    fontSize="10"
+                    fontWeight="700"
                     fontFamily="system-ui, sans-serif"
                   >
                     ⚠ Barrier

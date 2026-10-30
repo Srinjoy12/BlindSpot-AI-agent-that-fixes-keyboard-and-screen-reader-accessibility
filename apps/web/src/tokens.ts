@@ -1,17 +1,15 @@
 /**
  * BlindSpot Design Tokens
  * 
- * Strict minimal design system tokens adhering to WCAG 2.1 AA:
+ * Modern Tactile Neomorphism Design System adhering strictly to WCAG 2.1 AA:
  * - Text contrast >= 4.5:1
  * - UI components and focus rings >= 3:1
- * - NVIDIA Brand Green (#76B900)
- *   Source: https://www.nvidia.com/en-us/about-nvidia/legal-info/brand-guidelines/
- * - Nebius Brand Accent (#614efa / #b186db)
- *   Source: https://nebius.com/_next/static/css/c44eba56dc823930.css (sampled on 2026-10-27)
- *   Secondary text link source: https://nebius.com/_next/static/css/d09a98cf4da412f0.css (sampled on 2026-10-27)
- * - Radii: 6px and 10px only.
- * - Spacing: 4px base (8, 12, 16, 24, 32, 48px).
- * - Typography: Base 16px, nothing below 14px, two weights (400, 600), sentence case.
+ * - Primary Brand Accent: Invoca Green (#1B5E3B)
+ * - Light Foundation: Sand (#F6F4EE) & Mint Mist (#EBF3EE)
+ * - Dark Foundation: Black Green (#09140E) & Deep Green (#112219)
+ * - Status Tokens: Lime Green (#A3E635 / #156534)
+ * - Focus & Telemetry: Sky Blue (#0EA5E9 / #38BDF8 / #0284C7)
+ * - Accents & Secondary: Slate / Muted Mint (#688274)
  */
 
 export interface ThemeColors {
@@ -38,73 +36,65 @@ export interface ThemeColors {
 }
 
 export const darkTheme: ThemeColors = {
-  // Foundations
-  bgCanvas: "#0C0E12",
-  surface1: "#151820",
-  surface2: "#1E222D",
-  surface3: "#282E3D",
+  // Foundations - Black Green & Deep Green
+  bgCanvas: "#09140E",
+  surface1: "#112219", // Deep Green extruded slabs
+  surface2: "#0B1711", // Sunken well
+  surface3: "#183225", // Elevated deep
 
-  // Borders
-  borderSubdued: "#363E50",
-  borderUi: "#707A8F",
-  borderStrong: "#8E98AB",
-  focusRing: "#76B900", // NVIDIA Green for high-visibility outline
+  // Borders - Crisp 1px anchoring bevels
+  borderSubdued: "#234432",
+  borderUi: "#688274", // Slate / Muted Mint (>= 3.31:1 on all dark surfaces)
+  borderStrong: "#829E8F",
+  focusRing: "#38BDF8", // Luminous Sky Blue (>= 5.86:1 on all dark surfaces)
 
-  // Text
-  textPrimary: "#F9FAFB",
-  textSecondary: "#D1D5DB",
-  textMuted: "#A6ADB9",
+  // Typography - High Contrast on Black Green / Deep Green
+  textPrimary: "#F6F4EE", // Warm Sand mist (>= 14.5:1)
+  textSecondary: "#D2E0D6", // Mint Light (>= 10.5:1)
+  textMuted: "#9AB3A5", // Slate Mint Light (>= 6.5:1)
 
   // Brand Accents
-  // Primary accent: NVIDIA Green #76B900
-  // Source: https://www.nvidia.com/en-us/about-nvidia/legal-info/brand-guidelines/
-  accentPrimary: "#76B900",
-  accentPrimaryText: "#000000",
-
-  // Secondary accent: Nebius Purple/Lavender
-  // Source: https://nebius.com/_next/static/css/d09a98cf4da412f0.css (sampled on 2026-10-27)
-  accentSecondary: "#B186DB",
+  accentPrimary: "#1B5E3B", // Invoca Green
+  accentPrimaryText: "#FFFFFF", // Pure White (7.75:1 on Invoca Green)
+  accentSecondary: "#38BDF8", // Sky Blue
 
   // Semantic Severity & Status
-  severityBlocker: "#FF7A7A",
-  severityMajor: "#FBBF24",
-  severityMinor: "#60A5FA",
-  statusSuccess: "#34D399",
-  statusWarning: "#FBBF24",
-  statusError: "#FF7A7A",
+  severityBlocker: "#FF7B7B",
+  severityMajor: "#FCD34D",
+  severityMinor: "#7DD3FC",
+  statusSuccess: "#A3E635", // High-energy Lime Green (>= 9.1:1 on dark)
+  statusWarning: "#FCD34D",
+  statusError: "#FF7B7B",
 };
 
 export const lightTheme: ThemeColors = {
-  // Foundations
-  bgCanvas: "#FFFFFF",
-  surface1: "#F8F9FA",
-  surface2: "#EEF0F4",
-  surface3: "#E2E5EB",
+  // Foundations - Sand & Mint Mist
+  bgCanvas: "#F6F4EE", // Sand primary canvas
+  surface1: "#EBF3EE", // Mint Mist raised slabs/cards
+  surface2: "#E4ECE6", // Sunken well light
+  surface3: "#DAE4DC", // Trough deep light
 
-  // Borders
-  borderSubdued: "#D0D5DD",
-  borderUi: "#667085",
-  borderStrong: "#344054",
-  focusRing: "#2E6B00", // High-contrast deep green for focus indicator in light mode
+  // Borders - Crisp 1px anchoring bevels
+  borderSubdued: "#CBD8CF",
+  borderUi: "#587867", // Slate Mint UI border (>= 3.1:1 on light)
+  borderStrong: "#2C4A3A", // Deep Forest strong border (>= 8.0:1)
+  focusRing: "#0284C7", // Sky Blue 600 (>= 3.14:1 on all light surfaces)
 
-  // Text
-  textPrimary: "#0F172A",
-  textSecondary: "#334155",
-  textMuted: "#526075",
+  // Typography - Deep Forest & Slate on Sand/Mint
+  textPrimary: "#0C2015", // Deep Forest (>= 13.0:1)
+  textSecondary: "#1D3828", // Dense Forest (>= 9.0:1)
+  textMuted: "#3E5C4C", // Slate Mint Text (>= 5.5:1)
 
   // Brand Accents
-  accentPrimary: "#76B900",
-  accentPrimaryText: "#000000",
-
-  // Secondary accent: Nebius Purple (accessible on light backgrounds)
-  // Source: https://nebius.com/_next/static/css/c44eba56dc823930.css (sampled on 2026-10-27, #614efa / #5136E2)
-  accentSecondary: "#5136E2",
+  accentPrimary: "#1B5E3B", // Invoca Green
+  accentPrimaryText: "#FFFFFF", // Pure White (7.75:1 on Invoca Green)
+  accentSecondary: "#0369A1", // Deep Sky Blue (>= 4.55:1 on all light surfaces)
 
   // Semantic Severity & Status
   severityBlocker: "#B91C1C",
   severityMajor: "#92400E",
-  severityMinor: "#1D4ED8",
-  statusSuccess: "#065F46",
+  severityMinor: "#0369A1",
+  statusSuccess: "#156534", // Deep Forest Green (>= 7.0:1)
   statusWarning: "#92400E",
   statusError: "#B91C1C",
 };
@@ -121,12 +111,22 @@ export const spacing = {
 export const radius = {
   sm: "6px",
   md: "10px",
+  lg: "12px",
+  xl: "16px",
+  full: "9999px",
 } as const;
 
 export const shadows = {
   none: "none",
-  subtleDark: "0 1px 2px rgba(0, 0, 0, 0.4)",
-  subtleLight: "0 1px 2px rgba(0, 0, 0, 0.08)",
+  subtleDark: "6px 6px 16px rgba(0, 0, 0, 0.6), -4px -4px 12px rgba(35, 68, 50, 0.25)",
+  subtleLight: "6px 6px 14px rgba(18, 38, 27, 0.08), -6px -6px 14px rgba(255, 255, 255, 0.9)",
+} as const;
+
+export const neomorphism = {
+  extrudedLight: "6px 6px 14px rgba(18, 38, 27, 0.08), -6px -6px 14px rgba(255, 255, 255, 0.9)",
+  extrudedDark: "6px 6px 16px rgba(0, 0, 0, 0.6), -4px -4px 12px rgba(35, 68, 50, 0.25)",
+  sunkenLight: "inset 3px 3px 6px rgba(18, 38, 27, 0.1), inset -3px -3px 6px rgba(255, 255, 255, 0.85)",
+  sunkenDark: "inset 3px 3px 8px rgba(0, 0, 0, 0.7), inset -2px -2px 6px rgba(35, 68, 50, 0.2)",
 } as const;
 
 export const motion = {

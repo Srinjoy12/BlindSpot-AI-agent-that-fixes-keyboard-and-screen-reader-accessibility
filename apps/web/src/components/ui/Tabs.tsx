@@ -37,7 +37,7 @@ export const Tabs: React.FC<TabsProps> = ({
       isNavigatingWithKeyboard.current = false;
       const activeIdx = tabs.findIndex((t) => t.id === activeTabId);
       if (activeIdx >= 0) {
-        tabRefs.current[activeIdx]?.focus();
+        tabRefs.current[activeIdx]?.focus({ preventScroll: true });
       }
     }
   }, [activeTabId, tabs]);
@@ -71,7 +71,7 @@ export const Tabs: React.FC<TabsProps> = ({
     if (nextIndex >= 0) {
       isNavigatingWithKeyboard.current = true;
       onChange(tabs[nextIndex].id);
-      tabRefs.current[nextIndex]?.focus();
+      tabRefs.current[nextIndex]?.focus({ preventScroll: true });
     }
   };
 
@@ -91,6 +91,7 @@ export const Tabs: React.FC<TabsProps> = ({
           WebkitOverflowScrolling: "touch",
           scrollbarWidth: "none",
           whiteSpace: "nowrap",
+          paddingBottom: "2px",
         }}
       >
         {tabs.map((tab, idx) => {
@@ -120,13 +121,15 @@ export const Tabs: React.FC<TabsProps> = ({
                 }
               }}
               onKeyDown={(e) => handleKeyDown(e, idx)}
+              className={isSelected && !isDisabled ? "neo-extruded" : ""}
               style={{
                 position: "relative",
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "6px",
-                padding: "10px 14px",
+                gap: "8px",
+                padding: "10px 16px",
                 minHeight: "44px",
+                borderRadius: "var(--radius-md) var(--radius-md) 0 0",
                 fontSize: "var(--font-size-base)",
                 fontFamily: "var(--font-sans)",
                 fontWeight: isSelected ? 600 : 400,
@@ -135,11 +138,12 @@ export const Tabs: React.FC<TabsProps> = ({
                   : isSelected
                   ? "var(--color-text-primary)"
                   : "var(--color-text-secondary)",
-                backgroundColor: "transparent",
-                border: "none",
+                backgroundColor: isSelected && !isDisabled ? "var(--neo-extruded-bg)" : "transparent",
+                boxShadow: isSelected && !isDisabled ? "var(--neo-extruded-shadow)" : "none",
+                border: isSelected && !isDisabled ? "var(--neo-extruded-border)" : "1px solid transparent",
                 cursor: isDisabled ? "not-allowed" : "pointer",
                 opacity: isDisabled ? 0.6 : 1,
-                transition: "color var(--transition-duration) var(--transition-timing)",
+                transition: "all var(--transition-duration) var(--transition-timing)",
                 flexShrink: 0,
               }}
             >
@@ -150,10 +154,13 @@ export const Tabs: React.FC<TabsProps> = ({
                   style={{
                     fontSize: "var(--font-size-sm)",
                     fontWeight: 600,
-                    color: isSelected ? "var(--color-text-primary)" : "var(--color-text-muted)",
+                    padding: "1px 8px",
+                    borderRadius: "var(--radius-full)",
+                    backgroundColor: isSelected ? "var(--color-accent-primary)" : "var(--color-surface-2)",
+                    color: isSelected ? "#FFFFFF" : "var(--color-text-muted)",
                   }}
                 >
-                  ({tab.badge})
+                  {tab.badge}
                 </span>
               )}
 
@@ -169,18 +176,18 @@ export const Tabs: React.FC<TabsProps> = ({
                 </span>
               )}
 
-              {/* Selected Tab indicator: marked with an underline in the secondary accent and bold label */}
+              {/* Selected Tab indicator: Invoca green tactile indicator bar */}
               {isSelected && !isDisabled && (
                 <span
                   aria-hidden="true"
                   style={{
                     position: "absolute",
                     bottom: "-1px",
-                    left: "0",
-                    right: "0",
-                    height: "2px",
-                    backgroundColor: "var(--color-accent-secondary)",
-                    borderRadius: "1px",
+                    left: "12px",
+                    right: "12px",
+                    height: "3px",
+                    backgroundColor: "var(--color-accent-primary)",
+                    borderRadius: "2px",
                   }}
                 />
               )}

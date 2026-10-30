@@ -61,7 +61,7 @@ export const PhaseStepper: React.FC<PhaseStepperProps> = ({
 
   const activeStep = activeStepIndex >= 0 ? STEPS[activeStepIndex] : null;
 
-  // Format duration in seconds (e.g. "58.8 s" or "5.2 s")
+  // Format duration in seconds
   const durationText =
     durationMs > 0
       ? `${(durationMs / 1000).toFixed(1)} s`
@@ -77,26 +77,41 @@ export const PhaseStepper: React.FC<PhaseStepperProps> = ({
     announcement = `Step ${activeStep.number} of 6: ${activeStep.label}`;
   }
 
-  // When finished: collapse the stepper to one line: "Finished in 58.8 s" with a "Show steps" toggle
+  // When finished: collapse the stepper to one line with "Show steps" toggle
   if (currentPhase === "complete" && !isExpanded) {
     return (
       <div
+        className="neo-extruded"
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          backgroundColor: "var(--color-surface-1)",
-          border: "1px solid var(--color-border-subdued)",
-          borderRadius: "var(--radius-md)",
+          borderRadius: "var(--radius-lg)",
           padding: "var(--space-3) var(--space-4)",
           marginBottom: "var(--space-4)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
-          <StatusIcon status="success" size={16} />
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
+          <div
+            style={{
+              width: "24px",
+              height: "24px",
+              borderRadius: "50%",
+              backgroundColor: "var(--color-accent-primary)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#FFFFFF",
+              boxShadow: "0 0 10px rgba(27, 94, 59, 0.4)",
+              fontWeight: 700,
+              fontSize: "14px",
+            }}
+          >
+            ✓
+          </div>
           <span
             style={{
-              fontSize: "var(--font-size-sm)",
+              fontSize: "var(--font-size-base)",
               fontWeight: 600,
               color: "var(--color-text-primary)",
             }}
@@ -125,10 +140,9 @@ export const PhaseStepper: React.FC<PhaseStepperProps> = ({
 
   return (
     <div
+      className="neo-extruded"
       style={{
-        backgroundColor: "var(--color-surface-1)",
-        border: "1px solid var(--color-border-subdued)",
-        borderRadius: "var(--radius-md)",
+        borderRadius: "var(--radius-xl)",
         padding: "var(--space-4)",
         marginBottom: "var(--space-4)",
       }}
@@ -147,18 +161,33 @@ export const PhaseStepper: React.FC<PhaseStepperProps> = ({
           alignItems: "center",
           flexWrap: "wrap",
           gap: "var(--space-2)",
-          marginBottom: "var(--space-3)",
+          marginBottom: "var(--space-4)",
           paddingBottom: "var(--space-3)",
           borderBottom: "1px solid var(--color-border-subdued)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
           {currentPhase === "complete" ? (
             <>
-              <StatusIcon status="success" size={16} />
+              <div
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  borderRadius: "50%",
+                  backgroundColor: "var(--color-accent-primary)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#FFFFFF",
+                  fontWeight: 700,
+                  fontSize: "12px",
+                }}
+              >
+                ✓
+              </div>
               <span
                 style={{
-                  fontSize: "var(--font-size-sm)",
+                  fontSize: "var(--font-size-base)",
                   fontWeight: 600,
                   color: "var(--color-text-primary)",
                 }}
@@ -168,10 +197,10 @@ export const PhaseStepper: React.FC<PhaseStepperProps> = ({
             </>
           ) : currentPhase === "error" ? (
             <>
-              <StatusIcon status="error" size={16} />
+              <StatusIcon status="error" size={18} />
               <span
                 style={{
-                  fontSize: "var(--font-size-sm)",
+                  fontSize: "var(--font-size-base)",
                   fontWeight: 600,
                   color: "var(--color-severity-blocker)",
                 }}
@@ -182,7 +211,7 @@ export const PhaseStepper: React.FC<PhaseStepperProps> = ({
           ) : (
             <span
               style={{
-                fontSize: "var(--font-size-sm)",
+                fontSize: "var(--font-size-base)",
                 fontWeight: 600,
                 color: "var(--color-text-secondary)",
               }}
@@ -219,12 +248,12 @@ export const PhaseStepper: React.FC<PhaseStepperProps> = ({
         </div>
       </div>
 
-      {/* Horizontal Steps Grid */}
+      {/* Recessed Inset Groove connecting steps */}
       <div
+        className="neo-sunken stepper-grid"
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-          gap: "var(--space-2)",
+          padding: "var(--space-3)",
+          borderRadius: "var(--radius-lg)",
         }}
       >
         {STEPS.map((step) => {
@@ -262,93 +291,165 @@ export const PhaseStepper: React.FC<PhaseStepperProps> = ({
           return (
             <div
               key={step.id}
+              className={isRunningStep ? "neo-extruded" : ""}
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "4px",
-                padding: "var(--space-2) var(--space-3)",
-                borderRadius: "var(--radius-sm)",
+                gap: "8px",
+                padding: "var(--space-3)",
+                borderRadius: "var(--radius-md)",
                 backgroundColor: isRunningStep
-                  ? "var(--color-surface-3)"
+                  ? "var(--neo-extruded-bg)"
                   : isDoneStep
-                  ? "var(--color-surface-2)"
+                  ? "transparent"
                   : "transparent",
+                boxShadow: isRunningStep
+                  ? "var(--neo-extruded-shadow)"
+                  : "none",
                 border: isRunningStep
-                  ? "1px solid var(--color-border-strong)"
+                  ? "1px solid var(--color-accent-secondary)"
                   : isDoneStep
                   ? "1px solid var(--color-border-subdued)"
-                  : "1px solid transparent",
-                transition: "background-color var(--transition-duration) var(--transition-timing)",
+                  : "1px dashed var(--color-border-subdued)",
+                transition: "all var(--transition-duration) var(--transition-timing)",
               }}
             >
-              {/* Step Number + Status Icon or Text */}
+              {/* Step Bead + Header */}
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
+                  gap: "6px",
                   fontSize: "var(--font-size-sm)",
-                  fontFamily: "var(--font-mono)",
-                  color: isRunningStep
-                    ? "var(--color-text-primary)"
-                    : isDoneStep
-                    ? "var(--color-status-success)"
-                    : "var(--color-text-muted)",
                 }}
               >
-                <span>Step {step.number}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0, whiteSpace: "nowrap" }}>
+                  {/* Step Circular Bead */}
+                  <div
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      flexShrink: 0,
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      fontFamily: "var(--font-mono)",
+                      backgroundColor: isDoneStep
+                        ? "var(--color-accent-primary)"
+                        : isRunningStep
+                        ? "var(--color-accent-secondary)"
+                        : "var(--neo-sunken-bg)",
+                      color: isDoneStep
+                        ? "#FFFFFF"
+                        : isRunningStep
+                        ? "#FFFFFF"
+                        : "var(--color-text-muted)",
+                      boxShadow: isRunningStep
+                        ? "0 0 10px var(--color-accent-secondary)"
+                        : isDoneStep
+                        ? "0 0 6px rgba(27, 94, 59, 0.4)"
+                        : "inset 1px 1px 3px rgba(0,0,0,0.4)",
+                      border: isRunningStep ? "2px solid #FFFFFF" : isDoneStep ? "1px solid var(--color-status-success)" : "1px solid var(--color-border-ui)",
+                    }}
+                  >
+                    {isDoneStep ? "✓" : step.number}
+                  </div>
+                  <span
+                    style={{
+                      fontWeight: 600,
+                      whiteSpace: "nowrap",
+                      color: isRunningStep
+                        ? "var(--color-text-primary)"
+                        : isDoneStep
+                        ? "var(--color-text-primary)"
+                        : "var(--color-text-muted)",
+                    }}
+                  >
+                    Step {step.number}
+                  </span>
+                </div>
 
-                {/* State indicator: Running text, check icon, skipped, or pending dot */}
-                <span>
-                  {isDoneStep ? (
-                    <StatusIcon status="success" size={14} />
-                  ) : isRunningStep ? (
-                    <span
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        color: "var(--color-accent-primary)",
-                      }}
-                    >
-                      Running
-                    </span>
-                  ) : isSkippedStep ? (
-                    <span style={{ fontSize: "12px", color: "var(--color-text-muted)" }}>Skipped</span>
-                  ) : (
-                    "○"
-                  )}
-                </span>
+                {/* Model Badge */}
+                {step.modelBadge && (
+                  <span
+                    className="neo-pill"
+                    style={{
+                      flexShrink: 0,
+                      whiteSpace: "nowrap",
+                      fontSize: "11px",
+                      fontFamily: "var(--font-mono)",
+                      fontWeight: 600,
+                      padding: "1px 6px",
+                      backgroundColor: isRunningStep ? "var(--color-accent-primary)" : "var(--color-surface-3)",
+                      color: isRunningStep ? "#FFFFFF" : "var(--color-text-secondary)",
+                      border: "1px solid var(--color-border-subdued)",
+                    }}
+                  >
+                    {step.modelBadge}
+                  </span>
+                )}
               </div>
 
-              {/* Step Label */}
-              <span
+              {/* Step Plain-English Label */}
+              <div
                 style={{
                   fontSize: "var(--font-size-sm)",
-                  fontWeight: isRunningStep ? 600 : 400,
                   color: isRunningStep
                     ? "var(--color-text-primary)"
                     : isDoneStep
                     ? "var(--color-text-secondary)"
                     : "var(--color-text-muted)",
-                  lineHeight: 1.3,
+                  fontWeight: isRunningStep ? 600 : 400,
+                  lineHeight: 1.4,
                 }}
               >
                 {step.label}
-              </span>
+              </div>
 
-              {/* Model badge: only as small muted text on the three steps that use a model */}
-              {step.modelBadge && (
-                <span
-                  style={{
-                    fontSize: "12px",
-                    color: "var(--color-text-muted)",
-                    fontFamily: "var(--font-mono)",
-                    marginTop: "2px",
-                  }}
-                >
-                  {step.modelBadge}
-                </span>
-              )}
+              {/* Status Pill or Skipped text */}
+              <div style={{ marginTop: "auto" }}>
+                {isSkippedStep ? (
+                  <span style={{ fontSize: "12px", color: "var(--color-text-muted)", fontStyle: "italic" }}>
+                    Skipped (fixes off)
+                  </span>
+                ) : isRunningStep ? (
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      fontSize: "12px",
+                      color: "var(--color-accent-secondary)",
+                      fontWeight: 600,
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: "6px",
+                        height: "6px",
+                        borderRadius: "50%",
+                        backgroundColor: "var(--color-accent-secondary)",
+                        animation: "pulse 1.2s infinite",
+                      }}
+                    />
+                    Running...
+                  </span>
+                ) : isDoneStep ? (
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      color: "var(--color-status-success)",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Completed
+                  </span>
+                ) : null}
+              </div>
             </div>
           );
         })}

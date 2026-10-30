@@ -367,10 +367,10 @@ app.post("/api/audit", rateLimitMiddleware, tokenBudgetMiddleware, async (req, r
       }
 
       reportStore.set(auditId, activeReport);
-      if (cachedData.report?.auditId) {
+      if (cachedData.report?.auditId && reportStore.isValidId(cachedData.report.auditId)) {
         reportStore.set(cachedData.report.auditId, activeReport);
       }
-      if (cachedData.auditId) {
+      if (cachedData.auditId && reportStore.isValidId(cachedData.auditId)) {
         reportStore.set(cachedData.auditId, activeReport);
       }
 
