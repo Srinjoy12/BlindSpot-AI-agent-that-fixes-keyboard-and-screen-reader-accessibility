@@ -76,7 +76,7 @@ export const App: React.FC = () => {
   // Theme state: light is default, toggleable, preserves user preference
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("blindspot-theme");
+      const saved = localStorage.getItem("blindspot-theme-v2");
       if (saved === "light" || saved === "dark") return saved;
     }
     return "light";
@@ -84,7 +84,7 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("blindspot-theme", theme);
+    localStorage.setItem("blindspot-theme-v2", theme);
   }, [theme]);
 
   const toggleTheme = () => {
