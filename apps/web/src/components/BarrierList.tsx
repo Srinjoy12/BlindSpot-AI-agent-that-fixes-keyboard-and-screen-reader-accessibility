@@ -446,7 +446,7 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
                   What went wrong:
                 </strong>
                 <p style={{ margin: 0, fontSize: "var(--font-size-base)", color: "var(--color-text-primary)", lineHeight: 1.5 }}>
-                  {detail.plainDescription}
+                  {selectedBarrier.impact || detail.evidence}
                 </p>
               </div>
 
@@ -455,7 +455,7 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
                   Who is affected:
                 </strong>
                 <p style={{ margin: 0, fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
-                  {detail.whoIsAffected}
+                  {detail.whoItAffects}
                 </p>
               </div>
 
@@ -464,9 +464,45 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
                   How to fix it:
                 </strong>
                 <p style={{ margin: 0, fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
-                  {detail.howToFixIt}
+                  {selectedBarrier.fix?.explanation || selectedBarrier.fix?.rationale || detail.tavilyGuidanceLabel || "Apply accessible keyboard navigation handlers or appropriate ARIA roles and labels."}
                 </p>
               </div>
+
+              {detail.keyboardSteps && detail.keyboardSteps.length > 0 && (
+                <div>
+                  <strong style={{ display: "block", fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", marginBottom: "4px" }}>
+                    Keyboard reproduction steps:
+                  </strong>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                    {detail.keyboardSteps.map((step, idx) => (
+                      <span key={idx} style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", lineHeight: 1.4 }}>
+                        {step}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {selectedBarrier.likelySource && (
+                <div>
+                  <strong style={{ display: "block", fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)", marginBottom: "4px" }}>
+                    Likely source file:
+                  </strong>
+                  <code
+                    className="neo-sunken"
+                    style={{
+                      display: "inline-block",
+                      padding: "var(--space-2) var(--space-3)",
+                      borderRadius: "var(--radius-sm)",
+                      fontSize: "var(--font-size-sm)",
+                      fontFamily: "var(--font-mono)",
+                      color: "var(--color-accent-primary)",
+                    }}
+                  >
+                    {selectedBarrier.likelySource.path} ({selectedBarrier.likelySource.confidence} confidence)
+                  </code>
+                </div>
+              )}
 
               {(selectedBarrier.fix || selectedBarrier.diff || selectedBarrier.modifiedSource) && (
                 <div style={{ marginTop: "auto", paddingTop: "var(--space-3)", borderTop: "1px solid var(--color-border-subdued)" }}>

@@ -76,7 +76,7 @@ export const ExportTab: React.FC<ExportTabProps> = ({ auditId, report }) => {
     const blockers = barriers.filter((b) => b.severity === "blocker").length;
     const majors = barriers.filter((b) => b.severity === "major").length;
     const minors = barriers.filter((b) => b.severity === "minor").length;
-    const verified = barriers.filter((b) => b.verified || b.status === "verified").length;
+    const verified = barriers.filter((b) => b.verified || (b as { status?: string }).status === "verified").length;
 
     const summaryText = [
       `BlindSpot Accessibility Audit Summary`,
