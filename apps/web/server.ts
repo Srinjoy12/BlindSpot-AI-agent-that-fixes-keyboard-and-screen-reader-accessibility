@@ -83,22 +83,36 @@ app.use(
         return callback(null, true);
       }
       const lower = origin.toLowerCase();
-      // If CORS_ORIGINS is configured, check against allowlist
+      // If CORS_ORIGINS is configured, check against allowlist (supports '*' for wildcard)
       if (allowedCorsList.length > 0) {
-        if (allowedCorsList.includes(lower)) {
+        if (allowedCorsList.includes("*") || allowedCorsList.includes(lower)) {
           return callback(null, true);
         }
         return callback(new Error(`Origin '${origin}' not allowed by CORS policy`));
       }
-      // Same-origin default: verify host and port match local server
+      // Same-origin default: allow local development and cloud hosting origins
       try {
         const u = new URL(origin);
         const isLocal =
           u.hostname === "localhost" || u.hostname === "127.0.0.1" || u.hostname === "::1";
-        const portMatches =
-          (u.port || (u.protocol === "https:" ? "443" : "80")) === String(PORT);
-        if (isLocal && portMatches) {
+        if (isLocal) {
           return callback(null, true);
+        }
+        // Allow deployed cloud domains (Render, Hugging Face, Cloudflare tunnels, etc.)
+        if (
+          u.hostname.endsWith(".onrender.com") ||
+          u.hostname.endsWith(".hf.space") ||
+          u.hostname.endsWith(".trycloudflare.com") ||
+          u.hostname.endsWith(".loca.lt")
+        ) {
+          return callback(null, true);
+        }
+        // Allow Render external URL if configured
+        if (process.env.RENDER_EXTERNAL_URL) {
+          const renderUrl = new URL(process.env.RENDER_EXTERNAL_URL);
+          if (u.host === renderUrl.host) {
+            return callback(null, true);
+          }
         }
       } catch {}
       return callback(new Error(`Origin '${origin}' not allowed by CORS policy (same-origin only)`));
