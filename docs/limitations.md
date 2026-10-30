@@ -19,7 +19,7 @@ BlindSpot is an autonomous developer agent designed to catch, repair, and verify
 4. **No Native Mobile Apps or PDFs**: BlindSpot only audits HTML/SVG web interfaces rendered in Chromium. Mobile native apps (iOS/Android) and static PDF documents are out of scope.
 5. **No Automated Git Commits to Strangers' Repos**: BlindSpot delivers verified unified diffs and CSS/DOM runtime snippets. It never modifies user codebases without explicit developer action.
 6. **React / Framework Support via Local Dev Bridge**: While the static "Open project folder" mode is designed for static entry points without a build step, modern component frameworks (React, Vite, Next.js) are supported through the **URL + Source Folder (Local Dev Server Bridge)** mode. In this workflow, BlindSpot audits your running local dev server (e.g. `http://localhost:5173`) and cross-references runtime accessibility barriers with attached source files (`src/`). BlindSpot localizes responsible `.tsx` components and provides idiomatic JSX translations. Important boundaries:
-   - **Verification boundary**: While runtime DOM/HTML/CSS patches are strictly verified by re-crawling the browser, `.tsx` source code translations are deterministic suggestions and are not compiled or verified inside your project's bundler build pipeline.
+   - **Verification boundary**: While runtime DOM/HTML/CSS patches are strictly verified by re-crawling the browser, `.tsx` source code translations are deterministic suggestions produced via heuristic regex/string scoring and are not compiled or verified inside your project's bundler build pipeline.
    - **Isolation boundary**: The bridge operates strictly on loopback (`localhost`/`127.0.0.1`); all third-party origins and cross-port redirects are blocked. BlindSpot's own port (3000) is refused to prevent self-audit recursion loops.
 
 ---
@@ -33,7 +33,7 @@ Documenting boundaries and failure modes is a core engineering principle:
 - **Local Dev Server Bridge Boundaries**:
   - Works only when the BlindSpot server runs on the same physical host as the local dev server.
   - If running in Docker, `localhost` resolves to the container environment unless host networking (`--network host`) is configured.
-  - In this mode, verification is performed strictly on the runtime DOM patch. Source-level JSX/TSX files are identified via heuristic localization but not built/re-compiled; JSX snippets are provided as unverified suggestions.
+  - In this mode, verification is performed strictly on the runtime DOM patch. Source-level JSX/TSX files are identified via heuristic regex/string scoring rather than full AST compilation/matching and are not built/re-compiled; JSX snippets are provided as unverified suggestions.
 - **Canvas and WebGL Elements**: Custom controls rendered purely inside HTML5 `<canvas>` or WebGL shaders without fallback ARIA DOM subtrees are invisible to the focus crawler.
 - **Custom Faux-Focus Widgets**: Single-page apps that capture keyboard events and manually paint CSS classes onto container divs without updating `document.activeElement` may report unreachable controls.
 - **Lazy-Loaded Content Beyond Scroll Depth**: Elements that only mount into the DOM after infinite scrolling beyond viewport limits may not be captured in the initial 150-stop crawl.
