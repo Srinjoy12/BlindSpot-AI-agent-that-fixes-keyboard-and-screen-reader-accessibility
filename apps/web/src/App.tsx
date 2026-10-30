@@ -682,10 +682,16 @@ export const App: React.FC = () => {
               <StatusIcon status="error" size={20} />
               <div>
                 <strong style={{ display: "block", color: "var(--color-text-primary)", marginBottom: "2px" }}>
-                  {isRateLimited ? "Hourly rate limit reached" : "Audit stopped"}
+                  {isRateLimited
+                    ? "Hourly rate limit reached"
+                    : statusMessage.includes("TF_API_KEY") || statusMessage.toLowerCase().includes("api key")
+                    ? "Nebius Token Factory API Key Missing"
+                    : "Audit stopped"}
                 </strong>
                 <span style={{ fontSize: "var(--font-size-sm)", color: "var(--color-text-secondary)" }}>
-                  {statusMessage || "Could not complete the audit. Check the URL and try again."}
+                  {statusMessage.includes("TF_API_KEY") || statusMessage.toLowerCase().includes("api key")
+                    ? "Missing required environment variable TF_API_KEY. Configure TF_API_KEY in your .env file to enable live Nemotron AI fix generation, or explore Instant Replays with zero API tokens."
+                    : (statusMessage || "Could not complete the audit. Check the URL and try again.")}
                 </span>
               </div>
             </div>
