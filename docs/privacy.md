@@ -15,12 +15,16 @@ When you grant BlindSpot access to a local project folder:
 
 ---
 
-## 2. Airgapped Sandbox Egress Blocking
+## 2. Airgapped Sandbox Egress & Local Dev Bridge Security
 
 To protect user code and prevent data exfiltration:
-- The Playwright Chromium sandbox uses strict request interception (`page.route("**/*")`).
-- Any outbound request attempting to access external origins (such as external CDNs, third-party analytics, remote scripts, or tracking pixels) is immediately aborted.
-- Egress attempts are counted and reported directly in the audit summary (`blockedResourcesCount`).
+- **Playwright Network Guard**: The Chromium sandbox uses strict request interception (`page.route("**/*")`). Any outbound request attempting to access external origins (such as external CDNs, third-party analytics, remote scripts, or tracking pixels) is immediately aborted. Egress attempts are counted and reported directly in the audit summary (`blockedResourcesCount`).
+- **Pre-Body Parsing Security Middleware**: The Local Dev Bridge endpoint (`/api/audit-local-dev`) executes security validation before parsing JSON bodies:
+  - Requires `ENABLE_LOCAL_DEV_BRIDGE=true` in the server environment.
+  - Rejects third-party `Origin` headers via CORS (same-origin loopback only).
+  - Validates `Host` header to prevent DNS rebinding attacks.
+  - Enforces loopback-only targets (`127.0.0.1` or `localhost`) with an explicit port.
+  - Refuses BlindSpot's own port (e.g. 3000) to prevent denial-of-service or recursive loopback exhaustion.
 
 ---
 

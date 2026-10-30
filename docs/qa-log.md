@@ -139,3 +139,48 @@ Append-only log of QA checks, verification runs, decisions, and evidence.
 | **Secret & History Scanner** | `npm run scan-secrets` | **PASS** | Zero credentials found across tree & git commits |
 | **Web Production Bundle** | `npm run build` | **PASS** | Built cleanly in 552ms with 0 warnings |
 | **Overclaim Scrubbing** | `grep -r` | **PASS** | Zero mentions of D10/D11, 11 detectors, local CLI, score gauge, or "screen-reader accessibility" |
+
+---
+
+### [2026-10-30T07:25:00Z] - Final Release Verification & React Integration Gate
+
+- **Role:** Release Engineer & Verification Gatekeeper.
+- **Goal:** Final release verification: complete zero-regression verification, React support via Local Dev Server Bridge, UI neomorphic polish, clean dependency and secret gates.
+
+#### 1. Verification Test Suite Runs:
+- **`npm test`**: **18 test files passed (18)**, **184 unit/integration tests passed (184)** with 0 failures.
+  - Added test suites: `localDevBridge.test.ts` (23 tests), `server-endpoints.test.ts` (26 tests), `reactLocalizer.test.ts` (7 tests), `reactTranslate.test.ts` (10 tests), `reactToggle.test.tsx` (4 tests).
+- **TypeScript Type Checks**:
+  - `npx tsc --noEmit` (Root workspace): **PASS (0 errors)**.
+  - `npx tsc --noEmit` (`apps/web`): **PASS (0 errors)**.
+- **Web Production Bundle (`npm run build`)**: **PASS (0 errors)**, compiled with Vite in 591ms.
+- **WCAG AA Design Token Contrast (`npm run test:contrast`)**: **114 / 114 assertions passed (0 failed)** across dark and light palettes.
+- **Autonomous Self-Audit (`scripts/self-audit.ts`)**:
+  - **axe-core v4.14.0 baseline**: 0 violations.
+  - **Sequential keyboard crawl**: 11 forward stops, 35 backward stops.
+  - **Detectors D1–D9**: 0 barriers found on BlindSpot's own UI.
+  - **WCAG Interactive Checks**: Valid heading hierarchy (single `h1`), accessible ARIA tab pattern, 100% labelled inputs, polite `aria-live` region, 3px high-contrast focus rings (#F6F4EE/#1B5E3B), 0 horizontal overflow at 200% zoom (640px).
+
+#### 2. React Support & Local Dev Server Bridge Verification:
+- **`scripts/test-local-dev-bridge-e2e.ts`**: Full end-to-end execution passing against live local dev server on `http://127.0.0.1:5173`.
+- **Deterministic React Candidate File Localization (`reactLocalizer.ts`)**:
+  - Successfully localized `#close-btn` to `src/components/Modal.tsx` (`confidence: "high"`, score 39).
+  - Successfully localized `#submit-btn` to `src/components/Button.tsx` and `src/styles/buttons.css` (`confidence: "high"`, score 35).
+- **Pure Deterministic React Translation (`reactTranslate.ts`)**:
+  - Verified Option A (window Escape listener with `useEffect` cleanup) and Option B (`onKeyDown` inline handler on modal container).
+- **Strict Security Refusals Verified**:
+  - **Flag Off Refusal**: HTTP 403 `{"error":"Local dev server bridge is disabled..."}` when `ENABLE_LOCAL_DEV_BRIDGE` is unset.
+  - **Own Port 3000 Refusal**: HTTP 400 `{"error":"Target port 3000 matches the BlindSpot server's own port..."}` to prevent self-audit recursion loops.
+  - **Bad Origin Refusal**: HTTP 403 `Error: Origin 'http://evil.com' not allowed by CORS policy (same-origin only)`.
+
+#### 3. Zero-Token Smoke Tests Verified via Playwright:
+- **Paste Code Snippet Mode**: Audited pasted modal snippet with detectors D1-D9 in <1s with 0 model calls.
+- **Export Tab**: Download HTML, Markdown, JSON, and Copy Summary verified.
+- **Instant Replay**: B01 loaded in <50ms with 0 model calls, verified React JSX / HTML toggle in Fixes tab.
+- **Clean Fixture Control (C01)**: Verified "No keyboard problems found on this page" with 0 false alarms.
+- **Folder Mode Safety**: In-memory directory walker and byte-for-byte revert verified via `folder.test.ts`.
+
+#### 4. Repository & Secret Gate:
+- Removed obsolete components (`AxeBaselinePanel.tsx`, `ExportBar.tsx`, `LedgerDrawer.tsx`), scratch scripts, and committed `*.tsbuildinfo` caches in commit `d35c989`.
+- Added `*.tsbuildinfo` to `.gitignore`.
+- Security scanner: zero credentials or private keys in working tree or git history.

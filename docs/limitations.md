@@ -18,7 +18,9 @@ BlindSpot is an autonomous developer agent designed to catch, repair, and verify
 3. **No Multi-Page Authenticated Crawling in MVP**: The current engine is scoped to single URL audits. Authenticated flows behind OAuth/passwords, multi-step checkout funnels, and enterprise intranet pages are not crawled.
 4. **No Native Mobile Apps or PDFs**: BlindSpot only audits HTML/SVG web interfaces rendered in Chromium. Mobile native apps (iOS/Android) and static PDF documents are out of scope.
 5. **No Automated Git Commits to Strangers' Repos**: BlindSpot delivers verified unified diffs and CSS/DOM runtime snippets. It never modifies user codebases without explicit developer action.
-6. **Framework Projects Are Not Supported**: The web app's "Open project folder" mode supports static projects (plain HTML/CSS/JS with an `index.html` entry point). Framework projects (Next.js, Vite, React, Vue, Svelte) that require a compilation step, bundler, or active dev server are not supported.
+6. **React / Framework Support via Local Dev Bridge**: While the static "Open project folder" mode is designed for static entry points without a build step, modern component frameworks (React, Vite, Next.js) are supported through the **URL + Source Folder (Local Dev Server Bridge)** mode. In this workflow, BlindSpot audits your running local dev server (e.g. `http://localhost:5173`) and cross-references runtime accessibility barriers with attached source files (`src/`). BlindSpot localizes responsible `.tsx` components and provides idiomatic JSX translations. Important boundaries:
+   - **Verification boundary**: While runtime DOM/HTML/CSS patches are strictly verified by re-crawling the browser, `.tsx` source code translations are deterministic suggestions and are not compiled or verified inside your project's bundler build pipeline.
+   - **Isolation boundary**: The bridge operates strictly on loopback (`localhost`/`127.0.0.1`); all third-party origins and cross-port redirects are blocked. BlindSpot's own port (3000) is refused to prevent self-audit recursion loops.
 
 ---
 
@@ -50,7 +52,7 @@ As required by our engineering manifesto: *an accessibility tool with an inacces
 Before freezing the build, BlindSpot ran its own audit engine and verification suite against its own running UI (`http://localhost:3000`), testing both the initial empty state and the tabbed results dashboard:
 
 ### Automated Crawler & Detector Findings:
-- **axe-core Baseline Audit**: 0 violations reported (version 4.10.0).
+- **axe-core Baseline Audit**: 0 violations reported (version 4.14.0).
 - **Physical Keyboard Stops**: 14 forward focus stops captured across interactive controls; 36 backward stops.
 - **Detector D2 (Unreachable Control) Finding on WAI-ARIA Tabs**:
   When BlindSpot's sequential forward `Tab`-only crawler audits the tabbed dashboard, detector D2 flags unselected tab buttons (`#blindspot-results-tab-*`) as unreachable. This is an honest and known limitation of sequential Tab crawling:
@@ -69,7 +71,7 @@ Before freezing the build, BlindSpot ran its own audit engine and verification s
    - Contrast: Dark theme focus ring (#76B900) achieves 8.71:1 contrast; Light theme focus ring (#2E6B00) achieves 7.14:1 contrast (exceeding the 3:1 WCAG requirement).
    - No focus indicators are obscured by headers or modals.
 3. **Semantic Hierarchy & Landmarks**:
-   - Exactly one `<h1>` per view ("Accessibility audit").
+   - Exactly one `<h1>` per view ("Autonomous Accessibility Engine").
    - Strict heading hierarchy (`h1` → `h2` → `h3`) with zero skipped levels.
    - Semantic landmarks: `<header role="banner">`, `<main id="main-content">`, `<footer role="contentinfo">`, `<nav aria-label="Main navigation">`.
    - Skip to main content link (`.skip-link`) positioned at top of DOM.
