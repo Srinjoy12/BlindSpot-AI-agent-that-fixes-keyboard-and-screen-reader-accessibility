@@ -52,6 +52,10 @@ export const AuditBar: React.FC<AuditBarProps> = ({
 
   const [selectedCodePresetId, setSelectedCodePresetId] = useState<string>("");
 
+  const isRemoteHost =
+    typeof window !== "undefined" &&
+    !["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
+
   const selectedUrlExample = EXAMPLES.find((ex) => ex.htmlPath === url);
   const urlPresetValue = selectedUrlExample ? selectedUrlExample.htmlPath : "";
 
@@ -163,6 +167,7 @@ export const AuditBar: React.FC<AuditBarProps> = ({
 
   const devCanSubmit =
     !isRunning &&
+    !isRemoteHost &&
     mode === "url_folder" &&
     devUrl.trim().length > 0 &&
     devFiles.length > 0 &&
@@ -625,6 +630,40 @@ export const AuditBar: React.FC<AuditBarProps> = ({
           {/* URL + Source Folder Mode Panel */}
           {mode === "url_folder" && (
             <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
+              {isRemoteHost && (
+                <div
+                  role="note"
+                  className="neo-sunken"
+                  style={{
+                    padding: "var(--space-3) var(--space-4)",
+                    borderRadius: "var(--radius-md)",
+                    borderLeft: "4px solid var(--color-brand-primary)",
+                    backgroundColor: "var(--color-bg-sunken)",
+                    fontSize: "var(--font-size-sm)",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  <div
+                    style={{
+                      fontWeight: 600,
+                      color: "var(--color-text-primary)",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "var(--space-2)",
+                      marginBottom: "4px",
+                    }}
+                  >
+                    <span>🔒 Local Dev Bridge requires local execution</span>
+                  </div>
+                  <p style={{ margin: 0, color: "var(--color-text-secondary)" }}>
+                    Because this demo is running on a cloud container (Render), it cannot access <code>localhost:5173</code> or local folders on your computer (SSRF protection).
+                  </p>
+                  <p style={{ margin: "var(--space-2) 0 0 0", color: "var(--color-text-secondary)" }}>
+                    👉 <strong>To test on this cloud deployment:</strong> Use <strong>URL mode</strong> (choose any of the 16 seeded fixtures from the dropdown), <strong>Paste code mode</strong>, or <strong>Open folder mode</strong>.
+                    To audit your own local dev server, run BlindSpot locally via <code>npm run dev</code> at <code>localhost:3000</code>.
+                  </p>
+                </div>
+              )}
               <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "var(--space-3)", alignItems: "end" }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
                   <label
@@ -766,8 +805,15 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                   type="submit"
                   variant="primary"
                   disabled={!devCanSubmit}
+                  title={isRemoteHost ? "Local dev bridge only operates when running locally on localhost:3000" : undefined}
                 >
-                  <span>{isRunning ? "Running audit..." : "Audit dev server"}</span>
+                  <span>
+                    {isRunning
+                      ? "Running audit..."
+                      : isRemoteHost
+                      ? "Localhost only"
+                      : "Audit dev server"}
+                  </span>
                   <span
                     style={{
                       fontSize: "var(--font-size-sm)",
