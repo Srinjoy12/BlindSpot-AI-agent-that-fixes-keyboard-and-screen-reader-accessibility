@@ -29,6 +29,7 @@ interface KeyboardReplayProps {
   afterStops?: FocusStopItem[];
   barriers?: BarrierItem[];
   trapDetected?: boolean;
+  isRunning?: boolean;
 }
 
 export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
@@ -36,6 +37,7 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
   afterStops,
   barriers = [],
   trapDetected,
+  isRunning,
 }) => {
   const [selectedIdx, setSelectedIdx] = useState<number>(0);
   const [runMode, setRunMode] = useState<"before" | "after">("before");
@@ -87,7 +89,9 @@ export const KeyboardReplay: React.FC<KeyboardReplayProps> = ({
           fontSize: "var(--font-size-base)",
         }}
       >
-        No keyboard trace data loaded. Run an audit to inspect the focus sequence.
+        {isRunning
+          ? "Crawling keyboard navigation path in headless Chromium..."
+          : "No keyboard trace data loaded. Run an audit to inspect the focus sequence."}
       </div>
     );
   }

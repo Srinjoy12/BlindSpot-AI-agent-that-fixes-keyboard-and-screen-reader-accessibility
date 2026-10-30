@@ -11,6 +11,7 @@ interface FixesInlineViewProps {
   onOpenFullScreen: (barrier: BarrierItem) => void;
   isSourceMode?: boolean;
   onApplyToFolder?: (barrier: BarrierItem) => void;
+  isRunning?: boolean;
 }
 
 interface ParsedDiffLine {
@@ -86,6 +87,7 @@ export const FixesInlineView: React.FC<FixesInlineViewProps> = ({
   onOpenFullScreen,
   isSourceMode = false,
   onApplyToFolder,
+  isRunning,
 }) => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [barrierFormat, setBarrierFormat] = useState<Record<string, "html" | "react">>({});
@@ -113,10 +115,14 @@ export const FixesInlineView: React.FC<FixesInlineViewProps> = ({
         }}
       >
         <p style={{ margin: "0 0 var(--space-2) 0", fontWeight: 600, color: "var(--color-text-primary)" }}>
-          No automated fixes generated for this audit.
+          {isRunning
+            ? "Fix generation in progress..."
+            : "No automated fixes generated for this audit."}
         </p>
         <p style={{ margin: 0, color: "var(--color-text-muted)" }}>
-          Run the audit with "Suggest fixes and test them" enabled to produce deterministic patches.
+          {isRunning
+            ? "NVIDIA Nemotron Ultra will propose surgical fixes once barriers are ranked."
+            : 'Run the audit with "Suggest fixes and test them" enabled to produce deterministic patches.'}
         </p>
       </div>
     );

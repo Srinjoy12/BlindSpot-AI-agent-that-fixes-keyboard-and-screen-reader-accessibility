@@ -7,13 +7,57 @@ interface OverviewTabProps {
   barriers: BarrierItem[];
   onSelectTab: (tabId: string) => void;
   onOpenDiff?: (barrier: BarrierItem) => void;
+  isRunning?: boolean;
 }
 
 export const OverviewTab: React.FC<OverviewTabProps> = ({
   barriers,
   onSelectTab,
   onOpenDiff,
+  isRunning,
 }) => {
+  if (isRunning) {
+    return (
+      <div
+        className="neo-extruded"
+        style={{
+          borderRadius: "var(--radius-xl)",
+          padding: "var(--space-8)",
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "var(--space-3)",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
+          <StatusIcon status="running" size={24} />
+          <p
+            style={{
+              fontSize: "var(--font-size-lg)",
+              fontWeight: 600,
+              color: "var(--color-accent-secondary)",
+              margin: 0,
+            }}
+          >
+            Audit in progress...
+          </p>
+        </div>
+        <p
+          style={{
+            fontSize: "var(--font-size-base)",
+            color: "var(--color-text-secondary)",
+            margin: 0,
+            maxWidth: "540px",
+            lineHeight: 1.5,
+          }}
+        >
+          Chromium is crawling keyboard focus paths and NVIDIA Nemotron models are evaluating accessibility barriers. Results will appear once analysis completes.
+        </p>
+      </div>
+    );
+  }
+
   if (barriers.length === 0) {
     return (
       <div

@@ -69,9 +69,10 @@ export interface BarrierItem {
 interface BarrierListProps {
   barriers: BarrierItem[];
   onOpenDiff: (barrier: BarrierItem) => void;
+  isRunning?: boolean;
 }
 
-export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }) => {
+export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff, isRunning }) => {
   const [filter, setFilter] = useState<"all" | "blocker" | "major" | "minor" | "verified">("all");
   const [selectedId, setSelectedId] = useState<string | null>(barriers[0]?.id || null);
 
@@ -211,7 +212,9 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
             fontSize: "var(--font-size-base)",
           }}
         >
-          {barriers.length === 0
+          {isRunning
+            ? "Evaluating detected controls and barrier hits..."
+            : barriers.length === 0
             ? "No keyboard problems found on this page."
             : "No problems match the selected filter."}
         </div>

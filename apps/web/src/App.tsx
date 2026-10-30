@@ -519,6 +519,7 @@ export const App: React.FC = () => {
           barriers={barriers}
           onSelectTab={handleTabChange}
           onOpenDiff={(b) => setSelectedDiffBarrier(b)}
+          isRunning={isRunning}
         />
       ),
     },
@@ -532,6 +533,7 @@ export const App: React.FC = () => {
         <BarrierList
           barriers={barriers}
           onOpenDiff={(b) => setSelectedDiffBarrier(b)}
+          isRunning={isRunning}
         />
       ),
     },
@@ -546,6 +548,7 @@ export const App: React.FC = () => {
           stops={forwardStops}
           barriers={barriers}
           trapDetected={barriers.some((b) => b.detectorId === "D1")}
+          isRunning={isRunning}
         />
       ),
     },
@@ -560,6 +563,7 @@ export const App: React.FC = () => {
           barriers={barriers}
           onOpenFullScreen={(b) => setSelectedDiffBarrier(b)}
           isSourceMode={Boolean(isFolderMode || report?.targetUrl?.includes("code") || barriers.some((b) => b.modifiedSource))}
+          isRunning={isRunning}
         />
       ),
     },
