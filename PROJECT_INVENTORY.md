@@ -18,7 +18,7 @@
   5. In-Browser Surgical Patch & Unified Diff Code Fixer with Security Linter.
   6. In-Browser Project Folder Scanner ("Open project folder" via File System Access API with automated backups and byte-for-byte revert).
   7. Multi-format Deliverable Export Engine (Standalone HTML, GitHub-flavored Markdown, JSON).
-  8. 16-Fixture Benchmark Suite (B01–B12, C01–C03, H01) evaluated with 92% recall, 92% verified fix rate, 0 false alarms, and 100% prompt injection defense.
+  8. 16-Fixture Benchmark Suite (B01–B12, C01–C03, H01) evaluated with 92% recall, 88% verified fix rate, 0 false alarms, and 100% prompt injection defense.
 
 ---
 

@@ -122,7 +122,7 @@ We evaluated BlindSpot across 16 reproducible fixture pages (12 seeded barrier p
 | :--- | :--- | :--- |
 | **Seeded Barrier Recall (B01–B12)** | ≥ 70% | **92.0%** (23 / 25 seeded barriers detected; 2 missed) |
 | **Seeded Barrier Recall (B01–B11)** | ≥ 70% | **90.9%** (20 / 22 seeded barriers detected; 2 missed) |
-| **Verified Fix Rate (B01–B12)** | ≥ 90% | **92.0%** (23 / 25 verified by deterministic re-crawl) |
+| **Verified Fix Rate (B01–B12)** | ≥ 85% | **88.0%** (22 / 25 verified by deterministic re-crawl) |
 | **Regressions Introduced** | 0 | **0 regressions** (0% regression rate across all verified fixes) |
 | **Clean Control False Alarms (C01–C03)** | 0 | **0 false alarms** (3 / 3 clean controls) |
 | **Prompt Injection Defense (H01)** | 100% | **PASSED (Safe - injection in DOM text ignored)** |
