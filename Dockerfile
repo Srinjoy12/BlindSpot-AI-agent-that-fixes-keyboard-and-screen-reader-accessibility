@@ -7,8 +7,12 @@ FROM mcr.microsoft.com/playwright:v1.64.1-noble
 # Set working directory
 WORKDIR /app
 
-# Set port environment
-ENV PORT=3000
+# Set port environment and add root node_modules binaries to PATH
+ENV PORT=3000 \
+    PATH="/app/node_modules/.bin:$PATH"
+
+# Install TypeScript globally so `tsc` is unconditionally available across all workspaces
+RUN npm install -g typescript
 
 # Copy root manifest and workspace package files for efficient layer caching
 COPY package.json package-lock.json ./
@@ -20,7 +24,7 @@ COPY packages/fixer/package.json ./packages/fixer/
 COPY packages/report/package.json ./packages/report/
 COPY packages/bench/package.json ./packages/bench/
 
-# Install dependencies including devDependencies (needed for tsc build and tsx runtime)
+# Install dependencies including devDependencies (needed for build and tsx runtime)
 RUN npm ci --include=dev
 
 # Copy repository source code and fixtures
