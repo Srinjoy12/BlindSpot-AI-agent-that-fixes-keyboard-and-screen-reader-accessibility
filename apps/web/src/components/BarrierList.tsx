@@ -264,8 +264,38 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
                     width: "100%",
                   }}
                 >
-                  <div style={{ display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center" }}>
-                    {getSeverityBadge(b.severity)}
+                  <div style={{ display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center", flexWrap: "wrap", gap: "6px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px", flexWrap: "wrap" }}>
+                      {getSeverityBadge(b.severity)}
+                      {b.alsoReportedByAxe ? (
+                        <span
+                          className="neo-pill"
+                          style={{
+                            fontSize: "11px",
+                            fontFamily: "var(--font-mono)",
+                            padding: "1px 6px",
+                            color: "var(--color-text-muted)",
+                            border: "1px solid var(--color-border-subdued)",
+                          }}
+                        >
+                          Reported by axe-core
+                        </span>
+                      ) : (
+                        <span
+                          className="neo-pill"
+                          style={{
+                            fontSize: "11px",
+                            fontFamily: "var(--font-mono)",
+                            padding: "1px 6px",
+                            color: "var(--color-accent-secondary)",
+                            border: "1px solid rgba(14, 165, 233, 0.4)",
+                            backgroundColor: "rgba(14, 165, 233, 0.08)",
+                          }}
+                        >
+                          axe-core missed this
+                        </span>
+                      )}
+                    </div>
 
                     {isVerified && (
                       <span
@@ -332,7 +362,37 @@ export const BarrierList: React.FC<BarrierListProps> = ({ barriers, onOpenDiff }
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "var(--space-2)" }}>
                 <div>
-                  {getSeverityBadge(selectedBarrier.severity)}
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                    {getSeverityBadge(selectedBarrier.severity)}
+                    {selectedBarrier.alsoReportedByAxe ? (
+                      <span
+                        className="neo-pill"
+                        style={{
+                          fontSize: "12px",
+                          fontFamily: "var(--font-mono)",
+                          padding: "2px 8px",
+                          color: "var(--color-text-muted)",
+                          border: "1px solid var(--color-border-subdued)",
+                        }}
+                      >
+                        Reported by axe-core
+                      </span>
+                    ) : (
+                      <span
+                        className="neo-pill"
+                        style={{
+                          fontSize: "12px",
+                          fontFamily: "var(--font-mono)",
+                          padding: "2px 8px",
+                          color: "var(--color-accent-secondary)",
+                          border: "1px solid rgba(14, 165, 233, 0.4)",
+                          backgroundColor: "rgba(14, 165, 233, 0.08)",
+                        }}
+                      >
+                        axe-core missed this
+                      </span>
+                    )}
+                  </div>
                   <h3
                     style={{
                       fontSize: "var(--font-size-xl)",

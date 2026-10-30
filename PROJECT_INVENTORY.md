@@ -58,7 +58,6 @@ blindspot/
 │           │   ├── FixesInlineView.tsx    # Inline unified diff code viewer
 │           │   ├── DiffModal.tsx          # Accessible modal dialog with before/after keyboard path
 │           │   ├── ModelsAndCostPanel.tsx # Token Factory telemetry & cost breakdown
-│           │   ├── AxeBaselinePanel.tsx   # Static scanner comparison card
 │           │   ├── ExportTab.tsx          # Deliverable download & clipboard generator
 │           │   └── ui/                    # Atomic design primitives (Button, Card, Tabs, Stat, etc.)
 │           ├── project-folder/            # "Open project folder" in-browser folder scanner implementation
@@ -575,7 +574,7 @@ Vitest executes 79 tests across 12 test files with 100% pass rate:
 - `scripts/test-contrast.ts`: Programmatically tests all foreground/background color token pairs across light and dark themes to verify WCAG 2.1 AA contrast requirements (4.5:1 for text, 3.0:1 for UI components).
 - `scripts/scan-secrets.sh`: Git security script scanning all tracked files, staging area, and commit history for exposed API keys or tokens.
 - `scripts/verify-and-capture.ts`: Comprehensive verification script that opens the live UI, tests all workflows, and captures high-resolution screenshots at exactly **375px, 768px, 1280px, and 1440px**.
-- `scripts/verify-ui.ts`, `test-e2e-audit.ts`, `test-models-and-cost-tab.ts`, `test-readable-tabs.ts`, `test-summary-and-tabs.ts`: UI regression and integration testing scripts.
+- `scripts/verify-ui.ts`, `scripts/test-e2e-audit.ts`, `scripts/test-local-dev-bridge-e2e.ts`: UI and local dev bridge regression and integration testing scripts.
 
 ---
 

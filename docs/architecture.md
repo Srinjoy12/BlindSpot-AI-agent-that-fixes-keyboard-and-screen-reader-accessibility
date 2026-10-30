@@ -83,12 +83,14 @@ flowchart TD
 - **Components**:
   - `AuditBar`: Target URL input, ownership attestation checkbox (`FR-03`), auto-fix toggle, and fixture preset picker.
   - `PhaseStepper`: Live phase progress timeline with polite ARIA live region announcements.
-  - `ResultsSummary`: Plain headline and three severity counts (blocks keyboard use, hard to use, minor); never claims legal compliance or uses a 0-100 score gauge.
+  - `ResultsSummary`: Plain headline, four extruded stat tiles, and debossed axe-core comparison card; never claims legal compliance or uses a 0-100 score gauge.
+  - `OverviewTab`: Plain-language headline, issue breakdown, primary barrier remediation card, and direct jump actions.
   - `KeyboardReplay`: Sequential scrubber stepping through every physical Tab stop, displaying bounding boxes, `obscuredBy` overlays, and focus indicator diffs.
-  - `BarrierList`: Filterable issue list with direct links to W3C WCAG 2.2 documentation.
+  - `BarrierList`: Filterable issue list with direct links to W3C WCAG 2.2 documentation and static scanner comparison badges ("axe-core missed this").
+  - `FixesInlineView`: Side-by-side or inline patch browser with HTML/React view toggling, verified badges, and before/after accessibility proofs.
   - `DiffModal`: Monospace code viewer showing proposed patches and browser verification proofs.
-  - `LedgerDrawer`: Full transparency ledger detailing tokens in/out, latencies, and costs across all model calls.
-  - `ExportBar`: Direct download handlers for printable HTML, Markdown, and JSON audit artifacts.
+  - `ModelsAndCostPanel`: Full transparency telemetry detailing tokens in/out, latencies, and costs across all model calls.
+  - `ExportTab`: Direct download handlers for printable HTML, Markdown, and JSON audit artifacts.
 
 ### 2. Audit Engine (`packages/engine`)
 - **Session Isolation (`session.ts`)**: Spawns isolated Chromium contexts (1280x800 viewport) with no persistent storage, downloads blocked, popups suppressed, and a 20s navigation timeout followed by 500ms DOM stability polling.

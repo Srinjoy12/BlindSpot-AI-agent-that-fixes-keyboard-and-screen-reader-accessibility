@@ -1,1 +1,0 @@
-{"root":["./src/d1-trap.ts","./src/d2-unreachable.ts","./src/d3-invisible.ts","./src/d4-order.ts","./src/d5-obscured.ts","./src/d6-name.ts","./src/d7-tabindex.ts","./src/d8-dialog.ts","./src/d9-skiplink.ts","./src/dedup.ts","./src/index.ts","./src/types.ts"],"version":"5.9.3"}
