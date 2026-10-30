@@ -1,6 +1,6 @@
 # BlindSpot — Comprehensive Project Inventory & Technical Specification
-> **Verified against Codebase:** October 28, 2026 | **Hackathon Track:** Nebius x NVIDIA Global AI Hackathon (Best Apps & Agents Track)  
-> **Repository Monorepo Root:** `/blindspot` | **Test Status:** 79/79 Vitest Tests Passing (100%)
+> **Verified against Codebase:** October 30, 2026 | **Hackathon Track:** Nebius x NVIDIA Global AI Hackathon (Best Apps & Agents Track)  
+> **Repository Monorepo Root:** `/blindspot` | **Test Status:** 184/184 Vitest Tests Passing (100% across 18 test files)
 
 ---
 
@@ -111,10 +111,13 @@ blindspot/
 │   │   │   ├── ssrf.ts            # SSRF protection and DNS resolution validation
 │   │   │   ├── source.ts          # In-memory snippet and source loader
 │   │   │   ├── fileSet.ts         # Multi-file ephemeral HTTP server & egress blocker
+│   │   │   ├── localDevBridge.ts  # Local dev server bridge and loopback security validator
 │   │   │   └── types.ts           # FocusStop, PageState, CrawlOptions, FileSet types
 │   │   └── test/
 │   │       ├── axe.test.ts
+│   │       ├── concurrency.test.ts
 │   │       ├── fileSet.test.ts
+│   │       ├── localDevBridge.test.ts
 │   │       ├── server-endpoints.test.ts
 │   │       ├── source.test.ts
 │   │       └── ssrf.test.ts
@@ -128,12 +131,16 @@ blindspot/
 │   │   │   ├── sourceVerifier.ts  # Airgapped source code verifier
 │   │   │   ├── fileSetVerifier.ts # Multi-file project folder patch verifier
 │   │   │   ├── localizer.ts       # Candidate file heuristic localization
+│   │   │   ├── reactLocalizer.ts  # React JSX component heuristic scorer
+│   │   │   ├── reactTranslate.ts  # HTML/DOM to idiomatic React JSX patch translator
 │   │   │   ├── loop.ts            # Runtime patch revision loop (max 2 attempts)
 │   │   │   ├── sourceLoop.ts      # Snippet source fix loop
 │   │   │   └── fileSetLoop.ts     # Multi-file project fix loop
 │   │   └── test/
 │   │       ├── fixer.test.ts
 │   │       ├── fileSetLoop.test.ts
+│   │       ├── reactLocalizer.test.ts
+│   │       ├── reactTranslate.test.ts
 │   │       └── source-fixer.test.ts
 │   │
 │   ├── report/               # Multi-format report generators
@@ -154,7 +161,8 @@ blindspot/
 ├── fixtures/                 # Benchmark test fixtures
 │   ├── pages/                # 16 HTML test pages (B01–B12, C01–C03, H01)
 │   ├── manifests/            # Ground truth barrier JSON definitions
-│   └── local-project/        # Multi-file test folder (index.html, styles.css, script.js)
+│   ├── local-project/        # Multi-file test folder (index.html, styles.css, script.js)
+│   └── react-demo/           # Multi-file React demo fixture (App.tsx, Modal.tsx, Button.tsx)
 │
 ├── data/
 │   └── replays/              # Pre-computed zero-token offline replay caches (B01–H01)
@@ -164,6 +172,7 @@ blindspot/
 │   ├── seed-replays.ts       # Generates data/replays/*.json from live fixtures
 │   ├── self-audit.ts         # BlindSpot audits its own web application
 │   ├── test-contrast.ts      # Automated color contrast ratio checker
+│   ├── test-local-dev-bridge-e2e.ts # End-to-end local dev server bridge verification
 │   ├── scan-secrets.sh       # Secret leak scanner for git history
 │   └── verify-and-capture.ts # Playwright automation capturing screenshots at 4 breakpoints
 │
