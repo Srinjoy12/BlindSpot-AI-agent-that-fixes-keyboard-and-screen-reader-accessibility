@@ -176,12 +176,12 @@ All inference calls are routed dynamically across three NVIDIA Nemotron model ti
 
 ```mermaid
 flowchart LR
-    A[Chromium Keyboard Crawl] --> B[Deterministic Detectors D1-D9]
-    B --> C[Nemotron-3 Nano\nState Digest]
-    C --> D[Nemotron-3 Super + Tavily\nIssue Analysis & WCAG Mapping]
-    D --> E[Nemotron-3 Ultra\nSurgical Fix Proposals]
-    E --> F[Deterministic Verifier\nChromium Re-Crawl]
-    F --> G[Final Verified Audit]
+    A["Chromium Keyboard Crawl"] --> B["Deterministic Detectors D1–D9"]
+    B --> C["Nemotron-3 Nano<br/>State Digest"]
+    C --> D["Nemotron-3 Super + Tavily<br/>Issue Analysis & WCAG Mapping"]
+    D --> E["Nemotron-3 Ultra<br/>Surgical Fix Proposals"]
+    E --> F["Deterministic Verifier<br/>Chromium Re-Crawl"]
+    F --> G["Final Verified Audit"]
 ```
 
 - **Nemotron Nano (30B)** (`nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`): Fast state summaries and landmark digests (~250 tokens per call; latency measured at ~1.0–1.4s in local benchmark testing).

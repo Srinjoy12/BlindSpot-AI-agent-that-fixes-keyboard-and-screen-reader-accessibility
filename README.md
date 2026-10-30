@@ -67,24 +67,24 @@ BlindSpot follows a strict design rule: **Models propose; the deterministic harn
 
 ```mermaid
 flowchart TD
-    subgraph Browser Session [Playwright Chromium Engine]
-        A[Input URL / Fixture] --> B[Keyboard Tab & Shift+Tab Crawl]
-        B --> C[Keyboard Interaction Pass: Enter/Space/Escape]
-        D[Deterministic Detectors D1–D9] <-- C
+    subgraph browser ["Playwright Chromium Engine"]
+        A["Input URL / Fixture"] --> B["Keyboard Tab & Shift+Tab Crawl"]
+        B --> C["Keyboard Interaction Pass: Enter / Space / Escape"]
+        C --> D["Deterministic Detectors D1–D9"]
     end
 
-    subgraph Nebius Token Factory [NVIDIA Nemotron Inference]
-        D -->|Raw Stops & Tree| E[Nemotron-3 Nano 30B\nState Digests]
-        E -->|Digests + Detector Hits| F[Nemotron-3 Super 120B + Tavily\nIssue Analysis & WCAG 2.2 Mapping]
-        F -->|Verified Barrier| G[Nemotron-3 Ultra 550B\nSurgical Patch Generation]
+    subgraph nebius ["NVIDIA Nemotron Inference (Nebius)"]
+        D -->|"Raw Stops and Tree"| E["Nemotron-3 Nano 30B<br/>State Digests"]
+        E -->|"Digests + Detector Hits"| F["Nemotron-3 Super 120B + Tavily<br/>Issue Analysis & WCAG 2.2 Mapping"]
+        F -->|"Verified Barrier"| G["Nemotron-3 Ultra 550B<br/>Surgical Patch Generation"]
     end
 
-    subgraph Verification Loop [Deterministic Verifier]
-        G --> H[Patch Linter: Rejects eval/fetch/XHR]
-        H --> I[Inject Patch in Fresh Browser Session]
-        I --> J[Re-run Targeted Keyboard Crawl & Full Regression Pass]
-        J -->|No Regressions| K[Green Badge: Verified Fix]
-        J -->|Barrier Remains| L[Revision Loop: Feedback to Ultra max 2x]
+    subgraph verification ["Deterministic Verifier"]
+        G --> H["Patch Linter: Rejects eval / fetch / XHR"]
+        H --> I["Inject Patch in Fresh Browser Session"]
+        I --> J["Re-run Targeted Keyboard Crawl & Full Regression Pass"]
+        J -->|"No Regressions"| K["Green Badge: Verified Fix"]
+        J -->|"Barrier Remains"| L["Revision Loop: Feedback to Ultra (max 2x)"]
     end
 ```
 
