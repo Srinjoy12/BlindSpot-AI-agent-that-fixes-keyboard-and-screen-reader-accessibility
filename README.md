@@ -57,6 +57,7 @@ BlindSpot provides native first-class workflows for modern React engineering tea
   - **Own-port refusal**: Refuses requests targeting BlindSpot's own port (3000) to prevent self-audit recursion loops.
   - **CORS enforcement**: Blocks third-party origins; allows only same-origin loopback requests.
   - **Verification honesty**: Runtime DOM patches are verified in headless Chromium; suggested `.tsx` translations are marked as unverified in the browser build pipeline because BlindSpot does not invoke the project's compilation toolchain.
+  - **Testing verification**: Tested and verified end-to-end against a mock dev server serving `fixtures/react-demo` (`scripts/test-local-dev-bridge-e2e.ts`) rather than a live long-running Vite HMR dev server process.
 
 ---
 

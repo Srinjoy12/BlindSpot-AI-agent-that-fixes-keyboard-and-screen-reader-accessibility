@@ -34,6 +34,7 @@ Documenting boundaries and failure modes is a core engineering principle:
   - Works only when the BlindSpot server runs on the same physical host as the local dev server.
   - If running in Docker, `localhost` resolves to the container environment unless host networking (`--network host`) is configured.
   - In this mode, verification is performed strictly on the runtime DOM patch. Source-level JSX/TSX files are identified via heuristic regex/string scoring rather than full AST compilation/matching and are not built/re-compiled; JSX snippets are provided as unverified suggestions.
+  - **Testing Scope Disclosure**: The Local Dev Server Bridge was tested and verified end-to-end against a mock local dev server serving `fixtures/react-demo` (via `scripts/test-local-dev-bridge-e2e.ts`) rather than a live long-running Vite HMR dev server process.
 - **Canvas and WebGL Elements**: Custom controls rendered purely inside HTML5 `<canvas>` or WebGL shaders without fallback ARIA DOM subtrees are invisible to the focus crawler.
 - **Custom Faux-Focus Widgets**: Single-page apps that capture keyboard events and manually paint CSS classes onto container divs without updating `document.activeElement` may report unreachable controls.
 - **Lazy-Loaded Content Beyond Scroll Depth**: Elements that only mount into the DOM after infinite scrolling beyond viewport limits may not be captured in the initial 150-stop crawl.
