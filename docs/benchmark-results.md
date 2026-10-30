@@ -1,5 +1,6 @@
 # BlindSpot — Benchmark & Evaluation Report
-*Nebius x NVIDIA Global AI Hackathon · Best Apps & Agents Track*
+*Nebius x NVIDIA Global AI Hackathon · Best Apps & Agents Track*  
+*Benchmark Run Date: October 27, 2026 (`2026-10-27T22:07:09.715Z`)*
 
 ## 1. Executive Summary & Scorecard
 
@@ -31,23 +32,30 @@ BlindSpot evaluates accessibility barriers by actually navigating the page using
 
 ### Benchmark Reproduction & Regeneration Command
 
-To reproduce the benchmark and regenerate `artifacts/benchmark_results.json`:
+*Benchmark Run Date: October 27, 2026 (`2026-10-27T22:07:09.715Z`)*
+
+> [!WARNING]
+> **Warning**: Running the benchmark commands below will **overwrite** `artifacts/benchmark_results.json` on disk.
+
+To reproduce the benchmark:
 
 ```bash
-# Run full benchmark across all 16 fixtures (deterministic headless browser crawl, 0 model tokens)
+# Reproduce seeded barrier detection recall (23/25, 92.0%) across all 16 fixtures
+# (Deterministic headless Chromium crawl & detectors D1–D9; spends 0 model tokens)
 npm run bench
 
 # Run a single benchmark page
 npm run bench -- B01
 
-# Run with live model fix generation (spends Nebius model tokens)
+# Run with live model fix generation to reproduce verified-fix rate (22/25, 88.0%)
+# (Spends Nebius model tokens; because LLM output is non-deterministic, generated patches and exact verification counts can vary between runs)
 npm run bench -- --fixes
 
 # Run code-mode benchmark across all fixtures (spends Nebius model tokens, outputs artifacts/benchmark_code_mode.json)
 npm run bench:code
 ```
 
-> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier run and may differ from the benchmark figures, which come from `artifacts/benchmark_results.json`.
+> **Note on Instant Replays vs Benchmark Figures**: Instant replays (`data/replays/*.json`) are cached snapshots from an earlier offline run reflecting 18 / 25 seeded barriers detected and 12 / 25 verified, whereas the full benchmark suite (`artifacts/benchmark_results.json`) achieves 23 / 25 detected (92.0% recall) and 22 / 25 verified (88.0% verified-fix rate via live `--fixes`).
 
 ---
 

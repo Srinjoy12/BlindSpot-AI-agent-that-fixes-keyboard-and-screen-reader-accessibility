@@ -559,19 +559,25 @@ Evaluated across 16 reproducible fixture test pages (`fixtures/pages/` and `fixt
 
 ## 12. Verification & Automated Test Suite
 
-Vitest executes 79 tests across 12 test files with 100% pass rate:
-- `packages/detectors/test/detectors.test.ts` (12 tests): Validates D1 through D9 against mock and live traces.
+Vitest executes 184 tests across 18 test files with 100% pass rate:
+- `packages/detectors/test/detectors.test.ts` (16 tests): Validates D1 through D9 against mock and live traces.
 - `packages/engine/test/axe.test.ts` (7 tests): Validates axe-core injection, violation extraction, and comparison matcher.
-- `packages/engine/test/fileSet.test.ts` (12 tests): Validates POSIX path validation, sensitive file blocking, ephemeral server MIME routing, and FileSet size limits.
+- `packages/engine/test/concurrency.test.ts` (4 tests): Validates bounded semaphore concurrency control.
+- `packages/engine/test/fileSet.test.ts` (14 tests): Validates POSIX path validation, sensitive file blocking, ephemeral server MIME routing, and FileSet size limits.
+- `packages/engine/test/localDevBridge.test.ts` (23 tests): Validates local dev server bridge token handshakes, loopback enforcement, CORS origin guards, and React heuristic localization.
+- `packages/engine/test/server-endpoints.test.ts` (26 tests): Validates REST budget, fixtures, and source endpoints.
 - `packages/engine/test/source.test.ts` (4 tests): Validates airgapped in-memory HTML snippet session loading.
-- `packages/engine/test/ssrf.test.ts` (5 tests): Validates private IP blocking, link-local blocking, DNS failures, and hostname bans.
-- `packages/engine/test/server-endpoints.test.ts` (3 tests): Validates REST budget, fixtures, and source endpoints.
-- `packages/fixer/test/fixer.test.ts` (7 tests): Validates patch application and deterministic verification in Playwright.
-- `packages/fixer/test/source-fixer.test.ts` (11 tests): Validates unified diff generation, diff linter forbidden pattern rejection, and airgapped source verification.
+- `packages/engine/test/ssrf.test.ts` (26 tests): Validates private IP blocking, link-local blocking, DNS failures, and hostname bans.
 - `packages/fixer/test/fileSetLoop.test.ts` (3 tests): Validates multi-file project localization and repair loop.
+- `packages/fixer/test/fixer.test.ts` (7 tests): Validates patch application and deterministic verification in Playwright.
+- `packages/fixer/test/reactLocalizer.test.ts` (7 tests): Validates JSX/TSX element localization from runtime DOM markers.
+- `packages/fixer/test/reactTranslate.test.ts` (10 tests): Validates deterministic conversion of HTML/DOM fixes into JSX/TSX equivalents.
+- `packages/fixer/test/source-fixer.test.ts` (11 tests): Validates unified diff generation, diff linter forbidden pattern rejection, and airgapped source verification.
 - `packages/ai/test/pricing.test.ts` (7 tests): Validates token pricing table normalization, cost estimation, and cost-per-verified-fix.
-- `packages/report/test/report-export.test.ts` (3 tests): Validates HTML, Markdown, and JSON report generation.
-- `apps/web/src/project-folder/folder.test.ts` (5 tests): Validates folder operations, automated safety backups, and byte-for-byte reverts.
+- `packages/report/test/report-export.test.ts` (4 tests): Validates HTML, Markdown, and JSON report generation.
+- `packages/report/test/store.test.ts` (5 tests): Validates audit report state transitions and in-memory persistence.
+- `apps/web/src/project-folder/folder.test.ts` (6 tests): Validates folder operations, automated safety backups, and byte-for-byte reverts.
+- `apps/web/src/reactToggle.test.tsx` (4 tests): Validates React mode toggle and component rendering.
 
 ---
 
