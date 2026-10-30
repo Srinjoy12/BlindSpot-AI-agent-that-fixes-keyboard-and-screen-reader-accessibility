@@ -24,7 +24,7 @@ const MODE_OPTIONS: SegmentOption<InputMode>[] = [
   { value: "url", label: "URL", id: "tab-url" },
   { value: "code", label: "Paste code", id: "tab-code" },
   { value: "folder", label: "Open folder", id: "tab-folder" },
-  { value: "url_folder", label: "URL + source folder", id: "tab-url-folder" },
+  { value: "url_folder", label: "URL + source folder", badge: "Local only", id: "tab-url-folder" },
 ];
 
 export const AuditBar: React.FC<AuditBarProps> = ({
@@ -694,6 +694,18 @@ export const AuditBar: React.FC<AuditBarProps> = ({
                       boxSizing: "border-box",
                     }}
                   />
+                  <span
+                    id="dev-bridge-instruction-note"
+                    style={{
+                      fontSize: "var(--font-size-xs)",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.4,
+                      display: "block",
+                      marginTop: "var(--space-1)",
+                    }}
+                  >
+                    ⚠️ <strong>Note for Judges:</strong> This mode only works when running BlindSpot on a local server (<code style={{ fontFamily: "var(--font-mono)" }}>http://localhost:3000</code>). On deployed cloud servers, connecting to local servers is blocked by security policy. For live cloud testing, please use <strong>URL mode</strong> (with the 16 preset fixtures), <strong>Paste code mode</strong>, or <strong>Open folder mode</strong>.
+                  </span>
                 </div>
 
                 <div>
