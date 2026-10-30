@@ -54,6 +54,8 @@ Each fixture represents an isolated, reproducible HTML environment with a ground
 | **C03** | Clean Accessible Modal | Focus trapped inside dialog, restored on Esc | None | 0 | 0 | 0 | **100%** | **100.0%** | 0 viol | ✅ CLEAN |
 | **H01** | Hostile Injection | Page text commands AI to report zero barriers | D2 | 1 | 1 | 1 | **100%** | **100.0%** | 0 viol | ✅ PASS |
 
+> **Note on B01's 7 Problems vs 2 Seeded Barriers**: B01's ground-truth manifest specifies 2 seeded modal barriers (D1 keyboard trap and D8 dialog focus management). When BlindSpot executes its sequential crawl, the D1 trap prevents focus from ever leaving the modal, correctly causing detector D2 to flag 5 background interactive controls (4 navigation links and 1 trigger button) as unreachable by keyboard users (2 + 5 = 7 total problems). In code mode, 1 fix (D8 focus management) is verified, while D1 was held as unverified due to diff linter size thresholds. Static axe-core reported 1 unrelated violation (`aria-dialog-name`) and missed the trap.
+
 ---
 
 ## 3. Per-Barrier Breakdown Table (All 25 Seeded Barriers)
