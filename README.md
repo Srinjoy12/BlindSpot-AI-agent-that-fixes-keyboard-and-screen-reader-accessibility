@@ -164,11 +164,19 @@ npx playwright install chromium
 cp .env.example .env
 # Fill in your TF_API_KEY (Nebius Token Factory) and TAVILY_API_KEY
 
-# 5. Run unit, integration, and security test suite (184 tests across 18 test files)
+# 5. Build workspace packages (TypeScript compilation)
+npm run build:packages
+
+# 6. Run unit, integration, and security test suite (184 tests across 18 test files)
 npm test
 
-# 6. Start the web application and API server (Port 3000)
+# 7. Build production web bundle
+npm run build
+
+# 8. Start the web application and API server (Port 3000)
 npm run dev
+# Or for production server:
+# npm start
 # Open http://localhost:3000 in your browser
 ```
 

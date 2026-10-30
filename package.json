@@ -9,7 +9,9 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspace=apps/web",
-    "build": "npm run build --workspace=apps/web",
+    "build:packages": "npm run build --workspace=packages/ai && npm run build --workspace=packages/detectors && npm run build --workspace=packages/engine && npm run build --workspace=packages/fixer && npm run build --workspace=packages/report",
+    "build": "npm run build:packages && npm run build --workspace=apps/web",
+    "start": "npm run start --workspace=apps/web",
     "test": "vitest run",
     "test:contrast": "npx tsx scripts/test-contrast.ts",
     "hello-models": "npx tsx scripts/hello-models.ts",
