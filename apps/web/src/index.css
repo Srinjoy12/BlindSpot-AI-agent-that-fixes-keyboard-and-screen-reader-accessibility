@@ -457,3 +457,11 @@ input:focus, textarea:focus, select:focus {
     scroll-behavior: auto !important;
   }
 }
+
+/* All content sits above background layers */
+header,
+main {
+  position: relative;
+  z-index: 2;
+}
+

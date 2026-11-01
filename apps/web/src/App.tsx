@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "./components/Header.js";
 import { AuditBar } from "./components/AuditBar.js";
+import { RadialBackground } from "./components/ui/light-theme-tailwind-css-background-snippet.js";
 import { PhaseStepper, type AuditPhase } from "./components/PhaseStepper.js";
 import { KeyboardReplay, type FocusStopItem } from "./components/KeyboardReplay.js";
 import { BarrierList, type BarrierItem } from "./components/BarrierList.js";
@@ -604,10 +605,15 @@ export const App: React.FC = () => {
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "var(--color-bg-canvas)",
         color: "var(--color-text-primary)",
+        position: "relative",
+        isolation: "isolate",
       }}
     >
+      {/* Light theme radial background */}
+      {theme === "light" && <RadialBackground />}
+
+
       {/* Skip to Content Landmark */}
       <a href="#main-content" className="skip-link">
         Skip to main content
@@ -616,38 +622,45 @@ export const App: React.FC = () => {
       {/* Header Landmark */}
       <Header theme={theme} onToggleTheme={toggleTheme} />
 
-      {/* Main Landmark with 1120px max width and 24px padding */}
+      {/* Main Landmark with 1120px max width */}
       <main
         id="main-content"
         className="app-container"
         style={{
           flex: "1 0 auto",
+          paddingTop: "var(--space-4)",
           paddingBottom: "var(--space-12)",
         }}
       >
-        {/* Single H1 per view */}
-        <h1
-          style={{
-            fontSize: "var(--font-size-2xl)",
-            fontWeight: 600,
-            marginBottom: "var(--space-2)",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          Autonomous Accessibility Engine
-        </h1>
+        {/* Page Header / Hero Section */}
+        <div style={{ marginBottom: "var(--space-6)" }}>
+          {/* Single H1 per view */}
+          <h1
+            style={{
+              fontSize: "21px",
+              fontWeight: 600,
+              letterSpacing: "-0.015em",
+              marginBottom: "var(--space-2)",
+              color: "var(--color-text-primary)",
+              lineHeight: 1.3,
+            }}
+          >
+            Autonomous Accessibility Engine
+          </h1>
 
-        {/* Single sentence under h1: explains itself in 10 seconds. No second paragraph. */}
-        <p
-          style={{
-            fontSize: "var(--font-size-base)",
-            color: "var(--color-text-secondary)",
-            marginBottom: "var(--space-4)",
-            lineHeight: 1.5,
-          }}
-        >
-          Beyond static scans: BlindSpot actively navigates your live interface—finding hidden WCAG violations, broken screen reader semantics, and keyboard barriers, then testing verified code fixes.
-        </p>
+          {/* Single sentence under h1: explains itself in 10 seconds. No second paragraph. */}
+          <p
+            style={{
+              fontSize: "var(--font-size-sm)",
+              color: "var(--color-text-secondary)",
+              maxWidth: "760px",
+              lineHeight: 1.55,
+              margin: 0,
+            }}
+          >
+            Beyond static scans: BlindSpot actively navigates your live interface—finding hidden WCAG violations, broken screen reader semantics, and keyboard barriers, then testing verified code fixes.
+          </p>
+        </div>
 
         {/* Audit Input Hero Card */}
         <AuditBar
@@ -797,25 +810,6 @@ export const App: React.FC = () => {
           />
         )}
       </main>
-
-      {/* Footer Landmark */}
-      <footer
-        role="contentinfo"
-        style={{
-          borderTop: "1px solid var(--color-border-subdued)",
-          backgroundColor: "var(--color-surface-1)",
-          padding: "var(--space-6) var(--space-4)",
-          textAlign: "center",
-          fontSize: "var(--font-size-sm)",
-          color: "var(--color-text-muted)",
-        }}
-      >
-        <div className="app-container" style={{ padding: 0 }}>
-          <p>
-            BlindSpot · Built with Nebius Token Factory and NVIDIA Nemotron
-          </p>
-        </div>
-      </footer>
     </div>
   );
 };
